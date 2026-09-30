@@ -1,19 +1,541 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Centro Camionero</title>
+<meta name="description" content="Centro Camionero — compra y venta de camiones usados en Bogotá, y camiones nuevos FAW mediante alianza. Inspección de 100 puntos, financiación y traspaso acompañado.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
-  body{margin:0;font-family:Georgia,'Times New Roman',serif;background:#012792;color:#fff;
-       display:flex;flex-direction:column;align-items:center;justify-content:center;height:100vh;text-align:center}
-  h1{font-size:2.5rem;margin:0 0 .5rem}
-  span{color:#FA010D}
-  p{font-family:Arial,sans-serif;font-size:1.1rem;color:#e6ecfa}
+/* Paleta: azul marino de marca como ancla, blanco/acero como base clara,
+   tinta profunda como base oscura, rojo como único acento de acción.
+   Tipografía: Big Shoulders Display (industrial, condensada) para títulos,
+   IBM Plex Sans para cuerpo, IBM Plex Mono para datos/fichas técnicas.
+   Layout: una línea de carretera punteada atraviesa las secciones,
+   marcando el recorrido de compra — descubre, revisa, conduce. */
+:root{
+  --bg:#F3F4F7;
+  --bg-elevated:#FFFFFF;
+  --ink:#04102B;
+  --fg:#04102B;
+  --fg-muted:#4A5578;
+  --navy:#012792;
+  --navy-deep:#010B3D;
+  --red:#FA010D;
+  --red-deep:#C8000A;
+  --steel-100:#E4E7EF;
+  --steel-200:#CBD1E3;
+  --border:rgba(1,39,146,0.16);
+  --shadow:0 20px 50px -20px rgba(1,15,61,0.35);
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#050B1F;
+    --bg-elevated:#0B1740;
+    --ink:#F4F5F9;
+    --fg:#F4F5F9;
+    --fg-muted:#AAB4D6;
+    --navy:#3C63E0;
+    --navy-deep:#0B1740;
+    --red:#FF3A2E;
+    --red-deep:#FF6A52;
+    --steel-100:#121C42;
+    --steel-200:#1C2A57;
+    --border:rgba(244,245,249,0.14);
+    --shadow:0 20px 60px -20px rgba(0,0,0,0.6);
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#050B1F;
+  --bg-elevated:#0B1740;
+  --ink:#F4F5F9;
+  --fg:#F4F5F9;
+  --fg-muted:#AAB4D6;
+  --navy:#3C63E0;
+  --navy-deep:#0B1740;
+  --red:#FF3A2E;
+  --red-deep:#FF6A52;
+  --steel-100:#121C42;
+  --steel-200:#1C2A57;
+  --border:rgba(244,245,249,0.14);
+  --shadow:0 20px 60px -20px rgba(0,0,0,0.6);
+  color-scheme:dark;
+}
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:'IBM Plex Sans',-apple-system,sans-serif;line-height:1.5;-webkit-font-smoothing:antialiased}
+img,svg{max-width:100%}
+a{color:inherit}
+.container{max-width:1180px;margin:0 auto;padding-inline:clamp(18px,4vw,48px)}
+h1,h2,h3{font-family:'Big Shoulders Display',sans-serif;text-transform:uppercase;font-weight:800;letter-spacing:.01em;text-wrap:balance;line-height:.96;margin:0}
+.eyebrow{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--red);display:flex;align-items:center;gap:10px}
+.eyebrow::before{content:"";width:22px;height:2px;background:var(--red)}
+p{margin:0}
+.lede{color:var(--fg-muted);font-size:clamp(16px,1.6vw,19px);max-width:56ch}
+.mono{font-family:'IBM Plex Mono',monospace;font-variant-numeric:tabular-nums}
+.btn{display:inline-flex;align-items:center;gap:10px;font-family:'IBM Plex Mono',monospace;font-size:13px;letter-spacing:.08em;text-transform:uppercase;padding:14px 26px;border-radius:2px;border:1px solid transparent;cursor:pointer;text-decoration:none;transition:transform .15s ease,background .2s ease}
+.btn:hover{transform:translateY(-2px)}
+.btn-primary{background:var(--red);color:#fff}
+.btn-primary:hover{background:var(--red-deep)}
+.btn-ghost{border-color:currentColor}
+.btn-ghost.on-dark{color:#fff}
+.btn-ghost.on-light{color:var(--navy);border-color:var(--border)}
+.wheel{flex:none}
+.wheel circle{fill:none}
+.badge{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;background:var(--steel-100);color:var(--fg-muted);border:1px solid var(--border);padding:4px 9px;border-radius:99px}
+
+/* ---------- header ---------- */
+/* Fondo gris fijo (no cambia con el tema claro/oscuro): el logo es una imagen
+   con letras azul marino fijas, así que la franja debe mantenerse siempre clara. */
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:40;background:#FFFFFF;box-shadow:0 1px 0 rgba(1,15,61,.14);transition:padding .25s ease}
+header .bar{display:flex;align-items:center;justify-content:space-between;padding-block:14px;transition:padding .25s ease}
+header.scrolled .bar{padding-block:9px}
+.brand{display:flex;align-items:center;text-decoration:none}
+.brand-logo-img{display:block;height:34px;width:auto;transition:height .25s ease}
+header.scrolled .brand-logo-img{height:26px}
+.brand-word{display:inline-flex;align-items:center;white-space:nowrap;font-family:'Big Shoulders Display',sans-serif;font-weight:800;font-size:22px;letter-spacing:.005em;text-transform:uppercase;color:var(--fg)}
+.brand-word .c-swoosh{text-shadow:3px -2px 0 var(--red)}
+.brand-word .wheel-o{width:.72em;height:.72em;flex:none;margin:0 .01em;color:var(--red)}
+.brand-word .gap{width:.32em;flex:none}
+nav.menu{display:flex;align-items:center;gap:clamp(18px,3vw,40px)}
+nav.menu a{font-family:'IBM Plex Mono',monospace;font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;color:var(--navy-deep);position:relative;padding-block:4px}
+nav.menu a::after{content:"";position:absolute;left:0;right:0;bottom:-2px;height:2px;background:var(--red);transform:scaleX(0);transform-origin:left;transition:transform .2s ease}
+nav.menu a:hover::after{transform:scaleX(1)}
+.nav-toggle{display:none;background:none;border:1px solid rgba(1,15,61,.3);border-radius:2px;width:40px;height:40px;align-items:center;justify-content:center;color:var(--navy-deep)}
+
+/* ---------- hero ---------- */
+.hero{position:relative;background:#FFFFFF;padding-block:0 6px}
+.hero-banner-link{display:block;line-height:0}
+.hero-banner-img{display:block;width:100%;height:auto;aspect-ratio:1672/941}
+.stats-info{background:var(--bg);padding-block:22px}
+.stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(20px,4vw,32px)}
+.stat-card{display:flex;flex-direction:column;align-items:center;text-align:center;gap:10px}
+.stat-icon{width:60px;height:60px;border-radius:50%;background:var(--steel-100);display:flex;align-items:center;justify-content:center;color:var(--red)}
+.stat-icon svg{width:30px;height:30px}
+.stat-num{font-family:'Big Shoulders Display',sans-serif;font-size:clamp(38px,5vw,56px);color:var(--navy);line-height:1}
+.stat-label{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--fg-muted);max-width:18ch}
+.route-divider{display:flex;align-items:center;gap:14px;color:var(--fg-muted);margin-block:0}
+.route-divider .line{flex:1;height:0;border-top:2px dashed var(--border)}
+.route-divider span{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;white-space:nowrap}
+
+/* ---------- FAW banner ---------- */
+.faw{background:#fff;padding-block:6px 0}
+.faw-banner-link{display:block;line-height:0}
+.faw-banner-img{display:block;width:100%;height:auto;aspect-ratio:2508/627}
+.revision-banner-link{display:block;line-height:0}
+.revision-banner-img{display:block;width:100%;height:auto;aspect-ratio:2508/627}
+
+/* ---------- section shell ---------- */
+section{padding-block:clamp(56px,8vw,104px)}
+#camiones{padding-block:clamp(56px,8vw,104px) 18px}
+.revision{background:#fff;padding-block:18px 20px}
+.section-head{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;margin-bottom:clamp(28px,4vw,48px);flex-wrap:wrap}
+.section-head h2{font-size:clamp(32px,4.6vw,56px)}
+
+/* ---------- camiones grid ---------- */
+.grid-camiones{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+.card-camion{background:var(--bg-elevated);border:1px solid var(--border);border-radius:3px;overflow:hidden;box-shadow:var(--shadow);position:relative;display:flex;flex-direction:column}
+.card-camion .thumb{aspect-ratio:4/3;background:linear-gradient(155deg,var(--navy) 0%,var(--navy-deep) 100%);position:relative;display:flex;align-items:center;justify-content:center}
+.card-camion .thumb svg{width:64%;opacity:.92}
+.card-camion .example-pill{position:absolute;top:10px;left:10px;background:rgba(4,16,43,.65);color:#fff;font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;padding:4px 8px;border-radius:99px}
+.card-camion .body{padding:18px 18px 20px;display:flex;flex-direction:column;gap:10px;flex:1}
+.card-camion h3{font-size:22px;text-transform:none;font-weight:700}
+.specs{display:grid;grid-template-columns:1fr 1fr;gap:6px 14px;font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--fg-muted);border-top:1px dashed var(--border);padding-top:10px;margin-top:4px}
+.specs b{color:var(--fg);font-weight:600}
+.card-camion .price{margin-top:auto;display:flex;align-items:center;justify-content:space-between;padding-top:10px}
+.price b{font-family:'Big Shoulders Display',sans-serif;font-size:24px}
+.price a{font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;color:var(--navy);border-bottom:1px solid var(--navy)}
+
+/* ---------- quienes somos ---------- */
+.somos{background:var(--bg-elevated);border-block:1px solid var(--border);padding-block:26px clamp(56px,8vw,104px)}
+.somos-grid{display:flex;align-items:stretch;gap:clamp(24px,4vw,44px);flex-wrap:wrap}
+.somos-grid .somos-text{flex:1 1 380px}
+.example-pill{position:absolute;top:10px;left:10px;background:rgba(4,16,43,.65);color:#fff;font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;padding:3px 7px;border-radius:99px}
+.somos-photo{position:relative;border-radius:3px;overflow:hidden;flex:0 0 auto;width:min(300px,100%);min-height:180px;background:linear-gradient(155deg,var(--navy) 0%,var(--navy-deep) 100%);display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow)}
+.somos-photo svg{width:24%;opacity:.85}
+@media (max-width:860px){ .somos-photo{aspect-ratio:2/1;width:100%} }
+
+/* ---------- por qué elegirnos ---------- */
+.pasos{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1px;background:var(--border);border:1px solid var(--border)}
+.paso{background:var(--bg);padding:28px 24px}
+.paso .num{font-family:'IBM Plex Mono',monospace;color:var(--red);font-size:13px;letter-spacing:.08em}
+.paso h3{font-size:22px;text-transform:none;font-weight:700;margin-top:10px}
+.paso p{color:var(--fg-muted);font-size:14.5px;margin-top:10px}
+
+/* ---------- contacto ---------- */
+.contacto{background:var(--steel-100);color:var(--fg)}
+.contacto .badge{background:var(--bg-elevated)}
+.contacto-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(32px,5vw,64px)}
+.contacto h2{color:#fff}
+.info-list{display:flex;flex-direction:column;gap:20px;margin-top:28px}
+.info-list .row{display:flex;gap:14px;align-items:flex-start;border-top:1px solid rgba(255,255,255,.14);padding-top:16px}
+.info-list .row .k{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#9FADDD;width:110px;flex:none}
+.info-list .row .v{font-size:15px}
+form.contact-form{background:var(--bg-elevated);border:1px solid var(--border);border-radius:3px;padding:clamp(20px,3vw,32px);display:flex;flex-direction:column;gap:16px;box-shadow:var(--shadow)}
+.field{display:flex;flex-direction:column;gap:6px}
+.field label{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--fg-muted)}
+.field input,.field select,.field textarea{background:var(--bg);border:1px solid var(--border);border-radius:2px;color:var(--fg);padding:12px 14px;font-family:'IBM Plex Sans',sans-serif;font-size:14.5px}
+.field input::placeholder,.field textarea::placeholder{color:var(--fg-muted)}
+.field textarea{resize:vertical;min-height:90px}
+.form-note{font-size:12.5px;color:var(--fg-muted);display:flex;align-items:center;gap:8px;min-height:18px}
+.form-note.ok{color:#1F9D55}
+.sim-result{background:var(--bg);border:1px solid var(--border);border-radius:2px;padding:16px;text-align:center}
+.sim-result .k{display:block;font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--fg-muted);margin-bottom:6px}
+.sim-result .amount{display:block;font-family:'Big Shoulders Display',sans-serif;font-size:clamp(30px,4vw,42px);color:var(--navy)}
+
+/* ---------- footer ---------- */
+footer{padding-block:32px;border-top:1px solid var(--border)}
+.foot-social{display:flex;gap:12px}
+.social-ico{width:34px;height:34px;border-radius:50%;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--fg-muted);transition:color .2s ease,border-color .2s ease}
+.social-ico:hover{color:var(--red);border-color:var(--red)}
+.social-ico svg{width:16px;height:16px}
+.whatsapp-float{position:fixed;right:20px;bottom:20px;width:58px;height:58px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 24px rgba(0,0,0,.28);z-index:80;transition:transform .2s ease}
+.whatsapp-float:hover{transform:scale(1.07)}
+.whatsapp-float svg{width:28px;height:28px}
+.foot-inner{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+.foot-inner .brand{font-size:17px}
+.foot-links{display:flex;gap:22px;flex-wrap:wrap}
+.foot-links a{font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;color:var(--fg-muted)}
+.copy{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--fg-muted)}
+
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}}
+
+@media (max-width:860px){
+  .contacto-grid{grid-template-columns:1fr}
+  nav.menu{position:fixed;inset:0 0 0 30%;top:env(safe-area-inset-top,0px);background:#FFFFFF;flex-direction:column;justify-content:center;align-items:flex-start;padding:32px;gap:26px;transform:translateX(105%);transition:transform .3s ease;box-shadow:-10px 0 40px rgba(0,0,0,.3)}
+  nav.menu.open{transform:translateX(0)}
+  nav.menu a{font-size:15px}
+  .nav-toggle{display:flex}
+  .grid-camiones{grid-template-columns:repeat(2,1fr)}
+}
+@media (max-width:560px){
+  .grid-camiones{grid-template-columns:1fr}
+}
 </style>
 </head>
 <body>
-  <h1><span>C</span>ENTRO <span>C</span>AMIONERO</h1>
-  <p>Sitio en construcción — muy pronto estaremos en línea.</p>
+<header id="siteHeader">
+  <div class="container bar">
+    <a class="brand" href="#top">
+      <img class="brand-logo-img" src="assets/logo.png" alt="Centro Camionero">
+    </a>
+    <nav class="menu" id="siteMenu">
+      <a href="#camiones">Camiones usados</a>
+      <a href="#faw">Camiones Nuevos</a>
+      <a href="#somos">Quiénes somos</a>
+      <a href="#financiamiento">Financiamiento</a>
+    </nav>
+    <button class="nav-toggle" id="navToggle" aria-label="Abrir menú" aria-expanded="false">
+      <svg width="18" height="14" viewBox="0 0 18 14" fill="none"><path d="M0 1H18M0 7H18M0 13H18" stroke="currentColor" stroke-width="2"/></svg>
+    </button>
+  </div>
+</header>
+
+<main id="top">
+
+  <section class="hero">
+    <a class="hero-banner-link" href="#camiones" aria-label="Ver camiones disponibles">
+      <img class="hero-banner-img" src="assets/hero-banner.jpg" alt="Fachada de Centro Camionero — camiones usados como nuevos. Marcas: Chevrolet, JAC, JMC, Hino, Foton, Fuso.">
+    </a>
+  </section>
+
+  <section class="stats-info">
+    <div class="container stats-grid">
+      <div class="stat-card">
+        <div class="stat-icon"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 30V16h20v14H4Z"/><path d="M24 22h9l7 7v5h-3"/><circle cx="14" cy="32" r="4"/><circle cx="34" cy="32" r="4"/></svg></div>
+        <b class="stat-num">+500</b>
+        <span class="stat-label">Camiones comercializados*</span>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M24 5 8 11v11c0 10.5 6.9 16.8 16 21 9.1-4.2 16-10.5 16-21V11L24 5Z"/><path d="M16.5 24 22 29.5 32 18"/></svg></div>
+        <b class="stat-num">100</b>
+        <span class="stat-label">Puntos de inspección</span>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="10" width="36" height="32" rx="3"/><path d="M6 19h36M14 6v8M34 6v8"/></svg></div>
+        <b class="stat-num">12</b>
+        <span class="stat-label">Años en el negocio*</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="faw" id="faw">
+    <a class="faw-banner-link" href="#" id="fawLink" aria-label="Ver camiones FAW">
+      <img class="faw-banner-img" src="assets/faw-banner.jpg" alt="FAW Trucks — ¿Buscas camión 0 km? Conoce la línea de camiones nuevos FAW, la alianza con la que Centro Camionero entra a la línea de vehículos nuevos en Colombia.">
+    </a>
+  </section>
+
+  <section id="camiones">
+    <div class="container">
+      <div class="section-head reveal">
+        <div>
+          <h2>Nuestros camiones usados.</h2>
+        </div>
+        <p class="lede">Hay un camión esperando por ti.</p>
+      </div>
+
+      <div class="grid-camiones reveal">
+        <article class="card-camion">
+          <div class="thumb"><span class="example-pill">Ficha de ejemplo</span>
+            <svg viewBox="0 0 200 120" fill="none"><path d="M10 95H160V55H120L100 35H55L40 55H30V95" stroke="#fff" stroke-width="3"/><circle cx="60" cy="98" r="13" stroke="var(--red)" stroke-width="3"/><circle cx="140" cy="98" r="13" stroke="var(--red)" stroke-width="3"/></svg>
+          </div>
+          <div class="body">
+            <h3>Kenworth T800</h3>
+            <div class="specs">
+              <span>Modelo <b>2019</b></span><span>Kilometraje <b>180.000 km</b></span>
+              <span>Motor <b>Cummins ISX</b></span><span>Carrocería <b>Estacas</b></span>
+            </div>
+            <div class="price"><b class="mono">$ 210.000.000</b><a href="#financiamiento">Cotizar →</a></div>
+          </div>
+        </article>
+        <article class="card-camion">
+          <div class="thumb"><span class="example-pill">Ficha de ejemplo</span>
+            <svg viewBox="0 0 200 120" fill="none"><path d="M10 95H160V55H120L100 35H55L40 55H30V95" stroke="#fff" stroke-width="3"/><circle cx="60" cy="98" r="13" stroke="var(--red)" stroke-width="3"/><circle cx="140" cy="98" r="13" stroke="var(--red)" stroke-width="3"/></svg>
+          </div>
+          <div class="body">
+            <h3>International 4300</h3>
+            <div class="specs">
+              <span>Modelo <b>2020</b></span><span>Kilometraje <b>96.000 km</b></span>
+              <span>Motor <b>Maxxforce</b></span><span>Carrocería <b>Furgón</b></span>
+            </div>
+            <div class="price"><b class="mono">$ 165.000.000</b><a href="#financiamiento">Cotizar →</a></div>
+          </div>
+        </article>
+        <article class="card-camion">
+          <div class="thumb"><span class="example-pill">Ficha de ejemplo</span>
+            <svg viewBox="0 0 200 120" fill="none"><path d="M10 95H160V55H120L100 35H55L40 55H30V95" stroke="#fff" stroke-width="3"/><circle cx="60" cy="98" r="13" stroke="var(--red)" stroke-width="3"/><circle cx="140" cy="98" r="13" stroke="var(--red)" stroke-width="3"/></svg>
+          </div>
+          <div class="body">
+            <h3>Chevrolet FVR 8</h3>
+            <div class="specs">
+              <span>Modelo <b>2018</b></span><span>Kilometraje <b>140.000 km</b></span>
+              <span>Motor <b>Isuzu 6HK1</b></span><span>Carrocería <b>Volqueta</b></span>
+            </div>
+            <div class="price"><b class="mono">$ 128.000.000</b><a href="#financiamiento">Cotizar →</a></div>
+          </div>
+        </article>
+        <article class="card-camion">
+          <div class="thumb"><span class="example-pill">Ficha de ejemplo</span>
+            <svg viewBox="0 0 200 120" fill="none"><path d="M10 95H160V55H120L100 35H55L40 55H30V95" stroke="#fff" stroke-width="3"/><circle cx="60" cy="98" r="13" stroke="var(--red)" stroke-width="3"/><circle cx="140" cy="98" r="13" stroke="var(--red)" stroke-width="3"/></svg>
+          </div>
+          <div class="body">
+            <h3>Hino 500</h3>
+            <div class="specs">
+              <span>Modelo <b>2021</b></span><span>Kilometraje <b>72.000 km</b></span>
+              <span>Motor <b>Hino J08E</b></span><span>Carrocería <b>Furgón</b></span>
+            </div>
+            <div class="price"><b class="mono">$ 198.000.000</b><a href="#financiamiento">Cotizar →</a></div>
+          </div>
+        </article>
+        <article class="card-camion">
+          <div class="thumb"><span class="example-pill">Ficha de ejemplo</span>
+            <svg viewBox="0 0 200 120" fill="none"><path d="M10 95H160V55H120L100 35H55L40 55H30V95" stroke="#fff" stroke-width="3"/><circle cx="60" cy="98" r="13" stroke="var(--red)" stroke-width="3"/><circle cx="140" cy="98" r="13" stroke="var(--red)" stroke-width="3"/></svg>
+          </div>
+          <div class="body">
+            <h3>Freightliner M2</h3>
+            <div class="specs">
+              <span>Modelo <b>2017</b></span><span>Kilometraje <b>210.000 km</b></span>
+              <span>Motor <b>Cummins ISB</b></span><span>Carrocería <b>Estacas</b></span>
+            </div>
+            <div class="price"><b class="mono">$ 145.000.000</b><a href="#financiamiento">Cotizar →</a></div>
+          </div>
+        </article>
+        <article class="card-camion">
+          <div class="thumb"><span class="example-pill">Ficha de ejemplo</span>
+            <svg viewBox="0 0 200 120" fill="none"><path d="M10 95H160V55H120L100 35H55L40 55H30V95" stroke="#fff" stroke-width="3"/><circle cx="60" cy="98" r="13" stroke="var(--red)" stroke-width="3"/><circle cx="140" cy="98" r="13" stroke="var(--red)" stroke-width="3"/></svg>
+          </div>
+          <div class="body">
+            <h3>Volvo FH</h3>
+            <div class="specs">
+              <span>Modelo <b>2019</b></span><span>Kilometraje <b>165.000 km</b></span>
+              <span>Motor <b>D13 Volvo</b></span><span>Carrocería <b>Tractomula</b></span>
+            </div>
+            <div class="price"><b class="mono">$ 265.000.000</b><a href="#financiamiento">Cotizar →</a></div>
+          </div>
+        </article>
+        <article class="card-camion">
+          <div class="thumb"><span class="example-pill">Ficha de ejemplo</span>
+            <svg viewBox="0 0 200 120" fill="none"><path d="M10 95H160V55H120L100 35H55L40 55H30V95" stroke="#fff" stroke-width="3"/><circle cx="60" cy="98" r="13" stroke="var(--red)" stroke-width="3"/><circle cx="140" cy="98" r="13" stroke="var(--red)" stroke-width="3"/></svg>
+          </div>
+          <div class="body">
+            <h3>Isuzu NPR</h3>
+            <div class="specs">
+              <span>Modelo <b>2020</b></span><span>Kilometraje <b>88.000 km</b></span>
+              <span>Motor <b>Isuzu 4HK1</b></span><span>Carrocería <b>Furgón</b></span>
+            </div>
+            <div class="price"><b class="mono">$ 132.000.000</b><a href="#financiamiento">Cotizar →</a></div>
+          </div>
+        </article>
+        <article class="card-camion">
+          <div class="thumb"><span class="example-pill">Ficha de ejemplo</span>
+            <svg viewBox="0 0 200 120" fill="none"><path d="M10 95H160V55H120L100 35H55L40 55H30V95" stroke="#fff" stroke-width="3"/><circle cx="60" cy="98" r="13" stroke="var(--red)" stroke-width="3"/><circle cx="140" cy="98" r="13" stroke="var(--red)" stroke-width="3"/></svg>
+          </div>
+          <div class="body">
+            <h3>Dodge RAM 5500</h3>
+            <div class="specs">
+              <span>Modelo <b>2018</b></span><span>Kilometraje <b>120.000 km</b></span>
+              <span>Motor <b>Cummins 6.7L</b></span><span>Carrocería <b>Estacas</b></span>
+            </div>
+            <div class="price"><b class="mono">$ 158.000.000</b><a href="#financiamiento">Cotizar →</a></div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="revision">
+    <a class="revision-banner-link" href="#financiamiento" id="revisionLink" aria-label="Agendar revision tecnomecanica">
+        <img class="revision-banner-img" src="assets/revision-banner.jpg" alt="Agenda aqui tu revision tecnico mecanica">
+    </a>
+  </section>
+
+  <section class="somos">
+    <div class="container somos-grid">
+      <div class="somos-text reveal">
+        <p class="eyebrow">Quiénes somos</p>
+        <h2>Compramos, vendemos<br>y entendemos camiones.</h2>
+        <p class="lede" style="margin-top:18px">Texto de ejemplo — lo ajustamos con la historia real de Centro Camionero: origen, trayectoria en Bogotá, y lo que los distingue frente a otros concesionarios de usados. Contarnos esto es el siguiente paso para reemplazar este bloque.</p>
+      </div>
+      <div class="somos-photo reveal">
+        <span class="example-pill">Foto pendiente</span>
+        <svg viewBox="0 0 200 200" fill="none" aria-hidden="true">
+          <circle cx="72" cy="66" r="28" stroke="#fff" stroke-width="5"/>
+          <path d="M28 168c0-30 19-49 44-49s44 19 44 49" stroke="#fff" stroke-width="5"/>
+          <circle cx="146" cy="78" r="22" stroke="#fff" stroke-width="5" opacity=".65"/>
+          <path d="M108 168c2-26 19-43 38-43 19 0 34 13 40 34" stroke="#fff" stroke-width="5" opacity=".65"/>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <section class="contacto" id="financiamiento">
+    <div class="container contacto-grid">
+      <div class="reveal">
+        <p class="eyebrow">Financiamiento</p>
+        <h2>Simula tu cuota<br>mensual.</h2>
+        <p class="lede" style="margin-top:16px">Calcula un estimado de tu cuota para financiar tu próximo camión. Es una simulación de referencia — la tasa y condiciones finales las confirma la entidad financiera aliada.</p>
+        <span class="badge" style="margin-top:18px;display:inline-block">Tasa de ejemplo: 1,8% mensual — sujeta a aprobación</span>
+        <div style="margin-top:24px">
+          <a class="btn btn-primary" href="#" id="whatsappCta">Hablar con un asesor por WhatsApp →</a>
+        </div>
+      </div>
+      <form class="contact-form" id="simForm">
+        <div class="field"><label for="sim-monto">Valor del camión (COP)</label><input id="sim-monto" name="monto" type="number" min="0" step="1000000" placeholder="180.000.000" required></div>
+        <div class="field"><label for="sim-inicial">Cuota inicial (%)</label><input id="sim-inicial" name="inicial" type="number" min="0" max="90" step="1" placeholder="30" required></div>
+        <div class="field"><label for="sim-plazo">Plazo</label>
+          <select id="sim-plazo" name="plazo">
+            <option value="12">12 meses</option>
+            <option value="24">24 meses</option>
+            <option value="36" selected>36 meses</option>
+            <option value="48">48 meses</option>
+            <option value="60">60 meses</option>
+          </select>
+        </div>
+        <button class="btn btn-primary" type="submit" style="justify-content:center">Calcular cuota</button>
+        <div class="sim-result">
+          <span class="k">Cuota mensual estimada</span>
+          <span class="amount mono" id="simResultAmount">—</span>
+        </div>
+        <p class="form-note" id="formNote" role="status" aria-live="polite">*Simulación de referencia, no constituye una oferta de crédito.</p>
+      </form>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container foot-inner">
+    <a class="brand" href="#top">
+<img class="brand-logo-img footer-logo-img" src="assets/logo.png" alt="Centro Camionero">
+    </a>
+    <div class="foot-links">
+      <a href="#camiones">Camiones usados</a>
+      <a href="#faw">Camiones Nuevos</a>
+      <a href="#somos">Quiénes somos</a>
+      <a href="#financiamiento">Financiamiento</a>
+    </div>
+    <div class="foot-social">
+      <a class="social-ico" href="#" id="igLink" aria-label="Instagram" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.3" cy="6.7" r="1"/></svg>
+      </a>
+      <a class="social-ico" href="#" id="fbLink" aria-label="Facebook" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 21v-7.6h2.7l.4-3.2H14V8.1c0-.9.3-1.6 1.7-1.6h1.6V3.6C17 3.5 15.9 3.4 14.7 3.4c-2.6 0-4.3 1.6-4.3 4.4v2.4H7.8v3.2h2.6V21"/></svg>
+      </a>
+    </div>
+    <span class="copy">© 2026 Centro Camionero · Bogotá, Colombia</span>
+  </div>
+</footer>
+
+<a class="whatsapp-float" href="#" id="whatsappFloat" aria-label="Escríbenos por WhatsApp" title="Escríbenos por WhatsApp">
+  <svg viewBox="0 0 32 32" fill="none" aria-hidden="true">
+    <circle cx="16" cy="16" r="15" fill="#25D366"/>
+    <path d="M16 7c-5 0-9 4-9 9 0 1.7.5 3.3 1.3 4.6L7 25l4.6-1.3c1.3.7 2.8 1.1 4.4 1.1 5 0 9-4 9-9s-4-8.8-9-8.8Z" stroke="#fff" stroke-width="1.6"/>
+    <path d="M12.3 12.6c.2-.5.4-.5.7-.5h.5c.2 0 .4 0 .6.4.2.5.7 1.7.8 1.8.1.2.1.3 0 .5-.1.2-.2.3-.3.5-.2.2-.3.3-.1.6.2.4.9 1.4 1.9 2.2 1.3 1 2.3 1.4 2.7 1.5.3.1.5.1.7-.1.2-.2.8-.9 1-1.2.2-.3.4-.2.7-.1.3.1 1.8.9 2.1 1 .3.1.5.2.6.3.1.2.1 1-.3 1.9-.4.9-2 1.7-2.8 1.8-.7.1-1.6.2-4.3-.9-3.6-1.5-5.9-5.1-6.1-5.3-.2-.3-1.4-1.9-1.4-3.6 0-1.7.9-2.6 1.2-2.9Z" fill="#fff"/>
+  </svg>
+</a>
+
+<script>
+(function(){
+  try{
+    var header=document.getElementById('siteHeader');
+    var onScroll=function(){ header.classList.toggle('scrolled', window.scrollY>10); };
+    document.addEventListener('scroll', onScroll, {passive:true}); onScroll();
+
+    var toggle=document.getElementById('navToggle');
+    var menu=document.getElementById('siteMenu');
+    toggle.addEventListener('click', function(){
+      var open=menu.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', open?'true':'false');
+    });
+    menu.querySelectorAll('a').forEach(function(a){
+      a.addEventListener('click', function(){ menu.classList.remove('open'); toggle.setAttribute('aria-expanded','false'); });
+    });
+
+    if('IntersectionObserver' in window){
+      var io=new IntersectionObserver(function(entries){
+        entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+      },{threshold:.15});
+      document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+    } else {
+      document.querySelectorAll('.reveal').forEach(function(el){ el.classList.add('in'); });
+    }
+
+    var simForm=document.getElementById('simForm');
+    var simResult=document.getElementById('simResultAmount');
+    simForm.addEventListener('submit', function(e){
+      e.preventDefault();
+      var monto=parseFloat(document.getElementById('sim-monto').value)||0;
+      var inicialPct=parseFloat(document.getElementById('sim-inicial').value)||0;
+      var meses=parseInt(document.getElementById('sim-plazo').value,10)||36;
+      var tasaMensual=0.018; // tasa de ejemplo — pendiente confirmar con entidad financiera aliada
+      var principal=monto*(1-Math.min(Math.max(inicialPct,0),90)/100);
+      var factor=Math.pow(1+tasaMensual, meses);
+      var cuota=principal*tasaMensual*factor/(factor-1);
+      simResult.textContent=(principal>0 && isFinite(cuota)) ? ('$ '+Math.round(cuota).toLocaleString('es-CO')) : '—';
+    });
+
+    var fawLink=document.getElementById('fawLink');
+    fawLink.addEventListener('click', function(e){
+      e.preventDefault();
+      // Landing exclusiva de FAW pendiente de construir.
+    });
+
+    var waTargets=[document.getElementById('whatsappFloat'), document.getElementById('whatsappCta')];
+    waTargets.forEach(function(el){
+      if(!el) return;
+      el.addEventListener('click', function(e){
+        e.preventDefault();
+        // Número de WhatsApp real pendiente de confirmar por Laura.
+      });
+    });
+  }catch(err){ console.error(err); }
+})();
+</script>
+
 </body>
 </html>
