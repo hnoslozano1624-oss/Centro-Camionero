@@ -1,7 +1,8 @@
-/* Inventario en vivo: reemplaza las fichas de ejemplo con los camiones cargados desde el panel /admin.
+/* Inventario en vivo: reemplaza las fichas de ejemplo con los camiones USADOS cargados desde el panel /admin.
+   Los camiones nuevos se muestran en el showroom independiente /faw/ (FAW Centro Camionero).
    Si la API no responde o aún no hay camiones, la página conserva las fichas de ejemplo. */
 (function () {
-  var WHATSAPP = ""; // Número pendiente (formato 57XXXXXXXXXX). Mientras esté vacío, "Cotizar" lleva al simulador.
+  var WHATSAPP = "573245792435"; // Línea de atención (WhatsApp) de Centro Camionero
   var fmt = function (n) { return Number(n).toLocaleString("es-CO"); };
   var esc = function (s) { return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); };
   var SVG = '<svg viewBox="0 0 200 120" fill="none"><path d="M10 95H160V55H120L100 35H55L40 55H30V95" stroke="#fff" stroke-width="3"/><circle cx="60" cy="98" r="13" stroke="var(--red)" stroke-width="3"/><circle cx="140" cy="98" r="13" stroke="var(--red)" stroke-width="3"/></svg>';
@@ -54,7 +55,7 @@
       (v.fotos.length > 1 ? '<span class="nfotos">' + v.fotos.length + " fotos</span>" : "") + "</div>" +
       '<div class="body"><h3>' + esc(v.marca + " " + v.linea) + "</h3>" +
       (sp ? '<div class="specs">' + sp + "</div>" : "") +
-      '<div class="price"><b class="mono">' + precio(v) + '</b><a href="' + linkCotizar(v) + '" data-cotizar>Cotizar →</a></div></div></article>';
+      '<div class="price"><b class="mono">' + precio(v) + '</b><a href="' + linkCotizar(v) + '"' + (WHATSAPP ? ' target="_blank" rel="noopener"' : "") + ' data-cotizar>Cotizar →</a></div></div></article>';
   }
 
   var dlg;
@@ -93,25 +94,12 @@
     });
   }
 
-  fetch("/api/vehiculos").then(function (r) { if (!r.ok) throw 0; return r.json(); }).then(function (d) {
+  fetch("/api/vehiculos?tipo=usado").then(function (r) { if (!r.ok) throw 0; return r.json(); }).then(function (d) {
     var lista = d.vehiculos || [];
     lista.forEach(function (v) { CACHE[v.id] = v; });
     var usados = lista.filter(function (v) { return v.tipo === "usado"; });
-    var nuevos = lista.filter(function (v) { return v.tipo === "nuevo"; });
-
     var grid = document.querySelector("#camiones .grid-camiones");
     if (grid && usados.length) { grid.innerHTML = usados.map(tarjeta).join(""); grid.classList.add("in"); activar(grid); }
 
-    var faw = document.getElementById("faw");
-    if (faw && nuevos.length) {
-      var sec = document.createElement("section");
-      sec.id = "nuevos";
-      sec.style.paddingBlock = "clamp(40px,6vw,72px) 18px";
-      sec.innerHTML = '<div class="container"><div class="section-head"><div><h2>Camiones nuevos.</h2></div><p class="lede">0 km, con respaldo de nuestra alianza FAW.</p></div><div class="grid-camiones">' + nuevos.map(tarjeta).join("") + "</div></div>";
-      faw.insertAdjacentElement("afterend", sec);
-      activar(sec.querySelector(".grid-camiones"));
-      var fawLink = document.getElementById("fawLink");
-      if (fawLink) fawLink.addEventListener("click", function () { sec.scrollIntoView({ behavior: "smooth" }); });
-    }
   }).catch(function () { /* sin API: se quedan las fichas de ejemplo */ });
 })();

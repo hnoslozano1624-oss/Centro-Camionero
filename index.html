@@ -226,7 +226,7 @@ footer{padding-block:32px;border-top:1px solid var(--border)}
     </a>
     <nav class="menu" id="siteMenu">
       <a href="#camiones">Camiones usados</a>
-      <a href="#faw">Camiones Nuevos</a>
+      <a href="/faw/">FAW Centro Camionero</a>
       <a href="#somos">Quiénes somos</a>
       <a href="#financiamiento">Financiamiento</a>
     </nav>
@@ -265,8 +265,8 @@ footer{padding-block:32px;border-top:1px solid var(--border)}
   </section>
 
   <section class="faw" id="faw">
-    <a class="faw-banner-link" href="#" id="fawLink" aria-label="Ver camiones FAW">
-      <img class="faw-banner-img" src="assets/faw-banner.jpg" alt="FAW Trucks — ¿Buscas camión 0 km? Conoce la línea de camiones nuevos FAW, la alianza con la que Centro Camionero entra a la línea de vehículos nuevos en Colombia.">
+    <a class="faw-banner-link" href="/faw/" id="fawLink" aria-label="Ir al showroom FAW Centro Camionero">
+      <img class="faw-banner-img" src="assets/faw-banner.jpg" alt="FAW Centro Camionero — ¿Buscas camión 0 km? Conoce la línea de camiones nuevos FAW en el showroom FAW Centro Camionero.">
     </a>
   </section>
 
@@ -421,7 +421,7 @@ footer{padding-block:32px;border-top:1px solid var(--border)}
         <p class="lede" style="margin-top:16px">Calcula un estimado de tu cuota para financiar tu próximo camión. Es una simulación de referencia — la tasa y condiciones finales las confirma la entidad financiera aliada.</p>
         <span class="badge" style="margin-top:18px;display:inline-block">Tasa de ejemplo: 1,8% mensual — sujeta a aprobación</span>
         <div style="margin-top:24px">
-          <a class="btn btn-primary" href="#" id="whatsappCta">Hablar con un asesor por WhatsApp →</a>
+          <a class="btn btn-primary" href="https://wa.me/573245792435?text=Hola%2C%20quiero%20hablar%20con%20un%20asesor%20de%20Centro%20Camionero." target="_blank" rel="noopener" id="whatsappCta">Hablar con un asesor por WhatsApp →</a>
         </div>
       </div>
       <form class="contact-form" id="simForm">
@@ -455,7 +455,7 @@ footer{padding-block:32px;border-top:1px solid var(--border)}
     </a>
     <div class="foot-links">
       <a href="#camiones">Camiones usados</a>
-      <a href="#faw">Camiones Nuevos</a>
+      <a href="/faw/">FAW Centro Camionero</a>
       <a href="#somos">Quiénes somos</a>
       <a href="#financiamiento">Financiamiento</a>
     </div>
@@ -471,7 +471,7 @@ footer{padding-block:32px;border-top:1px solid var(--border)}
   </div>
 </footer>
 
-<a class="whatsapp-float" href="#" id="whatsappFloat" aria-label="Escríbenos por WhatsApp" title="Escríbenos por WhatsApp">
+<a class="whatsapp-float" href="https://wa.me/573245792435?text=Hola%2C%20quiero%20informaci%C3%B3n%20de%20Centro%20Camionero." target="_blank" rel="noopener" id="whatsappFloat" aria-label="Escríbenos por WhatsApp" title="Escríbenos por WhatsApp">
   <svg viewBox="0 0 32 32" fill="none" aria-hidden="true">
     <circle cx="16" cy="16" r="15" fill="#25D366"/>
     <path d="M16 7c-5 0-9 4-9 9 0 1.7.5 3.3 1.3 4.6L7 25l4.6-1.3c1.3.7 2.8 1.1 4.4 1.1 5 0 9-4 9-9s-4-8.8-9-8.8Z" stroke="#fff" stroke-width="1.6"/>
@@ -519,20 +519,6 @@ footer{padding-block:32px;border-top:1px solid var(--border)}
       simResult.textContent=(principal>0 && isFinite(cuota)) ? ('$ '+Math.round(cuota).toLocaleString('es-CO')) : '—';
     });
 
-    var fawLink=document.getElementById('fawLink');
-    fawLink.addEventListener('click', function(e){
-      e.preventDefault();
-      // Landing exclusiva de FAW pendiente de construir.
-    });
-
-    var waTargets=[document.getElementById('whatsappFloat'), document.getElementById('whatsappCta')];
-    waTargets.forEach(function(el){
-      if(!el) return;
-      el.addEventListener('click', function(e){
-        e.preventDefault();
-        // Número de WhatsApp real pendiente de confirmar por Laura.
-      });
-    });
   }catch(err){ console.error(err); }
 })();
 </script>
