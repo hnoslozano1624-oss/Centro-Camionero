@@ -18,18 +18,14 @@ Permite al equipo de Centro Camionero cargar camiones (datos, ficha técnica y f
 | Base de datos | D1 `centro-camionero-db` (tablas `vehiculos` y `vehiculo_fotos`) |
 | Fotos | KV `centro-camionero-fotos` (las fotos se reducen a 1600 px en el navegador antes de subir) |
 
-## Configuración única en Cloudflare (obligatoria)
+## Configuración en Cloudflare
 
-Workers & Pages → `centro-camionero` → **Settings** → **Bindings** (hacerlo en **Production** y en **Preview**):
+Ya no requiere pasos manuales en el panel de Cloudflare:
 
-1. **Add → D1 database** · Variable name: `DB` · Base: `centro-camionero-db`
-2. **Add → KV namespace** · Variable name: `FOTOS` · Namespace: `centro-camionero-fotos`
-
-Settings → **Variables and Secrets** → Add:
-
-3. Tipo **Secret** · Nombre: `ADMIN_PASSWORD` · Valor: la contraseña del panel (mínimo 12 caracteres).
-
-Después, volver a desplegar (Deployments → … → Retry deployment) para que tome los cambios.
+- `wrangler.toml` enlaza la base D1 (`DB`) y el almacenamiento de fotos KV (`FOTOS`) para producción y vista previa. Al existir este archivo, esos enlaces se administran desde aquí y no desde el panel.
+- La contraseña del panel se guarda como hash (SHA-256 con sal) en la tabla `config` de D1, junto con la llave que firma las sesiones (migración `migrations/0003_config.sql`). Nunca se guarda en el repositorio.
+- Para cambiar la contraseña: pedirlo a Claude (actualiza el hash en D1) o, si se prefiere, crear el secreto `ADMIN_PASSWORD` en Cloudflare, que tiene prioridad sobre el de D1.
+- Producción y vista previa comparten la misma base de datos: lo que se cargue en la vista previa también aparece en la web real.
 
 ## Pendientes
 
