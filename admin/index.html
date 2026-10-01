@@ -34,15 +34,15 @@ h1,h2{font-family:var(--f-display);text-transform:uppercase;letter-spacing:.01em
 
 /* login */
 .login{min-height:100vh;display:grid;place-items:center;padding:24px 16px;background:linear-gradient(160deg,var(--navy) 0%,var(--navy-deep) 100%)}
-.login form{background:var(--surface);border-radius:8px;padding:28px 24px;width:min(380px,100%);display:grid;gap:16px;box-shadow:0 30px 60px -20px rgba(0,0,0,.5)}
-.login img{height:38px;width:auto;justify-self:start}
+.login form{background:var(--surface);border-radius:8px;padding:28px 24px;width:min(400px,100%);display:grid;grid-template-columns:minmax(0,1fr);gap:16px;box-shadow:0 30px 60px -20px rgba(0,0,0,.5)}
+.login img{width:100%;max-width:300px;height:auto;justify-self:start}
 .login h1{font-size:30px;color:var(--navy)}
 .login p{margin:0;color:var(--muted);font-size:14px}
 
 /* app */
 .top{background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:20;padding-top:env(safe-area-inset-top,0px)}
 .top-in{max-width:1100px;margin:0 auto;padding:10px 16px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
-.top img{height:30px;width:auto}
+.top img{height:30px;width:auto;max-width:60vw;object-fit:contain;object-position:left}
 .top .tag{font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);border-left:1px solid var(--line);padding-left:12px}
 .top .sp{flex:1}
 main{max-width:1100px;margin:0 auto;padding:20px 16px 80px;display:grid;gap:16px}

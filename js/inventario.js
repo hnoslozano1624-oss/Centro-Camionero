@@ -10,6 +10,7 @@
   var css = document.createElement("style");
   css.textContent =
     ".card-camion{cursor:pointer;transition:transform .15s ease}.card-camion:hover{transform:translateY(-3px)}" +
+    ".card-camion .price{flex-wrap:wrap;gap:6px 10px}.card-camion .price b{white-space:nowrap}" +
     ".card-camion .thumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}" +
     ".card-camion .estado-pill{position:absolute;top:10px;right:10px;background:var(--red);color:#fff;font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;padding:4px 8px;border-radius:99px}" +
     ".card-camion .nfotos{position:absolute;bottom:10px;right:10px;background:rgba(4,16,43,.65);color:#fff;font-family:'IBM Plex Mono',monospace;font-size:10px;padding:3px 7px;border-radius:99px}" +
