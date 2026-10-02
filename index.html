@@ -200,11 +200,12 @@ section{padding-block:clamp(56px,8vw,104px)}
 .paso p{color:var(--fg-muted);font-size:14.5px;margin-top:10px}
 
 /* ---------- contacto ---------- */
-.contacto{background:linear-gradient(135deg,var(--navy-deep) 0%,var(--navy) 100%);color:#fff}
-.contacto .badge{background:var(--bg-elevated)}
+.contacto{background:linear-gradient(135deg,var(--navy-deep) 0%,var(--navy) 100%);color:#fff;margin-top:28px}
+.contacto .badge{background:var(--bg-elevated);font-family:'IBM Plex Sans',sans-serif;text-transform:none;letter-spacing:0;font-weight:600;font-size:13px}
 .contacto-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(32px,5vw,64px)}
 .contacto h2{font-family:'IBM Plex Sans',sans-serif;text-transform:none;font-weight:700;letter-spacing:-.01em;line-height:1.15;color:#fff}
 .contacto .lede{color:#C7D1F2}
+.contacto .btn{font-family:'IBM Plex Sans',sans-serif;text-transform:none;letter-spacing:0;font-weight:600}
 .contacto #whatsappCta{background:#fff;color:var(--navy)}
 .contacto #whatsappCta:hover{background:var(--steel-100)}
 .asesor-card{display:flex;align-items:center;gap:20px;flex-wrap:wrap;margin-top:28px;padding-top:24px;border-top:1px solid rgba(255,255,255,.18)}
@@ -219,14 +220,14 @@ form.contact-form{background:var(--bg-elevated);border:1px solid var(--border);b
 form.contact-form .btn-primary{background:var(--navy)}
 form.contact-form .btn-primary:hover{background:var(--navy-deep)}
 .field{display:flex;flex-direction:column;gap:6px}
-.field label{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--fg-muted)}
+.field label{font-family:'IBM Plex Sans',sans-serif;font-size:13px;letter-spacing:0;text-transform:none;font-weight:600;color:var(--fg-muted)}
 .field input,.field select,.field textarea{background:var(--bg);border:1px solid var(--border);border-radius:2px;color:var(--fg);padding:12px 14px;font-family:'IBM Plex Sans',sans-serif;font-size:14.5px}
 .field input::placeholder,.field textarea::placeholder{color:var(--fg-muted)}
 .field textarea{resize:vertical;min-height:90px}
 .form-note{font-size:12.5px;color:var(--fg-muted);display:flex;align-items:center;gap:8px;min-height:18px}
 .form-note.ok{color:#1F9D55}
 .sim-result{background:var(--bg);border:1px solid var(--border);border-radius:2px;padding:16px;text-align:center}
-.sim-result .k{display:block;font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--fg-muted);margin-bottom:6px}
+.sim-result .k{display:block;font-family:'IBM Plex Sans',sans-serif;font-size:13px;letter-spacing:0;text-transform:none;font-weight:600;color:var(--fg-muted);margin-bottom:6px}
 .sim-result .amount{display:block;font-family:'Big Shoulders Display',sans-serif;font-size:clamp(30px,4vw,42px);color:var(--navy)}
 
 /* ---------- footer ---------- */
@@ -270,7 +271,7 @@ footer{padding-block:32px;border-top:1px solid var(--border)}
     <nav class="menu" id="siteMenu">
       <a href="#camiones">Camiones disponibles</a>
       <a href="#faw">Camiones Nuevos</a>
-      <a href="#financiamiento">Financiamiento</a>
+      <a href="#financiamiento">Simulador de financiación</a>
     </nav>
     <button class="nav-toggle" id="navToggle" aria-label="Abrir menú" aria-expanded="false">
       <svg width="18" height="14" viewBox="0 0 18 14" fill="none"><path d="M0 1H18M0 7H18M0 13H18" stroke="currentColor" stroke-width="2"/></svg>
@@ -451,7 +452,7 @@ footer{padding-block:32px;border-top:1px solid var(--border)}
   <section class="contacto" id="financiamiento">
     <div class="container contacto-grid">
       <div class="reveal">
-        <p class="eyebrow">Financiamiento</p>
+        <p class="eyebrow">Simulador de financiación</p>
         <h2>Simula tu cuota<br>mensual.</h2>
         <p class="lede" style="margin-top:16px">Calcula un estimado de tu cuota para financiar tu próximo camión. Es una simulación de referencia — la tasa y condiciones finales las confirma la entidad financiera aliada.</p>
         <span class="badge" style="margin-top:18px;display:inline-block">Tasa de ejemplo: 1,8% mensual — sujeta a aprobación</span>
@@ -503,7 +504,7 @@ footer{padding-block:32px;border-top:1px solid var(--border)}
     <div class="foot-links">
       <a href="#camiones">Camiones disponibles</a>
       <a href="#faw">Camiones Nuevos</a>
-      <a href="#financiamiento">Financiamiento</a>
+      <a href="#financiamiento">Simulador de financiación</a>
     </div>
     <div class="foot-social">
       <a class="social-ico" href="#" id="igLink" aria-label="Instagram" target="_blank" rel="noopener">
