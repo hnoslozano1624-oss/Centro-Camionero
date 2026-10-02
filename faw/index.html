@@ -57,11 +57,11 @@ p{margin:0}
 
 /* ---------- vitrina (hero): escenario oscuro con luces, tarima vacía para la rotación de camiones ---------- */
 .vitrina{position:relative;background:#030A26;color:#fff;overflow:hidden;isolation:isolate}
-.scene{position:relative;width:100%;aspect-ratio:16/7;max-height:calc(100vh - 68px);min-height:420px}
+.scene{position:relative;width:100%;aspect-ratio:16/7;max-height:calc(100vh - 68px);min-height:500px}
 .scene svg{position:absolute;inset:0;width:100%;height:100%;display:block}
 .scene .breathe{animation:breathe 4.5s ease-in-out infinite}
 @keyframes breathe{0%,100%{opacity:.75}50%{opacity:1}}
-.unit{opacity:0;transform:translateX(300px) scale(.82);transform-origin:1060px 530px;transition:transform 1.5s cubic-bezier(.2,.75,.15,1),opacity 1.1s ease}
+.unit{opacity:0;transform:translateX(300px) scale(.82);transform-origin:1060px 560px;transition:transform 1.5s cubic-bezier(.2,.75,.15,1),opacity 1.1s ease}
 .unit.on{opacity:1;transform:none}
 .unit.off{opacity:0;transform:translateX(-300px) scale(.82)}
 .spin{animation:spin 18s linear infinite}
@@ -71,15 +71,17 @@ p{margin:0}
 @keyframes sweep{0%{opacity:0;transform:translateX(-520px)}25%{opacity:1}100%{opacity:0;transform:translateX(520px)}}
 .v-copy{position:absolute;inset:0;pointer-events:none}
 .v-copy .wrap{height:100%;display:flex;align-items:center}
+.v-copy .more{display:inline-flex;gap:8px;margin-top:16px;color:#C9D3F5;font-size:14.5px;font-weight:500;text-decoration:none;border-bottom:1px solid rgba(201,211,245,.4);padding-bottom:2px}
+.v-copy .more:hover{color:#fff;border-color:#fff}
 .v-copy .txt{pointer-events:auto;max-width:440px;text-shadow:0 2px 24px rgba(3,10,38,.8)}
 .v-copy .kicker{display:inline-flex;align-items:center;gap:10px;font-size:12.5px;letter-spacing:.16em;text-transform:uppercase;color:#AFC0FF;font-weight:500}
 .v-copy .kicker::before{content:"";width:28px;height:2px;background:#5B8CFF;box-shadow:0 0 10px #5B8CFF}
-.v-copy h1{font-size:clamp(38px,5vw,68px);font-weight:700;letter-spacing:-.01em;margin-top:14px}
+.v-copy h1{font-size:clamp(36px,4.3vw,62px);font-weight:700;letter-spacing:-.01em;margin-top:14px}
 .v-copy h1 span{display:block;font-weight:400;color:#DCE4FF}
 .v-copy .tag{margin-top:16px;font-size:clamp(16px,1.5vw,19px);color:#C9D3F5;max-width:32ch}
 .v-copy .tag b{color:#fff;font-style:italic}
 .v-copy .ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
-.on-stage{position:absolute;z-index:3;right:clamp(16px,4vw,40px);bottom:clamp(14px,3vw,28px);width:min(360px,calc(100% - 32px));background:rgba(5,14,52,.66);border:1px solid rgba(140,170,255,.22);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-radius:16px;padding:14px 16px 0;color:#fff;overflow:hidden}
+.on-stage{position:relative;margin-top:26px;width:min(400px,100%);text-shadow:none;background:rgba(5,14,52,.66);border:1px solid rgba(140,170,255,.22);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-radius:16px;padding:14px 16px 0;color:#fff;overflow:hidden}
 .on-stage .row1{display:flex;align-items:center;justify-content:space-between;gap:10px}
 .on-stage .k{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#9FB4FF;font-weight:500}
 .on-stage .count{font-family:var(--mono);font-size:13px;color:#C9D3F5}
@@ -100,7 +102,7 @@ p{margin:0}
   .v-copy{position:static}
   .v-copy .wrap{display:block;padding-block:28px 40px}
   .v-copy .txt{max-width:none;text-shadow:none}
-  .on-stage{position:relative;left:auto;right:auto;bottom:auto;margin:-18px 16px 0;width:auto}
+  .on-stage{width:100%}
   .leftshade{display:none}
 }
 @media (prefers-reduced-motion:reduce){.scene .breathe,.spin{animation:none}.unit{transition:opacity .4s ease}}
@@ -264,8 +266,12 @@ dialog::backdrop{background:rgba(8,18,65,.75)}
           <filter id="soft" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="14"/></filter>
           <filter id="streak" x="-50%" y="-10%" width="200%" height="120%"><feGaussianBlur stdDeviation="5 18"/></filter>
           <radialGradient id="gFade" cx=".5" cy=".58" r=".62"><stop offset=".5" stop-color="#fff"/><stop offset=".98" stop-color="#000"/></radialGradient>
-          <linearGradient id="gRefl" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".4"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
-          <mask id="mRefl" maskUnits="userSpaceOnUse" x="0" y="0" width="1600" height="700"><rect x="600" y="530" width="920" height="70" fill="url(#gRefl)"/></mask>
+          <filter id="tight" x="-30%" y="-100%" width="160%" height="300%"><feGaussianBlur stdDeviation="3"/></filter>
+          <filter id="ground" x="-30%" y="-60%" width="160%" height="220%"><feGaussianBlur stdDeviation="11"/></filter>
+          <filter id="tono" color-interpolation-filters="sRGB"><feColorMatrix type="matrix" values=".86 0 0 0 0  0 .89 0 0 .005  0 0 .97 0 .03  0 0 0 1 0"/></filter>
+          <filter id="silueta" color-interpolation-filters="sRGB"><feFlood flood-color="#020820"/><feComposite in2="SourceAlpha" operator="in"/></filter>
+          <linearGradient id="gAO" x1="0" y1="0" x2="0" y2="1"><stop offset=".55" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#fff" stop-opacity=".62"/></linearGradient>
+          <mask id="mAO" maskContentUnits="objectBoundingBox"><rect width="1" height="1" fill="url(#gAO)"/></mask>
           <linearGradient id="gSweep" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".5" stop-color="#DCE6FF" stop-opacity=".35"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
           <linearGradient id="gLeft" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#030A26" stop-opacity=".92"/><stop offset=".7" stop-color="#030A26" stop-opacity=".55"/><stop offset="1" stop-color="#030A26" stop-opacity="0"/></linearGradient>
         </defs>
@@ -325,32 +331,26 @@ dialog::backdrop{background:rgba(8,18,65,.75)}
         <!-- sombra lateral para que el texto se lea sobre el ventanal -->
         <rect class="leftshade" x="0" y="0" width="760" height="700" fill="url(#gLeft)"/>
 
-        <!-- tarima giratoria con anillos LED -->
-        <ellipse cx="1060" cy="590" rx="470" ry="84" fill="#01041A" opacity=".9"/>
-        <ellipse cx="1060" cy="590" rx="470" ry="84" fill="none" stroke="#5B8CFF" stroke-opacity=".25" stroke-width="2"/>
-        <ellipse cx="1060" cy="560" rx="400" ry="64" fill="#0A1446"/>
-        <ellipse cx="1060" cy="562" rx="402" ry="66" fill="none" stroke="#7FA2FF" stroke-width="3" filter="url(#glow)" class="breathe"/>
-        <path d="M680 540 A380 58 0 0 0 1440 540 V556 A380 58 0 0 1 680 556 Z" fill="url(#gSteel2)"/>
-        <ellipse cx="1060" cy="540" rx="380" ry="58" fill="#0C1850"/>
-        <ellipse cx="1060" cy="543" rx="382" ry="60" fill="none" stroke="#A9C0FF" stroke-width="2.5" filter="url(#glow)" class="breathe"/>
-        <path d="M700 512 A360 52 0 0 0 1420 512 V532 A360 52 0 0 1 700 532 Z" fill="url(#gSteel)"/>
-        <ellipse cx="1060" cy="512" rx="360" ry="52" fill="url(#gTop)"/>
-        <ellipse cx="1060" cy="512" rx="360" ry="52" fill="none" stroke="#FFFFFF" stroke-opacity=".35" stroke-width="1.5"/>
-        <ellipse cx="1060" cy="506" rx="250" ry="30" fill="#5B7BE8" opacity=".18" filter="url(#soft)"/>
+        <!-- tarima giratoria con anillos LED (vista en perspectiva para que los camiones se apoyen en ella) -->
+        <ellipse cx="1060" cy="622" rx="520" ry="122" fill="#01041A" opacity=".9"/>
+        <ellipse cx="1060" cy="622" rx="520" ry="122" fill="none" stroke="#5B8CFF" stroke-opacity=".22" stroke-width="2"/>
+        <ellipse cx="1060" cy="600" rx="440" ry="104" fill="#0A1446"/>
+        <ellipse cx="1060" cy="602" rx="442" ry="106" fill="none" stroke="#7FA2FF" stroke-width="3" filter="url(#glow)" class="breathe"/>
+        <path d="M640 575 A420 98 0 0 0 1480 575 V592 A420 98 0 0 1 640 592 Z" fill="url(#gSteel2)"/>
+        <ellipse cx="1060" cy="575" rx="420" ry="98" fill="#0C1850"/>
+        <ellipse cx="1060" cy="578" rx="422" ry="100" fill="none" stroke="#A9C0FF" stroke-width="2.5" filter="url(#glow)" class="breathe"/>
+        <path d="M660 540 A400 92 0 0 0 1460 540 V562 A400 92 0 0 1 660 562 Z" fill="url(#gSteel)"/>
+        <ellipse cx="1060" cy="540" rx="400" ry="92" fill="url(#gTop)"/>
+        <ellipse cx="1060" cy="540" rx="400" ry="92" fill="none" stroke="#FFFFFF" stroke-opacity=".35" stroke-width="1.5"/>
+        <ellipse cx="1060" cy="528" rx="290" ry="56" fill="#5B7BE8" opacity=".2" filter="url(#soft)"/>
 
         <!-- borde giratorio de la tarima -->
-        <ellipse class="spin" cx="1060" cy="512" rx="360" ry="52" fill="none" stroke="#FFFFFF" stroke-opacity=".55" stroke-width="2" stroke-dasharray="4 24"/>
+        <ellipse class="spin" cx="1060" cy="540" rx="400" ry="92" fill="none" stroke="#FFFFFF" stroke-opacity=".55" stroke-width="2" stroke-dasharray="4 24"/>
 
         <!-- vitrina: los camiones rotan sobre la tarima (se cargan desde el script) -->
-        <ellipse cx="1060" cy="528" rx="300" ry="24" fill="#000" opacity=".5" filter="url(#soft)"/>
         <g id="slot"></g>
         <rect class="sweep" id="sweep" x="900" y="180" width="320" height="400" fill="url(#gSweep)" style="mix-blend-mode:screen"/>
       </svg>
-    </div>
-    <div class="on-stage" id="onStage" aria-live="polite">
-      <div class="row1"><span class="k">En vitrina</span><span class="count" id="osCount">01 / 03</span></div>
-      <div class="row2"><div><div class="nm" id="osName">FAW Tiger</div><div class="sb" id="osSub"></div></div><a class="go" id="osGo" href="#asesoria" target="_blank" rel="noopener">Cotizar</a></div>
-      <div class="ctrl" id="osCtrl"></div>
     </div>
     <div class="v-copy">
       <div class="wrap">
@@ -358,13 +358,12 @@ dialog::backdrop{background:rgba(8,18,65,.75)}
           <p class="kicker">Showroom de camiones nuevos · Bogotá</p>
           <h1 id="t-hero">FAW <span>Centro Camionero</span></h1>
           <p class="tag">Fuerza de trabajo #1 en China, <b>ahora en Colombia.</b> Camiones FAW 0 km con la asesoría y el respaldo de Centro Camionero.</p>
-          <div class="ctas">
-            <a class="btn btn-white" href="#exhibicion">Ver camiones</a>
-            <a class="btn btn-line" data-wa="Hola, quiero información sobre los camiones nuevos de FAW Centro Camionero." href="#asesoria">
-              <svg viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><path d="M16 3C9 3 3.4 8.6 3.4 15.5c0 2.4.7 4.7 1.9 6.6L3.3 29l7.1-1.9a12.6 12.6 0 0 0 5.6 1.3c7 0 12.6-5.6 12.6-12.5S23 3 16 3Zm5.9 15.1c-.3-.2-1.9-.9-2.2-1-.3-.1-.5-.2-.7.2l-1 1.2c-.2.2-.4.2-.7.1a8.7 8.7 0 0 1-4.3-3.8c-.3-.6.3-.5.9-1.7.1-.2 0-.4 0-.5l-1-2.4c-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.2.2 2.1 3.3 5.2 4.6 1.9.8 2.7.9 3.7.7.6-.1 1.9-.8 2.2-1.5.3-.7.3-1.4.2-1.5-.1-.1-.3-.2-.6-.4Z"/></svg>
-              Escríbenos
-            </a>
+          <div class="on-stage" id="onStage" aria-live="polite">
+            <div class="row1"><span class="k">En vitrina</span><span class="count" id="osCount">01 / 03</span></div>
+            <div class="row2"><div><div class="nm" id="osName">FAW Tiger</div><div class="sb" id="osSub"></div></div><a class="go" id="osGo" href="#asesoria" target="_blank" rel="noopener">Cotizar</a></div>
+            <div class="ctrl" id="osCtrl"></div>
           </div>
+          <a class="more" href="#exhibicion">Ver camiones en exhibición <span aria-hidden="true">→</span></a>
         </div>
       </div>
     </div>
@@ -532,37 +531,55 @@ dialog::backdrop{background:rgba(8,18,65,.75)}
   // Vitrina: encuadre según pantalla y rotación de camiones nuevos sobre la tarima
   var stage = document.getElementById("stage");
   var mq = window.matchMedia("(max-width:900px)");
-  function encuadre(){ stage.setAttribute("viewBox", mq.matches ? "620 90 880 610" : "0 0 1600 700"); stage.setAttribute("preserveAspectRatio", mq.matches ? "xMidYMid slice" : "xMidYMax slice"); }
+  function encuadre(){ stage.setAttribute("viewBox", mq.matches ? "580 120 960 650" : "0 0 1600 700"); stage.setAttribute("preserveAspectRatio", mq.matches ? "xMidYMid slice" : "xMidYMax slice"); }
   encuadre(); if (mq.addEventListener) mq.addEventListener("change", encuadre);
 
   // Modelos en la vitrina (fotos sin fondo en /assets/vitrina). Para cambiar la rotación, editar esta lista.
+  // "ruedas": puntos donde cada llanta toca el piso, en fracción del ancho/alto de la foto
+  // [x, y, ancho de la llanta], en orden: delantera lejana, delantera cercana, trasera cercana, trasera lejana.
   var VITRINA = [
-    { src: "/assets/vitrina/faw-tiger-whr.webp", nombre: "FAW Tiger WHR", sub: "Cabina sencilla · chasís" },
-    { src: "/assets/vitrina/faw-tiger-wkr.webp", nombre: "FAW Tiger WKR", sub: "Doble cabina · chasís" },
-    { src: "/assets/vitrina/faw-modelo-3.webp", nombre: "FAW Tiger", sub: "Camión liviano · chasís" }
+    { src: "/assets/vitrina/faw-tiger-whr.webp", nombre: "FAW Tiger WHR", sub: "Cabina sencilla · chasís",
+      ruedas: [[.84, .935, .10], [.275, .995, .17], [.07, .715, .075], [.58, .69, .07]] },
+    { src: "/assets/vitrina/faw-tiger-wkr.webp", nombre: "FAW Tiger WKR", sub: "Doble cabina · chasís",
+      ruedas: [[.22, .93, .12], [.595, .995, .15], [.94, .82, .13], [.76, .77, .08]] },
+    { src: "/assets/vitrina/faw-modelo-3.webp", nombre: "FAW Tiger", sub: "Camión liviano · chasís",
+      ruedas: [[.2, .95, .12], [.745, .995, .15], [.95, .745, .08], [.72, .7, .07]] }
   ];
-  var DUR = 6000, NS = "http://www.w3.org/2000/svg";
+  var DUR = 6000, NS = "http://www.w3.org/2000/svg", ALTO = 380, PISO = 592, CENTRO = 1060;
+  function el(tag, attrs){ var e = document.createElementNS(NS, tag); for (var k in attrs) e.setAttribute(k, attrs[k]); return e; }
   function vitrina(){
     var slot = document.getElementById("slot"), box = document.getElementById("onStage"), ctrl = document.getElementById("osCtrl");
     var sweep = document.getElementById("sweep"), actual = -1, timer = null, pausa = false;
     var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     box.style.setProperty("--dur", DUR + "ms");
-    // Cada modelo: camión apoyado sobre la tarima + reflejo en el acero pulido
+    // Cada modelo: sombra de contacto bajo el chasís y bajo cada llanta, el camión con el tono de la luz
+    // del escenario y una oclusión suave en la parte baja, para que quede asentado sobre la tarima.
     var unidades = VITRINA.map(function(m, n){
-      var g = document.createElementNS(NS, "g"); g.setAttribute("class", "unit");
-      var img = document.createElementNS(NS, "image"), ref = document.createElementNS(NS, "image");
-      img.setAttribute("preserveAspectRatio", "xMidYMax meet"); ref.setAttribute("preserveAspectRatio", "xMidYMax meet");
-      ref.setAttribute("mask", "url(#mRefl)"); ref.setAttribute("opacity", ".5");
+      var g = el("g", { "class": "unit" });
+      slot.appendChild(g);
       var pic = new Image();
       pic.onload = function(){
-        var ar = pic.naturalWidth / pic.naturalHeight, w = 760, h = w / ar;
-        if (h > 330) { h = 330; w = h * ar; }
-        var x = 1060 - w / 2, y = 530 - h;
-        [img, ref].forEach(function(el){ el.setAttribute("x", x); el.setAttribute("y", y); el.setAttribute("width", w); el.setAttribute("height", h); el.setAttribute("href", m.src); });
-        ref.setAttribute("transform", "translate(0 1060) scale(1 -1)");
+        var ar = pic.naturalWidth / pic.naturalHeight, h = ALTO, w = h * ar;
+        if (w > 620) { w = 620; h = w / ar; }
+        var r = m.ruedas, cx = 0;
+        r.forEach(function(p){ cx += p[0]; }); cx /= r.length;
+        var x = CENTRO - w * cx, y = PISO - h * r[1][1];
+        var pts = r.map(function(p){ return [x + p[0] * w, y + p[1] * h]; });
+        // luz ambiental bloqueada alrededor del vehículo
+        var my = 0; pts.forEach(function(p){ my += p[1]; }); my /= pts.length;
+        g.appendChild(el("ellipse", { cx: CENTRO, cy: my + 14, rx: w * .62, ry: 46, fill: "#000", opacity: ".38", filter: "url(#ground)" }));
+        // sombra bajo el chasís (huella entre las cuatro llantas)
+        var d = "M" + pts.map(function(p, i){ return p[0] + " " + (p[1] + (i < 2 ? 8 : 3)); }).join(" L") + " Z";
+        g.appendChild(el("path", { d: d, fill: "#000", opacity: ".85", filter: "url(#ground)", stroke: "#000", "stroke-width": 30, "stroke-linejoin": "round" }));
+        // contacto de cada llanta
+        r.forEach(function(p, i){
+          g.appendChild(el("ellipse", { cx: x + p[0] * w, cy: y + p[1] * h - 1, rx: p[2] * w * .62, ry: i === 1 ? 8 : 6, fill: "#000", opacity: i === 1 ? ".9" : ".8", filter: "url(#tight)" }));
+        });
+        var attrs = { x: x, y: y, width: w, height: h, href: m.src, preserveAspectRatio: "none" };
+        g.appendChild(el("image", Object.assign({ filter: "url(#tono)" }, attrs)));
+        g.appendChild(el("image", Object.assign({ filter: "url(#silueta)", mask: "url(#mAO)" }, attrs)));
       };
       pic.src = m.src;
-      g.appendChild(ref); g.appendChild(img); slot.appendChild(g);
       var b = document.createElement("button"); b.type = "button"; b.setAttribute("aria-label", "Ver " + m.nombre); b.innerHTML = "<i></i>";
       b.addEventListener("click", function(){ mostrar(n, true); });
       ctrl.appendChild(b);
