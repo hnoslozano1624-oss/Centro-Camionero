@@ -186,7 +186,10 @@ section{padding-block:clamp(56px,8vw,104px)}
 .specs{display:grid;grid-template-columns:1fr 1fr;gap:8px 14px;font-family:'IBM Plex Sans',sans-serif;font-size:12.5px;color:var(--fg-muted);border-top:1px solid var(--border);padding-top:12px;margin-top:2px}
 .specs span{display:flex;flex-direction:column;gap:2px}
 .specs b{color:var(--fg);font-weight:700;font-size:13.5px;order:-1}
-.card-camion .btn{margin-top:auto;justify-content:center;width:100%;box-sizing:border-box}
+.card-camion .price-row{margin-top:auto;display:flex;align-items:center;justify-content:space-between;gap:10px}
+.card-camion .price{font-family:'Big Shoulders Display',sans-serif;font-size:21px;font-weight:800;color:#012792;line-height:1}
+.card-camion .price.muted{font-family:'IBM Plex Sans',sans-serif;font-size:12.5px;font-weight:600;letter-spacing:0;text-transform:none;color:var(--fg-muted)}
+.card-camion .btn{justify-content:center;flex:none}
 .card-camion .btn-primary{background:#012792}
 .card-camion .btn-primary:hover{background:#010B3D}
 
@@ -344,6 +347,22 @@ footer{padding-block:32px;border-top:1px solid var(--border)}
 
       <div class="grid-camiones reveal">
         <article class="card-camion">
+          <div class="thumb">
+            <img src="assets/karry-yoky.jpg" alt="Karry Yoky 2025, furgón de carga seca">
+          </div>
+          <div class="body">
+            <h3>Karry Yoky</h3>
+            <div class="specs">
+              <span>Modelo <b>2025</b></span><span>Kilometraje <b>101 km</b></span>
+              <span>Carrocería <b>Furgón carga seca</b></span>
+            </div>
+            <div class="price-row">
+              <span class="price">$ 69.000.000</span>
+              <a class="btn btn-primary" href="#financiamiento">Cotizar →</a>
+            </div>
+          </div>
+        </article>
+        <article class="card-camion">
           <div class="thumb"><span class="example-pill">Ficha de ejemplo</span>
             <svg viewBox="0 0 200 120" fill="none"><path d="M10 95H160V55H120L100 35H55L40 55H30V95" stroke="#fff" stroke-width="3"/><circle cx="60" cy="98" r="13" stroke="var(--red)" stroke-width="3"/><circle cx="140" cy="98" r="13" stroke="var(--red)" stroke-width="3"/></svg>
           </div>
@@ -353,7 +372,10 @@ footer{padding-block:32px;border-top:1px solid var(--border)}
               <span>Modelo <b>2019</b></span><span>Kilometraje <b>180.000 km</b></span>
               <span>Motor <b>Cummins ISX</b></span><span>Carrocería <b>Estacas</b></span>
             </div>
-            <a class="btn btn-primary" href="#financiamiento">Cotizar →</a>
+            <div class="price-row">
+              <span class="price muted">Precio a consultar</span>
+              <a class="btn btn-primary" href="#financiamiento">Cotizar →</a>
+            </div>
           </div>
         </article>
         <article class="card-camion">
@@ -366,7 +388,10 @@ footer{padding-block:32px;border-top:1px solid var(--border)}
               <span>Modelo <b>2020</b></span><span>Kilometraje <b>96.000 km</b></span>
               <span>Motor <b>Maxxforce</b></span><span>Carrocería <b>Furgón</b></span>
             </div>
-            <a class="btn btn-primary" href="#financiamiento">Cotizar →</a>
+            <div class="price-row">
+              <span class="price muted">Precio a consultar</span>
+              <a class="btn btn-primary" href="#financiamiento">Cotizar →</a>
+            </div>
           </div>
         </article>
         <article class="card-camion">
@@ -379,7 +404,10 @@ footer{padding-block:32px;border-top:1px solid var(--border)}
               <span>Modelo <b>2018</b></span><span>Kilometraje <b>140.000 km</b></span>
               <span>Motor <b>Isuzu 6HK1</b></span><span>Carrocería <b>Volqueta</b></span>
             </div>
-            <a class="btn btn-primary" href="#financiamiento">Cotizar →</a>
+            <div class="price-row">
+              <span class="price muted">Precio a consultar</span>
+              <a class="btn btn-primary" href="#financiamiento">Cotizar →</a>
+            </div>
           </div>
         </article>
         <article class="card-camion">
@@ -392,7 +420,10 @@ footer{padding-block:32px;border-top:1px solid var(--border)}
               <span>Modelo <b>2021</b></span><span>Kilometraje <b>72.000 km</b></span>
               <span>Motor <b>Hino J08E</b></span><span>Carrocería <b>Furgón</b></span>
             </div>
-            <a class="btn btn-primary" href="#financiamiento">Cotizar →</a>
+            <div class="price-row">
+              <span class="price muted">Precio a consultar</span>
+              <a class="btn btn-primary" href="#financiamiento">Cotizar →</a>
+            </div>
           </div>
         </article>
         <article class="card-camion">
@@ -405,7 +436,10 @@ footer{padding-block:32px;border-top:1px solid var(--border)}
               <span>Modelo <b>2017</b></span><span>Kilometraje <b>210.000 km</b></span>
               <span>Motor <b>Cummins ISB</b></span><span>Carrocería <b>Estacas</b></span>
             </div>
-            <a class="btn btn-primary" href="#financiamiento">Cotizar →</a>
+            <div class="price-row">
+              <span class="price muted">Precio a consultar</span>
+              <a class="btn btn-primary" href="#financiamiento">Cotizar →</a>
+            </div>
           </div>
         </article>
         <article class="card-camion">
@@ -418,7 +452,10 @@ footer{padding-block:32px;border-top:1px solid var(--border)}
               <span>Modelo <b>2019</b></span><span>Kilometraje <b>165.000 km</b></span>
               <span>Motor <b>D13 Volvo</b></span><span>Carrocería <b>Tractomula</b></span>
             </div>
-            <a class="btn btn-primary" href="#financiamiento">Cotizar →</a>
+            <div class="price-row">
+              <span class="price muted">Precio a consultar</span>
+              <a class="btn btn-primary" href="#financiamiento">Cotizar →</a>
+            </div>
           </div>
         </article>
         <article class="card-camion">
@@ -431,7 +468,10 @@ footer{padding-block:32px;border-top:1px solid var(--border)}
               <span>Modelo <b>2020</b></span><span>Kilometraje <b>88.000 km</b></span>
               <span>Motor <b>Isuzu 4HK1</b></span><span>Carrocería <b>Furgón</b></span>
             </div>
-            <a class="btn btn-primary" href="#financiamiento">Cotizar →</a>
+            <div class="price-row">
+              <span class="price muted">Precio a consultar</span>
+              <a class="btn btn-primary" href="#financiamiento">Cotizar →</a>
+            </div>
           </div>
         </article>
         <article class="card-camion">
@@ -444,7 +484,10 @@ footer{padding-block:32px;border-top:1px solid var(--border)}
               <span>Modelo <b>2018</b></span><span>Kilometraje <b>120.000 km</b></span>
               <span>Motor <b>Cummins 6.7L</b></span><span>Carrocería <b>Estacas</b></span>
             </div>
-            <a class="btn btn-primary" href="#financiamiento">Cotizar →</a>
+            <div class="price-row">
+              <span class="price muted">Precio a consultar</span>
+              <a class="btn btn-primary" href="#financiamiento">Cotizar →</a>
+            </div>
           </div>
         </article>
       </div>
