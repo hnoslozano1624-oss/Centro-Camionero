@@ -170,28 +170,22 @@ section{padding-block:clamp(56px,8vw,104px)}
 .section-head h2{font-size:clamp(32px,4.6vw,56px)}
 
 /* ---------- flota (camiones usados) ---------- */
-.fleet-wrap{display:flex;flex-direction:column;gap:22px}
-.fleet-row{overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent);mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent)}
-.fleet-track{display:flex;gap:22px;width:max-content;will-change:transform}
-.fleet-track.dir-left{animation:fleetLeft 44s linear infinite}
-.fleet-track.dir-right{animation:fleetRight 44s linear infinite}
-.fleet-row:hover .fleet-track,.fleet-track.is-paused{animation-play-state:paused}
-.fleet-dup{display:contents}
-@keyframes fleetLeft{to{transform:translateX(-50%)}}
-@keyframes fleetRight{from{transform:translateX(-50%)}to{transform:translateX(0)}}
-.card-camion{background:var(--bg-elevated);border:1px solid var(--border);border-radius:3px;overflow:hidden;box-shadow:var(--shadow);position:relative;display:flex;flex-direction:column;flex:0 0 clamp(240px,27vw,300px)}
-.card-camion .thumb{aspect-ratio:4/3;background:linear-gradient(155deg,var(--navy) 0%,var(--navy-deep) 100%);position:relative;display:flex;align-items:center;justify-content:center}
+.grid-camiones{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+.card-camion{background:var(--bg-elevated);border:1px solid var(--border);border-radius:16px;overflow:hidden;box-shadow:var(--shadow);position:relative;display:flex;flex-direction:column;transition:transform .3s ease,box-shadow .3s ease}
+.card-camion::after{content:"";position:absolute;inset:0;border-radius:inherit;padding:1px;background:linear-gradient(135deg,var(--navy) 0%,var(--steel-200) 50%,var(--red) 100%);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:.25;pointer-events:none;transition:opacity .3s ease}
+.card-camion:hover{transform:translateY(-6px);box-shadow:0 22px 46px -16px rgba(1,15,61,.32)}
+.card-camion:hover::after{opacity:.9}
+.card-camion .thumb{aspect-ratio:4/3;background:linear-gradient(155deg,var(--navy) 0%,var(--navy-deep) 100%);position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden;box-shadow:inset 0 0 0 1px rgba(255,255,255,.08)}
+.card-camion .thumb svg,.card-camion .thumb img{transition:transform .45s cubic-bezier(.2,.8,.2,1)}
 .card-camion .thumb svg{width:64%;opacity:.92}
+.card-camion .thumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.card-camion:hover .thumb svg,.card-camion:hover .thumb img{transform:scale(1.12)}
 .card-camion .example-pill{position:absolute;top:10px;left:10px;background:rgba(4,16,43,.65);color:#fff;font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;padding:4px 8px;border-radius:99px}
 .card-camion .body{padding:18px 18px 20px;display:flex;flex-direction:column;gap:10px;flex:1}
 .card-camion h3{font-size:22px;text-transform:none;font-weight:700}
 .specs{display:grid;grid-template-columns:1fr 1fr;gap:6px 14px;font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--fg-muted);border-top:1px dashed var(--border);padding-top:10px;margin-top:4px}
 .specs b{color:var(--fg);font-weight:600}
 .card-camion .btn{margin-top:auto;justify-content:center;width:100%;box-sizing:border-box}
-@media (prefers-reduced-motion:reduce){
-  .fleet-track.dir-left,.fleet-track.dir-right{animation:none}
-  .fleet-row{overflow-x:auto;-webkit-mask-image:none;mask-image:none}
-}
 
 /* ---------- quienes somos ---------- */
 .somos{background:var(--bg-elevated);border-block:1px solid var(--border);padding-block:26px clamp(56px,8vw,104px)}
@@ -255,6 +249,10 @@ footer{padding-block:32px;border-top:1px solid var(--border)}
   nav.menu.open{transform:translateX(0)}
   nav.menu a{font-size:15px}
   .nav-toggle{display:flex}
+  .grid-camiones{grid-template-columns:repeat(2,1fr)}
+}
+@media (max-width:560px){
+  .grid-camiones{grid-template-columns:1fr}
 }
 </style>
 </head>
@@ -331,9 +329,7 @@ footer{padding-block:32px;border-top:1px solid var(--border)}
         <p class="lede">Hay un camión esperando por ti.</p>
       </div>
 
-      <div class="fleet-wrap reveal">
-        <div class="fleet-row">
-          <div class="fleet-track dir-left">
+      <div class="grid-camiones reveal">
         <article class="card-camion">
           <div class="thumb"><span class="example-pill">Ficha de ejemplo</span>
             <svg viewBox="0 0 200 120" fill="none"><path d="M10 95H160V55H120L100 35H55L40 55H30V95" stroke="#fff" stroke-width="3"/><circle cx="60" cy="98" r="13" stroke="var(--red)" stroke-width="3"/><circle cx="140" cy="98" r="13" stroke="var(--red)" stroke-width="3"/></svg>
@@ -386,64 +382,6 @@ footer{padding-block:32px;border-top:1px solid var(--border)}
             <a class="btn btn-primary" href="#financiamiento">Cotizar →</a>
           </div>
         </article>
-            <div class="fleet-dup" aria-hidden="true" inert>
-        <article class="card-camion">
-          <div class="thumb"><span class="example-pill">Ficha de ejemplo</span>
-            <svg viewBox="0 0 200 120" fill="none"><path d="M10 95H160V55H120L100 35H55L40 55H30V95" stroke="#fff" stroke-width="3"/><circle cx="60" cy="98" r="13" stroke="var(--red)" stroke-width="3"/><circle cx="140" cy="98" r="13" stroke="var(--red)" stroke-width="3"/></svg>
-          </div>
-          <div class="body">
-            <h3>Kenworth T800</h3>
-            <div class="specs">
-              <span>Modelo <b>2019</b></span><span>Kilometraje <b>180.000 km</b></span>
-              <span>Motor <b>Cummins ISX</b></span><span>Carrocería <b>Estacas</b></span>
-            </div>
-            <a class="btn btn-primary" href="#financiamiento">Cotizar →</a>
-          </div>
-        </article>
-        <article class="card-camion">
-          <div class="thumb"><span class="example-pill">Ficha de ejemplo</span>
-            <svg viewBox="0 0 200 120" fill="none"><path d="M10 95H160V55H120L100 35H55L40 55H30V95" stroke="#fff" stroke-width="3"/><circle cx="60" cy="98" r="13" stroke="var(--red)" stroke-width="3"/><circle cx="140" cy="98" r="13" stroke="var(--red)" stroke-width="3"/></svg>
-          </div>
-          <div class="body">
-            <h3>International 4300</h3>
-            <div class="specs">
-              <span>Modelo <b>2020</b></span><span>Kilometraje <b>96.000 km</b></span>
-              <span>Motor <b>Maxxforce</b></span><span>Carrocería <b>Furgón</b></span>
-            </div>
-            <a class="btn btn-primary" href="#financiamiento">Cotizar →</a>
-          </div>
-        </article>
-        <article class="card-camion">
-          <div class="thumb"><span class="example-pill">Ficha de ejemplo</span>
-            <svg viewBox="0 0 200 120" fill="none"><path d="M10 95H160V55H120L100 35H55L40 55H30V95" stroke="#fff" stroke-width="3"/><circle cx="60" cy="98" r="13" stroke="var(--red)" stroke-width="3"/><circle cx="140" cy="98" r="13" stroke="var(--red)" stroke-width="3"/></svg>
-          </div>
-          <div class="body">
-            <h3>Chevrolet FVR 8</h3>
-            <div class="specs">
-              <span>Modelo <b>2018</b></span><span>Kilometraje <b>140.000 km</b></span>
-              <span>Motor <b>Isuzu 6HK1</b></span><span>Carrocería <b>Volqueta</b></span>
-            </div>
-            <a class="btn btn-primary" href="#financiamiento">Cotizar →</a>
-          </div>
-        </article>
-        <article class="card-camion">
-          <div class="thumb"><span class="example-pill">Ficha de ejemplo</span>
-            <svg viewBox="0 0 200 120" fill="none"><path d="M10 95H160V55H120L100 35H55L40 55H30V95" stroke="#fff" stroke-width="3"/><circle cx="60" cy="98" r="13" stroke="var(--red)" stroke-width="3"/><circle cx="140" cy="98" r="13" stroke="var(--red)" stroke-width="3"/></svg>
-          </div>
-          <div class="body">
-            <h3>Hino 500</h3>
-            <div class="specs">
-              <span>Modelo <b>2021</b></span><span>Kilometraje <b>72.000 km</b></span>
-              <span>Motor <b>Hino J08E</b></span><span>Carrocería <b>Furgón</b></span>
-            </div>
-            <a class="btn btn-primary" href="#financiamiento">Cotizar →</a>
-          </div>
-        </article>
-            </div>
-          </div>
-        </div>
-        <div class="fleet-row">
-          <div class="fleet-track dir-right">
         <article class="card-camion">
           <div class="thumb"><span class="example-pill">Ficha de ejemplo</span>
             <svg viewBox="0 0 200 120" fill="none"><path d="M10 95H160V55H120L100 35H55L40 55H30V95" stroke="#fff" stroke-width="3"/><circle cx="60" cy="98" r="13" stroke="var(--red)" stroke-width="3"/><circle cx="140" cy="98" r="13" stroke="var(--red)" stroke-width="3"/></svg>
@@ -496,62 +434,6 @@ footer{padding-block:32px;border-top:1px solid var(--border)}
             <a class="btn btn-primary" href="#financiamiento">Cotizar →</a>
           </div>
         </article>
-            <div class="fleet-dup" aria-hidden="true" inert>
-        <article class="card-camion">
-          <div class="thumb"><span class="example-pill">Ficha de ejemplo</span>
-            <svg viewBox="0 0 200 120" fill="none"><path d="M10 95H160V55H120L100 35H55L40 55H30V95" stroke="#fff" stroke-width="3"/><circle cx="60" cy="98" r="13" stroke="var(--red)" stroke-width="3"/><circle cx="140" cy="98" r="13" stroke="var(--red)" stroke-width="3"/></svg>
-          </div>
-          <div class="body">
-            <h3>Freightliner M2</h3>
-            <div class="specs">
-              <span>Modelo <b>2017</b></span><span>Kilometraje <b>210.000 km</b></span>
-              <span>Motor <b>Cummins ISB</b></span><span>Carrocería <b>Estacas</b></span>
-            </div>
-            <a class="btn btn-primary" href="#financiamiento">Cotizar →</a>
-          </div>
-        </article>
-        <article class="card-camion">
-          <div class="thumb"><span class="example-pill">Ficha de ejemplo</span>
-            <svg viewBox="0 0 200 120" fill="none"><path d="M10 95H160V55H120L100 35H55L40 55H30V95" stroke="#fff" stroke-width="3"/><circle cx="60" cy="98" r="13" stroke="var(--red)" stroke-width="3"/><circle cx="140" cy="98" r="13" stroke="var(--red)" stroke-width="3"/></svg>
-          </div>
-          <div class="body">
-            <h3>Volvo FH</h3>
-            <div class="specs">
-              <span>Modelo <b>2019</b></span><span>Kilometraje <b>165.000 km</b></span>
-              <span>Motor <b>D13 Volvo</b></span><span>Carrocería <b>Tractomula</b></span>
-            </div>
-            <a class="btn btn-primary" href="#financiamiento">Cotizar →</a>
-          </div>
-        </article>
-        <article class="card-camion">
-          <div class="thumb"><span class="example-pill">Ficha de ejemplo</span>
-            <svg viewBox="0 0 200 120" fill="none"><path d="M10 95H160V55H120L100 35H55L40 55H30V95" stroke="#fff" stroke-width="3"/><circle cx="60" cy="98" r="13" stroke="var(--red)" stroke-width="3"/><circle cx="140" cy="98" r="13" stroke="var(--red)" stroke-width="3"/></svg>
-          </div>
-          <div class="body">
-            <h3>Isuzu NPR</h3>
-            <div class="specs">
-              <span>Modelo <b>2020</b></span><span>Kilometraje <b>88.000 km</b></span>
-              <span>Motor <b>Isuzu 4HK1</b></span><span>Carrocería <b>Furgón</b></span>
-            </div>
-            <a class="btn btn-primary" href="#financiamiento">Cotizar →</a>
-          </div>
-        </article>
-        <article class="card-camion">
-          <div class="thumb"><span class="example-pill">Ficha de ejemplo</span>
-            <svg viewBox="0 0 200 120" fill="none"><path d="M10 95H160V55H120L100 35H55L40 55H30V95" stroke="#fff" stroke-width="3"/><circle cx="60" cy="98" r="13" stroke="var(--red)" stroke-width="3"/><circle cx="140" cy="98" r="13" stroke="var(--red)" stroke-width="3"/></svg>
-          </div>
-          <div class="body">
-            <h3>Dodge RAM 5500</h3>
-            <div class="specs">
-              <span>Modelo <b>2018</b></span><span>Kilometraje <b>120.000 km</b></span>
-              <span>Motor <b>Cummins 6.7L</b></span><span>Carrocería <b>Estacas</b></span>
-            </div>
-            <a class="btn btn-primary" href="#financiamiento">Cotizar →</a>
-          </div>
-        </article>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   </section>
@@ -776,22 +658,5 @@ footer{padding-block:32px;border-top:1px solid var(--border)}
   })();
 </script>
 
-<script>
-  (function(){
-    try{
-      var tracks = document.querySelectorAll('.fleet-track');
-      tracks.forEach(function(track){
-        var row = track.closest('.fleet-row');
-        if(!row) return;
-        function pause(){ track.classList.add('is-paused'); }
-        function resume(){ track.classList.remove('is-paused'); }
-        row.addEventListener('pointerdown', pause);
-        row.addEventListener('pointerup', resume);
-        row.addEventListener('pointercancel', resume);
-        row.addEventListener('pointerleave', resume);
-      });
-    }catch(err){ console.error(err); }
-  })();
-</script>
 </body>
 </html>
