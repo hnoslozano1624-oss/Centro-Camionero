@@ -1,13 +1,13 @@
-&lt;!doctype html&gt;
-&lt;html lang="es"&gt;
-&lt;head&gt;
-&lt;meta charset="UTF-8"&gt;
-&lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;
-&lt;title&gt;Centro Camionero&lt;/title&gt;
-&lt;meta name="description" content="Centro Camionero — compra y venta de camiones usados en Bogotá, y camiones nuevos FAW mediante alianza. Inspección de 100 puntos, financiación y traspaso acompañado."&gt;
-&lt;link rel="preconnect" href="https://fonts.googleapis.com"&gt;
-&lt;link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap"&gt;
-&lt;style&gt;
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Centro Camionero</title>
+<meta name="description" content="Centro Camionero — compra y venta de camiones usados en Bogotá, y camiones nuevos FAW mediante alianza. Inspección de 100 puntos, financiación y traspaso acompañado.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
 /* Paleta: azul marino de marca como ancla, blanco/acero como base clara,
    tinta profunda como base oscura, rojo como único acento de acción.
    Tipografía: Big Shoulders Display (industrial, condensada) para títulos,
@@ -266,286 +266,286 @@ footer{padding-block:32px;border-top:1px solid var(--border)}
 @media (max-width:560px){
   .grid-camiones{grid-template-columns:1fr}
 }
-&lt;/style&gt;
-&lt;/head&gt;
-&lt;body&gt;
-&lt;header id="siteHeader"&gt;
-  &lt;div class="container bar"&gt;
-    &lt;a class="brand" href="#top"&gt;
-      &lt;img class="brand-logo-img" src="assets/logo.png" alt="Centro Camionero"&gt;
-    &lt;/a&gt;
-    &lt;nav class="menu" id="siteMenu"&gt;
-      &lt;a href="#camiones"&gt;Camiones disponibles&lt;/a&gt;
-      &lt;a href="#faw"&gt;Camiones Nuevos&lt;/a&gt;
-      &lt;a href="#financiamiento"&gt;Simulador de financiación&lt;/a&gt;
-    &lt;/nav&gt;
-    &lt;button class="nav-toggle" id="navToggle" aria-label="Abrir menú" aria-expanded="false"&gt;
-      &lt;svg width="18" height="14" viewBox="0 0 18 14" fill="none"&gt;&lt;path d="M0 1H18M0 7H18M0 13H18" stroke="currentColor" stroke-width="2"/&gt;&lt;/svg&gt;
-    &lt;/button&gt;
-  &lt;/div&gt;
-&lt;/header&gt;
+</style>
+</head>
+<body>
+<header id="siteHeader">
+  <div class="container bar">
+    <a class="brand" href="#top">
+      <img class="brand-logo-img" src="assets/logo.png" alt="Centro Camionero">
+    </a>
+    <nav class="menu" id="siteMenu">
+      <a href="#camiones">Camiones disponibles</a>
+      <a href="#faw">Camiones Nuevos</a>
+      <a href="#financiamiento">Simulador de financiación</a>
+    </nav>
+    <button class="nav-toggle" id="navToggle" aria-label="Abrir menú" aria-expanded="false">
+      <svg width="18" height="14" viewBox="0 0 18 14" fill="none"><path d="M0 1H18M0 7H18M0 13H18" stroke="currentColor" stroke-width="2"/></svg>
+    </button>
+  </div>
+</header>
 
-&lt;main id="top"&gt;
+<main id="top">
 
-  &lt;section class="hero"&gt;
-    &lt;a class="hero-banner-link" href="#camiones" aria-label="Ver camiones disponibles"&gt;
-      &lt;img class="hero-banner-img" src="assets/hero-banner.jpg" alt="Fachada de Centro Camionero — camiones usados como nuevos. Marcas: Chevrolet, JAC, JMC, Hino, Foton, Fuso."&gt;
-    &lt;/a&gt;
-  &lt;/section&gt;
+  <section class="hero">
+    <a class="hero-banner-link" href="#camiones" aria-label="Ver camiones disponibles">
+      <img class="hero-banner-img" src="assets/hero-banner.jpg" alt="Fachada de Centro Camionero — camiones usados como nuevos. Marcas: Chevrolet, JAC, JMC, Hino, Foton, Fuso.">
+    </a>
+  </section>
 
-  &lt;section class="stats-info"&gt;
-    &lt;div class="container stats-grid"&gt;
-      &lt;div class="stat-card"&gt;
-        &lt;div class="stat-icon"&gt;&lt;svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"&gt;&lt;path d="M4 30V16h20v14H4Z"/&gt;&lt;path d="M24 22h9l7 7v5h-3"/&gt;&lt;circle cx="14" cy="32" r="4"/&gt;&lt;circle cx="34" cy="32" r="4"/&gt;&lt;/svg&gt;&lt;/div&gt;
-        &lt;span class="stat-num-wrap"&gt;
-          &lt;b class="stat-num" data-target="500" data-prefix="+"&gt;0&lt;/b&gt;
-          &lt;span class="sparkle sparkle-1" aria-hidden="true"&gt;&lt;/span&gt;
-          &lt;span class="sparkle sparkle-2" aria-hidden="true"&gt;&lt;/span&gt;
-          &lt;span class="sparkle sparkle-3" aria-hidden="true"&gt;&lt;/span&gt;
-          &lt;span class="sparkle sparkle-4" aria-hidden="true"&gt;&lt;/span&gt;
-        &lt;/span&gt;
-        &lt;span class="stat-label"&gt;Camiones comercializados&lt;/span&gt;
-      &lt;/div&gt;
-      &lt;div class="stat-card"&gt;
-        &lt;div class="stat-icon"&gt;&lt;svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"&gt;&lt;path d="M24 5 8 11v11c0 10.5 6.9 16.8 16 21 9.1-4.2 16-10.5 16-21V11L24 5Z"/&gt;&lt;path d="M16.5 24 22 29.5 32 18"/&gt;&lt;/svg&gt;&lt;/div&gt;
-        &lt;span class="stat-num-wrap"&gt;
-          &lt;b class="stat-num" data-target="100"&gt;0&lt;/b&gt;
-          &lt;span class="sparkle sparkle-1" aria-hidden="true"&gt;&lt;/span&gt;
-          &lt;span class="sparkle sparkle-2" aria-hidden="true"&gt;&lt;/span&gt;
-          &lt;span class="sparkle sparkle-3" aria-hidden="true"&gt;&lt;/span&gt;
-          &lt;span class="sparkle sparkle-4" aria-hidden="true"&gt;&lt;/span&gt;
-        &lt;/span&gt;
-        &lt;span class="stat-label"&gt;Puntos de inspección&lt;/span&gt;
-      &lt;/div&gt;
-      &lt;div class="stat-card"&gt;
-        &lt;div class="stat-icon"&gt;&lt;svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"&gt;&lt;rect x="6" y="10" width="36" height="32" rx="3"/&gt;&lt;path d="M6 19h36M14 6v8M34 6v8"/&gt;&lt;/svg&gt;&lt;/div&gt;
-        &lt;span class="stat-num-wrap"&gt;
-          &lt;b class="stat-num" data-target="12" data-prefix="+"&gt;0&lt;/b&gt;
-          &lt;span class="sparkle sparkle-1" aria-hidden="true"&gt;&lt;/span&gt;
-          &lt;span class="sparkle sparkle-2" aria-hidden="true"&gt;&lt;/span&gt;
-          &lt;span class="sparkle sparkle-3" aria-hidden="true"&gt;&lt;/span&gt;
-          &lt;span class="sparkle sparkle-4" aria-hidden="true"&gt;&lt;/span&gt;
-        &lt;/span&gt;
-        &lt;span class="stat-label"&gt;Años de experiencia&lt;/span&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
-  &lt;/section&gt;
+  <section class="stats-info">
+    <div class="container stats-grid">
+      <div class="stat-card">
+        <div class="stat-icon"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 30V16h20v14H4Z"/><path d="M24 22h9l7 7v5h-3"/><circle cx="14" cy="32" r="4"/><circle cx="34" cy="32" r="4"/></svg></div>
+        <span class="stat-num-wrap">
+          <b class="stat-num" data-target="500" data-prefix="+">0</b>
+          <span class="sparkle sparkle-1" aria-hidden="true"></span>
+          <span class="sparkle sparkle-2" aria-hidden="true"></span>
+          <span class="sparkle sparkle-3" aria-hidden="true"></span>
+          <span class="sparkle sparkle-4" aria-hidden="true"></span>
+        </span>
+        <span class="stat-label">Camiones comercializados</span>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M24 5 8 11v11c0 10.5 6.9 16.8 16 21 9.1-4.2 16-10.5 16-21V11L24 5Z"/><path d="M16.5 24 22 29.5 32 18"/></svg></div>
+        <span class="stat-num-wrap">
+          <b class="stat-num" data-target="100">0</b>
+          <span class="sparkle sparkle-1" aria-hidden="true"></span>
+          <span class="sparkle sparkle-2" aria-hidden="true"></span>
+          <span class="sparkle sparkle-3" aria-hidden="true"></span>
+          <span class="sparkle sparkle-4" aria-hidden="true"></span>
+        </span>
+        <span class="stat-label">Puntos de inspección</span>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="10" width="36" height="32" rx="3"/><path d="M6 19h36M14 6v8M34 6v8"/></svg></div>
+        <span class="stat-num-wrap">
+          <b class="stat-num" data-target="12" data-prefix="+">0</b>
+          <span class="sparkle sparkle-1" aria-hidden="true"></span>
+          <span class="sparkle sparkle-2" aria-hidden="true"></span>
+          <span class="sparkle sparkle-3" aria-hidden="true"></span>
+          <span class="sparkle sparkle-4" aria-hidden="true"></span>
+        </span>
+        <span class="stat-label">Años de experiencia</span>
+      </div>
+    </div>
+  </section>
 
-  &lt;section id="camiones"&gt;
-    &lt;div class="container"&gt;
-      &lt;div class="section-head reveal"&gt;
-        &lt;div&gt;
-          &lt;h2&gt;Camiones disponibles.&lt;/h2&gt;
-        &lt;/div&gt;
-        &lt;p class="lede"&gt;Hay un camión esperando por ti.&lt;/p&gt;
-      &lt;/div&gt;
+  <section id="camiones">
+    <div class="container">
+      <div class="section-head reveal">
+        <div>
+          <h2>Camiones disponibles.</h2>
+        </div>
+        <p class="lede">Hay un camión esperando por ti.</p>
+      </div>
 
-      &lt;div class="grid-camiones reveal"&gt;
-        &lt;article class="card-camion"&gt;
-          &lt;div class="thumb"&gt;&lt;span class="example-pill"&gt;Ficha de ejemplo&lt;/span&gt;
-            &lt;svg viewBox="0 0 200 120" fill="none"&gt;&lt;path d="M10 95H160V55H120L100 35H55L40 55H30V95" stroke="#fff" stroke-width="3"/&gt;&lt;circle cx="60" cy="98" r="13" stroke="var(--red)" stroke-width="3"/&gt;&lt;circle cx="140" cy="98" r="13" stroke="var(--red)" stroke-width="3"/&gt;&lt;/svg&gt;
-          &lt;/div&gt;
-          &lt;div class="body"&gt;
-            &lt;h3&gt;Kenworth T800&lt;/h3&gt;
-            &lt;div class="specs"&gt;
-              &lt;span&gt;Modelo &lt;b&gt;2019&lt;/b&gt;&lt;/span&gt;&lt;span&gt;Kilometraje &lt;b&gt;180.000 km&lt;/b&gt;&lt;/span&gt;
-              &lt;span&gt;Motor &lt;b&gt;Cummins ISX&lt;/b&gt;&lt;/span&gt;&lt;span&gt;Carrocería &lt;b&gt;Estacas&lt;/b&gt;&lt;/span&gt;
-            &lt;/div&gt;
-            &lt;a class="btn btn-primary" href="#financiamiento"&gt;Cotizar →&lt;/a&gt;
-          &lt;/div&gt;
-        &lt;/article&gt;
-        &lt;article class="card-camion"&gt;
-          &lt;div class="thumb"&gt;&lt;span class="example-pill"&gt;Ficha de ejemplo&lt;/span&gt;
-            &lt;svg viewBox="0 0 200 120" fill="none"&gt;&lt;path d="M10 95H160V55H120L100 35H55L40 55H30V95" stroke="#fff" stroke-width="3"/&gt;&lt;circle cx="60" cy="98" r="13" stroke="var(--red)" stroke-width="3"/&gt;&lt;circle cx="140" cy="98" r="13" stroke="var(--red)" stroke-width="3"/&gt;&lt;/svg&gt;
-          &lt;/div&gt;
-          &lt;div class="body"&gt;
-            &lt;h3&gt;International 4300&lt;/h3&gt;
-            &lt;div class="specs"&gt;
-              &lt;span&gt;Modelo &lt;b&gt;2020&lt;/b&gt;&lt;/span&gt;&lt;span&gt;Kilometraje &lt;b&gt;96.000 km&lt;/b&gt;&lt;/span&gt;
-              &lt;span&gt;Motor &lt;b&gt;Maxxforce&lt;/b&gt;&lt;/span&gt;&lt;span&gt;Carrocería &lt;b&gt;Furgón&lt;/b&gt;&lt;/span&gt;
-            &lt;/div&gt;
-            &lt;a class="btn btn-primary" href="#financiamiento"&gt;Cotizar →&lt;/a&gt;
-          &lt;/div&gt;
-        &lt;/article&gt;
-        &lt;article class="card-camion"&gt;
-          &lt;div class="thumb"&gt;&lt;span class="example-pill"&gt;Ficha de ejemplo&lt;/span&gt;
-            &lt;svg viewBox="0 0 200 120" fill="none"&gt;&lt;path d="M10 95H160V55H120L100 35H55L40 55H30V95" stroke="#fff" stroke-width="3"/&gt;&lt;circle cx="60" cy="98" r="13" stroke="var(--red)" stroke-width="3"/&gt;&lt;circle cx="140" cy="98" r="13" stroke="var(--red)" stroke-width="3"/&gt;&lt;/svg&gt;
-          &lt;/div&gt;
-          &lt;div class="body"&gt;
-            &lt;h3&gt;Chevrolet FVR 8&lt;/h3&gt;
-            &lt;div class="specs"&gt;
-              &lt;span&gt;Modelo &lt;b&gt;2018&lt;/b&gt;&lt;/span&gt;&lt;span&gt;Kilometraje &lt;b&gt;140.000 km&lt;/b&gt;&lt;/span&gt;
-              &lt;span&gt;Motor &lt;b&gt;Isuzu 6HK1&lt;/b&gt;&lt;/span&gt;&lt;span&gt;Carrocería &lt;b&gt;Volqueta&lt;/b&gt;&lt;/span&gt;
-            &lt;/div&gt;
-            &lt;a class="btn btn-primary" href="#financiamiento"&gt;Cotizar →&lt;/a&gt;
-          &lt;/div&gt;
-        &lt;/article&gt;
-        &lt;article class="card-camion"&gt;
-          &lt;div class="thumb"&gt;&lt;span class="example-pill"&gt;Ficha de ejemplo&lt;/span&gt;
-            &lt;svg viewBox="0 0 200 120" fill="none"&gt;&lt;path d="M10 95H160V55H120L100 35H55L40 55H30V95" stroke="#fff" stroke-width="3"/&gt;&lt;circle cx="60" cy="98" r="13" stroke="var(--red)" stroke-width="3"/&gt;&lt;circle cx="140" cy="98" r="13" stroke="var(--red)" stroke-width="3"/&gt;&lt;/svg&gt;
-          &lt;/div&gt;
-          &lt;div class="body"&gt;
-            &lt;h3&gt;Hino 500&lt;/h3&gt;
-            &lt;div class="specs"&gt;
-              &lt;span&gt;Modelo &lt;b&gt;2021&lt;/b&gt;&lt;/span&gt;&lt;span&gt;Kilometraje &lt;b&gt;72.000 km&lt;/b&gt;&lt;/span&gt;
-              &lt;span&gt;Motor &lt;b&gt;Hino J08E&lt;/b&gt;&lt;/span&gt;&lt;span&gt;Carrocería &lt;b&gt;Furgón&lt;/b&gt;&lt;/span&gt;
-            &lt;/div&gt;
-            &lt;a class="btn btn-primary" href="#financiamiento"&gt;Cotizar →&lt;/a&gt;
-          &lt;/div&gt;
-        &lt;/article&gt;
-        &lt;article class="card-camion"&gt;
-          &lt;div class="thumb"&gt;&lt;span class="example-pill"&gt;Ficha de ejemplo&lt;/span&gt;
-            &lt;svg viewBox="0 0 200 120" fill="none"&gt;&lt;path d="M10 95H160V55H120L100 35H55L40 55H30V95" stroke="#fff" stroke-width="3"/&gt;&lt;circle cx="60" cy="98" r="13" stroke="var(--red)" stroke-width="3"/&gt;&lt;circle cx="140" cy="98" r="13" stroke="var(--red)" stroke-width="3"/&gt;&lt;/svg&gt;
-          &lt;/div&gt;
-          &lt;div class="body"&gt;
-            &lt;h3&gt;Freightliner M2&lt;/h3&gt;
-            &lt;div class="specs"&gt;
-              &lt;span&gt;Modelo &lt;b&gt;2017&lt;/b&gt;&lt;/span&gt;&lt;span&gt;Kilometraje &lt;b&gt;210.000 km&lt;/b&gt;&lt;/span&gt;
-              &lt;span&gt;Motor &lt;b&gt;Cummins ISB&lt;/b&gt;&lt;/span&gt;&lt;span&gt;Carrocería &lt;b&gt;Estacas&lt;/b&gt;&lt;/span&gt;
-            &lt;/div&gt;
-            &lt;a class="btn btn-primary" href="#financiamiento"&gt;Cotizar →&lt;/a&gt;
-          &lt;/div&gt;
-        &lt;/article&gt;
-        &lt;article class="card-camion"&gt;
-          &lt;div class="thumb"&gt;&lt;span class="example-pill"&gt;Ficha de ejemplo&lt;/span&gt;
-            &lt;svg viewBox="0 0 200 120" fill="none"&gt;&lt;path d="M10 95H160V55H120L100 35H55L40 55H30V95" stroke="#fff" stroke-width="3"/&gt;&lt;circle cx="60" cy="98" r="13" stroke="var(--red)" stroke-width="3"/&gt;&lt;circle cx="140" cy="98" r="13" stroke="var(--red)" stroke-width="3"/&gt;&lt;/svg&gt;
-          &lt;/div&gt;
-          &lt;div class="body"&gt;
-            &lt;h3&gt;Volvo FH&lt;/h3&gt;
-            &lt;div class="specs"&gt;
-              &lt;span&gt;Modelo &lt;b&gt;2019&lt;/b&gt;&lt;/span&gt;&lt;span&gt;Kilometraje &lt;b&gt;165.000 km&lt;/b&gt;&lt;/span&gt;
-              &lt;span&gt;Motor &lt;b&gt;D13 Volvo&lt;/b&gt;&lt;/span&gt;&lt;span&gt;Carrocería &lt;b&gt;Tractomula&lt;/b&gt;&lt;/span&gt;
-            &lt;/div&gt;
-            &lt;a class="btn btn-primary" href="#financiamiento"&gt;Cotizar →&lt;/a&gt;
-          &lt;/div&gt;
-        &lt;/article&gt;
-        &lt;article class="card-camion"&gt;
-          &lt;div class="thumb"&gt;&lt;span class="example-pill"&gt;Ficha de ejemplo&lt;/span&gt;
-            &lt;svg viewBox="0 0 200 120" fill="none"&gt;&lt;path d="M10 95H160V55H120L100 35H55L40 55H30V95" stroke="#fff" stroke-width="3"/&gt;&lt;circle cx="60" cy="98" r="13" stroke="var(--red)" stroke-width="3"/&gt;&lt;circle cx="140" cy="98" r="13" stroke="var(--red)" stroke-width="3"/&gt;&lt;/svg&gt;
-          &lt;/div&gt;
-          &lt;div class="body"&gt;
-            &lt;h3&gt;Isuzu NPR&lt;/h3&gt;
-            &lt;div class="specs"&gt;
-              &lt;span&gt;Modelo &lt;b&gt;2020&lt;/b&gt;&lt;/span&gt;&lt;span&gt;Kilometraje &lt;b&gt;88.000 km&lt;/b&gt;&lt;/span&gt;
-              &lt;span&gt;Motor &lt;b&gt;Isuzu 4HK1&lt;/b&gt;&lt;/span&gt;&lt;span&gt;Carrocería &lt;b&gt;Furgón&lt;/b&gt;&lt;/span&gt;
-            &lt;/div&gt;
-            &lt;a class="btn btn-primary" href="#financiamiento"&gt;Cotizar →&lt;/a&gt;
-          &lt;/div&gt;
-        &lt;/article&gt;
-        &lt;article class="card-camion"&gt;
-          &lt;div class="thumb"&gt;&lt;span class="example-pill"&gt;Ficha de ejemplo&lt;/span&gt;
-            &lt;svg viewBox="0 0 200 120" fill="none"&gt;&lt;path d="M10 95H160V55H120L100 35H55L40 55H30V95" stroke="#fff" stroke-width="3"/&gt;&lt;circle cx="60" cy="98" r="13" stroke="var(--red)" stroke-width="3"/&gt;&lt;circle cx="140" cy="98" r="13" stroke="var(--red)" stroke-width="3"/&gt;&lt;/svg&gt;
-          &lt;/div&gt;
-          &lt;div class="body"&gt;
-            &lt;h3&gt;Dodge RAM 5500&lt;/h3&gt;
-            &lt;div class="specs"&gt;
-              &lt;span&gt;Modelo &lt;b&gt;2018&lt;/b&gt;&lt;/span&gt;&lt;span&gt;Kilometraje &lt;b&gt;120.000 km&lt;/b&gt;&lt;/span&gt;
-              &lt;span&gt;Motor &lt;b&gt;Cummins 6.7L&lt;/b&gt;&lt;/span&gt;&lt;span&gt;Carrocería &lt;b&gt;Estacas&lt;/b&gt;&lt;/span&gt;
-            &lt;/div&gt;
-            &lt;a class="btn btn-primary" href="#financiamiento"&gt;Cotizar →&lt;/a&gt;
-          &lt;/div&gt;
-        &lt;/article&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
-  &lt;/section&gt;
+      <div class="grid-camiones reveal">
+        <article class="card-camion">
+          <div class="thumb"><span class="example-pill">Ficha de ejemplo</span>
+            <svg viewBox="0 0 200 120" fill="none"><path d="M10 95H160V55H120L100 35H55L40 55H30V95" stroke="#fff" stroke-width="3"/><circle cx="60" cy="98" r="13" stroke="var(--red)" stroke-width="3"/><circle cx="140" cy="98" r="13" stroke="var(--red)" stroke-width="3"/></svg>
+          </div>
+          <div class="body">
+            <h3>Kenworth T800</h3>
+            <div class="specs">
+              <span>Modelo <b>2019</b></span><span>Kilometraje <b>180.000 km</b></span>
+              <span>Motor <b>Cummins ISX</b></span><span>Carrocería <b>Estacas</b></span>
+            </div>
+            <a class="btn btn-primary" href="#financiamiento">Cotizar →</a>
+          </div>
+        </article>
+        <article class="card-camion">
+          <div class="thumb"><span class="example-pill">Ficha de ejemplo</span>
+            <svg viewBox="0 0 200 120" fill="none"><path d="M10 95H160V55H120L100 35H55L40 55H30V95" stroke="#fff" stroke-width="3"/><circle cx="60" cy="98" r="13" stroke="var(--red)" stroke-width="3"/><circle cx="140" cy="98" r="13" stroke="var(--red)" stroke-width="3"/></svg>
+          </div>
+          <div class="body">
+            <h3>International 4300</h3>
+            <div class="specs">
+              <span>Modelo <b>2020</b></span><span>Kilometraje <b>96.000 km</b></span>
+              <span>Motor <b>Maxxforce</b></span><span>Carrocería <b>Furgón</b></span>
+            </div>
+            <a class="btn btn-primary" href="#financiamiento">Cotizar →</a>
+          </div>
+        </article>
+        <article class="card-camion">
+          <div class="thumb"><span class="example-pill">Ficha de ejemplo</span>
+            <svg viewBox="0 0 200 120" fill="none"><path d="M10 95H160V55H120L100 35H55L40 55H30V95" stroke="#fff" stroke-width="3"/><circle cx="60" cy="98" r="13" stroke="var(--red)" stroke-width="3"/><circle cx="140" cy="98" r="13" stroke="var(--red)" stroke-width="3"/></svg>
+          </div>
+          <div class="body">
+            <h3>Chevrolet FVR 8</h3>
+            <div class="specs">
+              <span>Modelo <b>2018</b></span><span>Kilometraje <b>140.000 km</b></span>
+              <span>Motor <b>Isuzu 6HK1</b></span><span>Carrocería <b>Volqueta</b></span>
+            </div>
+            <a class="btn btn-primary" href="#financiamiento">Cotizar →</a>
+          </div>
+        </article>
+        <article class="card-camion">
+          <div class="thumb"><span class="example-pill">Ficha de ejemplo</span>
+            <svg viewBox="0 0 200 120" fill="none"><path d="M10 95H160V55H120L100 35H55L40 55H30V95" stroke="#fff" stroke-width="3"/><circle cx="60" cy="98" r="13" stroke="var(--red)" stroke-width="3"/><circle cx="140" cy="98" r="13" stroke="var(--red)" stroke-width="3"/></svg>
+          </div>
+          <div class="body">
+            <h3>Hino 500</h3>
+            <div class="specs">
+              <span>Modelo <b>2021</b></span><span>Kilometraje <b>72.000 km</b></span>
+              <span>Motor <b>Hino J08E</b></span><span>Carrocería <b>Furgón</b></span>
+            </div>
+            <a class="btn btn-primary" href="#financiamiento">Cotizar →</a>
+          </div>
+        </article>
+        <article class="card-camion">
+          <div class="thumb"><span class="example-pill">Ficha de ejemplo</span>
+            <svg viewBox="0 0 200 120" fill="none"><path d="M10 95H160V55H120L100 35H55L40 55H30V95" stroke="#fff" stroke-width="3"/><circle cx="60" cy="98" r="13" stroke="var(--red)" stroke-width="3"/><circle cx="140" cy="98" r="13" stroke="var(--red)" stroke-width="3"/></svg>
+          </div>
+          <div class="body">
+            <h3>Freightliner M2</h3>
+            <div class="specs">
+              <span>Modelo <b>2017</b></span><span>Kilometraje <b>210.000 km</b></span>
+              <span>Motor <b>Cummins ISB</b></span><span>Carrocería <b>Estacas</b></span>
+            </div>
+            <a class="btn btn-primary" href="#financiamiento">Cotizar →</a>
+          </div>
+        </article>
+        <article class="card-camion">
+          <div class="thumb"><span class="example-pill">Ficha de ejemplo</span>
+            <svg viewBox="0 0 200 120" fill="none"><path d="M10 95H160V55H120L100 35H55L40 55H30V95" stroke="#fff" stroke-width="3"/><circle cx="60" cy="98" r="13" stroke="var(--red)" stroke-width="3"/><circle cx="140" cy="98" r="13" stroke="var(--red)" stroke-width="3"/></svg>
+          </div>
+          <div class="body">
+            <h3>Volvo FH</h3>
+            <div class="specs">
+              <span>Modelo <b>2019</b></span><span>Kilometraje <b>165.000 km</b></span>
+              <span>Motor <b>D13 Volvo</b></span><span>Carrocería <b>Tractomula</b></span>
+            </div>
+            <a class="btn btn-primary" href="#financiamiento">Cotizar →</a>
+          </div>
+        </article>
+        <article class="card-camion">
+          <div class="thumb"><span class="example-pill">Ficha de ejemplo</span>
+            <svg viewBox="0 0 200 120" fill="none"><path d="M10 95H160V55H120L100 35H55L40 55H30V95" stroke="#fff" stroke-width="3"/><circle cx="60" cy="98" r="13" stroke="var(--red)" stroke-width="3"/><circle cx="140" cy="98" r="13" stroke="var(--red)" stroke-width="3"/></svg>
+          </div>
+          <div class="body">
+            <h3>Isuzu NPR</h3>
+            <div class="specs">
+              <span>Modelo <b>2020</b></span><span>Kilometraje <b>88.000 km</b></span>
+              <span>Motor <b>Isuzu 4HK1</b></span><span>Carrocería <b>Furgón</b></span>
+            </div>
+            <a class="btn btn-primary" href="#financiamiento">Cotizar →</a>
+          </div>
+        </article>
+        <article class="card-camion">
+          <div class="thumb"><span class="example-pill">Ficha de ejemplo</span>
+            <svg viewBox="0 0 200 120" fill="none"><path d="M10 95H160V55H120L100 35H55L40 55H30V95" stroke="#fff" stroke-width="3"/><circle cx="60" cy="98" r="13" stroke="var(--red)" stroke-width="3"/><circle cx="140" cy="98" r="13" stroke="var(--red)" stroke-width="3"/></svg>
+          </div>
+          <div class="body">
+            <h3>Dodge RAM 5500</h3>
+            <div class="specs">
+              <span>Modelo <b>2018</b></span><span>Kilometraje <b>120.000 km</b></span>
+              <span>Motor <b>Cummins 6.7L</b></span><span>Carrocería <b>Estacas</b></span>
+            </div>
+            <a class="btn btn-primary" href="#financiamiento">Cotizar →</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
 
-  &lt;section class="faw" id="faw"&gt;
-    &lt;a class="faw-banner-link" href="#" id="fawLink" aria-label="Ver camiones FAW"&gt;
-      &lt;img class="faw-banner-img" src="assets/faw-banner.jpg" alt="FAW Trucks — ¿Buscas camión 0 km? Conoce la línea de camiones nuevos FAW, la alianza con la que Centro Camionero entra a la línea de vehículos nuevos en Colombia."&gt;
-    &lt;/a&gt;
-  &lt;/section&gt;
+  <section class="faw" id="faw">
+    <a class="faw-banner-link" href="#" id="fawLink" aria-label="Ver camiones FAW">
+      <img class="faw-banner-img" src="assets/faw-banner.jpg" alt="FAW Trucks — ¿Buscas camión 0 km? Conoce la línea de camiones nuevos FAW, la alianza con la que Centro Camionero entra a la línea de vehículos nuevos en Colombia.">
+    </a>
+  </section>
 
-  &lt;section class="contacto" id="financiamiento"&gt;
-    &lt;div class="contacto-truck" aria-hidden="true"&gt;
-      &lt;svg viewBox="0 0 400 160" fill="#fff"&gt;
-        &lt;rect x="14" y="46" width="250" height="66" rx="4"/&gt;
-        &lt;path d="M264 46h46l48 40v26h-94Z"/&gt;
-        &lt;circle cx="66" cy="124" r="20"/&gt;
-        &lt;circle cx="150" cy="124" r="20"/&gt;
-        &lt;circle cx="330" cy="124" r="20"/&gt;
-      &lt;/svg&gt;
-    &lt;/div&gt;
-    &lt;div class="container contacto-grid"&gt;
-      &lt;div class="contacto-info reveal"&gt;
-        &lt;h2&gt;Simulador de financiación&lt;/h2&gt;
-        &lt;p class="intro-phrase"&gt;Proyecta tu cuota mensual.&lt;/p&gt;
-        &lt;p class="lede" style="margin-top:16px"&gt;Calcula un estimado de tu cuota para financiar tu próximo camión. Es una simulación de referencia — la tasa y condiciones finales las confirma la entidad financiera aliada.&lt;/p&gt;
-        &lt;span class="badge" style="margin-top:18px;display:inline-block"&gt;Tasa de ejemplo: 1,8% mensual — sujeta a aprobación&lt;/span&gt;
+  <section class="contacto" id="financiamiento">
+    <div class="contacto-truck" aria-hidden="true">
+      <svg viewBox="0 0 400 160" fill="#fff">
+        <rect x="14" y="46" width="250" height="66" rx="4"/>
+        <path d="M264 46h46l48 40v26h-94Z"/>
+        <circle cx="66" cy="124" r="20"/>
+        <circle cx="150" cy="124" r="20"/>
+        <circle cx="330" cy="124" r="20"/>
+      </svg>
+    </div>
+    <div class="container contacto-grid">
+      <div class="contacto-info reveal">
+        <h2>Simulador de financiación</h2>
+        <p class="intro-phrase">Proyecta tu cuota mensual.</p>
+        <p class="lede" style="margin-top:16px">Calcula un estimado de tu cuota para financiar tu próximo camión. Es una simulación de referencia — la tasa y condiciones finales las confirma la entidad financiera aliada.</p>
+        <span class="badge" style="margin-top:18px;display:inline-block">Tasa de ejemplo: 1,8% mensual — sujeta a aprobación</span>
 
-        &lt;div class="asesor-card reveal"&gt;
-          &lt;div class="asesor-avatar"&gt;
-            &lt;svg viewBox="0 0 100 100" fill="none" aria-hidden="true"&gt;
-              &lt;circle cx="50" cy="38" r="20" stroke="#fff" stroke-width="5"/&gt;
-              &lt;path d="M15 94c0-24 15-40 35-40s35 16 35 40" stroke="#fff" stroke-width="5"/&gt;
-            &lt;/svg&gt;
-            &lt;span class="example-pill"&gt;Foto pendiente&lt;/span&gt;
-          &lt;/div&gt;
-          &lt;div class="asesor-info"&gt;
-            &lt;p class="asesor-name"&gt;Tu asesor comercial&lt;/p&gt;
-            &lt;p class="asesor-note"&gt;Te acompañamos en todo el trámite, sin afán.&lt;/p&gt;
-            &lt;a class="btn btn-primary" href="#" id="whatsappCta"&gt;Hablar con un asesor de confianza →&lt;/a&gt;
-          &lt;/div&gt;
-        &lt;/div&gt;
-      &lt;/div&gt;
-      &lt;form class="contact-form" id="simForm"&gt;
-        &lt;div class="field"&gt;&lt;label for="sim-monto"&gt;Valor del camión (COP)&lt;/label&gt;&lt;input id="sim-monto" name="monto" type="number" min="0" step="1000000" placeholder="180.000.000" required&gt;&lt;/div&gt;
-        &lt;div class="field"&gt;&lt;label for="sim-inicial"&gt;Cuota inicial (%)&lt;/label&gt;&lt;input id="sim-inicial" name="inicial" type="number" min="0" max="90" step="1" placeholder="30" required&gt;&lt;/div&gt;
-        &lt;div class="field"&gt;&lt;label for="sim-plazo"&gt;Plazo&lt;/label&gt;
-          &lt;select id="sim-plazo" name="plazo"&gt;
-            &lt;option value="12"&gt;12 meses&lt;/option&gt;
-            &lt;option value="24"&gt;24 meses&lt;/option&gt;
-            &lt;option value="36" selected&gt;36 meses&lt;/option&gt;
-            &lt;option value="48"&gt;48 meses&lt;/option&gt;
-            &lt;option value="60"&gt;60 meses&lt;/option&gt;
-          &lt;/select&gt;
-        &lt;/div&gt;
-        &lt;button class="btn btn-primary" type="submit" style="justify-content:center"&gt;Calcular cuota&lt;/button&gt;
-        &lt;div class="sim-result"&gt;
-          &lt;span class="k"&gt;Cuota mensual estimada&lt;/span&gt;
-          &lt;span class="amount mono" id="simResultAmount"&gt;—&lt;/span&gt;
-        &lt;/div&gt;
-        &lt;p class="form-note" id="formNote" role="status" aria-live="polite"&gt;*Simulación de referencia, no constituye una oferta de crédito.&lt;/p&gt;
-      &lt;/form&gt;
-    &lt;/div&gt;
-  &lt;/section&gt;
+        <div class="asesor-card reveal">
+          <div class="asesor-avatar">
+            <svg viewBox="0 0 100 100" fill="none" aria-hidden="true">
+              <circle cx="50" cy="38" r="20" stroke="#fff" stroke-width="5"/>
+              <path d="M15 94c0-24 15-40 35-40s35 16 35 40" stroke="#fff" stroke-width="5"/>
+            </svg>
+            <span class="example-pill">Foto pendiente</span>
+          </div>
+          <div class="asesor-info">
+            <p class="asesor-name">Tu asesor comercial</p>
+            <p class="asesor-note">Te acompañamos en todo el trámite, sin afán.</p>
+            <a class="btn btn-primary" href="#" id="whatsappCta">Hablar con un asesor de confianza →</a>
+          </div>
+        </div>
+      </div>
+      <form class="contact-form" id="simForm">
+        <div class="field"><label for="sim-monto">Valor del camión (COP)</label><input id="sim-monto" name="monto" type="number" min="0" step="1000000" placeholder="180.000.000" required></div>
+        <div class="field"><label for="sim-inicial">Cuota inicial (%)</label><input id="sim-inicial" name="inicial" type="number" min="0" max="90" step="1" placeholder="30" required></div>
+        <div class="field"><label for="sim-plazo">Plazo</label>
+          <select id="sim-plazo" name="plazo">
+            <option value="12">12 meses</option>
+            <option value="24">24 meses</option>
+            <option value="36" selected>36 meses</option>
+            <option value="48">48 meses</option>
+            <option value="60">60 meses</option>
+          </select>
+        </div>
+        <button class="btn btn-primary" type="submit" style="justify-content:center">Calcular cuota</button>
+        <div class="sim-result">
+          <span class="k">Cuota mensual estimada</span>
+          <span class="amount mono" id="simResultAmount">—</span>
+        </div>
+        <p class="form-note" id="formNote" role="status" aria-live="polite">*Simulación de referencia, no constituye una oferta de crédito.</p>
+      </form>
+    </div>
+  </section>
 
-&lt;/main&gt;
+</main>
 
-&lt;footer&gt;
-  &lt;div class="container foot-inner"&gt;
-    &lt;a class="brand" href="#top"&gt;
-&lt;img class="brand-logo-img footer-logo-img" src="assets/logo.png" alt="Centro Camionero"&gt;
-    &lt;/a&gt;
-    &lt;div class="foot-links"&gt;
-      &lt;a href="#camiones"&gt;Camiones disponibles&lt;/a&gt;
-      &lt;a href="#faw"&gt;Camiones Nuevos&lt;/a&gt;
-      &lt;a href="#financiamiento"&gt;Simulador de financiación&lt;/a&gt;
-    &lt;/div&gt;
-    &lt;div class="foot-social"&gt;
-      &lt;a class="social-ico" href="#" id="igLink" aria-label="Instagram" target="_blank" rel="noopener"&gt;
-        &lt;svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"&gt;&lt;rect x="3" y="3" width="18" height="18" rx="5"/&gt;&lt;circle cx="12" cy="12" r="4.2"/&gt;&lt;circle cx="17.3" cy="6.7" r="1"/&gt;&lt;/svg&gt;
-      &lt;/a&gt;
-      &lt;a class="social-ico" href="#" id="fbLink" aria-label="Facebook" target="_blank" rel="noopener"&gt;
-        &lt;svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"&gt;&lt;path d="M14 21v-7.6h2.7l.4-3.2H14V8.1c0-.9.3-1.6 1.7-1.6h1.6V3.6C17 3.5 15.9 3.4 14.7 3.4c-2.6 0-4.3 1.6-4.3 4.4v2.4H7.8v3.2h2.6V21"/&gt;&lt;/svg&gt;
-      &lt;/a&gt;
-    &lt;/div&gt;
-    &lt;span class="copy"&gt;© 2026 Centro Camionero · Bogotá, Colombia&lt;/span&gt;
-  &lt;/div&gt;
-&lt;/footer&gt;
+<footer>
+  <div class="container foot-inner">
+    <a class="brand" href="#top">
+<img class="brand-logo-img footer-logo-img" src="assets/logo.png" alt="Centro Camionero">
+    </a>
+    <div class="foot-links">
+      <a href="#camiones">Camiones disponibles</a>
+      <a href="#faw">Camiones Nuevos</a>
+      <a href="#financiamiento">Simulador de financiación</a>
+    </div>
+    <div class="foot-social">
+      <a class="social-ico" href="#" id="igLink" aria-label="Instagram" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.3" cy="6.7" r="1"/></svg>
+      </a>
+      <a class="social-ico" href="#" id="fbLink" aria-label="Facebook" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 21v-7.6h2.7l.4-3.2H14V8.1c0-.9.3-1.6 1.7-1.6h1.6V3.6C17 3.5 15.9 3.4 14.7 3.4c-2.6 0-4.3 1.6-4.3 4.4v2.4H7.8v3.2h2.6V21"/></svg>
+      </a>
+    </div>
+    <span class="copy">© 2026 Centro Camionero · Bogotá, Colombia</span>
+  </div>
+</footer>
 
-&lt;a class="whatsapp-float" href="#" id="whatsappFloat" aria-label="Escríbenos por WhatsApp" title="Escríbenos por WhatsApp"&gt;
-  &lt;svg viewBox="0 0 32 32" fill="none" aria-hidden="true"&gt;
-    &lt;circle cx="16" cy="16" r="15" fill="#25D366"/&gt;
-    &lt;path d="M16 7c-5 0-9 4-9 9 0 1.7.5 3.3 1.3 4.6L7 25l4.6-1.3c1.3.7 2.8 1.1 4.4 1.1 5 0 9-4 9-9s-4-8.8-9-8.8Z" stroke="#fff" stroke-width="1.6"/&gt;
-    &lt;path d="M12.3 12.6c.2-.5.4-.5.7-.5h.5c.2 0 .4 0 .6.4.2.5.7 1.7.8 1.8.1.2.1.3 0 .5-.1.2-.2.3-.3.5-.2.2-.3.3-.1.6.2.4.9 1.4 1.9 2.2 1.3 1 2.3 1.4 2.7 1.5.3.1.5.1.7-.1.2-.2.8-.9 1-1.2.2-.3.4-.2.7-.1.3.1 1.8.9 2.1 1 .3.1.5.2.6.3.1.2.1 1-.3 1.9-.4.9-2 1.7-2.8 1.8-.7.1-1.6.2-4.3-.9-3.6-1.5-5.9-5.1-6.1-5.3-.2-.3-1.4-1.9-1.4-3.6 0-1.7.9-2.6 1.2-2.9Z" fill="#fff"/&gt;
-  &lt;/svg&gt;
-&lt;/a&gt;
+<a class="whatsapp-float" href="#" id="whatsappFloat" aria-label="Escríbenos por WhatsApp" title="Escríbenos por WhatsApp">
+  <svg viewBox="0 0 32 32" fill="none" aria-hidden="true">
+    <circle cx="16" cy="16" r="15" fill="#25D366"/>
+    <path d="M16 7c-5 0-9 4-9 9 0 1.7.5 3.3 1.3 4.6L7 25l4.6-1.3c1.3.7 2.8 1.1 4.4 1.1 5 0 9-4 9-9s-4-8.8-9-8.8Z" stroke="#fff" stroke-width="1.6"/>
+    <path d="M12.3 12.6c.2-.5.4-.5.7-.5h.5c.2 0 .4 0 .6.4.2.5.7 1.7.8 1.8.1.2.1.3 0 .5-.1.2-.2.3-.3.5-.2.2-.3.3-.1.6.2.4.9 1.4 1.9 2.2 1.3 1 2.3 1.4 2.7 1.5.3.1.5.1.7-.1.2-.2.8-.9 1-1.2.2-.3.4-.2.7-.1.3.1 1.8.9 2.1 1 .3.1.5.2.6.3.1.2.1 1-.3 1.9-.4.9-2 1.7-2.8 1.8-.7.1-1.6.2-4.3-.9-3.6-1.5-5.9-5.1-6.1-5.3-.2-.3-1.4-1.9-1.4-3.6 0-1.7.9-2.6 1.2-2.9Z" fill="#fff"/>
+  </svg>
+</a>
 
-&lt;script&gt;
+<script>
 (function(){
   try{
     var header=document.getElementById('siteHeader');
-    var onScroll=function(){ header.classList.toggle('scrolled', window.scrollY&gt;10); };
+    var onScroll=function(){ header.classList.toggle('scrolled', window.scrollY>10); };
     document.addEventListener('scroll', onScroll, {passive:true}); onScroll();
 
     var toggle=document.getElementById('navToggle');
@@ -578,7 +578,7 @@ footer{padding-block:32px;border-top:1px solid var(--border)}
       var principal=monto*(1-Math.min(Math.max(inicialPct,0),90)/100);
       var factor=Math.pow(1+tasaMensual, meses);
       var cuota=principal*tasaMensual*factor/(factor-1);
-      simResult.textContent=(principal&gt;0 && isFinite(cuota)) ? ('$ '+Math.round(cuota).toLocaleString('es-CO')) : '—';
+      simResult.textContent=(principal>0 && isFinite(cuota)) ? ('$ '+Math.round(cuota).toLocaleString('es-CO')) : '—';
     });
 
     var fawLink=document.getElementById('fawLink');
@@ -597,9 +597,9 @@ footer{padding-block:32px;border-top:1px solid var(--border)}
     });
   }catch(err){ console.error(err); }
 })();
-&lt;/script&gt;
+</script>
 
-&lt;script&gt;
+<script>
   (function(){
     try{
       var grid = document.querySelector('.stats-grid');
@@ -617,7 +617,7 @@ footer{padding-block:32px;border-top:1px solid var(--border)}
           var p = Math.min((ts - start) / duration, 1);
           var eased = 1 - Math.pow(1 - p, 3);
           el.textContent = prefix + Math.round(eased * target);
-          if(p &lt; 1){ requestAnimationFrame(step); }
+          if(p < 1){ requestAnimationFrame(step); }
           else { el.textContent = prefix + target; if(onDone) onDone(); }
         }
         requestAnimationFrame(step);
@@ -668,7 +668,7 @@ footer{padding-block:32px;border-top:1px solid var(--border)}
       }
     }catch(err){ console.error(err); }
   })();
-&lt;/script&gt;
+</script>
 
-&lt;/body&gt;
-&lt;/html&gt;
+</body>
+</html>
