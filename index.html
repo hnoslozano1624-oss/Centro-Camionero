@@ -121,7 +121,12 @@ nav.menu a:hover::after{transform:scaleX(1)}
 .stat-card:nth-child(2){transition-delay:.12s}
 .stat-card:nth-child(3){transition-delay:.24s}
 .stat-icon{width:60px;height:60px;border-radius:50%;background:var(--steel-100);display:flex;align-items:center;justify-content:center;color:var(--red);transition:background .35s ease,color .35s ease,transform .35s ease}
-.stat-card:hover .stat-icon{background:var(--red);color:#fff;transform:scale(1.08) rotate(-4deg)}
+.stat-card.is-visible .stat-icon{animation:statIconFloat 3.2s ease-in-out infinite}
+.stat-card:nth-child(1) .stat-icon{animation-delay:0s}
+.stat-card:nth-child(2) .stat-icon{animation-delay:.45s}
+.stat-card:nth-child(3) .stat-icon{animation-delay:.9s}
+.stat-card:hover .stat-icon{animation-play-state:paused;background:var(--red);color:#fff;transform:scale(1.08) rotate(-4deg)}
+@keyframes statIconFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
 .stat-icon svg{width:30px;height:30px}
 .stat-num{font-family:'Big Shoulders Display',sans-serif;font-size:clamp(38px,5vw,56px);color:var(--navy);line-height:1}
 .stat-label{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--fg-muted);max-width:18ch}
@@ -130,6 +135,7 @@ nav.menu a:hover::after{transform:scaleX(1)}
   .stat-card:hover{transform:none}
   .stat-icon{transition:background .2s ease,color .2s ease}
   .stat-card:hover .stat-icon{transform:none}
+  .stat-card.is-visible .stat-icon{animation:none}
 }
 .route-divider{display:flex;align-items:center;gap:14px;color:var(--fg-muted);margin-block:0}
 .route-divider .line{flex:1;height:0;border-top:2px dashed var(--border)}
