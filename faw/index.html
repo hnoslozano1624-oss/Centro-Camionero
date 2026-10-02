@@ -146,6 +146,37 @@ p{margin:0}
 .empty p{color:var(--muted);margin-top:8px}
 .empty .btn{margin-top:18px}
 
+/* ---------- línea de modelos FAW ---------- */
+.on-stage .vf{display:inline-block;margin-top:4px;font-size:13px;font-weight:700;color:#fff;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.4)}
+.on-stage .vf:hover{border-color:#fff}
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:26px}
+.filters button{border:2px solid var(--faw);background:#fff;color:var(--faw);font:inherit;font-weight:700;font-size:14px;padding:9px 16px;border-radius:999px;cursor:pointer;transition:background .2s ease,color .2s ease,transform .15s ease}
+.filters button:hover{transform:translateY(-2px)}
+.filters button[aria-pressed="true"]{background:var(--faw);color:#fff}
+.filters button span{font-family:var(--mono);font-size:12.5px;opacity:.75;margin-left:6px}
+.models{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:20px}
+.mc{display:flex;flex-direction:column;background:#fff;border-radius:16px;overflow:hidden;text-decoration:none;box-shadow:0 14px 34px -24px rgba(12,26,94,.6);transition:transform .35s cubic-bezier(.2,.8,.2,1),box-shadow .3s ease,opacity .35s ease;opacity:0;transform:translateY(24px) scale(.97)}
+.mc.in{opacity:1;transform:none}
+.mc.in:hover{transform:translateY(-6px);box-shadow:0 22px 44px -24px rgba(12,26,94,.7)}
+.mc.out{opacity:0;transform:scale(.94)}
+.mc[hidden]{display:none}
+.mc .ph{position:relative;aspect-ratio:16/11;background:radial-gradient(90% 80% at 50% 92%,#2448D8,var(--faw-deep) 70%);overflow:hidden}
+.mc .ph::after{content:"";position:absolute;left:12%;right:12%;bottom:6%;height:10%;border-radius:50%;background:radial-gradient(closest-side,rgba(143,176,255,.5),transparent)}
+.mc .ph img{position:absolute;inset:9% 6% 7%;width:88%;height:84%;object-fit:contain;z-index:1;transition:transform .5s cubic-bezier(.2,.8,.2,1)}
+.mc:hover .ph img{transform:translateX(5%) scale(1.06)}
+.mc .tg{position:absolute;top:10px;left:10px;z-index:2;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:5px 10px;border-radius:999px;background:#fff;color:var(--faw)}
+.mc .tg.tiger{background:linear-gradient(90deg,#FFB21E,#FF5A36);color:#2A1200}
+.mc .tg2{position:absolute;top:10px;right:10px;z-index:2;font-size:11px;font-weight:700;letter-spacing:.06em;padding:5px 10px;border-radius:999px;background:rgba(8,18,65,.78);color:#fff;border:1px solid rgba(255,255,255,.3)}
+.mc .bd{padding:14px 16px 16px;display:grid;gap:6px;flex:1;align-content:start}
+.mc h3{font-size:20px;color:var(--faw-ink)}
+.mc .sb{font-size:13.5px;color:var(--muted)}
+.mc .mn{display:flex;gap:14px;flex-wrap:wrap;font-family:var(--mono);font-size:13px;color:var(--muted);border-top:1px solid var(--silver-2);padding-top:8px;margin-top:4px}
+.mc .mn b{color:var(--ink)}
+.mc .go2{margin-top:6px;font-weight:700;font-size:14px;color:var(--faw);display:flex;align-items:center;gap:6px}
+.mc .go2 i{font-style:normal;transition:transform .25s ease}
+.mc:hover .go2 i{transform:translateX(5px)}
+@media (prefers-reduced-motion:reduce){.mc{opacity:1;transform:none}}
+
 /* ---------- muro de historia ---------- */
 .history{position:relative;background:var(--faw);color:#fff;overflow:hidden}
 .history::after{content:"FAW";position:absolute;right:-2%;bottom:-.22em;font-weight:700;font-size:clamp(160px,26vw,360px);line-height:1;color:transparent;-webkit-text-stroke:2px rgba(255,255,255,.18);pointer-events:none}
@@ -238,6 +269,7 @@ dialog::backdrop{background:rgba(8,18,65,.75)}
       <svg width="20" height="14" viewBox="0 0 20 14" fill="none" aria-hidden="true"><path d="M0 1h20M0 7h20M0 13h20" stroke="currentColor" stroke-width="2"/></svg>
     </button>
     <nav id="nav" aria-label="Secciones">
+      <a href="#modelos">Modelos</a>
       <a href="#exhibicion">Exhibición</a>
       <a href="#historia">Historia FAW</a>
       <a href="#asesoria">Asesoría</a>
@@ -360,10 +392,10 @@ dialog::backdrop{background:rgba(8,18,65,.75)}
           <p class="tag">Fuerza de trabajo #1 en China, <b>ahora en Colombia.</b> Camiones FAW 0 km con la asesoría y el respaldo de Centro Camionero.</p>
           <div class="on-stage" id="onStage" aria-live="polite">
             <div class="row1"><span class="k">En vitrina</span><span class="count" id="osCount">01 / 03</span></div>
-            <div class="row2"><div><div class="nm" id="osName">FAW Tiger</div><div class="sb" id="osSub"></div></div><a class="go" id="osGo" href="#asesoria" target="_blank" rel="noopener">Cotizar</a></div>
+            <div class="row2"><div><div class="nm" id="osName">FAW Tiger</div><div class="sb" id="osSub"></div><a class="vf" id="osVer" href="#modelos" hidden>Ver ficha técnica →</a></div><a class="go" id="osGo" href="#asesoria" target="_blank" rel="noopener">Cotizar</a></div>
             <div class="ctrl" id="osCtrl"></div>
           </div>
-          <a class="more" href="#exhibicion">Ver camiones en exhibición <span aria-hidden="true">→</span></a>
+          <a class="more" href="#modelos">Ver los modelos FAW <span aria-hidden="true">→</span></a>
         </div>
       </div>
     </div>
@@ -377,7 +409,21 @@ dialog::backdrop{background:rgba(8,18,65,.75)}
     </div>
   </section>
 
+  <!-- Línea de modelos FAW: cada modelo abre su propia página (/faw/modelos/<modelo>) -->
+  <section class="sec" id="modelos" aria-labelledby="t-mod">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2 id="t-mod">Línea FAW disponible</h2>
+        <p>Diez modelos de carga liviana y mediana. Elige uno para ver su ficha técnica completa y cotizarlo por WhatsApp.</p>
+        <span class="rule" aria-hidden="true"></span>
+      </div>
+      <div class="filters" id="filtros" role="group" aria-label="Filtrar modelos"></div>
+      <div class="models" id="modelosGrid"></div>
+    </div>
+  </section>
+
   <!-- Exhibición -->
+
   <section class="sec hex" id="exhibicion" aria-labelledby="t-exh">
     <div class="wrap">
       <div class="sec-head">
@@ -444,6 +490,7 @@ dialog::backdrop{background:rgba(8,18,65,.75)}
   <div class="wrap">
     <a class="lockup" href="#top" style="gap:12px"><img src="/assets/faw-logo-h-blanco.svg" alt="FAW Trucks"><span class="dist" style="color:#fff;font-size:16px">Centro Camionero</span></a>
     <div class="lk">
+      <a href="#modelos">Modelos FAW</a>
       <a href="#exhibicion">Exhibición</a>
       <a href="#historia">Historia FAW</a>
       <a href="#asesoria">Asesoría</a>
@@ -538,9 +585,9 @@ dialog::backdrop{background:rgba(8,18,65,.75)}
   // "ruedas": puntos donde cada llanta toca el piso, en fracción del ancho/alto de la foto
   // [x, y, ancho de la llanta], en orden: delantera lejana, delantera cercana, trasera cercana, trasera lejana.
   var VITRINA = [
-    { src: "/assets/vitrina/faw-tiger-whr.webp", nombre: "FAW Tiger WHR", sub: "Cabina sencilla · chasís",
+    { src: "/assets/vitrina/faw-tiger-whr.webp", nombre: "FAW WHR Tiger 2.9", sub: "Carga liviana · cabina sencilla", url: "/faw/modelos/whr-tiger-2-9",
       ruedas: [[.84, .935, .10], [.275, .995, .17], [.07, .715, .075], [.58, .69, .07]] },
-    { src: "/assets/vitrina/faw-tiger-wkr.webp", nombre: "FAW Tiger WKR", sub: "Doble cabina · chasís",
+    { src: "/assets/vitrina/faw-tiger-wkr.webp", nombre: "FAW WKR Tiger 3.6", sub: "Carga mediana · doble cabina", url: "/faw/modelos/wkr-tiger-3-6",
       ruedas: [[.22, .93, .12], [.595, .995, .15], [.94, .82, .13], [.76, .77, .08]] },
     { src: "/assets/vitrina/faw-modelo-3.webp", nombre: "FAW Tiger", sub: "Camión liviano · chasís",
       ruedas: [[.2, .95, .12], [.745, .995, .15], [.95, .745, .08], [.72, .7, .07]] }
@@ -598,6 +645,7 @@ dialog::backdrop{background:rgba(8,18,65,.75)}
       var m = VITRINA[n];
       document.getElementById("osName").textContent = m.nombre;
       document.getElementById("osSub").textContent = m.sub;
+      var vf = document.getElementById("osVer"); vf.hidden = !m.url; if (m.url) vf.href = m.url;
       document.getElementById("osCount").textContent = ("0" + (n + 1)).slice(-2) + " / " + ("0" + VITRINA.length).slice(-2);
       document.getElementById("osGo").href = waLink("Hola, me interesa el " + m.nombre + " que vi en la vitrina de FAW Centro Camionero.");
       [].forEach.call(ctrl.children, function(b, k){
@@ -619,6 +667,38 @@ dialog::backdrop{background:rgba(8,18,65,.75)}
     mostrar(0);
   }
   vitrina();
+
+  // Línea de modelos FAW (datos en /faw/modelos.json, tomados de las fichas técnicas FAW Trucks)
+  fetch("/faw/modelos.json").then(function(r){ if (!r.ok) throw 0; return r.json(); }).then(function(d){
+    var ms = d.modelos || [], grid = document.getElementById("modelosGrid"), fl = document.getElementById("filtros");
+    var FIL = [["todos", "Todos", function(){ return true; }],
+      ["liviana", "Carga liviana", function(m){ return /liviana/i.test(m.segmento); }],
+      ["mediana", "Carga mediana", function(m){ return /mediana/i.test(m.segmento); }],
+      ["tiger", "Tiger", function(m){ return m.serie === "Tiger"; }],
+      ["lion", "Lion", function(m){ return m.serie === "Lion"; }]];
+    grid.innerHTML = ms.map(function(m){
+      return '<a class="mc" href="/faw/modelos/' + m.slug + '"><div class="ph"><span class="tg ' + m.serie.toLowerCase() + '">' + esc(m.serie) + '</span>' + (m.etiqueta ? '<span class="tg2">' + esc(m.etiqueta) + '</span>' : '') +
+        '<img src="' + esc(m.img) + '" alt="Camión FAW ' + esc(m.nombre) + '" loading="lazy"></div><div class="bd"><h3>' + esc(m.nombre) + '</h3><span class="sb">' + esc(m.segmento) + ' · ' + esc(m.motorDestacado) + '</span>' +
+        '<div class="mn"><span><b>' + m.datos.hp + '</b> HP</span><span><b>' + fmt(m.datos.carga) + '</b> kg</span><span><b>' + String(m.datos.largo).replace(".", ",") + '</b> m</span></div>' +
+        '<span class="go2">Ver modelo <i aria-hidden="true">→</i></span></div></a>';
+    }).join("");
+    var cards = [].slice.call(grid.children);
+    fl.innerHTML = FIL.map(function(f, i){ return '<button type="button" data-f="' + f[0] + '" aria-pressed="' + (i === 0) + '">' + f[1] + '<span>' + ms.filter(f[2]).length + '</span></button>'; }).join("");
+    function entrar(lista){ lista.forEach(function(c, i){ setTimeout(function(){ c.classList.add("in"); }, i * 70); }); }
+    var io = "IntersectionObserver" in window ? new IntersectionObserver(function(es){ if (es[0].isIntersecting) { entrar(cards); io.disconnect(); } }, {threshold:.1}) : null;
+    if (io) io.observe(grid); else entrar(cards);
+    fl.addEventListener("click", function(e){
+      var b = e.target.closest("button"); if (!b) return;
+      [].forEach.call(fl.children, function(x){ x.setAttribute("aria-pressed", x === b); });
+      var f = FIL.filter(function(x){ return x[0] === b.dataset.f; })[0][2];
+      cards.forEach(function(c){ c.classList.add("out"); c.classList.remove("in"); });
+      setTimeout(function(){
+        var vis = [];
+        cards.forEach(function(c, i){ var ok = f(ms[i]); c.hidden = !ok; c.classList.remove("out"); if (ok) vis.push(c); });
+        entrar(vis);
+      }, 260);
+    });
+  }).catch(function(){ document.getElementById("modelos").hidden = true; });
 
   fetch("/api/vehiculos?tipo=nuevo").then(function(r){ if (!r.ok) throw 0; return r.json(); }).then(function(d){
     var l = d.vehiculos || [];
