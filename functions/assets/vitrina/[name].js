@@ -7,7 +7,8 @@ export async function onRequestGet({ request, params, env }) {
   if (!m) return new Response("No encontrado", { status: 404 });
 
   const real = await env.ASSETS.fetch(request);
-  if (real.ok && (real.headers.get("content-type") || "").startsWith("image/")) return real;
+  // 304: el navegador ya tiene la imagen estática en caché.
+  if (real.status === 304 || (real.ok && (real.headers.get("content-type") || "").startsWith("image/"))) return real;
 
   let txt = "";
   for (let i = 1; i <= 40; i++) {
