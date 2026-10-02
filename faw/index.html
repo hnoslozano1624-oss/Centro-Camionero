@@ -61,7 +61,14 @@ p{margin:0}
 .scene svg{position:absolute;inset:0;width:100%;height:100%;display:block}
 .scene .breathe{animation:breathe 4.5s ease-in-out infinite}
 @keyframes breathe{0%,100%{opacity:.75}50%{opacity:1}}
-.truck{transition:opacity .9s ease}
+.unit{opacity:0;transform:translateX(300px) scale(.82);transform-origin:1060px 530px;transition:transform 1.5s cubic-bezier(.2,.75,.15,1),opacity 1.1s ease}
+.unit.on{opacity:1;transform:none}
+.unit.off{opacity:0;transform:translateX(-300px) scale(.82)}
+.spin{animation:spin 18s linear infinite}
+@keyframes spin{to{stroke-dashoffset:-560}}
+.sweep{opacity:0}
+.sweep.go{animation:sweep 1.6s ease-out}
+@keyframes sweep{0%{opacity:0;transform:translateX(-520px)}25%{opacity:1}100%{opacity:0;transform:translateX(520px)}}
 .v-copy{position:absolute;inset:0;pointer-events:none}
 .v-copy .wrap{height:100%;display:flex;align-items:center}
 .v-copy .txt{pointer-events:auto;max-width:440px;text-shadow:0 2px 24px rgba(3,10,38,.8)}
@@ -72,23 +79,31 @@ p{margin:0}
 .v-copy .tag{margin-top:16px;font-size:clamp(16px,1.5vw,19px);color:#C9D3F5;max-width:32ch}
 .v-copy .tag b{color:#fff;font-style:italic}
 .v-copy .ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
-.on-stage{position:absolute;z-index:3;right:clamp(16px,4vw,40px);bottom:clamp(14px,3vw,28px);display:flex;align-items:center;gap:14px;background:rgba(5,14,52,.72);border:1px solid rgba(140,170,255,.25);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-radius:999px;padding:8px 8px 8px 18px;color:#fff;text-decoration:none;max-width:calc(100% - 32px);transition:opacity .6s ease}
-.on-stage[hidden]{display:none!important}
-.on-stage .nm{font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.on-stage .pr{color:#AFC0FF;font-size:14px;white-space:nowrap}
-.on-stage .go{background:#fff;color:var(--faw);font-weight:700;font-size:13.5px;border-radius:999px;padding:8px 14px;white-space:nowrap;border:0;cursor:pointer}
-.dots{display:flex;gap:6px;margin-right:4px}
-.dots i{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.3)}
-.dots i.on{background:#fff}
+.on-stage{position:absolute;z-index:3;right:clamp(16px,4vw,40px);bottom:clamp(14px,3vw,28px);width:min(360px,calc(100% - 32px));background:rgba(5,14,52,.66);border:1px solid rgba(140,170,255,.22);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-radius:16px;padding:14px 16px 0;color:#fff;overflow:hidden}
+.on-stage .row1{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.on-stage .k{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#9FB4FF;font-weight:500}
+.on-stage .count{font-family:var(--mono);font-size:13px;color:#C9D3F5}
+.on-stage .row2{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;margin-top:4px}
+.on-stage .nm{font-size:22px;font-weight:700;line-height:1.15}
+.on-stage .sb{font-size:13.5px;color:#C9D3F5}
+.on-stage .go{background:#fff;color:var(--faw);font-weight:700;font-size:13.5px;border-radius:999px;padding:9px 16px;white-space:nowrap;text-decoration:none;flex:none}
+.on-stage .ctrl{display:flex;gap:8px;margin-top:12px}
+.on-stage .ctrl button{flex:1;height:22px;border:0;background:none;padding:0;cursor:pointer;position:relative}
+.on-stage .ctrl button::before{content:"";position:absolute;left:0;right:0;top:9px;height:3px;border-radius:2px;background:rgba(255,255,255,.22)}
+.on-stage .ctrl button i{position:absolute;left:0;top:9px;height:3px;width:0;border-radius:2px;background:#fff}
+.on-stage .ctrl button.on i{animation:fill var(--dur,6s) linear forwards}
+.on-stage .ctrl button.done i{width:100%}
+.on-stage.paused .ctrl button.on i{animation-play-state:paused}
+@keyframes fill{to{width:100%}}
 @media (max-width:900px){
   .scene{aspect-ratio:4/3;min-height:0;max-height:none}
   .v-copy{position:static}
   .v-copy .wrap{display:block;padding-block:28px 40px}
   .v-copy .txt{max-width:none;text-shadow:none}
-  .on-stage{position:relative;left:auto;right:auto;bottom:auto;margin:-26px 16px 0;justify-content:space-between;z-index:2}
+  .on-stage{position:relative;left:auto;right:auto;bottom:auto;margin:-18px 16px 0;width:auto}
   .leftshade{display:none}
 }
-@media (prefers-reduced-motion:reduce){.scene .breathe{animation:none}}
+@media (prefers-reduced-motion:reduce){.scene .breathe,.spin{animation:none}.unit{transition:opacity .4s ease}}
 
 /* ---------- franja de datos ---------- */
 .facts{background:var(--faw-deep);color:#fff}
@@ -249,8 +264,9 @@ dialog::backdrop{background:rgba(8,18,65,.75)}
           <filter id="soft" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="14"/></filter>
           <filter id="streak" x="-50%" y="-10%" width="200%" height="120%"><feGaussianBlur stdDeviation="5 18"/></filter>
           <radialGradient id="gFade" cx=".5" cy=".58" r=".62"><stop offset=".5" stop-color="#fff"/><stop offset=".98" stop-color="#000"/></radialGradient>
-          <mask id="m0" maskUnits="userSpaceOnUse" x="0" y="0" width="1600" height="700"><rect x="760" y="242" width="600" height="280" fill="url(#gFade)"/></mask>
-          <mask id="m1" maskUnits="userSpaceOnUse" x="0" y="0" width="1600" height="700"><rect x="760" y="242" width="600" height="280" fill="url(#gFade)"/></mask>
+          <linearGradient id="gRefl" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".4"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
+          <mask id="mRefl" maskUnits="userSpaceOnUse" x="0" y="0" width="1600" height="700"><rect x="600" y="530" width="920" height="70" fill="url(#gRefl)"/></mask>
+          <linearGradient id="gSweep" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".5" stop-color="#DCE6FF" stop-opacity=".35"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
           <linearGradient id="gLeft" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#030A26" stop-opacity=".92"/><stop offset=".7" stop-color="#030A26" stop-opacity=".55"/><stop offset="1" stop-color="#030A26" stop-opacity="0"/></linearGradient>
         </defs>
 
@@ -281,7 +297,7 @@ dialog::backdrop{background:rgba(8,18,65,.75)}
         </g>
 
         <!-- logo FAW retroiluminado en el muro -->
-        <image href="/assets/faw-logo-h-blanco.svg" x="910" y="150" width="300" height="64" opacity=".9" filter="url(#glow)"/>
+        <image href="/assets/faw-logo-h-blanco.svg" x="935" y="140" width="250" height="53" opacity=".9" filter="url(#glow)"/>
 
         <!-- techo: anillo de luz y reflectores -->
         <path d="M480 0 H1600 V60 Q1050 150 480 60 Z" fill="#020718"/>
@@ -322,19 +338,20 @@ dialog::backdrop{background:rgba(8,18,65,.75)}
         <ellipse cx="1060" cy="512" rx="360" ry="52" fill="none" stroke="#FFFFFF" stroke-opacity=".35" stroke-width="1.5"/>
         <ellipse cx="1060" cy="506" rx="250" ry="30" fill="#5B7BE8" opacity=".18" filter="url(#soft)"/>
 
-        <!-- espacio para la rotación de camiones (vacío si no hay camiones nuevos cargados) -->
-        <g id="slot">
-          <ellipse id="shadow" cx="1060" cy="512" rx="280" ry="26" fill="#000" opacity="0"/>
-          <image class="truck" id="t0" x="760" y="242" width="600" height="280" preserveAspectRatio="none" mask="url(#m0)" style="opacity:0"/>
-          <image class="truck" id="t1" x="760" y="242" width="600" height="280" preserveAspectRatio="none" mask="url(#m1)" style="opacity:0"/>
-        </g>
+        <!-- borde giratorio de la tarima -->
+        <ellipse class="spin" cx="1060" cy="512" rx="360" ry="52" fill="none" stroke="#FFFFFF" stroke-opacity=".55" stroke-width="2" stroke-dasharray="4 24"/>
+
+        <!-- vitrina: los camiones rotan sobre la tarima (se cargan desde el script) -->
+        <ellipse cx="1060" cy="528" rx="300" ry="24" fill="#000" opacity=".5" filter="url(#soft)"/>
+        <g id="slot"></g>
+        <rect class="sweep" id="sweep" x="900" y="180" width="320" height="400" fill="url(#gSweep)" style="mix-blend-mode:screen"/>
       </svg>
     </div>
-    <button class="on-stage" id="onStage" type="button" hidden aria-live="polite">
-      <span class="dots" id="dots" aria-hidden="true"></span>
-      <span class="nm" id="osName"></span><span class="pr" id="osPrice"></span>
-      <span class="go">Ver camión</span>
-    </button>
+    <div class="on-stage" id="onStage" aria-live="polite">
+      <div class="row1"><span class="k">En vitrina</span><span class="count" id="osCount">01 / 03</span></div>
+      <div class="row2"><div><div class="nm" id="osName">FAW Tiger</div><div class="sb" id="osSub"></div></div><a class="go" id="osGo" href="#asesoria" target="_blank" rel="noopener">Cotizar</a></div>
+      <div class="ctrl" id="osCtrl"></div>
+    </div>
     <div class="v-copy">
       <div class="wrap">
         <div class="txt">
@@ -518,49 +535,78 @@ dialog::backdrop{background:rgba(8,18,65,.75)}
   function encuadre(){ stage.setAttribute("viewBox", mq.matches ? "620 90 880 610" : "0 0 1600 700"); stage.setAttribute("preserveAspectRatio", mq.matches ? "xMidYMid slice" : "xMidYMax slice"); }
   encuadre(); if (mq.addEventListener) mq.addEventListener("change", encuadre);
 
-  function vitrina(lista){
-    var conFoto = lista.filter(function(v){ return v.fotos && v.fotos[0]; });
-    if (!conFoto.length) return; // sin camiones: la tarima queda vacía
-    var imgs = [document.getElementById("t0"), document.getElementById("t1")];
-    var sombra = document.getElementById("shadow"), btn = document.getElementById("onStage");
-    var dots = document.getElementById("dots"), i = 0, cara = 0, timer;
-    dots.innerHTML = conFoto.length > 1 ? conFoto.map(function(){ return "<i></i>"; }).join("") : "";
-    // Ajusta la foto a su proporción real, apoyada sobre la tarima, con bordes difuminados
-    function colocar(el, src, listo){
+  // Modelos en la vitrina (fotos sin fondo en /assets/vitrina). Para cambiar la rotación, editar esta lista.
+  var VITRINA = [
+    { src: "/assets/vitrina/faw-tiger-whr.webp", nombre: "FAW Tiger WHR", sub: "Cabina sencilla · chasís" },
+    { src: "/assets/vitrina/faw-tiger-wkr.webp", nombre: "FAW Tiger WKR", sub: "Doble cabina · chasís" },
+    { src: "/assets/vitrina/faw-modelo-3.webp", nombre: "FAW Tiger", sub: "Camión liviano · chasís" }
+  ];
+  var DUR = 6000, NS = "http://www.w3.org/2000/svg";
+  function vitrina(){
+    var slot = document.getElementById("slot"), box = document.getElementById("onStage"), ctrl = document.getElementById("osCtrl");
+    var sweep = document.getElementById("sweep"), actual = -1, timer = null, pausa = false;
+    var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    box.style.setProperty("--dur", DUR + "ms");
+    // Cada modelo: camión apoyado sobre la tarima + reflejo en el acero pulido
+    var unidades = VITRINA.map(function(m, n){
+      var g = document.createElementNS(NS, "g"); g.setAttribute("class", "unit");
+      var img = document.createElementNS(NS, "image"), ref = document.createElementNS(NS, "image");
+      img.setAttribute("preserveAspectRatio", "xMidYMax meet"); ref.setAttribute("preserveAspectRatio", "xMidYMax meet");
+      ref.setAttribute("mask", "url(#mRefl)"); ref.setAttribute("opacity", ".5");
       var pic = new Image();
       pic.onload = function(){
-        var ar = pic.naturalWidth / pic.naturalHeight || 1.5, w = 600, h = w / ar;
-        if (h > 280) { h = 280; w = h * ar; }
-        var x = 1060 - w / 2, y = 522 - h;
-        [["x", x], ["y", y], ["width", w], ["height", h]].forEach(function(a){
-          el.setAttribute(a[0], a[1]);
-          document.querySelector(el.getAttribute("mask").slice(4, -1) + " rect").setAttribute(a[0], a[1]);
-        });
-        el.setAttribute("href", src); listo();
+        var ar = pic.naturalWidth / pic.naturalHeight, w = 760, h = w / ar;
+        if (h > 330) { h = 330; w = h * ar; }
+        var x = 1060 - w / 2, y = 530 - h;
+        [img, ref].forEach(function(el){ el.setAttribute("x", x); el.setAttribute("y", y); el.setAttribute("width", w); el.setAttribute("height", h); el.setAttribute("href", m.src); });
+        ref.setAttribute("transform", "translate(0 1060) scale(1 -1)");
       };
-      pic.src = src;
+      pic.src = m.src;
+      g.appendChild(ref); g.appendChild(img); slot.appendChild(g);
+      var b = document.createElement("button"); b.type = "button"; b.setAttribute("aria-label", "Ver " + m.nombre); b.innerHTML = "<i></i>";
+      b.addEventListener("click", function(){ mostrar(n, true); });
+      ctrl.appendChild(b);
+      return g;
+    });
+    function mostrar(n, manual){
+      if (n === actual) return;
+      var prev = actual; actual = n;
+      unidades.forEach(function(u, k){
+        u.classList.remove("on", "off");
+        if (k === n) u.classList.add("on"); else if (k === prev) u.classList.add("off");
+      });
+      // la siguiente unidad espera a la derecha para entrar
+      setTimeout(function(){ if (prev > -1 && prev !== actual) unidades[prev].classList.remove("off"); }, 1600);
+      if (!reduce) { sweep.classList.remove("go"); void sweep.getBBox(); sweep.classList.add("go"); }
+      var m = VITRINA[n];
+      document.getElementById("osName").textContent = m.nombre;
+      document.getElementById("osSub").textContent = m.sub;
+      document.getElementById("osCount").textContent = ("0" + (n + 1)).slice(-2) + " / " + ("0" + VITRINA.length).slice(-2);
+      document.getElementById("osGo").href = waLink("Hola, me interesa el " + m.nombre + " que vi en la vitrina de FAW Centro Camionero.");
+      [].forEach.call(ctrl.children, function(b, k){
+        b.className = k === n ? "" : k < n ? "done" : "";
+        if (k === n) { void b.offsetWidth; b.className = "on"; }
+      });
+      programar();
     }
-    function mostrar(n){
-      var v = conFoto[n], nueva = imgs[cara ^ 1], vieja = imgs[cara];
-      cara ^= 1;
-      colocar(nueva, v.fotos[0], function(){ nueva.style.opacity = 1; vieja.style.opacity = 0; });
-      sombra.setAttribute("opacity", ".55");
-      document.getElementById("osName").textContent = nombre(v);
-      document.getElementById("osPrice").textContent = v.precio ? "$ " + fmt(v.precio) : "Precio a consultar";
-      [].forEach.call(dots.children, function(d, k){ d.className = k === n ? "on" : ""; });
-      btn.hidden = false; btn.onclick = function(){ detalle(v); };
+    function programar(){
+      clearTimeout(timer);
+      if (reduce || pausa) return;
+      timer = setTimeout(function(){ mostrar((actual + 1) % VITRINA.length); }, DUR);
     }
+    var scene = document.getElementById("scene");
+    [scene, box].forEach(function(el){
+      el.addEventListener("mouseenter", function(){ pausa = true; box.classList.add("paused"); clearTimeout(timer); });
+      el.addEventListener("mouseleave", function(){ pausa = false; box.classList.remove("paused"); var b = ctrl.children[actual]; if (b) { b.className = ""; void b.offsetWidth; b.className = "on"; } programar(); });
+    });
     mostrar(0);
-    if (conFoto.length > 1 && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      timer = setInterval(function(){ i = (i + 1) % conFoto.length; mostrar(i); }, 5000);
-    }
   }
+  vitrina();
 
   fetch("/api/vehiculos?tipo=nuevo").then(function(r){ if (!r.ok) throw 0; return r.json(); }).then(function(d){
     var l = d.vehiculos || [];
     if (!l.length) return;
     l.forEach(function(v){ CACHE[v.id] = v; });
-    vitrina(l);
     exh.innerHTML = '<div class="grid">' + l.map(card).join("") + "</div>";
   }).catch(function(){ /* sin API: se mantiene el mensaje de exhibición en preparación */ });
 })();
