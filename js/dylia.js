@@ -60,6 +60,17 @@
   }
   window.abrirDylia = abrir;
 
+  // Fichas estáticas del inicio: "camión usado" solo si la ficha trae kilometraje mayor a 0.
+  function mensajeFicha(card) {
+    var h3 = card.querySelector("h3"), nombre = h3 ? h3.textContent.trim() : "", modelo = "", km = 0;
+    [].forEach.call(card.querySelectorAll(".specs span"), function (sp) {
+      var t = sp.textContent.replace(/\s+/g, " ").trim(), b = sp.querySelector("b"), v = b ? b.textContent.trim() : "";
+      if (/^Modelo/i.test(t)) modelo = v;
+      if (/^Kilometraje/i.test(t)) km = parseInt(v.replace(/\D/g, ""), 10) || 0;
+    });
+    return "Hola, me interesa el camión" + (km > 0 ? " usado " : " ") + nombre + (modelo ? " " + modelo : "") + (km > 0 ? " (" + km.toLocaleString("es-CO") + " km)" : "") + " publicado en la página web.";
+  }
+
   document.addEventListener("click", function (e) {
     var a = e.target.closest && e.target.closest("a");
     if (!a) return;
@@ -71,6 +82,8 @@
       hit = true; txt = a.getAttribute("data-dylia") || null;
     } else if (a.hasAttribute("data-wa")) {
       hit = true; txt = a.getAttribute("data-wa");
+    } else if (h === "#financiamiento" && a.closest(".card-camion")) {
+      hit = true; txt = mensajeFicha(a.closest(".card-camion"));
     }
     if (!hit) return;
     e.preventDefault(); e.stopPropagation();

@@ -42,7 +42,9 @@
   function precio(v) { return v.precio ? "$ " + fmt(v.precio) : "Precio a consultar"; }
   function linkCotizar(v) {
     if (!WHATSAPP) return "#financiamiento";
-    var msg = "Hola, me interesa el " + v.marca + " " + v.linea + (v.modelo_anio ? " " + v.modelo_anio : "") + " publicado en la página web.";
+    // "usado" solo si el camión tiene kilometraje real (> 0); los 0 km no llevan la palabra.
+    var usado = v.tipo === "usado" && Number(v.kilometraje) > 0;
+    var msg = "Hola, me interesa el camión" + (usado ? " usado " : " ") + v.marca + " " + v.linea + (v.modelo_anio ? " " + v.modelo_anio : "") + (usado ? " (" + fmt(v.kilometraje) + " km)" : "") + " publicado en la página web.";
     return "https://wa.me/" + WHATSAPP + "?text=" + encodeURIComponent(msg);
   }
 
