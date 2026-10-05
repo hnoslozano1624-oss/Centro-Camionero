@@ -2,10 +2,11 @@
 
 Permite al equipo de Centro Camionero cargar camiones (datos, ficha técnica y fotos) y publicarlos en la página web sin tocar código.
 
-- **Panel:** `https://www.centrocamionero.com.co/admin/` (protegido con contraseña)
-- **Web pública:** las tarjetas de "Nuestros camiones usados" se llenan solas con los camiones publicados. Los camiones **nuevos** aparecen en una sección propia debajo del banner FAW.
+- **Panel:** `https://www.centrocamionero.com.co/admin/` (protegido con contraseña). En pruebas: `https://preview-sitio-web.centro-camionero.pages.dev/admin/` o `https://panel-admin.centro-camionero.pages.dev/admin/` (misma base de datos).
+- **Web pública:** en "Camiones disponibles" aparecen primero los camiones **usados** publicados desde el panel; después quedan las fichas marcadas "Ficha de ejemplo" (se retiran del `index.html` antes del lanzamiento). Los camiones **nuevos** se muestran en el showroom FAW (`/faw/`).
 - Un camión aparece en la web si está marcado **"En la web"** y su estado **no** es "Vendido". "Reservado" se muestra con una etiqueta.
-- Mientras no haya camiones cargados (o si la API no responde), la web conserva las fichas de ejemplo.
+- La API pública responde sin caché: lo que se guarda en el panel se ve al recargar la página.
+- El botón "Habla con un asesor" de cada camión abre WhatsApp (57 324 579 2435) con el camión ya mencionado.
 
 ## Cómo funciona
 
@@ -29,5 +30,5 @@ Ya no requiere pasos manuales en el panel de Cloudflare:
 
 ## Pendientes
 
-- Número de WhatsApp: editar `WHATSAPP` en `js/inventario.js` (formato `57XXXXXXXXXX`) para que "Cotizar" abra el chat con el camión ya mencionado.
+- Retirar las fichas de ejemplo del `index.html` antes del lanzamiento.
 - Fotos: cuando se active R2 en la cuenta de Cloudflare, se puede migrar el almacenamiento de KV a R2 (más capacidad gratuita: 10 GB vs 1 GB).
