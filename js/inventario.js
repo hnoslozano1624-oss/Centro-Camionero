@@ -2,7 +2,7 @@
    (las fichas marcadas "Ficha de ejemplo" quedan después; se retiran del index.html antes del lanzamiento).
    Los camiones nuevos se muestran en el showroom independiente /faw/ (FAW Centro Camionero). */
 (function () {
-  var WHATSAPP = "573245792435"; // Línea de atención (WhatsApp) de Centro Camionero
+  var WHATSAPP = "573157207016"; // Asesor Centro Camionero (camiones usados)
   var fmt = function (n) { return Number(n).toLocaleString("es-CO"); };
   var esc = function (s) { return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); };
   var SVG = '<svg viewBox="0 0 200 120" fill="none"><path d="M10 95H160V55H120L100 35H55L40 55H30V95" stroke="#fff" stroke-width="3"/><circle cx="60" cy="98" r="13" stroke="var(--red)" stroke-width="3"/><circle cx="140" cy="98" r="13" stroke="var(--red)" stroke-width="3"/></svg>';
