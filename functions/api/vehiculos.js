@@ -13,5 +13,5 @@ export async function onRequestGet({ request, env }) {
   const { results } = await env.DB.prepare(sql).bind(...args).all();
   const fotos = await fotosPorVehiculo(env.DB, results.map((v) => v.id));
   const data = results.map(({ ficha_tecnica, ...v }) => ({ ...v, ficha: parseFicha(ficha_tecnica), fotos: (fotos[v.id] || []).map((f) => f.url) }));
-  return json({ vehiculos: data }, 200, { "Cache-Control": "public, max-age=60" });
+  return json({ vehiculos: data }, 200, { "Cache-Control": "no-store" });
 }
