@@ -1,0 +1,2 @@
+# Cada modelo FAW tiene su propia dirección (/faw/modelos/<modelo>) servida por la misma plantilla.
+/faw/modelos/*  /faw/modelo/  200

@@ -1,0 +1,712 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>FAW Centro Camionero · Showroom de camiones nuevos en Bogotá</title>
+<meta name="description" content="FAW Centro Camionero: showroom de camiones nuevos FAW Trucks en Bogotá. Camiones 0 km, asesoría y cotización por WhatsApp 324 579 2435.">
+<link rel="icon" href="/assets/faw-emblema-blanco.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500;700&family=Ubuntu+Mono:wght@400;700&display=swap">
+<style>
+/* Showroom FAW Centro Camionero — basado en "Lineamientos de Marca para Showroom FAW Trucks 2026".
+   Azul FAW Pantone 286C (RGB 21 42 140), panel aluminio gris plata, muro de imagen azul,
+   counter blanco, malla hexagonal de fondo. Tipografía Ubuntu, como en los lineamientos. */
+:root{
+  --faw:#152A8C; --faw-deep:#0C1A5E; --faw-ink:#081241;
+  --silver:#ECEEF2; --silver-2:#D9DDE5; --steel:#9AA3B5;
+  --white:#FFFFFF; --ink:#0B1433; --muted:#556079;
+  --wa:#1FAF54;
+  --f:'Ubuntu',"Segoe UI",Arial,sans-serif; --mono:'Ubuntu Mono',ui-monospace,Menlo,monospace;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--white);color:var(--ink);font-family:var(--f);font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+a{color:inherit}
+h1,h2,h3{margin:0;line-height:1.05;text-wrap:balance}
+p{margin:0}
+.wrap{max-width:1200px;margin:0 auto;padding-inline:clamp(16px,4vw,40px)}
+:focus-visible{outline:3px solid #6F8CFF;outline-offset:2px}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
+
+/* malla hexagonal (fondo de los lineamientos) */
+.hex{background-color:var(--silver);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='97' viewBox='0 0 56 97'%3E%3Cpath d='M28 0l28 16v32L28 64 0 48V16zM28 64v33M0 48l-28 16M56 48l28 16' fill='none' stroke='%23C9CFDB' stroke-width='1'/%3E%3C/svg%3E");background-size:56px 97px}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:14px 24px;border-radius:999px;font-weight:700;font-size:15px;text-decoration:none;border:2px solid transparent;cursor:pointer;transition:transform .15s ease,background .2s ease;white-space:nowrap}
+.btn:hover{transform:translateY(-2px)}
+.btn-wa{background:var(--wa);color:#fff}
+.btn-white{background:#fff;color:var(--faw)}
+.btn-line{border-color:rgba(255,255,255,.7);color:#fff}
+.btn-faw{background:var(--faw);color:#fff}
+.btn svg{width:20px;height:20px;flex:none}
+
+/* ---------- aviso (header) estilo fachada: panel plata + logo FAW + nombre del distribuidor ---------- */
+.sign{position:sticky;top:0;z-index:50;background:linear-gradient(#FAFBFC,#EDEFF3);border-bottom:3px solid var(--faw);padding-top:env(safe-area-inset-top,0px)}
+.sign .wrap{display:flex;align-items:center;gap:16px;min-height:68px}
+.lockup{display:flex;align-items:center;gap:14px;text-decoration:none;min-width:0}
+.lockup img{height:34px;width:auto}
+.lockup .div{width:2px;height:30px;background:var(--faw);opacity:.35;flex:none}
+.lockup .dist{font-weight:700;color:var(--faw);font-size:19px;letter-spacing:.01em;white-space:nowrap}
+.sign nav{margin-left:auto;display:flex;gap:clamp(14px,2.4vw,28px);align-items:center}
+.sign nav a{text-decoration:none;color:var(--faw-ink);font-weight:500;font-size:14.5px}
+.sign nav a:hover{color:var(--faw)}
+.sign nav .back{font-size:13px;color:var(--muted);border:1px solid var(--silver-2);padding:6px 12px;border-radius:999px;background:#fff}
+.menu-btn{display:none;margin-left:auto;background:none;border:1px solid var(--silver-2);border-radius:8px;width:42px;height:42px;align-items:center;justify-content:center;color:var(--faw)}
+
+/* ---------- vitrina (hero): escenario oscuro con luces, tarima vacía para la rotación de camiones ---------- */
+.vitrina{position:relative;background:#030A26;color:#fff;overflow:hidden;isolation:isolate}
+.scene{position:relative;width:100%;aspect-ratio:16/7;max-height:calc(100vh - 68px);min-height:500px}
+.scene svg{position:absolute;inset:0;width:100%;height:100%;display:block}
+.scene .breathe{animation:breathe 4.5s ease-in-out infinite}
+@keyframes breathe{0%,100%{opacity:.75}50%{opacity:1}}
+.unit{opacity:0;transform:translateX(300px) scale(.82);transform-origin:1060px 560px;transition:transform 1.5s cubic-bezier(.2,.75,.15,1),opacity 1.1s ease}
+.unit.on{opacity:1;transform:none}
+.unit.off{opacity:0;transform:translateX(-300px) scale(.82)}
+.spin{animation:spin 18s linear infinite}
+@keyframes spin{to{stroke-dashoffset:-560}}
+.sweep{opacity:0}
+.sweep.go{animation:sweep 1.6s ease-out}
+@keyframes sweep{0%{opacity:0;transform:translateX(-520px)}25%{opacity:1}100%{opacity:0;transform:translateX(520px)}}
+.v-copy{position:absolute;inset:0;pointer-events:none}
+.v-copy .wrap{height:100%;display:flex;align-items:center}
+.v-copy .more{display:inline-flex;gap:8px;margin-top:16px;color:#C9D3F5;font-size:14.5px;font-weight:500;text-decoration:none;border-bottom:1px solid rgba(201,211,245,.4);padding-bottom:2px}
+.v-copy .more:hover{color:#fff;border-color:#fff}
+.v-copy .txt{pointer-events:auto;max-width:440px;text-shadow:0 2px 24px rgba(3,10,38,.8)}
+.v-copy .kicker{display:inline-flex;align-items:center;gap:10px;font-size:12.5px;letter-spacing:.16em;text-transform:uppercase;color:#AFC0FF;font-weight:500}
+.v-copy .kicker::before{content:"";width:28px;height:2px;background:#5B8CFF;box-shadow:0 0 10px #5B8CFF}
+.v-copy h1{font-size:clamp(36px,4.3vw,62px);font-weight:700;letter-spacing:-.01em;margin-top:14px}
+.v-copy h1 span{display:block;font-weight:400;color:#DCE4FF}
+.v-copy .tag{margin-top:16px;font-size:clamp(16px,1.5vw,19px);color:#C9D3F5;max-width:32ch}
+.v-copy .tag b{color:#fff;font-style:italic}
+.v-copy .ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
+.on-stage{position:relative;margin-top:26px;width:min(400px,100%);text-shadow:none;background:rgba(5,14,52,.66);border:1px solid rgba(140,170,255,.22);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-radius:16px;padding:14px 16px 0;color:#fff;overflow:hidden}
+.on-stage .row1{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.on-stage .k{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#9FB4FF;font-weight:500}
+.on-stage .count{font-family:var(--mono);font-size:13px;color:#C9D3F5}
+.on-stage .row2{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;margin-top:4px}
+.on-stage .nm{font-size:22px;font-weight:700;line-height:1.15}
+.on-stage .sb{font-size:13.5px;color:#C9D3F5}
+.on-stage .go{background:#fff;color:var(--faw);font-weight:700;font-size:13.5px;border-radius:999px;padding:9px 16px;white-space:nowrap;text-decoration:none;flex:none}
+.on-stage .ctrl{display:flex;gap:8px;margin-top:12px}
+.on-stage .ctrl button{flex:1;height:22px;border:0;background:none;padding:0;cursor:pointer;position:relative}
+.on-stage .ctrl button::before{content:"";position:absolute;left:0;right:0;top:9px;height:3px;border-radius:2px;background:rgba(255,255,255,.22)}
+.on-stage .ctrl button i{position:absolute;left:0;top:9px;height:3px;width:0;border-radius:2px;background:#fff}
+.on-stage .ctrl button.on i{animation:fill var(--dur,6s) linear forwards}
+.on-stage .ctrl button.done i{width:100%}
+.on-stage.paused .ctrl button.on i{animation-play-state:paused}
+@keyframes fill{to{width:100%}}
+@media (max-width:900px){
+  .scene{aspect-ratio:4/3;min-height:0;max-height:none}
+  .v-copy{position:static}
+  .v-copy .wrap{display:block;padding-block:28px 40px}
+  .v-copy .txt{max-width:none;text-shadow:none}
+  .on-stage{width:100%}
+  .leftshade{display:none}
+}
+@media (prefers-reduced-motion:reduce){.scene .breathe,.spin{animation:none}.unit{transition:opacity .4s ease}}
+
+/* ---------- franja de datos ---------- */
+.facts{background:var(--faw-deep);color:#fff}
+.facts .wrap{display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}
+.facts .f+.f{border-left:1px solid rgba(255,255,255,.14)}
+.facts .f{background:var(--faw-deep);padding:20px 8px;display:grid;gap:2px;text-align:center}
+.facts .f b{font-size:clamp(20px,2.4vw,26px)}
+.facts .f span{font-size:13px;color:#B8C3F0;letter-spacing:.04em}
+.facts a{text-decoration:none}
+
+/* ---------- encabezados de sección (como los títulos de los lineamientos) ---------- */
+.sec{padding-block:clamp(56px,8vw,96px)}
+.sec-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:16px 32px;margin-bottom:clamp(28px,4vw,44px)}
+.sec-head h2{font-size:clamp(30px,4vw,46px);color:var(--faw);font-weight:700}
+.sec-head .rule{flex-basis:100%;height:2px;background:linear-gradient(90deg,var(--faw) 0 40%,transparent 40%);opacity:.9;order:3}
+.sec-head p{color:var(--muted);max-width:52ch}
+
+/* ---------- exhibición ---------- */
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
+.card{background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 1px 0 var(--silver-2),0 18px 40px -24px rgba(12,26,94,.45);display:flex;flex-direction:column;cursor:pointer;transition:transform .2s ease}
+.card:hover{transform:translateY(-4px)}
+.card .ph{position:relative;aspect-ratio:4/3;background:linear-gradient(160deg,var(--faw),var(--faw-deep));display:grid;place-items:center}
+.card .ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.card .ph .emb{width:34%;opacity:.5}
+.badge{position:absolute;top:12px;left:12px;background:#fff;color:var(--faw);font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:5px 10px;border-radius:999px}
+.badge.res{left:auto;right:12px;background:#E0262D;color:#fff}
+.card .bd{padding:18px 20px 20px;display:flex;flex-direction:column;gap:12px;flex:1}
+.card h3{font-size:22px;color:var(--faw-ink)}
+.specs{display:grid;grid-template-columns:1fr 1fr;gap:6px 14px;font-family:var(--mono);font-size:13.5px;color:var(--muted);border-top:1px solid var(--silver-2);padding-top:12px}
+.specs b{color:var(--ink);font-weight:700}
+.card .ft{margin-top:auto;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;padding-top:6px}
+.price{font-size:22px;font-weight:700;color:var(--faw);white-space:nowrap}
+.price.ask{font-size:16px}
+.card .ft a{font-size:14px;font-weight:700;color:var(--wa);text-decoration:none}
+.empty{background:#fff;border-radius:14px;padding:clamp(28px,4vw,48px);display:grid;grid-template-columns:auto minmax(0,1fr);gap:28px;align-items:center;box-shadow:0 18px 40px -26px rgba(12,26,94,.45)}
+.empty img{width:120px;height:auto}
+.empty h3{font-size:24px;color:var(--faw)}
+.empty p{color:var(--muted);margin-top:8px}
+.empty .btn{margin-top:18px}
+
+/* ---------- línea de modelos FAW ---------- */
+.on-stage .vf{display:inline-block;margin-top:4px;font-size:13px;font-weight:700;color:#fff;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.4)}
+.on-stage .vf:hover{border-color:#fff}
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:26px}
+.filters button{border:2px solid var(--faw);background:#fff;color:var(--faw);font:inherit;font-weight:700;font-size:14px;padding:9px 16px;border-radius:999px;cursor:pointer;transition:background .2s ease,color .2s ease,transform .15s ease}
+.filters button:hover{transform:translateY(-2px)}
+.filters button[aria-pressed="true"]{background:var(--faw);color:#fff}
+.filters button span{font-family:var(--mono);font-size:12.5px;opacity:.75;margin-left:6px}
+.models{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:20px}
+.mc{display:flex;flex-direction:column;background:#fff;border-radius:16px;overflow:hidden;text-decoration:none;box-shadow:0 14px 34px -24px rgba(12,26,94,.6);transition:transform .35s cubic-bezier(.2,.8,.2,1),box-shadow .3s ease,opacity .35s ease;opacity:0;transform:translateY(24px) scale(.97)}
+.mc.in{opacity:1;transform:none}
+.mc.in:hover{transform:translateY(-6px);box-shadow:0 22px 44px -24px rgba(12,26,94,.7)}
+.mc.out{opacity:0;transform:scale(.94)}
+.mc[hidden]{display:none}
+.mc .ph{position:relative;aspect-ratio:16/11;background:radial-gradient(90% 80% at 50% 92%,#2448D8,var(--faw-deep) 70%);overflow:hidden}
+.mc .ph::after{content:"";position:absolute;left:12%;right:12%;bottom:6%;height:10%;border-radius:50%;background:radial-gradient(closest-side,rgba(143,176,255,.5),transparent)}
+.mc .ph img{position:absolute;inset:9% 6% 7%;width:88%;height:84%;object-fit:contain;z-index:1;transition:transform .5s cubic-bezier(.2,.8,.2,1)}
+.mc:hover .ph img{transform:translateX(5%) scale(1.06)}
+.mc .tg{position:absolute;top:10px;left:10px;z-index:2;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:5px 10px;border-radius:999px;background:#fff;color:var(--faw)}
+.mc .tg.tiger{background:linear-gradient(90deg,#FFB21E,#FF5A36);color:#2A1200}
+.mc .tg2{position:absolute;top:10px;right:10px;z-index:2;font-size:11px;font-weight:700;letter-spacing:.06em;padding:5px 10px;border-radius:999px;background:rgba(8,18,65,.78);color:#fff;border:1px solid rgba(255,255,255,.3)}
+.mc .bd{padding:14px 16px 16px;display:grid;gap:6px;flex:1;align-content:start}
+.mc h3{font-size:20px;color:var(--faw-ink)}
+.mc .sb{font-size:13.5px;color:var(--muted)}
+.mc .mn{display:flex;gap:14px;flex-wrap:wrap;font-family:var(--mono);font-size:13px;color:var(--muted);border-top:1px solid var(--silver-2);padding-top:8px;margin-top:4px}
+.mc .mn b{color:var(--ink)}
+.mc .go2{margin-top:6px;font-weight:700;font-size:14px;color:var(--faw);display:flex;align-items:center;gap:6px}
+.mc .go2 i{font-style:normal;transition:transform .25s ease}
+.mc:hover .go2 i{transform:translateX(5px)}
+@media (prefers-reduced-motion:reduce){.mc{opacity:1;transform:none}}
+
+/* ---------- muro de historia ---------- */
+.history{position:relative;background:var(--faw);color:#fff;overflow:hidden}
+.history::after{content:"FAW";position:absolute;right:-2%;bottom:-.22em;font-weight:700;font-size:clamp(160px,26vw,360px);line-height:1;color:transparent;-webkit-text-stroke:2px rgba(255,255,255,.18);pointer-events:none}
+.history .sec-head h2{color:#fff}
+.history .sec-head .rule{background:linear-gradient(90deg,#fff 0 40%,transparent 40%)}
+.history .sec-head p{color:#C9D2FF}
+.tl{position:relative;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;z-index:1}
+.tl::before{content:"";position:absolute;left:0;right:0;top:27px;height:2px;background:rgba(255,255,255,.3)}
+.tl .it{position:relative;display:grid;gap:10px;padding-top:0}
+.tl .yr{display:inline-flex;align-self:start;justify-self:start;background:#fff;color:var(--faw);font-weight:700;font-size:24px;padding:10px 18px;border-radius:999px;position:relative}
+.tl .it p{color:#E3E8FF;max-width:32ch}
+.tl .it h3{font-size:20px}
+
+/* ---------- lounge / asesoría (counter blanco frente al muro azul) ---------- */
+.lounge .wrap{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:clamp(24px,4vw,48px);align-items:stretch}
+.counter{background:#fff;border-radius:18px;padding:clamp(24px,4vw,40px);box-shadow:0 30px 60px -34px rgba(12,26,94,.55);display:grid;gap:16px;align-content:start}
+.counter .lbl{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:500}
+.counter .num{font-size:clamp(34px,4.6vw,52px);font-weight:700;color:var(--faw);letter-spacing:.01em;font-variant-numeric:tabular-nums}
+.counter .row{display:flex;flex-wrap:wrap;gap:12px}
+.counter small{color:var(--muted);font-size:13.5px}
+.steps{display:grid;gap:14px;align-content:center}
+.step{display:grid;grid-template-columns:44px minmax(0,1fr);gap:14px;align-items:start;background:rgba(255,255,255,.75);border-radius:12px;padding:16px}
+.step .n{width:44px;height:44px;border-radius:50%;background:var(--faw);color:#fff;font-weight:700;display:grid;place-items:center}
+.step h3{font-size:17px;color:var(--faw-ink)}
+.step p{color:var(--muted);font-size:14.5px;margin-top:2px}
+
+/* ---------- pie ---------- */
+footer{background:var(--faw-ink);color:#C2CAEA;padding-block:36px calc(36px + env(safe-area-inset-bottom,0px))}
+footer .wrap{display:flex;flex-wrap:wrap;gap:20px 40px;align-items:center;justify-content:space-between}
+footer img{height:26px;width:auto}
+footer .lk{display:flex;gap:20px;flex-wrap:wrap;font-size:14px}
+footer a{text-decoration:none}
+footer a:hover{color:#fff}
+footer .cp{font-size:12.5px;flex-basis:100%;border-top:1px solid rgba(255,255,255,.12);padding-top:16px}
+
+.wa-float{position:fixed;right:18px;bottom:calc(18px + env(safe-area-inset-bottom,0px));z-index:60;width:58px;height:58px;border-radius:50%;background:var(--wa);display:grid;place-items:center;box-shadow:0 10px 26px rgba(0,0,0,.3)}
+.wa-float svg{width:30px;height:30px}
+
+/* ---------- detalle ---------- */
+dialog{border:0;padding:0;border-radius:14px;width:min(960px,calc(100% - 24px));max-height:calc(100% - 24px);background:#fff;color:var(--ink)}
+dialog::backdrop{background:rgba(8,18,65,.75)}
+.det{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr)}
+.det .gal{background:var(--faw-ink);min-width:0}
+.det .big{aspect-ratio:4/3;display:grid;place-items:center;background:linear-gradient(160deg,var(--faw),var(--faw-deep))}
+.det .big img{width:100%;height:100%;object-fit:contain}
+.det .big .emb{width:30%;opacity:.5}
+.det .mins{display:flex;gap:6px;padding:8px;overflow-x:auto}
+.det .mins button{flex:none;width:72px;aspect-ratio:4/3;padding:0;border:2px solid transparent;border-radius:4px;overflow:hidden;background:none;cursor:pointer;opacity:.65}
+.det .mins button[aria-current="true"]{border-color:#fff;opacity:1}
+.det .mins img{width:100%;height:100%;object-fit:cover}
+.det .tx{padding:28px;display:flex;flex-direction:column;gap:14px;min-width:0}
+.det .tx .k{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:500}
+.det h3{font-size:30px;color:var(--faw-ink)}
+.det .desc{color:var(--muted);white-space:pre-line;font-size:15px}
+.det .btn{margin-top:auto}
+.x{position:absolute;top:10px;right:10px;z-index:2;width:38px;height:38px;border-radius:50%;border:0;background:rgba(8,18,65,.75);color:#fff;font-size:24px;line-height:1;cursor:pointer}
+
+@media (max-width:900px){
+  .lounge .wrap{grid-template-columns:minmax(0,1fr)}
+  .grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .det{grid-template-columns:minmax(0,1fr)}
+  dialog{width:100%;max-width:100%;max-height:100%;height:100%;margin:0;border-radius:0}
+  .sign nav{position:fixed;inset:0 0 0 25%;background:#fff;flex-direction:column;align-items:flex-start;justify-content:center;padding:32px;gap:24px;transform:translateX(105%);transition:transform .3s ease;box-shadow:-10px 0 40px rgba(0,0,0,.25)}
+  .sign nav.open{transform:none}
+  .sign nav a{font-size:18px}
+  .menu-btn{display:flex}
+}
+@media (max-width:620px){
+  .grid,.tl{grid-template-columns:minmax(0,1fr)}
+  .tl::before{display:none}
+  .facts .wrap{grid-template-columns:minmax(0,1fr)}
+  .facts .f+.f{border-left:0;border-top:1px solid rgba(255,255,255,.14)}
+  .empty{grid-template-columns:minmax(0,1fr)}
+  .lockup img{height:24px}
+  .lockup .dist{font-size:15px}
+  .lockup .div{height:24px}
+}
+</style>
+</head>
+<body>
+
+<header class="sign">
+  <div class="wrap">
+    <a class="lockup" href="#top" aria-label="FAW Centro Camionero, inicio">
+      <img src="/assets/faw-logo-h-azul.svg" alt="FAW Trucks">
+      <span class="div" aria-hidden="true"></span>
+      <span class="dist">Centro Camionero</span>
+    </a>
+    <button class="menu-btn" id="menuBtn" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav">
+      <svg width="20" height="14" viewBox="0 0 20 14" fill="none" aria-hidden="true"><path d="M0 1h20M0 7h20M0 13h20" stroke="currentColor" stroke-width="2"/></svg>
+    </button>
+    <nav id="nav" aria-label="Secciones">
+      <a href="#modelos">Modelos</a>
+      <a href="#exhibicion">Exhibición</a>
+      <a href="#historia">Historia FAW</a>
+      <a href="#asesoria">Asesoría</a>
+      <a class="back" href="/">← Centro Camionero</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- Vitrina: escenario FAW con tarima vacía; los camiones nuevos del panel rotan sobre ella -->
+  <section class="vitrina" aria-labelledby="t-hero">
+    <div class="scene" id="scene">
+      <svg id="stage" viewBox="0 0 1600 700" preserveAspectRatio="xMidYMax slice" role="img" aria-label="Vitrina FAW Centro Camionero">
+        <defs>
+          <linearGradient id="gBg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#01051A"/><stop offset=".55" stop-color="#061344"/><stop offset="1" stop-color="#030A26"/></linearGradient>
+          <linearGradient id="gSky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#030A2E"/><stop offset=".55" stop-color="#0B1D63"/><stop offset=".78" stop-color="#2A3C8E"/><stop offset=".86" stop-color="#6B6FA8"/><stop offset="1" stop-color="#0A1442"/></linearGradient>
+          <linearGradient id="gWall" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0B1A5C"/><stop offset=".6" stop-color="#132A8C"/><stop offset="1" stop-color="#0A1650"/></linearGradient>
+          <radialGradient id="gWallGlow" cx=".5" cy=".75" r=".55"><stop offset="0" stop-color="#3D63E0" stop-opacity=".55"/><stop offset="1" stop-color="#152A8C" stop-opacity="0"/></radialGradient>
+          <linearGradient id="gFloor" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0D1A55"/><stop offset="1" stop-color="#02061C"/></linearGradient>
+          <linearGradient id="gCone" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E8EEFF" stop-opacity=".5"/><stop offset="1" stop-color="#9DB4FF" stop-opacity="0"/></linearGradient>
+          <linearGradient id="gTop" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2A3E96"/><stop offset="1" stop-color="#101E5E"/></linearGradient>
+          <linearGradient id="gSteel" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#1A2560"/><stop offset=".3" stop-color="#AEB9DE"/><stop offset=".5" stop-color="#F2F5FF"/><stop offset=".7" stop-color="#AEB9DE"/><stop offset="1" stop-color="#1A2560"/></linearGradient>
+          <linearGradient id="gSteel2" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#0C1645"/><stop offset=".5" stop-color="#6E7CB8"/><stop offset="1" stop-color="#0C1645"/></linearGradient>
+          <filter id="glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+          <filter id="soft" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="14"/></filter>
+          <filter id="streak" x="-50%" y="-10%" width="200%" height="120%"><feGaussianBlur stdDeviation="5 18"/></filter>
+          <radialGradient id="gFade" cx=".5" cy=".58" r=".62"><stop offset=".5" stop-color="#fff"/><stop offset=".98" stop-color="#000"/></radialGradient>
+          <filter id="tight" x="-30%" y="-100%" width="160%" height="300%"><feGaussianBlur stdDeviation="3"/></filter>
+          <filter id="ground" x="-30%" y="-60%" width="160%" height="220%"><feGaussianBlur stdDeviation="11"/></filter>
+          <filter id="tono" color-interpolation-filters="sRGB"><feColorMatrix type="matrix" values=".86 0 0 0 0  0 .89 0 0 .005  0 0 .97 0 .03  0 0 0 1 0"/></filter>
+          <filter id="silueta" color-interpolation-filters="sRGB"><feFlood flood-color="#020820"/><feComposite in2="SourceAlpha" operator="in"/></filter>
+          <linearGradient id="gAO" x1="0" y1="0" x2="0" y2="1"><stop offset=".55" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#fff" stop-opacity=".62"/></linearGradient>
+          <mask id="mAO" maskContentUnits="objectBoundingBox"><rect width="1" height="1" fill="url(#gAO)"/></mask>
+          <linearGradient id="gSweep" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".5" stop-color="#DCE6FF" stop-opacity=".35"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
+          <linearGradient id="gLeft" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#030A26" stop-opacity=".92"/><stop offset=".7" stop-color="#030A26" stop-opacity=".55"/><stop offset="1" stop-color="#030A26" stop-opacity="0"/></linearGradient>
+        </defs>
+
+        <!-- fondo -->
+        <rect width="1600" height="700" fill="url(#gBg)"/>
+        <!-- ventanal con la ciudad de noche -->
+        <path d="M0 0 H560 V470 H0 Z" fill="url(#gSky)"/>
+        <g fill="#050C30" opacity=".95">
+          <rect x="0" y="420" width="560" height="52"/><rect x="40" y="398" width="34" height="30"/><rect x="92" y="406" width="22" height="22"/><rect x="150" y="388" width="40" height="40"/><rect x="230" y="402" width="26" height="26"/><rect x="300" y="380" width="30" height="48"/><rect x="372" y="396" width="44" height="32"/><rect x="452" y="404" width="24" height="24"/><rect x="500" y="392" width="36" height="36"/>
+        </g>
+        <g fill="#FFD9A0" opacity=".55"><circle cx="58" cy="410" r="1.4"/><circle cx="166" cy="398" r="1.4"/><circle cx="178" cy="410" r="1.4"/><circle cx="312" cy="392" r="1.4"/><circle cx="318" cy="404" r="1.4"/><circle cx="390" cy="406" r="1.4"/><circle cx="515" cy="402" r="1.4"/></g>
+        <path d="M120 470 L520 0" stroke="#8FA4E8" stroke-opacity=".18" stroke-width="2"/>
+        <path d="M0 470 H560" stroke="#8FA4E8" stroke-opacity=".25" stroke-width="2"/>
+        <rect x="0" y="0" width="560" height="470" fill="#030A2E" opacity=".25"/>
+
+        <!-- muro curvo de la vitrina, azul FAW -->
+        <path d="M560 470 V140 Q1040 205 1600 140 V470 Z" fill="url(#gWall)"/>
+        <path d="M560 470 V140 Q1040 205 1600 140 V470 Z" fill="url(#gWallGlow)"/>
+        <g stroke="#FFFFFF" stroke-opacity=".05" stroke-width="2">
+          <path d="M700 158 V470"/><path d="M820 168 V470"/><path d="M940 174 V470"/><path d="M1060 175 V470"/><path d="M1180 172 V470"/><path d="M1300 166 V470"/><path d="M1420 157 V470"/>
+        </g>
+        <!-- columnas con tiras LED -->
+        <rect x="560" y="130" width="110" height="345" fill="#071240"/>
+        <rect x="1490" y="130" width="110" height="345" fill="#071240"/>
+        <g filter="url(#glow)" class="breathe">
+          <rect x="652" y="150" width="4" height="320" fill="#DCE6FF"/><rect x="1504" y="150" width="4" height="320" fill="#DCE6FF"/>
+          <rect x="580" y="150" width="3" height="320" fill="#8FA9FF" opacity=".7"/><rect x="1577" y="150" width="3" height="320" fill="#8FA9FF" opacity=".7"/>
+        </g>
+
+        <!-- logo FAW retroiluminado en el muro -->
+        <image href="/assets/faw-logo-h-blanco.svg" x="935" y="140" width="250" height="53" opacity=".9" filter="url(#glow)"/>
+
+        <!-- techo: anillo de luz y reflectores -->
+        <path d="M480 0 H1600 V60 Q1050 150 480 60 Z" fill="#020718"/>
+        <path d="M520 62 Q1060 150 1600 62" fill="none" stroke="#E6ECFF" stroke-width="4" filter="url(#glow)" class="breathe"/>
+        <path d="M560 92 Q1060 176 1600 92" fill="none" stroke="#6F8CFF" stroke-opacity=".55" stroke-width="2" filter="url(#glow)"/>
+        <g>
+          <polygon points="770,108 790,108 900,520 640,520" fill="url(#gCone)" opacity=".35"/>
+          <polygon points="900,124 920,124 1010,520 790,520" fill="url(#gCone)" opacity=".4"/>
+          <polygon points="1050,128 1070,128 1180,520 960,520" fill="url(#gCone)" opacity=".4"/>
+          <polygon points="1200,122 1220,122 1340,520 1100,520" fill="url(#gCone)" opacity=".35"/>
+          <polygon points="1350,108 1370,108 1470,520 1250,520" fill="url(#gCone)" opacity=".28"/>
+        </g>
+        <g fill="#FFFFFF" filter="url(#glow)">
+          <circle cx="780" cy="106" r="7"/><circle cx="910" cy="121" r="7"/><circle cx="1060" cy="125" r="7"/><circle cx="1210" cy="119" r="7"/><circle cx="1360" cy="106" r="7"/><circle cx="660" cy="84" r="5" opacity=".8"/><circle cx="1490" cy="88" r="5" opacity=".8"/>
+        </g>
+
+        <!-- piso pulido con reflejos -->
+        <rect x="0" y="470" width="1600" height="230" fill="url(#gFloor)"/>
+        <g filter="url(#streak)" opacity=".55">
+          <rect x="650" y="480" width="8" height="200" fill="#C9D6FF"/><rect x="1502" y="480" width="8" height="200" fill="#C9D6FF"/>
+          <rect x="776" y="560" width="10" height="140" fill="#C9D6FF" opacity=".5"/><rect x="1055" y="580" width="10" height="120" fill="#C9D6FF" opacity=".5"/><rect x="1355" y="560" width="10" height="140" fill="#C9D6FF" opacity=".5"/>
+          <rect x="280" y="480" width="40" height="160" fill="#4B5FA8" opacity=".6"/>
+        </g>
+
+        <!-- sombra lateral para que el texto se lea sobre el ventanal -->
+        <rect class="leftshade" x="0" y="0" width="760" height="700" fill="url(#gLeft)"/>
+
+        <!-- tarima giratoria con anillos LED (vista en perspectiva para que los camiones se apoyen en ella) -->
+        <ellipse cx="1060" cy="622" rx="520" ry="122" fill="#01041A" opacity=".9"/>
+        <ellipse cx="1060" cy="622" rx="520" ry="122" fill="none" stroke="#5B8CFF" stroke-opacity=".22" stroke-width="2"/>
+        <ellipse cx="1060" cy="600" rx="440" ry="104" fill="#0A1446"/>
+        <ellipse cx="1060" cy="602" rx="442" ry="106" fill="none" stroke="#7FA2FF" stroke-width="3" filter="url(#glow)" class="breathe"/>
+        <path d="M640 575 A420 98 0 0 0 1480 575 V592 A420 98 0 0 1 640 592 Z" fill="url(#gSteel2)"/>
+        <ellipse cx="1060" cy="575" rx="420" ry="98" fill="#0C1850"/>
+        <ellipse cx="1060" cy="578" rx="422" ry="100" fill="none" stroke="#A9C0FF" stroke-width="2.5" filter="url(#glow)" class="breathe"/>
+        <path d="M660 540 A400 92 0 0 0 1460 540 V562 A400 92 0 0 1 660 562 Z" fill="url(#gSteel)"/>
+        <ellipse cx="1060" cy="540" rx="400" ry="92" fill="url(#gTop)"/>
+        <ellipse cx="1060" cy="540" rx="400" ry="92" fill="none" stroke="#FFFFFF" stroke-opacity=".35" stroke-width="1.5"/>
+        <ellipse cx="1060" cy="528" rx="290" ry="56" fill="#5B7BE8" opacity=".2" filter="url(#soft)"/>
+
+        <!-- borde giratorio de la tarima -->
+        <ellipse class="spin" cx="1060" cy="540" rx="400" ry="92" fill="none" stroke="#FFFFFF" stroke-opacity=".55" stroke-width="2" stroke-dasharray="4 24"/>
+
+        <!-- vitrina: los camiones rotan sobre la tarima (se cargan desde el script) -->
+        <g id="slot"></g>
+        <rect class="sweep" id="sweep" x="900" y="180" width="320" height="400" fill="url(#gSweep)" style="mix-blend-mode:screen"/>
+      </svg>
+    </div>
+    <div class="v-copy">
+      <div class="wrap">
+        <div class="txt">
+          <p class="kicker">Showroom de camiones nuevos · Bogotá</p>
+          <h1 id="t-hero">FAW <span>Centro Camionero</span></h1>
+          <p class="tag">Fuerza de trabajo #1 en China, <b>ahora en Colombia.</b> Camiones FAW 0 km con la asesoría y el respaldo de Centro Camionero.</p>
+          <div class="on-stage" id="onStage" aria-live="polite">
+            <div class="row1"><span class="k">En vitrina</span><span class="count" id="osCount">01 / 03</span></div>
+            <div class="row2"><div><div class="nm" id="osName">FAW Tiger</div><div class="sb" id="osSub"></div><a class="vf" id="osVer" href="#modelos" hidden>Ver ficha técnica →</a></div><a class="go" id="osGo" href="#asesoria" target="_blank" rel="noopener">Cotizar</a></div>
+            <div class="ctrl" id="osCtrl"></div>
+          </div>
+          <a class="more" href="#modelos">Ver los modelos FAW <span aria-hidden="true">→</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="facts" aria-label="Datos del showroom">
+    <div class="wrap">
+      <div class="f"><b>0 km</b><span>Camiones nuevos FAW</span></div>
+      <div class="f"><b>Bogotá</b><span>Showroom Centro Camionero</span></div>
+      <a class="f" data-wa="Hola, quiero información sobre los camiones nuevos de FAW Centro Camionero." href="#asesoria"><b>324 579 2435</b><span>Atención por WhatsApp</span></a>
+    </div>
+  </section>
+
+  <!-- Línea de modelos FAW: cada modelo abre su propia página (/faw/modelos/<modelo>) -->
+  <section class="sec" id="modelos" aria-labelledby="t-mod">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2 id="t-mod">Línea FAW disponible</h2>
+        <p>Diez modelos de carga liviana y mediana. Elige uno para ver su ficha técnica completa y cotizarlo por WhatsApp.</p>
+        <span class="rule" aria-hidden="true"></span>
+      </div>
+      <div class="filters" id="filtros" role="group" aria-label="Filtrar modelos"></div>
+      <div class="models" id="modelosGrid"></div>
+    </div>
+  </section>
+
+  <!-- Exhibición -->
+
+  <section class="sec hex" id="exhibicion" aria-labelledby="t-exh">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2 id="t-exh">Camiones en exhibición</h2>
+        <p>Unidades nuevas disponibles en FAW Centro Camionero. Toca cada camión para ver fotos y ficha técnica.</p>
+        <span class="rule" aria-hidden="true"></span>
+      </div>
+      <div id="exh">
+        <div class="empty" id="exhEmpty">
+          <img src="/assets/faw-logo-v-blanco.svg" alt="" aria-hidden="true" style="background:var(--faw);border-radius:12px;padding:14px">
+          <div>
+            <h3>Estamos preparando la exhibición</h3>
+            <p>Muy pronto verás aquí las unidades FAW disponibles. Mientras tanto, nuestros asesores te cuentan qué modelos tenemos, precios y tiempos de entrega.</p>
+            <a class="btn btn-wa" data-wa="Hola, quiero conocer los modelos FAW disponibles en FAW Centro Camionero." href="#asesoria">Consultar modelos disponibles</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Muro de historia -->
+  <section class="sec history" id="historia" aria-labelledby="t-his">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2 id="t-his">Historia del desarrollo</h2>
+        <p>Más de siete décadas fabricando vehículos de trabajo en China, ahora con presencia en Colombia.</p>
+        <span class="rule" aria-hidden="true"></span>
+      </div>
+      <div class="tl">
+        <div class="it"><span class="yr">1953</span><h3>Nace FAW</h3><p>First Automobile Works se funda en Changchun, China, como la primera fábrica de vehículos del país.</p></div>
+        <div class="it"><span class="yr">1956</span><h3>El primer camión</h3><p>Sale de la línea de producción el primer camión Jiefang, inicio de la tradición de camiones de trabajo de FAW.</p></div>
+        <div class="it"><span class="yr">Hoy</span><h3>FAW Centro Camionero</h3><p>FAW Trucks llega a Colombia y Centro Camionero abre su línea de camiones nuevos en Bogotá.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Lounge / asesoría -->
+  <section class="sec lounge hex" id="asesoria" aria-labelledby="t-ase">
+    <div class="wrap">
+      <div class="counter">
+        <span class="lbl">Atención FAW Centro Camionero</span>
+        <h2 id="t-ase" style="font-size:clamp(26px,3.4vw,36px);color:var(--faw-ink)">Habla con un asesor</h2>
+        <span class="num">324 579 2435</span>
+        <div class="row">
+          <a class="btn btn-wa" data-wa="Hola, quiero cotizar un camión nuevo en FAW Centro Camionero." href="https://wa.me/573245792435" target="_blank" rel="noopener">
+            <svg viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><path d="M16 3C9 3 3.4 8.6 3.4 15.5c0 2.4.7 4.7 1.9 6.6L3.3 29l7.1-1.9a12.6 12.6 0 0 0 5.6 1.3c7 0 12.6-5.6 12.6-12.5S23 3 16 3Zm5.9 15.1c-.3-.2-1.9-.9-2.2-1-.3-.1-.5-.2-.7.2l-1 1.2c-.2.2-.4.2-.7.1a8.7 8.7 0 0 1-4.3-3.8c-.3-.6.3-.5.9-1.7.1-.2 0-.4 0-.5l-1-2.4c-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.2.2 2.1 3.3 5.2 4.6 1.9.8 2.7.9 3.7.7.6-.1 1.9-.8 2.2-1.5.3-.7.3-1.4.2-1.5-.1-.1-.3-.2-.6-.4Z"/></svg>
+            Escribir por WhatsApp
+          </a>
+          <a class="btn btn-faw" href="tel:+573245792435">Llamar</a>
+        </div>
+        <small>¿Quieres saber cuánto pagarías al mes? Usa el <a href="/#financiamiento">simulador de cuotas de Centro Camionero</a>.</small>
+      </div>
+      <div class="steps">
+        <div class="step"><span class="n">1</span><div><h3>Elige tu camión</h3><p>Revisa las unidades en exhibición o cuéntanos qué necesitas transportar.</p></div></div>
+        <div class="step"><span class="n">2</span><div><h3>Recibe tu cotización</h3><p>Un asesor te envía precio, ficha técnica y opciones de pago por WhatsApp.</p></div></div>
+        <div class="step"><span class="n">3</span><div><h3>Visítanos en Bogotá</h3><p>Conoce el camión en el showroom de Centro Camionero antes de decidir.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <a class="lockup" href="#top" style="gap:12px"><img src="/assets/faw-logo-h-blanco.svg" alt="FAW Trucks"><span class="dist" style="color:#fff;font-size:16px">Centro Camionero</span></a>
+    <div class="lk">
+      <a href="#modelos">Modelos FAW</a>
+      <a href="#exhibicion">Exhibición</a>
+      <a href="#historia">Historia FAW</a>
+      <a href="#asesoria">Asesoría</a>
+      <a href="/">Camiones usados Centro Camionero</a>
+    </div>
+    <p class="cp">© 2026 FAW Centro Camionero · Bogotá, Colombia · WhatsApp 324 579 2435. FAW y FAW Trucks son marcas de sus respectivos titulares.</p>
+  </div>
+</footer>
+
+<a class="wa-float" data-wa="Hola, quiero información sobre los camiones nuevos de FAW Centro Camionero." href="https://wa.me/573245792435" target="_blank" rel="noopener" aria-label="Escríbenos por WhatsApp">
+  <svg viewBox="0 0 32 32" fill="#fff" aria-hidden="true"><path d="M16 3C9 3 3.4 8.6 3.4 15.5c0 2.4.7 4.7 1.9 6.6L3.3 29l7.1-1.9a12.6 12.6 0 0 0 5.6 1.3c7 0 12.6-5.6 12.6-12.5S23 3 16 3Zm5.9 15.1c-.3-.2-1.9-.9-2.2-1-.3-.1-.5-.2-.7.2l-1 1.2c-.2.2-.4.2-.7.1a8.7 8.7 0 0 1-4.3-3.8c-.3-.6.3-.5.9-1.7.1-.2 0-.4 0-.5l-1-2.4c-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.2.2 2.1 3.3 5.2 4.6 1.9.8 2.7.9 3.7.7.6-.1 1.9-.8 2.2-1.5.3-.7.3-1.4.2-1.5-.1-.1-.3-.2-.6-.4Z"/></svg>
+</a>
+
+<dialog id="dlg" aria-label="Detalle del camión"></dialog>
+
+<script>
+(function(){
+  var WA = "573245792435";
+  var waLink = function(msg){ return "https://wa.me/" + WA + "?text=" + encodeURIComponent(msg); };
+  var fmt = function(n){ return Number(n).toLocaleString("es-CO"); };
+  var esc = function(s){ return String(s == null ? "" : s).replace(/[&<>"']/g, function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]; }); };
+  var EMB = '<img class="emb" src="/assets/faw-emblema-blanco.svg" alt="" aria-hidden="true">';
+
+  // Todos los botones de WhatsApp abren el chat con un mensaje prellenado
+  document.querySelectorAll("[data-wa]").forEach(function(a){
+    a.href = waLink(a.getAttribute("data-wa")); a.target = "_blank"; a.rel = "noopener";
+  });
+
+  // Menú móvil
+  var btn = document.getElementById("menuBtn"), nav = document.getElementById("nav");
+  btn.addEventListener("click", function(){ var o = nav.classList.toggle("open"); btn.setAttribute("aria-expanded", o); });
+  nav.querySelectorAll("a").forEach(function(a){ a.addEventListener("click", function(){ nav.classList.remove("open"); btn.setAttribute("aria-expanded", "false"); }); });
+
+  function nombre(v){ return (/^faw$/i.test(v.marca) ? "FAW" : v.marca) + " " + v.linea; }
+  function specs(v){
+    var f = v.ficha || {}, o = [];
+    if (v.modelo_anio) o.push(["Modelo", v.modelo_anio]);
+    o.push(["Kilometraje", "0 km"]);
+    [["motor","Motor"],["carroceria","Carrocería"],["capacidad","Capacidad"],["transmision","Transmisión"],["combustible","Combustible"],["configuracion","Configuración"]]
+      .forEach(function(k){ if (f[k[0]]) o.push([k[1], f[k[0]]]); });
+    return o;
+  }
+  function spHTML(list){ return list.map(function(s){ return "<span>" + esc(s[0]) + " <b>" + esc(s[1]) + "</b></span>"; }).join(""); }
+  function precio(v){ return v.precio ? '<span class="price">$ ' + fmt(v.precio) + "</span>" : '<span class="price ask">Precio a consultar</span>'; }
+  function msg(v){ return "Hola, me interesa el " + nombre(v) + (v.modelo_anio ? " " + v.modelo_anio : "") + " de FAW Centro Camionero."; }
+
+  var CACHE = {};
+  function card(v){
+    return '<article class="card" tabindex="0" role="button" data-id="' + v.id + '" aria-label="Ver ' + esc(nombre(v)) + '">' +
+      '<div class="ph">' + (v.fotos[0] ? '<img src="' + esc(v.fotos[0]) + '" alt="' + esc(nombre(v)) + '" loading="lazy">' : EMB) +
+      '<span class="badge">Nuevo 0 km</span>' + (v.estado === "reservado" ? '<span class="badge res">Reservado</span>' : "") + "</div>" +
+      '<div class="bd"><h3>' + esc(nombre(v)) + '</h3><div class="specs">' + spHTML(specs(v).slice(0, 4)) + "</div>" +
+      '<div class="ft">' + precio(v) + '<a href="' + waLink(msg(v)) + '" target="_blank" rel="noopener" data-cot>Cotizar →</a></div></div></article>';
+  }
+
+  var dlg = document.getElementById("dlg");
+  dlg.addEventListener("click", function(e){ if (e.target === dlg || e.target.closest(".x")) dlg.close(); });
+  function detalle(v){
+    var f = v.fotos;
+    dlg.innerHTML = '<button class="x" aria-label="Cerrar">×</button><div class="det"><div class="gal"><div class="big">' +
+      (f[0] ? '<img src="' + esc(f[0]) + '" alt="' + esc(nombre(v)) + '">' : EMB) + "</div>" +
+      (f.length > 1 ? '<div class="mins">' + f.map(function(u, i){ return '<button data-i="' + i + '" aria-current="' + (i === 0) + '" aria-label="Foto ' + (i + 1) + '"><img src="' + esc(u) + '" alt="" loading="lazy"></button>'; }).join("") + "</div>" : "") +
+      '</div><div class="tx"><span class="k">FAW Centro Camionero · Nuevo 0 km' + (v.estado === "reservado" ? " · Reservado" : "") + "</span><h3>" + esc(nombre(v)) + "</h3>" + precio(v) +
+      '<div class="specs">' + spHTML(specs(v)) + "</div>" + (v.descripcion ? '<p class="desc">' + esc(v.descripcion) + "</p>" : "") +
+      '<a class="btn btn-wa" href="' + waLink(msg(v)) + '" target="_blank" rel="noopener">Cotizar por WhatsApp</a></div></div>';
+    dlg.querySelectorAll(".mins button").forEach(function(b){
+      b.addEventListener("click", function(){
+        dlg.querySelector(".big img").src = f[+b.dataset.i];
+        dlg.querySelectorAll(".mins button").forEach(function(x){ x.setAttribute("aria-current", x === b); });
+      });
+    });
+    dlg.showModal();
+  }
+
+  var exh = document.getElementById("exh");
+  exh.addEventListener("click", function(e){
+    if (e.target.closest("[data-cot]")) return;
+    var c = e.target.closest(".card"); if (c) detalle(CACHE[c.dataset.id]);
+  });
+  exh.addEventListener("keydown", function(e){
+    var c = e.target.closest(".card");
+    if (c && (e.key === "Enter" || e.key === " ")) { e.preventDefault(); detalle(CACHE[c.dataset.id]); }
+  });
+
+  // Vitrina: encuadre según pantalla y rotación de camiones nuevos sobre la tarima
+  var stage = document.getElementById("stage");
+  var mq = window.matchMedia("(max-width:900px)");
+  function encuadre(){ stage.setAttribute("viewBox", mq.matches ? "580 120 960 650" : "0 0 1600 700"); stage.setAttribute("preserveAspectRatio", mq.matches ? "xMidYMid slice" : "xMidYMax slice"); }
+  encuadre(); if (mq.addEventListener) mq.addEventListener("change", encuadre);
+
+  // Modelos en la vitrina (fotos sin fondo en /assets/vitrina). Para cambiar la rotación, editar esta lista.
+  // "ruedas": puntos donde cada llanta toca el piso, en fracción del ancho/alto de la foto
+  // [x, y, ancho de la llanta], en orden: delantera lejana, delantera cercana, trasera cercana, trasera lejana.
+  var VITRINA = [
+    { src: "/assets/vitrina/faw-tiger-whr.webp", nombre: "FAW WHR Tiger 2.9", sub: "Carga liviana · cabina sencilla", url: "/faw/modelos/whr-tiger-2-9",
+      ruedas: [[.84, .935, .10], [.275, .995, .17], [.07, .715, .075], [.58, .69, .07]] },
+    { src: "/assets/vitrina/faw-tiger-wkr.webp", nombre: "FAW WKR Tiger 3.6", sub: "Carga mediana · doble cabina", url: "/faw/modelos/wkr-tiger-3-6",
+      ruedas: [[.22, .93, .12], [.595, .995, .15], [.94, .82, .13], [.76, .77, .08]] },
+    { src: "/assets/vitrina/faw-modelo-3.webp", nombre: "FAW Tiger", sub: "Camión liviano · chasís",
+      ruedas: [[.2, .95, .12], [.745, .995, .15], [.95, .745, .08], [.72, .7, .07]] }
+  ];
+  var DUR = 6000, NS = "http://www.w3.org/2000/svg", ALTO = 380, PISO = 592, CENTRO = 1060;
+  function el(tag, attrs){ var e = document.createElementNS(NS, tag); for (var k in attrs) e.setAttribute(k, attrs[k]); return e; }
+  function vitrina(){
+    var slot = document.getElementById("slot"), box = document.getElementById("onStage"), ctrl = document.getElementById("osCtrl");
+    var sweep = document.getElementById("sweep"), actual = -1, timer = null, pausa = false;
+    var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    box.style.setProperty("--dur", DUR + "ms");
+    // Cada modelo: sombra de contacto bajo el chasís y bajo cada llanta, el camión con el tono de la luz
+    // del escenario y una oclusión suave en la parte baja, para que quede asentado sobre la tarima.
+    var unidades = VITRINA.map(function(m, n){
+      var g = el("g", { "class": "unit" });
+      slot.appendChild(g);
+      var pic = new Image();
+      pic.onload = function(){
+        var ar = pic.naturalWidth / pic.naturalHeight, h = ALTO, w = h * ar;
+        if (w > 620) { w = 620; h = w / ar; }
+        var r = m.ruedas, cx = 0;
+        r.forEach(function(p){ cx += p[0]; }); cx /= r.length;
+        var x = CENTRO - w * cx, y = PISO - h * r[1][1];
+        var pts = r.map(function(p){ return [x + p[0] * w, y + p[1] * h]; });
+        // luz ambiental bloqueada alrededor del vehículo
+        var my = 0; pts.forEach(function(p){ my += p[1]; }); my /= pts.length;
+        g.appendChild(el("ellipse", { cx: CENTRO, cy: my + 14, rx: w * .62, ry: 46, fill: "#000", opacity: ".38", filter: "url(#ground)" }));
+        // sombra bajo el chasís (huella entre las cuatro llantas)
+        var d = "M" + pts.map(function(p, i){ return p[0] + " " + (p[1] + (i < 2 ? 8 : 3)); }).join(" L") + " Z";
+        g.appendChild(el("path", { d: d, fill: "#000", opacity: ".85", filter: "url(#ground)", stroke: "#000", "stroke-width": 30, "stroke-linejoin": "round" }));
+        // contacto de cada llanta
+        r.forEach(function(p, i){
+          g.appendChild(el("ellipse", { cx: x + p[0] * w, cy: y + p[1] * h - 1, rx: p[2] * w * .62, ry: i === 1 ? 8 : 6, fill: "#000", opacity: i === 1 ? ".9" : ".8", filter: "url(#tight)" }));
+        });
+        var attrs = { x: x, y: y, width: w, height: h, href: m.src, preserveAspectRatio: "none" };
+        g.appendChild(el("image", Object.assign({ filter: "url(#tono)" }, attrs)));
+        g.appendChild(el("image", Object.assign({ filter: "url(#silueta)", mask: "url(#mAO)" }, attrs)));
+      };
+      pic.src = m.src;
+      var b = document.createElement("button"); b.type = "button"; b.setAttribute("aria-label", "Ver " + m.nombre); b.innerHTML = "<i></i>";
+      b.addEventListener("click", function(){ mostrar(n, true); });
+      ctrl.appendChild(b);
+      return g;
+    });
+    function mostrar(n, manual){
+      if (n === actual) return;
+      var prev = actual; actual = n;
+      unidades.forEach(function(u, k){
+        u.classList.remove("on", "off");
+        if (k === n) u.classList.add("on"); else if (k === prev) u.classList.add("off");
+      });
+      // la siguiente unidad espera a la derecha para entrar
+      setTimeout(function(){ if (prev > -1 && prev !== actual) unidades[prev].classList.remove("off"); }, 1600);
+      if (!reduce) { sweep.classList.remove("go"); void sweep.getBBox(); sweep.classList.add("go"); }
+      var m = VITRINA[n];
+      document.getElementById("osName").textContent = m.nombre;
+      document.getElementById("osSub").textContent = m.sub;
+      var vf = document.getElementById("osVer"); vf.hidden = !m.url; if (m.url) vf.href = m.url;
+      document.getElementById("osCount").textContent = ("0" + (n + 1)).slice(-2) + " / " + ("0" + VITRINA.length).slice(-2);
+      document.getElementById("osGo").href = waLink("Hola, me interesa el " + m.nombre + " que vi en la vitrina de FAW Centro Camionero.");
+      [].forEach.call(ctrl.children, function(b, k){
+        b.className = k === n ? "" : k < n ? "done" : "";
+        if (k === n) { void b.offsetWidth; b.className = "on"; }
+      });
+      programar();
+    }
+    function programar(){
+      clearTimeout(timer);
+      if (reduce || pausa) return;
+      timer = setTimeout(function(){ mostrar((actual + 1) % VITRINA.length); }, DUR);
+    }
+    var scene = document.getElementById("scene");
+    [scene, box].forEach(function(el){
+      el.addEventListener("mouseenter", function(){ pausa = true; box.classList.add("paused"); clearTimeout(timer); });
+      el.addEventListener("mouseleave", function(){ pausa = false; box.classList.remove("paused"); var b = ctrl.children[actual]; if (b) { b.className = ""; void b.offsetWidth; b.className = "on"; } programar(); });
+    });
+    mostrar(0);
+  }
+  vitrina();
+
+  // Línea de modelos FAW (datos en /faw/modelos.json, tomados de las fichas técnicas FAW Trucks)
+  fetch("/faw/modelos.json").then(function(r){ if (!r.ok) throw 0; return r.json(); }).then(function(d){
+    var ms = d.modelos || [], grid = document.getElementById("modelosGrid"), fl = document.getElementById("filtros");
+    var FIL = [["todos", "Todos", function(){ return true; }],
+      ["liviana", "Carga liviana", function(m){ return /liviana/i.test(m.segmento); }],
+      ["mediana", "Carga mediana", function(m){ return /mediana/i.test(m.segmento); }],
+      ["tiger", "Tiger", function(m){ return m.serie === "Tiger"; }],
+      ["lion", "Lion", function(m){ return m.serie === "Lion"; }]];
+    grid.innerHTML = ms.map(function(m){
+      return '<a class="mc" href="/faw/modelos/' + m.slug + '"><div class="ph"><span class="tg ' + m.serie.toLowerCase() + '">' + esc(m.serie) + '</span>' + (m.etiqueta ? '<span class="tg2">' + esc(m.etiqueta) + '</span>' : '') +
+        '<img src="' + esc(m.img) + '" alt="Camión FAW ' + esc(m.nombre) + '" loading="lazy"></div><div class="bd"><h3>' + esc(m.nombre) + '</h3><span class="sb">' + esc(m.segmento) + ' · ' + esc(m.motorDestacado) + '</span>' +
+        '<div class="mn"><span><b>' + m.datos.hp + '</b> HP</span><span><b>' + fmt(m.datos.carga) + '</b> kg</span><span><b>' + String(m.datos.largo).replace(".", ",") + '</b> m</span></div>' +
+        '<span class="go2">Ver modelo <i aria-hidden="true">→</i></span></div></a>';
+    }).join("");
+    var cards = [].slice.call(grid.children);
+    fl.innerHTML = FIL.map(function(f, i){ return '<button type="button" data-f="' + f[0] + '" aria-pressed="' + (i === 0) + '">' + f[1] + '<span>' + ms.filter(f[2]).length + '</span></button>'; }).join("");
+    function entrar(lista){ lista.forEach(function(c, i){ setTimeout(function(){ c.classList.add("in"); }, i * 70); }); }
+    var io = "IntersectionObserver" in window ? new IntersectionObserver(function(es){ if (es[0].isIntersecting) { entrar(cards); io.disconnect(); } }, {threshold:.1}) : null;
+    if (io) io.observe(grid); else entrar(cards);
+    fl.addEventListener("click", function(e){
+      var b = e.target.closest("button"); if (!b) return;
+      [].forEach.call(fl.children, function(x){ x.setAttribute("aria-pressed", x === b); });
+      var f = FIL.filter(function(x){ return x[0] === b.dataset.f; })[0][2];
+      cards.forEach(function(c){ c.classList.add("out"); c.classList.remove("in"); });
+      setTimeout(function(){
+        var vis = [];
+        cards.forEach(function(c, i){ var ok = f(ms[i]); c.hidden = !ok; c.classList.remove("out"); if (ok) vis.push(c); });
+        entrar(vis);
+      }, 260);
+    });
+  }).catch(function(){ document.getElementById("modelos").hidden = true; });
+
+  fetch("/api/vehiculos?tipo=nuevo").then(function(r){ if (!r.ok) throw 0; return r.json(); }).then(function(d){
+    var l = d.vehiculos || [];
+    if (!l.length) return;
+    l.forEach(function(v){ CACHE[v.id] = v; });
+    exh.innerHTML = '<div class="grid">' + l.map(card).join("") + "</div>";
+  }).catch(function(){ /* sin API: se mantiene el mensaje de exhibición en preparación */ });
+})();
+</script>
+</body>
+</html>

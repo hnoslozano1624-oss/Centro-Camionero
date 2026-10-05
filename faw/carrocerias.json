@@ -1,0 +1,60 @@
+{
+ "fuente": "Configuraciones listadas por FAW Trucks Colombia en fawcamiones.com para cada modelo (consultado 2026-10-02). Descripciones redactadas por FAW Centro Camionero.",
+ "carrocerias": [
+  {
+   "id": "furgon",
+   "nombre": "Camión furgón",
+   "descripcion": "Caja cerrada que protege la mercancía del agua, el polvo y el robo. Ideal para distribución urbana y entregas puerta a puerta.",
+   "usos": [
+    "Paquetería",
+    "Mudanzas",
+    "Comercio y retail",
+    "Distribución de mercancía seca"
+   ]
+  },
+  {
+   "id": "planchon",
+   "nombre": "Camión planchón",
+   "descripcion": "Plataforma plana y abierta para cargas voluminosas o de forma irregular, que se aseguran con amarres y se cargan por cualquier costado.",
+   "usos": [
+    "Materiales de construcción",
+    "Maquinaria y equipos",
+    "Estibas",
+    "Estructuras metálicas"
+   ]
+  },
+  {
+   "id": "grua",
+   "nombre": "Camión grúa",
+   "descripcion": "Plataforma con grúa montada sobre el chasís para cargar y descargar sin depender de montacargas ni equipos externos.",
+   "usos": [
+    "Materiales pesados",
+    "Postes y tubería",
+    "Equipos industriales",
+    "Servicios de izaje"
+   ]
+  },
+  {
+   "id": "refrigerado",
+   "nombre": "Furgón refrigerado",
+   "descripcion": "Caja aislada con equipo de frío que mantiene la temperatura de la carga durante todo el recorrido, para no romper la cadena de frío.",
+   "usos": [
+    "Alimentos y lácteos",
+    "Cárnicos",
+    "Flores",
+    "Productos farmacéuticos"
+   ]
+  },
+  {
+   "id": "estacas",
+   "nombre": "Camión estacas",
+   "descripcion": "Plataforma con barandas de estacas removibles que contienen la carga a granel o en bultos y facilitan el cargue lateral.",
+   "usos": [
+    "Productos agrícolas",
+    "Bebidas",
+    "Bultos y sacos",
+    "Carga general"
+   ]
+  }
+ ]
+}
