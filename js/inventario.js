@@ -74,7 +74,8 @@
       "<h3>" + esc(v.marca + " " + v.linea) + '</h3><span class="pr">' + precio(v) + "</span>" +
       '<div class="specs">' + specs(v).map(function (s) { return "<span>" + esc(s[0]) + " <b>" + esc(s[1]) + "</b></span>"; }).join("") + "</div>" +
       (v.descripcion ? '<p class="desc">' + esc(v.descripcion) + "</p>" : "") +
-      '<a class="btn btn-primary" href="' + linkCotizar(v) + '" style="margin-top:auto;justify-content:center"' + (WHATSAPP ? ' target="_blank" rel="noopener"' : "") + ">Habla con un asesor →</a></div></div>";
+      '<a class="btn btn-primary" href="' + linkCotizar(v) + '" style="margin-top:auto;justify-content:center"' + (WHATSAPP ? ' target="_blank" rel="noopener"' : "") + ">Habla con un asesor →</a>" +
+      (v.tipo === "usado" ? '<a class="btn btn-ghost on-light" href="/usados/' + v.id + '" style="justify-content:center">Ver ficha completa</a>' : "") + "</div></div>";
     dlg.querySelectorAll(".mins button").forEach(function (b) {
       b.addEventListener("click", function () {
         dlg.querySelector(".big img").src = fotos[+b.dataset.i];
