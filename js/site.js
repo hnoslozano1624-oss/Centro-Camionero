@@ -9,7 +9,10 @@
     menu: [
       { k: "inicio", t: "Camiones disponibles", h: "/#camiones" },
       { k: "financiacion", t: "Financiación", h: "/financiacion/" },
-      { k: "faw", t: "Camiones nuevos", h: "/faw/" }
+      { k: "retomas", t: "Retomas", h: "/retomas/" },
+      { k: "faw", t: "Camiones nuevos", h: "/faw/" },
+      { k: "nosotros", t: "Nosotros", h: "/nosotros/" },
+      { k: "contacto", t: "Contacto", h: "/contacto/" }
     ]
   };
   var body = document.body;
