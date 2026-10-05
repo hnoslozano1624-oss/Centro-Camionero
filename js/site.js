@@ -2,7 +2,6 @@
    Para agregar o quitar una página del menú, edite solo la lista MENU. */
 (function () {
   var CFG = {
-    wa: { usados: "573157207016", faw: "573245792435" },
     dir: "Calle 13 #62-34, Bogotá",
     mapa: "https://maps.app.goo.gl/kEuP6FUTMVdnTjbs6",
     horario: ["Lunes a viernes: 8:00 a. m. a 5:00 p. m.", "Sábados: 8:00 a. m. a 2:00 p. m."],
@@ -17,7 +16,6 @@
   };
   var body = document.body;
   var page = body.getAttribute("data-page") || "";
-  var wa = body.getAttribute("data-wa") || CFG.wa.usados;
 
   function esc(s) { return String(s).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); }
   function links(cls) {
@@ -52,15 +50,10 @@
       '<span class="copy">© 2026 Centro Camionero · Bogotá, Colombia</span></div>';
   }
 
-  // Botón flotante de WhatsApp (número según la página: asesor de Centro Camionero o asesor FAW)
-  if (!document.getElementById("whatsappFloat")) {
-    var f = document.createElement("a");
-    f.className = "whatsapp-float"; f.id = "whatsappFloat"; f.target = "_blank"; f.rel = "noopener";
-    f.href = "https://wa.me/" + wa + "?text=" + encodeURIComponent("Hola, quiero información de Centro Camionero.");
-    f.setAttribute("aria-label", "Escríbenos por WhatsApp"); f.title = "Escríbenos por WhatsApp";
-    f.innerHTML = '<svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><circle cx="16" cy="16" r="15" fill="#25D366"/><path d="M16 7c-5 0-9 4-9 9 0 1.7.5 3.3 1.3 4.6L7 25l4.6-1.3c1.3.7 2.8 1.1 4.4 1.1 5 0 9-4 9-9s-4-8.8-9-8.8Z" stroke="#fff" stroke-width="1.6"/><path d="M12.3 12.6c.2-.5.4-.5.7-.5h.5c.2 0 .4 0 .6.4.2.5.7 1.7.8 1.8.1.2.1.3 0 .5-.1.2-.2.3-.3.5-.2.2-.3.3-.1.6.2.4.9 1.4 1.9 2.2 1.3 1 2.3 1.4 2.7 1.5.3.1.5.1.7-.1.2-.2.8-.9 1-1.2.2-.3.4-.2.7-.1.3.1 1.8.9 2.1 1 .3.1.5.2.6.3.1.2.1 1-.3 1.9-.4.9-2 1.7-2.8 1.8-.7.1-1.6.2-4.3-.9-3.6-1.5-5.9-5.1-6.1-5.3-.2-.3-1.4-1.9-1.4-3.6 0-1.7.9-2.6 1.2-2.9Z" fill="#fff"/></svg>';
-    body.appendChild(f);
-  }
+  // Asistente virtual DYLIA: todos los llamados a la acción del sitio la abren (ver /js/dylia.js)
+  var d = document.createElement("script");
+  d.src = "/js/dylia.js"; d.defer = true;
+  document.head.appendChild(d);
 
   // Comportamiento: sombra al desplazar, menú móvil y aparición suave de bloques
   try {
