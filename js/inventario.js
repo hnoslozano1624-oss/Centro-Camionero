@@ -1,6 +1,6 @@
-/* Inventario en vivo: reemplaza las fichas de ejemplo con los camiones USADOS cargados desde el panel /admin.
-   Los camiones nuevos se muestran en el showroom independiente /faw/ (FAW Centro Camionero).
-   Si la API no responde o aún no hay camiones, la página conserva las fichas de ejemplo. */
+/* Inventario en vivo: muestra primero los camiones USADOS cargados desde el panel /admin
+   (las fichas marcadas "Ficha de ejemplo" quedan después; se retiran del index.html antes del lanzamiento).
+   Los camiones nuevos se muestran en el showroom independiente /faw/ (FAW Centro Camionero). */
 (function () {
   var WHATSAPP = "573245792435"; // Línea de atención (WhatsApp) de Centro Camionero
   var fmt = function (n) { return Number(n).toLocaleString("es-CO"); };
@@ -10,9 +10,7 @@
 
   var css = document.createElement("style");
   css.textContent =
-    ".card-camion{cursor:pointer;transition:transform .15s ease}.card-camion:hover{transform:translateY(-3px)}" +
-    ".card-camion .price{flex-wrap:wrap;gap:6px 10px}.card-camion .price b{white-space:nowrap}" +
-    ".card-camion .thumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}" +
+    ".card-camion[data-id]{cursor:pointer}" +
     ".card-camion .estado-pill{position:absolute;top:10px;right:10px;background:var(--red);color:#fff;font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;padding:4px 8px;border-radius:99px}" +
     ".card-camion .nfotos{position:absolute;bottom:10px;right:10px;background:rgba(4,16,43,.65);color:#fff;font-family:'IBM Plex Mono',monospace;font-size:10px;padding:3px 7px;border-radius:99px}" +
     "dialog.cc-det{border:0;padding:0;width:min(920px,calc(100% - 24px));max-height:calc(100% - 24px);border-radius:4px;background:var(--bg-elevated);color:var(--fg);box-shadow:var(--shadow)}" +
@@ -33,6 +31,7 @@
 
   function specs(v) {
     var f = v.ficha || {}, out = [];
+    if (v.marca) out.push(["Marca", v.marca]);
     if (v.modelo_anio) out.push(["Modelo", v.modelo_anio]);
     if (v.tipo === "usado" && v.kilometraje != null) out.push(["Kilometraje", fmt(v.kilometraje) + " km"]);
     if (v.tipo === "nuevo") out.push(["Kilometraje", "0 km"]);
@@ -48,14 +47,15 @@
   }
 
   function tarjeta(v) {
-    var sp = specs(v).slice(0, 4).map(function (s) { return "<span>" + esc(s[0]) + " <b>" + esc(s[1]) + "</b></span>"; }).join("");
-    return '<article class="card-camion" data-id="' + v.id + '" tabindex="0" role="button" aria-label="Ver detalle de ' + esc(v.marca + " " + v.linea) + '">' +
-      '<div class="thumb">' + (v.fotos[0] ? '<img src="' + esc(v.fotos[0]) + '" alt="' + esc(v.marca + " " + v.linea) + '" loading="lazy">' : SVG) +
+    var nombre = v.marca + " " + v.linea;
+    var sp = specs(v).slice(0, 5).map(function (s) { return "<span>" + esc(s[0]) + " <b>" + esc(s[1]) + "</b></span>"; }).join("");
+    return '<article class="card-camion" data-id="' + v.id + '" tabindex="0" role="button" aria-label="Ver detalle de ' + esc(nombre) + '">' +
+      '<div class="thumb">' + (v.fotos[0] ? '<img src="' + esc(v.fotos[0]) + '" alt="' + esc(nombre + (v.modelo_anio ? " " + v.modelo_anio : "")) + '" loading="lazy">' : SVG) +
       (v.estado === "reservado" ? '<span class="estado-pill">Reservado</span>' : "") +
       (v.fotos.length > 1 ? '<span class="nfotos">' + v.fotos.length + " fotos</span>" : "") + "</div>" +
-      '<div class="body"><h3>' + esc(v.marca + " " + v.linea) + "</h3>" +
+      '<div class="body"><div class="name-row"><h3>' + esc(nombre) + '</h3><span class="price' + (v.precio ? "" : " muted") + '">' + precio(v) + "</span></div>" +
       (sp ? '<div class="specs">' + sp + "</div>" : "") +
-      '<div class="price"><b class="mono">' + precio(v) + '</b><a href="' + linkCotizar(v) + '"' + (WHATSAPP ? ' target="_blank" rel="noopener"' : "") + ' data-cotizar>Cotizar →</a></div></div></article>';
+      '<a class="btn btn-primary" href="' + linkCotizar(v) + '"' + (WHATSAPP ? ' target="_blank" rel="noopener"' : "") + ' data-cotizar>Habla con un asesor →</a></div></article>';
   }
 
   var dlg;
@@ -72,7 +72,7 @@
       "<h3>" + esc(v.marca + " " + v.linea) + '</h3><span class="pr">' + precio(v) + "</span>" +
       '<div class="specs">' + specs(v).map(function (s) { return "<span>" + esc(s[0]) + " <b>" + esc(s[1]) + "</b></span>"; }).join("") + "</div>" +
       (v.descripcion ? '<p class="desc">' + esc(v.descripcion) + "</p>" : "") +
-      '<a class="btn btn-primary" href="' + linkCotizar(v) + '" style="margin-top:auto;justify-content:center"' + (WHATSAPP ? ' target="_blank" rel="noopener"' : "") + ">Cotizar este camión →</a></div></div>";
+      '<a class="btn btn-primary" href="' + linkCotizar(v) + '" style="margin-top:auto;justify-content:center"' + (WHATSAPP ? ' target="_blank" rel="noopener"' : "") + ">Habla con un asesor →</a></div></div>";
     dlg.querySelectorAll(".mins button").forEach(function (b) {
       b.addEventListener("click", function () {
         dlg.querySelector(".big img").src = fotos[+b.dataset.i];
@@ -99,7 +99,7 @@
     lista.forEach(function (v) { CACHE[v.id] = v; });
     var usados = lista.filter(function (v) { return v.tipo === "usado"; });
     var grid = document.querySelector("#camiones .grid-camiones");
-    if (grid && usados.length) { grid.innerHTML = usados.map(tarjeta).join(""); grid.classList.add("in"); activar(grid); }
+    if (grid && usados.length) { grid.insertAdjacentHTML("afterbegin", usados.map(tarjeta).join("")); grid.classList.add("in"); activar(grid); }
 
   }).catch(function () { /* sin API: se quedan las fichas de ejemplo */ });
 })();
