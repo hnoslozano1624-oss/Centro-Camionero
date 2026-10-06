@@ -14,6 +14,12 @@
   st.textContent = ".whatsapp-float,.wa-float{display:none!important}";
   document.head.appendChild(st);
 
+  // Esta es la única pieza que cargan todas las páginas públicas (también el showroom FAW),
+  // así que aquí se enciende la franja de aliados financieros; ella sabe en qué páginas mostrarse.
+  var fr = document.createElement("script");
+  fr.src = "/js/aliados.js"; fr.defer = true;
+  document.head.appendChild(fr);
+
   if (!document.getElementById("ia-sdk-root")) {
     var root = document.createElement("div");
     root.id = "ia-sdk-root";
