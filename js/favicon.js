@@ -2,6 +2,8 @@
    - Se dibuja la llanta en un lienzo y se cambia el ícono varias veces por segundo (funciona en Chrome, Edge y Firefox).
    - Si el navegador no lo permite o la persona pidió reducir el movimiento, queda la llanta quieta. */
 (function () {
+  if (window.__faviconLlanta) return;
+  window.__faviconLlanta = true;
   var SRC = "/assets/favicon.svg", S = 64, VUELTA = 2400, CADA = 90;
 
   function nuevoIcono(href, tipo) {

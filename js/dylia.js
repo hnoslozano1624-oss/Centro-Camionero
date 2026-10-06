@@ -20,6 +20,12 @@
   fr.src = "/js/aliados.js"; fr.defer = true;
   document.head.appendChild(fr);
 
+  // También aquí se enciende el ícono de la pestaña (la llanta de Centro Camionero): así lo tienen
+  // todas las páginas, incluidas las del showroom FAW, que no usan site.js.
+  var fv = document.createElement("script");
+  fv.src = "/js/favicon.js"; fv.defer = true;
+  document.head.appendChild(fv);
+
   if (!document.getElementById("ia-sdk-root")) {
     var root = document.createElement("div");
     root.id = "ia-sdk-root";
