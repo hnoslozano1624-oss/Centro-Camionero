@@ -365,4 +365,7 @@ body.inner .btn-primary:hover{background:#010B3D}
 .cta-band h2{font-family:'IBM Plex Sans',sans-serif;text-transform:none;font-weight:800;letter-spacing:-.02em;line-height:1.1;font-size:clamp(26px,3.6vw,40px);color:#fff;max-width:20ch}
 .cta-band p{color:#C7D1F2;margin-top:10px;max-width:52ch}
 @media (max-width:860px){.sim-grid{grid-template-columns:1fr}}
+/* Encabezado: el logo se corre a la izquierda y se deja aire entre el logo y el menú */
+header .container{max-width:1400px;padding-inline:clamp(14px,2.2vw,30px)}
+header .brand{margin-right:clamp(16px,3vw,44px)}
 @media (min-width:1241px){.brand{flex:none}}

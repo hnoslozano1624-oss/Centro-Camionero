@@ -28,7 +28,7 @@
   if (header) {
     header.innerHTML =
       '<div class="container bar">' +
-      '<a class="brand" href="/"><img class="brand-logo-img" src="/assets/logo.png" alt="Centro Camionero"></a>' +
+      '<a class="brand" href="/"><img class="brand-logo-img" src="/assets/logo.svg" alt="Centro Camionero"></a>' +
       '<nav class="menu" id="siteMenu" aria-label="Principal">' + links() + "</nav>" +
       '<div class="bar-right"><a class="nav-cta" href="/financiacion/">Financia tu camión</a>' +
       '<button class="nav-toggle" id="navToggle" aria-label="Abrir menú" aria-expanded="false">' +
@@ -39,7 +39,7 @@
   if (footer) {
     footer.innerHTML =
       '<div class="container foot-inner">' +
-      '<a class="brand" href="/"><img class="brand-logo-img footer-logo-img" src="/assets/logo.png" alt="Centro Camionero"></a>' +
+      '<a class="brand" href="/"><img class="brand-logo-img footer-logo-img" src="/assets/logo.svg" alt="Centro Camionero"></a>' +
       '<div class="foot-links">' + links() + "</div>" +
       '<div class="foot-info"><b>' + esc(CFG.dir) + '</b><a href="' + CFG.mapa + '" target="_blank" rel="noopener">Ver en el mapa</a>' +
       CFG.horario.map(function (h) { return "<span>" + esc(h) + "</span>"; }).join("") + "</div>" +
