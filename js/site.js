@@ -55,6 +55,11 @@
   d.src = "/js/dylia.js"; d.defer = true;
   document.head.appendChild(d);
 
+  // Ícono de la pestaña: la llanta de Centro Camionero, girando (ver /js/favicon.js)
+  var fv = document.createElement("script");
+  fv.src = "/js/favicon.js"; fv.defer = true;
+  document.head.appendChild(fv);
+
   // Luces de los camiones del banner principal (solo en la página de inicio)
   if (page === "inicio" && document.querySelector(".hero-banner-link")) {
     var hl = document.createElement("script");
