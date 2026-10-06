@@ -56,11 +56,11 @@ p{margin:0}
 .sign nav .back{white-space:nowrap;font-size:13px;color:var(--muted);border:1px solid var(--silver-2);padding:6px 12px;border-radius:999px;background:#fff}
 .menu-btn{display:none;margin-left:auto;background:none;border:1px solid var(--silver-2);border-radius:8px;width:42px;height:42px;align-items:center;justify-content:center;color:var(--faw)}
 
-/* ---------- hero: foto del camión FAW con el paso del día (el sol y las nubes cruzan de izquierda a derecha) ----------
-   Capas (de atrás hacia adelante): cielo con nubes (se desplaza) · tintes de la hora del día · sol · camión y montañas (fijo) · noche.
+/* ---------- hero: foto del camión FAW al atardecer; solo las nubes se desplazan (de izquierda a derecha) ----------
+   Capas (de atrás hacia adelante): cielo con nubes (animado) · sol (fijo) · camión y montañas (fijo).
    Todo se dibuja dentro de .fw-canvas, que mantiene la proporción de la foto (1600 x 733) para que las capas siempre coincidan.
-   Un día completo dura 60 s (--dia). La página arranca ya avanzada (--inicio) para que se vea primero la luz dorada de la foto. */
-.vitrina{position:relative;background:#030A26;color:#fff;overflow:hidden;isolation:isolate;--dia:60s;--inicio:-42s}
+   El cielo se repite sin saltos con dos copias desfasadas medio ciclo que se funden entre sí. --nube = duración de un ciclo. */
+.vitrina{position:relative;background:#030A26;color:#fff;overflow:hidden;isolation:isolate;--nube:60s}
 .scene{position:relative;width:100%;aspect-ratio:1600/733;max-height:calc(100svh - 68px);min-height:440px;overflow:hidden;container-type:size;background:#030A26}
 .fw-visual{position:absolute;inset:0;overflow:hidden;container-type:size}
 .fw-canvas{position:absolute;top:50%;left:0;width:100%;aspect-ratio:1600/733;transform:translateY(-50%);--ax:.5}
@@ -69,33 +69,21 @@ p{margin:0}
 }
 .fw-cielo,.fw-canvas>img,.fw-canvas>i{position:absolute;display:block}
 .fw-cielo{inset:0;overflow:hidden;isolation:isolate}
-.fw-nube{left:0;top:0;width:127.5%;height:auto;max-width:none;will-change:transform;animation:kf-nube var(--dia) linear var(--inicio) infinite}
+.fw-nube{left:0;top:0;width:127.5%;height:auto;max-width:none;will-change:transform;animation:kf-nube var(--nube) linear infinite}
+.fw-nube-b{animation-name:kf-nube-b;animation-delay:calc(var(--nube) / -2)}
 .fw-fg{inset:0;width:100%;height:100%;max-width:none}
 .fw-cielo i{position:absolute;inset:0;pointer-events:none}
-.fw-dia{background:linear-gradient(180deg,rgba(64,128,255,.62) 0%,rgba(110,168,255,.44) 42%,rgba(255,226,172,.22) 60%,rgba(255,226,172,0) 70%);mix-blend-mode:screen;opacity:0;animation:kf-dia var(--dia) linear var(--inicio) infinite}
-.fw-fria{background:radial-gradient(ellipse 70% 72% at 84% 46%,#4a78d8 0,#5a86dc 42%,rgba(90,134,220,0) 82%);mix-blend-mode:color;opacity:.9;animation:kf-fria var(--dia) linear var(--inicio) infinite}
-.fw-alba{background:radial-gradient(ellipse 52% 42% at 10% 52%,rgba(255,140,84,.8),rgba(255,120,90,.22) 55%,transparent 75%);mix-blend-mode:screen;opacity:0;animation:kf-alba var(--dia) linear var(--inicio) infinite}
-.fw-noche-c{background:rgba(2,6,26,.9);opacity:0;animation:kf-noche-c var(--dia) linear var(--inicio) infinite}
-.fw-noche{inset:0;background:rgba(2,6,26,.36);opacity:0;pointer-events:none;animation:kf-noche var(--dia) linear var(--inicio) infinite}
-/* sol: caja cuadrada de 26 % del ancho que recorre el arco de izquierda a derecha */
-.fw-cielo .fw-sol{inset:auto;left:0;top:0;width:26%;aspect-ratio:1;mix-blend-mode:screen;will-change:transform;transform:translate3d(-28.37%,66.59%,0);animation:kf-sol var(--dia) linear var(--inicio) infinite}
-.fw-sol i{inset:0;border-radius:50%;will-change:opacity,transform}
+/* sol fijo, en la posición que tiene en la foto original */
+.fw-cielo .fw-sol{inset:auto;left:0;top:0;width:26%;aspect-ratio:1;mix-blend-mode:screen;transform:translate3d(296.15%,37.98%,0)}
+.fw-sol i{inset:0;border-radius:50%}
+.fw-sol-i{transform:scale(1.03)}
 .fw-sol .s-brillo{inset:-45%;background:radial-gradient(circle,rgba(255,196,104,.55) 0,rgba(255,150,56,.3) 20%,rgba(255,112,26,.12) 42%,transparent 66%)}
-.fw-sol .s-rayos{inset:-8%;border-radius:0;background:repeating-conic-gradient(from 8deg,rgba(255,214,128,.5) 0 1.1deg,transparent 1.1deg 12deg);-webkit-mask-image:radial-gradient(circle,#000 0,rgba(0,0,0,.55) 30%,transparent 62%);mask-image:radial-gradient(circle,#000 0,rgba(0,0,0,.55) 30%,transparent 62%);animation:kf-rayos 150s linear infinite}
-.fw-sol .s-rayos2{inset:-14%;background:repeating-conic-gradient(from 3deg,rgba(255,236,190,.38) 0 .7deg,transparent .7deg 17deg);animation-duration:210s;animation-direction:reverse}
+.fw-sol .s-rayos{inset:-8%;border-radius:0;background:repeating-conic-gradient(from 8deg,rgba(255,214,128,.5) 0 1.1deg,transparent 1.1deg 12deg);-webkit-mask-image:radial-gradient(circle,#000 0,rgba(0,0,0,.55) 30%,transparent 62%);mask-image:radial-gradient(circle,#000 0,rgba(0,0,0,.55) 30%,transparent 62%)}
+.fw-sol .s-rayos2{inset:-14%;background:repeating-conic-gradient(from 3deg,rgba(255,236,190,.38) 0 .7deg,transparent .7deg 17deg)}
 .fw-sol .s-calida{inset:27%;background:radial-gradient(circle,rgba(255,232,168,.98) 0,rgba(255,196,96,.62) 24%,rgba(255,142,40,.24) 54%,transparent 80%)}
-.fw-sol .s-blanca{inset:41%;background:radial-gradient(circle,#fff 0,#fff 34%,rgba(255,248,222,.88) 52%,rgba(255,236,180,.28) 76%,transparent 100%);animation:kf-blanca var(--dia) linear var(--inicio) infinite}
-.fw-sol-i{inset:0;animation:kf-sol-i var(--dia) linear var(--inicio) infinite}
-@keyframes kf-rayos{to{transform:rotate(360deg)}}
-@keyframes kf-nube{0%{transform:translate3d(-19.61%,0,0)}88%,100%{transform:translate3d(0,0,0)}}
-@keyframes kf-dia{0%{opacity:0}10%{opacity:.35}28%{opacity:.85}44%{opacity:1}62%{opacity:.62}80%{opacity:.14}88%,100%{opacity:0}}
-@keyframes kf-fria{0%{opacity:.9}30%{opacity:.85}56%{opacity:.4}76%{opacity:.08}86%,100%{opacity:0}}
-@keyframes kf-alba{0%,2%{opacity:0}7%{opacity:.95}20%{opacity:.4}34%,100%{opacity:0}}
-@keyframes kf-noche-c{0%{opacity:.9}3.5%{opacity:.45}6.5%{opacity:0}91%{opacity:0}97%,100%{opacity:.9}}
-@keyframes kf-noche{0%{opacity:1}3.5%{opacity:.5}6.5%{opacity:0}91%{opacity:0}97%,100%{opacity:1}}
-@keyframes kf-sol-i{0%,1.6%{opacity:0;transform:scale(1.2)}3%{opacity:1;transform:scale(1.18)}12%{transform:scale(1.04)}48%{transform:scale(.8)}80%{transform:scale(.94)}88%{opacity:1;transform:scale(1.02)}90%{opacity:1;transform:scale(1.04)}94.5%{opacity:.5;transform:scale(1.1)}95.5%,100%{opacity:0;transform:scale(1.1)}}
-@keyframes kf-blanca{0%,3%{opacity:.5}14%{opacity:.75}45%{opacity:1}80%{opacity:.85}100%{opacity:.8}}
-@keyframes kf-sol{0%{transform:translate3d(-28.37%,66.59%,0)}2.00%{transform:translate3d(-28.37%,66.59%,0)}4.61%{transform:translate3d(-19.17%,60.18%,0)}7.21%{transform:translate3d(-9.98%,53.78%,0)}9.82%{transform:translate3d(-0.78%,47.39%,0)}12.42%{transform:translate3d(8.28%,40.80%,0)}15.03%{transform:translate3d(17.29%,34.14%,0)}17.64%{transform:translate3d(26.55%,27.84%,0)}20.24%{transform:translate3d(36.21%,22.18%,0)}22.85%{transform:translate3d(46.15%,17.00%,0)}25.45%{transform:translate3d(56.23%,12.12%,0)}28.06%{transform:translate3d(66.44%,7.51%,0)}30.67%{transform:translate3d(76.76%,3.14%,0)}33.27%{transform:translate3d(87.17%,-0.99%,0)}35.88%{transform:translate3d(97.67%,-4.89%,0)}38.48%{transform:translate3d(108.25%,-8.58%,0)}41.09%{transform:translate3d(118.90%,-12.07%,0)}43.70%{transform:translate3d(129.62%,-15.32%,0)}46.30%{transform:translate3d(140.42%,-18.27%,0)}48.91%{transform:translate3d(151.28%,-21.03%,0)}51.52%{transform:translate3d(162.16%,-23.70%,0)}54.12%{transform:translate3d(173.15%,-25.88%,0)}56.73%{transform:translate3d(184.29%,-27.04%,0)}59.33%{transform:translate3d(195.47%,-26.68%,0)}61.94%{transform:translate3d(206.49%,-24.70%,0)}64.55%{transform:translate3d(217.26%,-21.63%,0)}67.15%{transform:translate3d(227.79%,-17.79%,0)}69.76%{transform:translate3d(238.09%,-13.39%,0)}72.36%{transform:translate3d(248.11%,-8.39%,0)}74.97%{transform:translate3d(257.47%,-2.25%,0)}77.58%{transform:translate3d(266.16%,4.82%,0)}80.18%{transform:translate3d(274.45%,12.35%,0)}82.79%{transform:translate3d(282.09%,20.54%,0)}85.39%{transform:translate3d(289.11%,29.27%,0)}88.00%{transform:translate3d(296.15%,37.98%,0)}90.00%{transform:translate3d(296.15%,37.98%,0)}95.50%{transform:translate3d(305.29%,62.98%,0)}100%{transform:translate3d(305.29%,62.98%,0)}}
+.fw-sol .s-blanca{inset:41%;background:radial-gradient(circle,#fff 0,#fff 34%,rgba(255,248,222,.88) 52%,rgba(255,236,180,.28) 76%,transparent 100%);opacity:.85}
+@keyframes kf-nube{from{transform:translate3d(-10%,0,0)}to{transform:translate3d(0,0,0)}}
+@keyframes kf-nube-b{0%{transform:translate3d(-10%,0,0);opacity:0}50%{opacity:1}100%{transform:translate3d(0,0,0);opacity:0}}
 /* legibilidad del texto y fundido hacia el resto de la página */
 .fw-cielo .fw-scrim{background:linear-gradient(90deg,rgba(3,10,38,.5) 0%,rgba(3,10,38,.22) 30%,rgba(3,10,38,0) 48%)}
 .fw-logo{position:absolute;right:6.1cqw;top:7.4cqh;width:24.7cqw;height:auto;max-width:none;z-index:4;filter:drop-shadow(0 2px 14px rgba(3,10,38,.45))}
@@ -139,10 +127,10 @@ p{margin:0}
   .on-stage .vf,.on-stage .go{font-size:15px}.on-stage .go{padding:11px 22px}
   .v-copy .more{margin-top:20px;font-size:15px}
 }
-/* sin movimiento: se muestra la foto tal como fue diseñada (atardecer dorado) */
+/* sin movimiento: se muestra la foto tal como fue diseñada */
 @media (prefers-reduced-motion:reduce){
   .fw-canvas{background:url("/assets/faw-hero/fw-base.jpg") center/100% 100% no-repeat}
-  .fw-cielo,.fw-fg,.fw-noche{display:none}
+  .fw-cielo,.fw-fg{display:none}
 }
 
 
@@ -320,19 +308,18 @@ dialog::backdrop{background:rgba(8,18,65,.75)}
 
 <main id="top">
 
-  <!-- Hero: foto del camión FAW al atardecer. El sol y las nubes cruzan de izquierda a derecha (ver estilos .fw-*) -->
+  <!-- Hero: foto del camión FAW al atardecer. Solo las nubes se desplazan, de izquierda a derecha (ver estilos .fw-*) -->
   <section class="vitrina" aria-labelledby="t-hero">
     <div class="scene" id="scene">
       <div class="fw-visual">
       <div class="fw-canvas" aria-hidden="true">
         <div class="fw-cielo">
           <img class="fw-nube" src="/assets/faw-hero/fw-cielo.jpg" alt="" width="2040" height="500" fetchpriority="high" decoding="async">
-          <i class="fw-scrim"></i><i class="fw-fria"></i><i class="fw-dia"></i><i class="fw-alba"></i>
+          <img class="fw-nube fw-nube-b" src="/assets/faw-hero/fw-cielo.jpg" alt="" width="2040" height="500" decoding="async">
+          <i class="fw-scrim"></i>
           <i class="fw-sol"><i class="fw-sol-i"><i class="s-brillo"></i><i class="s-rayos"></i><i class="s-rayos s-rayos2"></i><i class="s-calida"></i><i class="s-blanca"></i></i></i>
-          <i class="fw-noche-c"></i>
         </div>
         <img class="fw-fg" src="/assets/faw-hero/fw-primer-plano.webp" alt="" width="1600" height="733" fetchpriority="high" decoding="async">
-        <i class="fw-noche"></i>
       </div>
       <img class="fw-logo" src="/assets/faw-logo-h-blanco.svg" alt="FAW Trucks" width="2000" height="422">
       </div>
