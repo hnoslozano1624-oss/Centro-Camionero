@@ -232,11 +232,11 @@ footer{padding-block:32px;border-top:1px solid var(--border)}
   /* encabezado de inicio para celular: recorte de la fachada y las unidades, con el texto y los botones en HTML (legibles) */
   .hero-banner-link{display:none}
   .hero-movil{display:block;background:#FFFFFF}
-  .hm-foto{display:block;position:relative;overflow:hidden;aspect-ratio:1081/680;background:#0B2B70}
-  /* degradado inferior: la foto se funde con el fondo blanco en vez de cortarse en seco */
-  .hm-foto::after{content:"";position:absolute;left:0;right:0;bottom:0;height:26%;z-index:2;pointer-events:none;background:linear-gradient(180deg,rgba(255,255,255,0) 0%,rgba(255,255,255,.4) 50%,rgba(255,255,255,.85) 82%,#FFFFFF 100%)}
-  .hm-foto img{position:absolute;display:block;width:177.24%;max-width:none;height:auto;left:-77.24%;top:-2.941%}
-  .hm-info{padding:18px clamp(16px,5vw,28px) 6px}
+  .hm-foto{display:block;position:relative;overflow:hidden;aspect-ratio:1084/644;background:#0B2B70}
+  /* los cuatro camiones completos (hasta las llantas); abajo el piso se funde con el fondo blanco en vez de cortarse en seco */
+  .hm-foto::after{content:"";position:absolute;left:0;right:0;bottom:0;height:9%;z-index:2;pointer-events:none;background:linear-gradient(180deg,rgba(108,110,121,0) 0%,rgba(108,110,121,0) 30%,#6C6E79 100%)}
+  .hm-foto img{position:absolute;display:block;width:176.75%;max-width:none;height:auto;left:-76.75%;top:-4.348%}
+  .hm-info{padding:50px clamp(16px,5vw,28px) 6px;margin-top:-1px;background:linear-gradient(180deg,#6C6E79 0,#B4B6BD 22px,#FFFFFF 50px)}
   .hm-info h1{font-size:clamp(38px,11.5vw,50px);line-height:.94;color:var(--ink)}
   .hm-info h1 span{display:block;color:#0B63D6}
   .hm-info .hm-sub{margin-top:10px;font-size:15.5px;color:var(--fg-muted)}
