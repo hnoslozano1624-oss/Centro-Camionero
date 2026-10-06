@@ -92,7 +92,7 @@ header.scrolled .brand-logo-img{height:20px}
 .brand-word .wheel-o{width:.72em;height:.72em;flex:none;margin:0 .01em;color:var(--red)}
 .brand-word .gap{width:.32em;flex:none}
 nav.menu{display:flex;align-items:center;gap:clamp(18px,3vw,40px)}
-nav.menu a{font-family:'IBM Plex Mono',monospace;font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;color:var(--navy-deep);position:relative;padding-block:4px}
+nav.menu a{font-family:'IBM Plex Sans',sans-serif;font-weight:500;font-size:14.5px;letter-spacing:0;text-transform:none;white-space:nowrap;text-decoration:none;color:var(--navy-deep);position:relative;padding-block:4px}
 nav.menu a::after{content:"";position:absolute;left:0;right:0;bottom:-2px;height:2px;background:var(--red);transform:scaleX(0);transform-origin:left;transition:transform .2s ease}
 nav.menu a:hover::after{transform:scaleX(1)}
 .nav-toggle{display:none;background:none;border:1px solid rgba(1,15,61,.3);border-radius:2px;width:40px;height:40px;align-items:center;justify-content:center;color:var(--navy-deep)}
@@ -241,8 +241,8 @@ footer{padding-block:32px;border-top:1px solid var(--border)}
 .foot-inner{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
 .foot-inner .brand{font-size:17px}
 .foot-links{display:flex;gap:22px;flex-wrap:wrap}
-.foot-links a{font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;color:var(--fg-muted)}
-.copy{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--fg-muted)}
+.foot-links a{font-family:'IBM Plex Sans',sans-serif;font-weight:500;font-size:13.5px;letter-spacing:0;text-transform:none;text-decoration:none;color:var(--fg-muted)}
+.copy{font-family:'IBM Plex Sans',sans-serif;font-size:12.5px;color:var(--fg-muted)}
 
 .reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}
 .reveal.in{opacity:1;transform:none}
@@ -250,11 +250,14 @@ footer{padding-block:32px;border-top:1px solid var(--border)}
 
 @media (max-width:860px){
   .contacto-grid{grid-template-columns:1fr}
+  .grid-camiones{grid-template-columns:repeat(2,1fr)}
+}
+/* Menú hamburguesa desde 1240px: con el logo completo el menú horizontal no cabe antes */
+@media (max-width:1240px){
   nav.menu{position:fixed;inset:0 0 0 30%;top:env(safe-area-inset-top,0px);background:#FFFFFF;flex-direction:column;justify-content:center;align-items:flex-start;padding:32px;gap:26px;transform:translateX(105%);transition:transform .3s ease;box-shadow:-10px 0 40px rgba(0,0,0,.3)}
   nav.menu.open{transform:translateX(0)}
-  nav.menu a{font-size:15px}
+  nav.menu a{font-size:17px}
   .nav-toggle{display:flex}
-  .grid-camiones{grid-template-columns:repeat(2,1fr)}
 }
 @media (max-width:560px){
   .grid-camiones{grid-template-columns:1fr}
@@ -276,9 +279,11 @@ nav.menu a[aria-current="page"]::after{transform:scaleX(1)}
 .foot-info a{color:inherit;text-decoration:none}
 .foot-info a:hover{color:var(--red)}
 .foot-info b{color:var(--fg);font-weight:600}
-@media (max-width:860px){
+@media (max-width:1240px){
   header #siteMenu{margin-left:0}
   .bar-right{margin-left:auto}
+}
+@media (max-width:860px){
   .nav-cta{font-size:12.5px;padding:9px 12px}
 }
 @media (max-width:380px){.nav-cta{font-size:12px;padding:8px 10px}}
@@ -360,3 +365,4 @@ body.inner .btn-primary:hover{background:#010B3D}
 .cta-band h2{font-family:'IBM Plex Sans',sans-serif;text-transform:none;font-weight:800;letter-spacing:-.02em;line-height:1.1;font-size:clamp(26px,3.6vw,40px);color:#fff;max-width:20ch}
 .cta-band p{color:#C7D1F2;margin-top:10px;max-width:52ch}
 @media (max-width:860px){.sim-grid{grid-template-columns:1fr}}
+@media (min-width:1241px){.brand{flex:none}}
