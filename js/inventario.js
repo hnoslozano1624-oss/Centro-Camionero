@@ -1,5 +1,5 @@
-/* Inventario en vivo: muestra primero los camiones USADOS cargados desde el panel /admin
-   (las fichas marcadas "Ficha de ejemplo" quedan después; se retiran del index.html antes del lanzamiento).
+/* Inventario en vivo: muestra los camiones USADOS cargados desde el panel /admin.
+   Si no hay camiones publicados o la API no responde, se muestra el aviso #sinCamiones.
    Los camiones nuevos se muestran en el showroom independiente /faw/ (FAW Centro Camionero). */
 (function () {
   var WHATSAPP = "573157207016"; // Asesor Centro Camionero (camiones usados)
@@ -11,6 +11,7 @@
   var css = document.createElement("style");
   css.textContent =
     ".card-camion[data-id]{cursor:pointer}" +
+    ".sin-camiones{text-align:center;color:var(--fg-muted);font-size:16px;padding:28px 16px;border:1px dashed var(--border);border-radius:16px;background:var(--bg-elevated)}" +
     ".card-camion .estado-pill{position:absolute;top:10px;right:10px;background:var(--red);color:#fff;font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;padding:4px 8px;border-radius:99px}" +
     ".card-camion .nfotos{position:absolute;bottom:10px;right:10px;background:rgba(4,16,43,.65);color:#fff;font-family:'IBM Plex Mono',monospace;font-size:10px;padding:3px 7px;border-radius:99px}" +
     "dialog.cc-det{border:0;padding:0;width:min(920px,calc(100% - 24px));max-height:calc(100% - 24px);border-radius:4px;background:var(--bg-elevated);color:var(--fg);box-shadow:var(--shadow)}" +
@@ -102,7 +103,9 @@
     lista.forEach(function (v) { CACHE[v.id] = v; });
     var usados = lista.filter(function (v) { return v.tipo === "usado"; });
     var grid = document.querySelector("#camiones .grid-camiones");
-    if (grid && usados.length) { grid.insertAdjacentHTML("afterbegin", usados.map(tarjeta).join("")); grid.classList.add("in"); activar(grid); }
+    if (grid && usados.length) { grid.innerHTML = usados.map(tarjeta).join(""); grid.classList.add("in"); activar(grid); }
+    else sinCamiones();
+  }).catch(sinCamiones);
 
-  }).catch(function () { /* sin API: se quedan las fichas de ejemplo */ });
+  function sinCamiones() { var p = document.getElementById("sinCamiones"); if (p) p.hidden = false; }
 })();
