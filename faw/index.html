@@ -50,9 +50,10 @@ p{margin:0}
 .lockup .div{width:2px;height:30px;background:var(--faw);opacity:.35;flex:none}
 .lockup .dist{font-weight:700;color:var(--faw);font-size:19px;letter-spacing:.01em;white-space:nowrap}
 .sign nav{margin-left:auto;display:flex;gap:clamp(14px,2.4vw,28px);align-items:center}
-.sign nav a{text-decoration:none;color:var(--faw-ink);font-weight:500;font-size:14.5px}
+.sign nav a{text-decoration:none;color:var(--faw-ink);font-weight:500;font-size:14.5px;white-space:nowrap}
 .sign nav a:hover{color:var(--faw)}
-.sign nav .back{font-size:13px;color:var(--muted);border:1px solid var(--silver-2);padding:6px 12px;border-radius:999px;background:#fff}
+@media(max-width:1180px) and (min-width:901px){.sign .dist,.sign .lockup .div{display:none}.sign nav{gap:18px}}
+.sign nav .back{white-space:nowrap;font-size:13px;color:var(--muted);border:1px solid var(--silver-2);padding:6px 12px;border-radius:999px;background:#fff}
 .menu-btn{display:none;margin-left:auto;background:none;border:1px solid var(--silver-2);border-radius:8px;width:42px;height:42px;align-items:center;justify-content:center;color:var(--faw)}
 
 /* ---------- vitrina (hero): escenario oscuro con luces, tarima vacía para la rotación de camiones ---------- */
@@ -270,8 +271,9 @@ dialog::backdrop{background:rgba(8,18,65,.75)}
     </button>
     <nav id="nav" aria-label="Secciones">
       <a href="#modelos">Modelos</a>
-      <a href="#exhibicion">Exhibición</a>
-      <a href="#historia">Historia FAW</a>
+      <a href="#historia">Historia</a>
+      <a href="/faw/por-que-faw/">Por qué FAW</a>
+      <a href="/faw/respaldo/">Respaldo</a>
       <a href="/financiacion/">Financiación</a>
       <a href="#asesoria">Asesoría</a>
       <a class="back" href="/">← Centro Camionero</a>
@@ -458,6 +460,10 @@ dialog::backdrop{background:rgba(8,18,65,.75)}
         <div class="it"><span class="yr">1956</span><h3>El primer camión</h3><p>Sale de la línea de producción el primer camión Jiefang, inicio de la tradición de camiones de trabajo de FAW.</p></div>
         <div class="it"><span class="yr">Hoy</span><h3>FAW Centro Camionero</h3><p>FAW Trucks llega a Colombia y Centro Camionero abre su línea de camiones nuevos en Bogotá.</p></div>
       </div>
+      <p style="display:flex;flex-wrap:wrap;gap:12px;margin:28px 0 0">
+        <a class="btn btn-white" href="/faw/por-que-faw/">Por qué elegir FAW</a>
+        <a class="btn btn-line" href="/faw/respaldo/">Respaldo y servicio</a>
+      </p>
     </div>
   </section>
 
@@ -494,6 +500,8 @@ dialog::backdrop{background:rgba(8,18,65,.75)}
       <a href="#modelos">Modelos FAW</a>
       <a href="#exhibicion">Exhibición</a>
       <a href="#historia">Historia FAW</a>
+      <a href="/faw/por-que-faw/">Por qué FAW</a>
+      <a href="/faw/respaldo/">Respaldo y servicio</a>
       <a href="/financiacion/">Financiación</a>
       <a href="#asesoria">Asesoría</a>
       <a href="/">Camiones usados Centro Camionero</a>
