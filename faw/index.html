@@ -7,7 +7,7 @@
 <meta name="description" content="FAW Centro Camionero: showroom de camiones nuevos FAW Trucks en Bogotá. Camiones 0 km, asesoría y cotización con DYLIA, nuestra asistente virtual.">
 <link rel="icon" href="/assets/faw-emblema-blanco.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500;700&family=Ubuntu+Mono:wght@400;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&family=Ubuntu+Mono:wght@400;700&display=swap">
 <style>
 /* Showroom FAW Centro Camionero — basado en "Lineamientos de Marca para Showroom FAW Trucks 2026".
    Azul FAW Pantone 286C (RGB 21 42 140), panel aluminio gris plata, muro de imagen azul,
@@ -56,57 +56,95 @@ p{margin:0}
 .sign nav .back{white-space:nowrap;font-size:13px;color:var(--muted);border:1px solid var(--silver-2);padding:6px 12px;border-radius:999px;background:#fff}
 .menu-btn{display:none;margin-left:auto;background:none;border:1px solid var(--silver-2);border-radius:8px;width:42px;height:42px;align-items:center;justify-content:center;color:var(--faw)}
 
-/* ---------- vitrina (hero): escenario oscuro con luces, tarima vacía para la rotación de camiones ---------- */
-.vitrina{position:relative;background:#030A26;color:#fff;overflow:hidden;isolation:isolate}
-.scene{position:relative;width:100%;aspect-ratio:16/7;max-height:calc(100vh - 68px);min-height:500px}
-.scene svg{position:absolute;inset:0;width:100%;height:100%;display:block}
-.scene .breathe{animation:breathe 4.5s ease-in-out infinite}
-@keyframes breathe{0%,100%{opacity:.75}50%{opacity:1}}
-.unit{opacity:0;transform:translateX(300px) scale(.82);transform-origin:1060px 560px;transition:transform 1.5s cubic-bezier(.2,.75,.15,1),opacity 1.1s ease}
-.unit.on{opacity:1;transform:none}
-.unit.off{opacity:0;transform:translateX(-300px) scale(.82)}
-.spin{animation:spin 18s linear infinite}
-@keyframes spin{to{stroke-dashoffset:-560}}
-.sweep{opacity:0}
-.sweep.go{animation:sweep 1.6s ease-out}
-@keyframes sweep{0%{opacity:0;transform:translateX(-520px)}25%{opacity:1}100%{opacity:0;transform:translateX(520px)}}
-.v-copy{position:absolute;inset:0;pointer-events:none}
-.v-copy .wrap{height:100%;display:flex;align-items:center}
-.v-copy .more{display:inline-flex;gap:8px;margin-top:16px;color:#C9D3F5;font-size:14.5px;font-weight:500;text-decoration:none;border-bottom:1px solid rgba(201,211,245,.4);padding-bottom:2px}
-.v-copy .more:hover{color:#fff;border-color:#fff}
-.v-copy .txt{pointer-events:auto;max-width:440px;text-shadow:0 2px 24px rgba(3,10,38,.8)}
-.v-copy .kicker{display:inline-flex;align-items:center;gap:10px;font-size:12.5px;letter-spacing:.16em;text-transform:uppercase;color:#AFC0FF;font-weight:500}
-.v-copy .kicker::before{content:"";width:28px;height:2px;background:#5B8CFF;box-shadow:0 0 10px #5B8CFF}
-.v-copy h1{font-size:clamp(36px,4.3vw,62px);font-weight:700;letter-spacing:-.01em;margin-top:14px}
-.v-copy h1 span{display:block;font-weight:400;color:#DCE4FF}
-.v-copy .tag{margin-top:16px;font-size:clamp(16px,1.5vw,19px);color:#C9D3F5;max-width:32ch}
-.v-copy .tag b{color:#fff;font-style:italic}
-.v-copy .ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
-.on-stage{position:relative;margin-top:26px;width:min(400px,100%);text-shadow:none;background:rgba(5,14,52,.66);border:1px solid rgba(140,170,255,.22);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-radius:16px;padding:14px 16px 0;color:#fff;overflow:hidden}
-.on-stage .row1{display:flex;align-items:center;justify-content:space-between;gap:10px}
-.on-stage .k{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#9FB4FF;font-weight:500}
-.on-stage .count{font-family:var(--mono);font-size:13px;color:#C9D3F5}
-.on-stage .row2{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;margin-top:4px}
-.on-stage .nm{font-size:22px;font-weight:700;line-height:1.15}
-.on-stage .sb{font-size:13.5px;color:#C9D3F5}
-.on-stage .go{background:#fff;color:var(--faw);font-weight:700;font-size:13.5px;border-radius:999px;padding:9px 16px;white-space:nowrap;text-decoration:none;flex:none}
-.on-stage .ctrl{display:flex;gap:8px;margin-top:12px}
-.on-stage .ctrl button{flex:1;height:22px;border:0;background:none;padding:0;cursor:pointer;position:relative}
-.on-stage .ctrl button::before{content:"";position:absolute;left:0;right:0;top:9px;height:3px;border-radius:2px;background:rgba(255,255,255,.22)}
-.on-stage .ctrl button i{position:absolute;left:0;top:9px;height:3px;width:0;border-radius:2px;background:#fff}
-.on-stage .ctrl button.on i{animation:fill var(--dur,6s) linear forwards}
-.on-stage .ctrl button.done i{width:100%}
-.on-stage.paused .ctrl button.on i{animation-play-state:paused}
-@keyframes fill{to{width:100%}}
-@media (max-width:900px){
-  .scene{aspect-ratio:4/3;min-height:0;max-height:none}
-  .v-copy{position:static}
-  .v-copy .wrap{display:block;padding-block:28px 40px}
-  .v-copy .txt{max-width:none;text-shadow:none}
-  .on-stage{width:100%}
-  .leftshade{display:none}
+/* ---------- hero: foto del camión FAW con el paso del día (el sol y las nubes cruzan de izquierda a derecha) ----------
+   Capas (de atrás hacia adelante): cielo con nubes (se desplaza) · tintes de la hora del día · sol · camión y montañas (fijo) · noche.
+   Todo se dibuja dentro de .fw-canvas, que mantiene la proporción de la foto (1600 x 733) para que las capas siempre coincidan.
+   Un día completo dura 60 s (--dia). La página arranca ya avanzada (--inicio) para que se vea primero la luz dorada de la foto. */
+.vitrina{position:relative;background:#030A26;color:#fff;overflow:hidden;isolation:isolate;--dia:60s;--inicio:-42s}
+.scene{position:relative;width:100%;aspect-ratio:1600/733;max-height:calc(100svh - 68px);min-height:440px;overflow:hidden;container-type:size;background:#030A26}
+.fw-visual{position:absolute;inset:0;overflow:hidden;container-type:size}
+.fw-canvas{position:absolute;top:50%;left:0;width:100%;aspect-ratio:1600/733;transform:translateY(-50%);--ax:.5}
+@supports (width:1cqw){
+  .fw-canvas{--cw:max(100cqw,calc(100cqh * 2.18281));width:var(--cw);left:clamp(calc(100cqw - var(--cw)),calc(50cqw - var(--ax) * var(--cw)),0px)}
 }
-@media (prefers-reduced-motion:reduce){.scene .breathe,.spin{animation:none}.unit{transition:opacity .4s ease}}
+.fw-cielo,.fw-canvas>img,.fw-canvas>i{position:absolute;display:block}
+.fw-cielo{inset:0;overflow:hidden;isolation:isolate}
+.fw-nube{left:0;top:0;width:127.5%;height:auto;max-width:none;will-change:transform;animation:kf-nube var(--dia) linear var(--inicio) infinite}
+.fw-fg{inset:0;width:100%;height:100%;max-width:none}
+.fw-cielo i{position:absolute;inset:0;pointer-events:none}
+.fw-dia{background:linear-gradient(180deg,rgba(64,128,255,.62) 0%,rgba(110,168,255,.44) 42%,rgba(255,226,172,.22) 60%,rgba(255,226,172,0) 70%);mix-blend-mode:screen;opacity:0;animation:kf-dia var(--dia) linear var(--inicio) infinite}
+.fw-fria{background:radial-gradient(ellipse 70% 72% at 84% 46%,#4a78d8 0,#5a86dc 42%,rgba(90,134,220,0) 82%);mix-blend-mode:color;opacity:.9;animation:kf-fria var(--dia) linear var(--inicio) infinite}
+.fw-alba{background:radial-gradient(ellipse 52% 42% at 10% 52%,rgba(255,140,84,.8),rgba(255,120,90,.22) 55%,transparent 75%);mix-blend-mode:screen;opacity:0;animation:kf-alba var(--dia) linear var(--inicio) infinite}
+.fw-noche-c{background:rgba(2,6,26,.9);opacity:0;animation:kf-noche-c var(--dia) linear var(--inicio) infinite}
+.fw-noche{inset:0;background:rgba(2,6,26,.36);opacity:0;pointer-events:none;animation:kf-noche var(--dia) linear var(--inicio) infinite}
+/* sol: caja cuadrada de 26 % del ancho que recorre el arco de izquierda a derecha */
+.fw-cielo .fw-sol{inset:auto;left:0;top:0;width:26%;aspect-ratio:1;mix-blend-mode:screen;will-change:transform;transform:translate3d(-28.37%,66.59%,0);animation:kf-sol var(--dia) linear var(--inicio) infinite}
+.fw-sol i{inset:0;border-radius:50%;will-change:opacity,transform}
+.fw-sol .s-brillo{inset:-45%;background:radial-gradient(circle,rgba(255,196,104,.55) 0,rgba(255,150,56,.3) 20%,rgba(255,112,26,.12) 42%,transparent 66%)}
+.fw-sol .s-rayos{inset:-8%;border-radius:0;background:repeating-conic-gradient(from 8deg,rgba(255,214,128,.5) 0 1.1deg,transparent 1.1deg 12deg);-webkit-mask-image:radial-gradient(circle,#000 0,rgba(0,0,0,.55) 30%,transparent 62%);mask-image:radial-gradient(circle,#000 0,rgba(0,0,0,.55) 30%,transparent 62%);animation:kf-rayos 150s linear infinite}
+.fw-sol .s-rayos2{inset:-14%;background:repeating-conic-gradient(from 3deg,rgba(255,236,190,.38) 0 .7deg,transparent .7deg 17deg);animation-duration:210s;animation-direction:reverse}
+.fw-sol .s-calida{inset:27%;background:radial-gradient(circle,rgba(255,232,168,.98) 0,rgba(255,196,96,.62) 24%,rgba(255,142,40,.24) 54%,transparent 80%)}
+.fw-sol .s-blanca{inset:41%;background:radial-gradient(circle,#fff 0,#fff 34%,rgba(255,248,222,.88) 52%,rgba(255,236,180,.28) 76%,transparent 100%);animation:kf-blanca var(--dia) linear var(--inicio) infinite}
+.fw-sol-i{inset:0;animation:kf-sol-i var(--dia) linear var(--inicio) infinite}
+@keyframes kf-rayos{to{transform:rotate(360deg)}}
+@keyframes kf-nube{0%{transform:translate3d(-19.61%,0,0)}88%,100%{transform:translate3d(0,0,0)}}
+@keyframes kf-dia{0%{opacity:0}10%{opacity:.35}28%{opacity:.85}44%{opacity:1}62%{opacity:.62}80%{opacity:.14}88%,100%{opacity:0}}
+@keyframes kf-fria{0%{opacity:.9}30%{opacity:.85}56%{opacity:.4}76%{opacity:.08}86%,100%{opacity:0}}
+@keyframes kf-alba{0%,2%{opacity:0}7%{opacity:.95}20%{opacity:.4}34%,100%{opacity:0}}
+@keyframes kf-noche-c{0%{opacity:.9}3.5%{opacity:.45}6.5%{opacity:0}91%{opacity:0}97%,100%{opacity:.9}}
+@keyframes kf-noche{0%{opacity:1}3.5%{opacity:.5}6.5%{opacity:0}91%{opacity:0}97%,100%{opacity:1}}
+@keyframes kf-sol-i{0%,1.6%{opacity:0;transform:scale(1.2)}3%{opacity:1;transform:scale(1.18)}12%{transform:scale(1.04)}48%{transform:scale(.8)}80%{transform:scale(.94)}88%{opacity:1;transform:scale(1.02)}90%{opacity:1;transform:scale(1.04)}94.5%{opacity:.5;transform:scale(1.1)}95.5%,100%{opacity:0;transform:scale(1.1)}}
+@keyframes kf-blanca{0%,3%{opacity:.5}14%{opacity:.75}45%{opacity:1}80%{opacity:.85}100%{opacity:.8}}
+@keyframes kf-sol{0%{transform:translate3d(-28.37%,66.59%,0)}2.00%{transform:translate3d(-28.37%,66.59%,0)}4.61%{transform:translate3d(-19.17%,60.18%,0)}7.21%{transform:translate3d(-9.98%,53.78%,0)}9.82%{transform:translate3d(-0.78%,47.39%,0)}12.42%{transform:translate3d(8.28%,40.80%,0)}15.03%{transform:translate3d(17.29%,34.14%,0)}17.64%{transform:translate3d(26.55%,27.84%,0)}20.24%{transform:translate3d(36.21%,22.18%,0)}22.85%{transform:translate3d(46.15%,17.00%,0)}25.45%{transform:translate3d(56.23%,12.12%,0)}28.06%{transform:translate3d(66.44%,7.51%,0)}30.67%{transform:translate3d(76.76%,3.14%,0)}33.27%{transform:translate3d(87.17%,-0.99%,0)}35.88%{transform:translate3d(97.67%,-4.89%,0)}38.48%{transform:translate3d(108.25%,-8.58%,0)}41.09%{transform:translate3d(118.90%,-12.07%,0)}43.70%{transform:translate3d(129.62%,-15.32%,0)}46.30%{transform:translate3d(140.42%,-18.27%,0)}48.91%{transform:translate3d(151.28%,-21.03%,0)}51.52%{transform:translate3d(162.16%,-23.70%,0)}54.12%{transform:translate3d(173.15%,-25.88%,0)}56.73%{transform:translate3d(184.29%,-27.04%,0)}59.33%{transform:translate3d(195.47%,-26.68%,0)}61.94%{transform:translate3d(206.49%,-24.70%,0)}64.55%{transform:translate3d(217.26%,-21.63%,0)}67.15%{transform:translate3d(227.79%,-17.79%,0)}69.76%{transform:translate3d(238.09%,-13.39%,0)}72.36%{transform:translate3d(248.11%,-8.39%,0)}74.97%{transform:translate3d(257.47%,-2.25%,0)}77.58%{transform:translate3d(266.16%,4.82%,0)}80.18%{transform:translate3d(274.45%,12.35%,0)}82.79%{transform:translate3d(282.09%,20.54%,0)}85.39%{transform:translate3d(289.11%,29.27%,0)}88.00%{transform:translate3d(296.15%,37.98%,0)}90.00%{transform:translate3d(296.15%,37.98%,0)}95.50%{transform:translate3d(305.29%,62.98%,0)}100%{transform:translate3d(305.29%,62.98%,0)}}
+/* legibilidad del texto y fundido hacia el resto de la página */
+.fw-cielo .fw-scrim{background:linear-gradient(90deg,rgba(3,10,38,.5) 0%,rgba(3,10,38,.22) 30%,rgba(3,10,38,0) 48%)}
+.fw-logo{position:absolute;right:6.1cqw;top:7.4cqh;width:24.7cqw;height:auto;max-width:none;z-index:4;filter:drop-shadow(0 2px 14px rgba(3,10,38,.45))}
+/* texto y tarjeta, escalados con el ancho de la foto */
+.v-copy{position:absolute;inset:0;z-index:5;pointer-events:none}
+.v-copy .wrap{max-width:none;padding:0;height:100%}
+.v-copy .txt{pointer-events:auto;position:absolute;left:7.8cqw;top:0;bottom:0;width:31cqw;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;text-shadow:0 1px 3px rgba(3,10,38,.85),0 2px 22px rgba(3,10,38,.75)}
+.v-copy .kicker{display:flex;align-items:center;gap:clamp(8px,.8cqw,14px);font-size:clamp(11px,.875cqw,15px);letter-spacing:.16em;text-transform:uppercase;color:#D3DCF4;font-weight:400;white-space:nowrap}
+.v-copy .kicker::before{content:"";flex:none;width:clamp(26px,2.6cqw,48px);height:1px;background:#C9D6F5;opacity:.85}
+.v-copy h1{font-size:clamp(34px,3.5cqw,72px);font-weight:700;letter-spacing:-.005em;line-height:1.06;margin-top:clamp(12px,1.5cqw,28px);text-wrap:wrap}
+.v-copy h1 span{display:block;font-weight:300;color:#BFD4FF}
+.v-copy .tag{margin-top:clamp(12px,1.2cqw,22px);font-size:clamp(14px,1.15cqw,21px);line-height:1.45;color:#E8EDFA;max-width:21.6cqw}
+.v-copy .tag b{color:#fff;font-style:italic;font-weight:700}
+.v-copy .on-stage{position:relative;margin-top:clamp(16px,1.6cqw,30px);width:27cqw;min-width:min(100%,290px);text-shadow:none;background:linear-gradient(180deg,rgba(8,28,92,.9),rgba(5,18,66,.92));border:1px solid rgba(120,160,255,.28);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-radius:clamp(12px,1cqw,18px);padding:clamp(14px,1.45cqw,26px) clamp(16px,1.6cqw,28px);color:#fff;box-shadow:0 18px 40px -18px rgba(1,6,30,.7)}
+.on-stage .nm{font-size:clamp(17px,1.45cqw,27px);font-weight:700;line-height:1.15}
+.on-stage .sb{font-size:clamp(13px,.95cqw,17px);color:#B9C7EE;margin-top:3px}
+.on-stage .row2{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;margin-top:clamp(14px,1.5cqw,26px)}
+.on-stage .vf{display:inline-block;font-size:clamp(13.5px,1cqw,18px);font-weight:700;color:#fff;text-decoration:none;border-bottom:2px solid #3F73FF;padding-bottom:3px;white-space:nowrap}
+.on-stage .go{background:#fff;color:#1238B8;font-weight:700;font-size:clamp(13.5px,1cqw,18px);border-radius:999px;padding:clamp(9px,.9cqw,16px) clamp(18px,1.8cqw,32px);white-space:nowrap;text-decoration:none;flex:none;transition:transform .15s ease,box-shadow .2s ease}
+.on-stage .go:hover{transform:translateY(-2px);box-shadow:0 10px 24px -10px rgba(0,0,0,.6)}
+.v-copy .more{display:inline-flex;gap:8px;margin-top:clamp(14px,1.3cqw,24px);color:#fff;font-size:clamp(13.5px,1cqw,18px);font-weight:400;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.7);padding-bottom:2px}
+.v-copy .more:hover{border-color:#fff}
+/* pantallas medianas y móviles: la foto arriba y el texto debajo, con el camión y el sol a la vista */
+@media (max-width:1179px){
+  .scene{aspect-ratio:auto;height:auto;max-height:none;min-height:0;overflow:visible;container-type:normal}
+  .fw-visual{position:relative;inset:auto;height:clamp(300px,72vw,560px)}
+  .fw-canvas{--ax:.66}
+  .fw-visual::after{content:"";position:absolute;left:0;right:0;bottom:0;height:34%;background:linear-gradient(180deg,rgba(3,10,38,0),#030A26);z-index:3;pointer-events:none}
+  .fw-cielo .fw-scrim{display:none}
+  .fw-logo{right:5cqw;top:5cqw;width:min(36cqw,230px)}
+  .v-copy{position:static;pointer-events:auto}
+  .v-copy .wrap{height:auto;max-width:1200px;padding:6px clamp(16px,4vw,40px) 44px}
+  .v-copy .txt{position:static;width:auto;max-width:640px;display:block;text-shadow:none}
+  .v-copy .kicker{font-size:11.5px}
+  .v-copy .kicker::before{width:28px}
+  .v-copy .kicker{letter-spacing:.1em}
+  .v-copy h1{font-size:clamp(36px,9vw,56px);margin-top:14px}
+  .v-copy .tag{font-size:clamp(16px,2.6vw,19px);max-width:36ch;margin-top:14px}
+  .v-copy .on-stage{width:min(100%,460px);margin-top:22px;padding:16px 18px;border-radius:16px}
+  .on-stage .nm{font-size:21px}.on-stage .sb{font-size:14px}
+  .on-stage .vf,.on-stage .go{font-size:15px}.on-stage .go{padding:11px 22px}
+  .v-copy .more{margin-top:20px;font-size:15px}
+}
+/* sin movimiento: se muestra la foto tal como fue diseñada (atardecer dorado) */
+@media (prefers-reduced-motion:reduce){
+  .fw-canvas{background:url("/assets/faw-hero/fw-base.jpg") center/100% 100% no-repeat}
+  .fw-cielo,.fw-fg,.fw-noche{display:none}
+}
+
 
 /* ---------- franja de datos ---------- */
 .facts{background:var(--faw-deep);color:#fff}
@@ -148,7 +186,6 @@ p{margin:0}
 .empty .btn{margin-top:18px}
 
 /* ---------- línea de modelos FAW ---------- */
-.on-stage .vf{display:inline-block;margin-top:4px;font-size:13px;font-weight:700;color:#fff;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.4)}
 .on-stage .vf:hover{border-color:#fff}
 .filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:26px}
 .filters button{border:2px solid var(--faw);background:#fff;color:var(--faw);font:inherit;font-weight:700;font-size:14px;padding:9px 16px;border-radius:999px;cursor:pointer;transition:background .2s ease,color .2s ease,transform .15s ease}
@@ -283,122 +320,35 @@ dialog::backdrop{background:rgba(8,18,65,.75)}
 
 <main id="top">
 
-  <!-- Vitrina: escenario FAW con tarima vacía; los camiones nuevos del panel rotan sobre ella -->
+  <!-- Hero: foto del camión FAW al atardecer. El sol y las nubes cruzan de izquierda a derecha (ver estilos .fw-*) -->
   <section class="vitrina" aria-labelledby="t-hero">
     <div class="scene" id="scene">
-      <svg id="stage" viewBox="0 0 1600 700" preserveAspectRatio="xMidYMax slice" role="img" aria-label="Vitrina FAW Centro Camionero">
-        <defs>
-          <linearGradient id="gBg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#01051A"/><stop offset=".55" stop-color="#061344"/><stop offset="1" stop-color="#030A26"/></linearGradient>
-          <linearGradient id="gSky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#030A2E"/><stop offset=".55" stop-color="#0B1D63"/><stop offset=".78" stop-color="#2A3C8E"/><stop offset=".86" stop-color="#6B6FA8"/><stop offset="1" stop-color="#0A1442"/></linearGradient>
-          <linearGradient id="gWall" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0B1A5C"/><stop offset=".6" stop-color="#132A8C"/><stop offset="1" stop-color="#0A1650"/></linearGradient>
-          <radialGradient id="gWallGlow" cx=".5" cy=".75" r=".55"><stop offset="0" stop-color="#3D63E0" stop-opacity=".55"/><stop offset="1" stop-color="#152A8C" stop-opacity="0"/></radialGradient>
-          <linearGradient id="gFloor" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0D1A55"/><stop offset="1" stop-color="#02061C"/></linearGradient>
-          <linearGradient id="gCone" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E8EEFF" stop-opacity=".5"/><stop offset="1" stop-color="#9DB4FF" stop-opacity="0"/></linearGradient>
-          <linearGradient id="gTop" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2A3E96"/><stop offset="1" stop-color="#101E5E"/></linearGradient>
-          <linearGradient id="gSteel" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#1A2560"/><stop offset=".3" stop-color="#AEB9DE"/><stop offset=".5" stop-color="#F2F5FF"/><stop offset=".7" stop-color="#AEB9DE"/><stop offset="1" stop-color="#1A2560"/></linearGradient>
-          <linearGradient id="gSteel2" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#0C1645"/><stop offset=".5" stop-color="#6E7CB8"/><stop offset="1" stop-color="#0C1645"/></linearGradient>
-          <filter id="glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-          <filter id="soft" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="14"/></filter>
-          <filter id="streak" x="-50%" y="-10%" width="200%" height="120%"><feGaussianBlur stdDeviation="5 18"/></filter>
-          <radialGradient id="gFade" cx=".5" cy=".58" r=".62"><stop offset=".5" stop-color="#fff"/><stop offset=".98" stop-color="#000"/></radialGradient>
-          <filter id="tight" x="-30%" y="-100%" width="160%" height="300%"><feGaussianBlur stdDeviation="3"/></filter>
-          <filter id="ground" x="-30%" y="-60%" width="160%" height="220%"><feGaussianBlur stdDeviation="11"/></filter>
-          <filter id="tono" color-interpolation-filters="sRGB"><feColorMatrix type="matrix" values=".86 0 0 0 0  0 .89 0 0 .005  0 0 .97 0 .03  0 0 0 1 0"/></filter>
-          <filter id="silueta" color-interpolation-filters="sRGB"><feFlood flood-color="#020820"/><feComposite in2="SourceAlpha" operator="in"/></filter>
-          <linearGradient id="gAO" x1="0" y1="0" x2="0" y2="1"><stop offset=".55" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#fff" stop-opacity=".62"/></linearGradient>
-          <mask id="mAO" maskContentUnits="objectBoundingBox"><rect width="1" height="1" fill="url(#gAO)"/></mask>
-          <linearGradient id="gSweep" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".5" stop-color="#DCE6FF" stop-opacity=".35"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
-          <linearGradient id="gLeft" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#030A26" stop-opacity=".92"/><stop offset=".7" stop-color="#030A26" stop-opacity=".55"/><stop offset="1" stop-color="#030A26" stop-opacity="0"/></linearGradient>
-        </defs>
-
-        <!-- fondo -->
-        <rect width="1600" height="700" fill="url(#gBg)"/>
-        <!-- ventanal con la ciudad de noche -->
-        <path d="M0 0 H560 V470 H0 Z" fill="url(#gSky)"/>
-        <g fill="#050C30" opacity=".95">
-          <rect x="0" y="420" width="560" height="52"/><rect x="40" y="398" width="34" height="30"/><rect x="92" y="406" width="22" height="22"/><rect x="150" y="388" width="40" height="40"/><rect x="230" y="402" width="26" height="26"/><rect x="300" y="380" width="30" height="48"/><rect x="372" y="396" width="44" height="32"/><rect x="452" y="404" width="24" height="24"/><rect x="500" y="392" width="36" height="36"/>
-        </g>
-        <g fill="#FFD9A0" opacity=".55"><circle cx="58" cy="410" r="1.4"/><circle cx="166" cy="398" r="1.4"/><circle cx="178" cy="410" r="1.4"/><circle cx="312" cy="392" r="1.4"/><circle cx="318" cy="404" r="1.4"/><circle cx="390" cy="406" r="1.4"/><circle cx="515" cy="402" r="1.4"/></g>
-        <path d="M120 470 L520 0" stroke="#8FA4E8" stroke-opacity=".18" stroke-width="2"/>
-        <path d="M0 470 H560" stroke="#8FA4E8" stroke-opacity=".25" stroke-width="2"/>
-        <rect x="0" y="0" width="560" height="470" fill="#030A2E" opacity=".25"/>
-
-        <!-- muro curvo de la vitrina, azul FAW -->
-        <path d="M560 470 V140 Q1040 205 1600 140 V470 Z" fill="url(#gWall)"/>
-        <path d="M560 470 V140 Q1040 205 1600 140 V470 Z" fill="url(#gWallGlow)"/>
-        <g stroke="#FFFFFF" stroke-opacity=".05" stroke-width="2">
-          <path d="M700 158 V470"/><path d="M820 168 V470"/><path d="M940 174 V470"/><path d="M1060 175 V470"/><path d="M1180 172 V470"/><path d="M1300 166 V470"/><path d="M1420 157 V470"/>
-        </g>
-        <!-- columnas con tiras LED -->
-        <rect x="560" y="130" width="110" height="345" fill="#071240"/>
-        <rect x="1490" y="130" width="110" height="345" fill="#071240"/>
-        <g filter="url(#glow)" class="breathe">
-          <rect x="652" y="150" width="4" height="320" fill="#DCE6FF"/><rect x="1504" y="150" width="4" height="320" fill="#DCE6FF"/>
-          <rect x="580" y="150" width="3" height="320" fill="#8FA9FF" opacity=".7"/><rect x="1577" y="150" width="3" height="320" fill="#8FA9FF" opacity=".7"/>
-        </g>
-
-        <!-- logo FAW retroiluminado en el muro -->
-        <image href="/assets/faw-logo-h-blanco.svg" x="935" y="140" width="250" height="53" opacity=".9" filter="url(#glow)"/>
-
-        <!-- techo: anillo de luz y reflectores -->
-        <path d="M480 0 H1600 V60 Q1050 150 480 60 Z" fill="#020718"/>
-        <path d="M520 62 Q1060 150 1600 62" fill="none" stroke="#E6ECFF" stroke-width="4" filter="url(#glow)" class="breathe"/>
-        <path d="M560 92 Q1060 176 1600 92" fill="none" stroke="#6F8CFF" stroke-opacity=".55" stroke-width="2" filter="url(#glow)"/>
-        <g>
-          <polygon points="770,108 790,108 900,520 640,520" fill="url(#gCone)" opacity=".35"/>
-          <polygon points="900,124 920,124 1010,520 790,520" fill="url(#gCone)" opacity=".4"/>
-          <polygon points="1050,128 1070,128 1180,520 960,520" fill="url(#gCone)" opacity=".4"/>
-          <polygon points="1200,122 1220,122 1340,520 1100,520" fill="url(#gCone)" opacity=".35"/>
-          <polygon points="1350,108 1370,108 1470,520 1250,520" fill="url(#gCone)" opacity=".28"/>
-        </g>
-        <g fill="#FFFFFF" filter="url(#glow)">
-          <circle cx="780" cy="106" r="7"/><circle cx="910" cy="121" r="7"/><circle cx="1060" cy="125" r="7"/><circle cx="1210" cy="119" r="7"/><circle cx="1360" cy="106" r="7"/><circle cx="660" cy="84" r="5" opacity=".8"/><circle cx="1490" cy="88" r="5" opacity=".8"/>
-        </g>
-
-        <!-- piso pulido con reflejos -->
-        <rect x="0" y="470" width="1600" height="230" fill="url(#gFloor)"/>
-        <g filter="url(#streak)" opacity=".55">
-          <rect x="650" y="480" width="8" height="200" fill="#C9D6FF"/><rect x="1502" y="480" width="8" height="200" fill="#C9D6FF"/>
-          <rect x="776" y="560" width="10" height="140" fill="#C9D6FF" opacity=".5"/><rect x="1055" y="580" width="10" height="120" fill="#C9D6FF" opacity=".5"/><rect x="1355" y="560" width="10" height="140" fill="#C9D6FF" opacity=".5"/>
-          <rect x="280" y="480" width="40" height="160" fill="#4B5FA8" opacity=".6"/>
-        </g>
-
-        <!-- sombra lateral para que el texto se lea sobre el ventanal -->
-        <rect class="leftshade" x="0" y="0" width="760" height="700" fill="url(#gLeft)"/>
-
-        <!-- tarima giratoria con anillos LED (vista en perspectiva para que los camiones se apoyen en ella) -->
-        <ellipse cx="1060" cy="622" rx="520" ry="122" fill="#01041A" opacity=".9"/>
-        <ellipse cx="1060" cy="622" rx="520" ry="122" fill="none" stroke="#5B8CFF" stroke-opacity=".22" stroke-width="2"/>
-        <ellipse cx="1060" cy="600" rx="440" ry="104" fill="#0A1446"/>
-        <ellipse cx="1060" cy="602" rx="442" ry="106" fill="none" stroke="#7FA2FF" stroke-width="3" filter="url(#glow)" class="breathe"/>
-        <path d="M640 575 A420 98 0 0 0 1480 575 V592 A420 98 0 0 1 640 592 Z" fill="url(#gSteel2)"/>
-        <ellipse cx="1060" cy="575" rx="420" ry="98" fill="#0C1850"/>
-        <ellipse cx="1060" cy="578" rx="422" ry="100" fill="none" stroke="#A9C0FF" stroke-width="2.5" filter="url(#glow)" class="breathe"/>
-        <path d="M660 540 A400 92 0 0 0 1460 540 V562 A400 92 0 0 1 660 562 Z" fill="url(#gSteel)"/>
-        <ellipse cx="1060" cy="540" rx="400" ry="92" fill="url(#gTop)"/>
-        <ellipse cx="1060" cy="540" rx="400" ry="92" fill="none" stroke="#FFFFFF" stroke-opacity=".35" stroke-width="1.5"/>
-        <ellipse cx="1060" cy="528" rx="290" ry="56" fill="#5B7BE8" opacity=".2" filter="url(#soft)"/>
-
-        <!-- borde giratorio de la tarima -->
-        <ellipse class="spin" cx="1060" cy="540" rx="400" ry="92" fill="none" stroke="#FFFFFF" stroke-opacity=".55" stroke-width="2" stroke-dasharray="4 24"/>
-
-        <!-- vitrina: los camiones rotan sobre la tarima (se cargan desde el script) -->
-        <g id="slot"></g>
-        <rect class="sweep" id="sweep" x="900" y="180" width="320" height="400" fill="url(#gSweep)" style="mix-blend-mode:screen"/>
-      </svg>
-    </div>
-    <div class="v-copy">
-      <div class="wrap">
-        <div class="txt">
-          <p class="kicker">Showroom de camiones nuevos · Bogotá</p>
-          <h1 id="t-hero">FAW <span>Centro Camionero</span></h1>
-          <p class="tag">Fuerza de trabajo #1 en China, <b>ahora en Colombia.</b> Camiones FAW 0 km con la asesoría y el respaldo de Centro Camionero.</p>
-          <div class="on-stage" id="onStage" aria-live="polite">
-            <div class="row1"><span class="k">En vitrina</span><span class="count" id="osCount">01 / 03</span></div>
-            <div class="row2"><div><div class="nm" id="osName">FAW Tiger</div><div class="sb" id="osSub"></div><a class="vf" id="osVer" href="#modelos" hidden>Ver ficha técnica →</a></div><a class="go" id="osGo" href="#asesoria" target="_blank" rel="noopener">Cotizar</a></div>
-            <div class="ctrl" id="osCtrl"></div>
+      <div class="fw-visual">
+      <div class="fw-canvas" aria-hidden="true">
+        <div class="fw-cielo">
+          <img class="fw-nube" src="/assets/faw-hero/fw-cielo.jpg" alt="" width="2040" height="500" fetchpriority="high" decoding="async">
+          <i class="fw-scrim"></i><i class="fw-fria"></i><i class="fw-dia"></i><i class="fw-alba"></i>
+          <i class="fw-sol"><i class="fw-sol-i"><i class="s-brillo"></i><i class="s-rayos"></i><i class="s-rayos s-rayos2"></i><i class="s-calida"></i><i class="s-blanca"></i></i></i>
+          <i class="fw-noche-c"></i>
+        </div>
+        <img class="fw-fg" src="/assets/faw-hero/fw-primer-plano.webp" alt="" width="1600" height="733" fetchpriority="high" decoding="async">
+        <i class="fw-noche"></i>
+      </div>
+      <img class="fw-logo" src="/assets/faw-logo-h-blanco.svg" alt="FAW Trucks" width="2000" height="422">
+      </div>
+      <div class="v-copy">
+        <div class="wrap">
+          <div class="txt">
+            <p class="kicker">Showroom de camiones nuevos · Bogotá</p>
+            <h1 id="t-hero">FAW <span>Centro Camionero</span></h1>
+            <p class="tag">Fuerza de trabajo #1 en China, <b>ahora en Colombia.</b> Camiones FAW 0 km con la asesoría y el respaldo de Centro Camionero.</p>
+            <div class="on-stage">
+              <div class="nm">Camión FAW WRR 7.1 LION</div>
+              <div class="sb">Carga mediana</div>
+              <div class="row2"><a class="vf" href="/faw/modelos/wrr-lion-7-1">Ver ficha técnica <span aria-hidden="true">→</span></a><a class="go" data-wa="Hola, me interesa el camión FAW WRR 7.1 LION que vi en la página de FAW Centro Camionero." href="#asesoria">Cotizar</a></div>
+            </div>
+            <a class="more" href="#modelos">Ver los modelos FAW <span aria-hidden="true">→</span></a>
           </div>
-          <a class="more" href="#modelos">Ver los modelos FAW <span aria-hidden="true">→</span></a>
         </div>
       </div>
     </div>
@@ -585,98 +535,6 @@ dialog::backdrop{background:rgba(8,18,65,.75)}
     if (c && (e.key === "Enter" || e.key === " ")) { e.preventDefault(); detalle(CACHE[c.dataset.id]); }
   });
 
-  // Vitrina: encuadre según pantalla y rotación de camiones nuevos sobre la tarima
-  var stage = document.getElementById("stage");
-  var mq = window.matchMedia("(max-width:900px)");
-  function encuadre(){ stage.setAttribute("viewBox", mq.matches ? "580 120 960 650" : "0 0 1600 700"); stage.setAttribute("preserveAspectRatio", mq.matches ? "xMidYMid slice" : "xMidYMax slice"); }
-  encuadre(); if (mq.addEventListener) mq.addEventListener("change", encuadre);
-
-  // Modelos en la vitrina (fotos sin fondo en /assets/vitrina). Para cambiar la rotación, editar esta lista.
-  // "ruedas": puntos donde cada llanta toca el piso, en fracción del ancho/alto de la foto
-  // [x, y, ancho de la llanta], en orden: delantera lejana, delantera cercana, trasera cercana, trasera lejana.
-  var VITRINA = [
-    { src: "/assets/vitrina/faw-tiger-whr.webp", nombre: "FAW WHR Tiger 2.9", sub: "Carga liviana · cabina sencilla", url: "/faw/modelos/whr-tiger-2-9",
-      ruedas: [[.84, .935, .10], [.275, .995, .17], [.07, .715, .075], [.58, .69, .07]] },
-    { src: "/assets/vitrina/faw-tiger-wkr.webp", nombre: "FAW WKR Tiger 3.6", sub: "Carga mediana · doble cabina", url: "/faw/modelos/wkr-tiger-3-6",
-      ruedas: [[.22, .93, .12], [.595, .995, .15], [.94, .82, .13], [.76, .77, .08]] },
-    { src: "/assets/vitrina/faw-modelo-3.webp", nombre: "FAW Tiger", sub: "Camión liviano · chasís",
-      ruedas: [[.2, .95, .12], [.745, .995, .15], [.95, .745, .08], [.72, .7, .07]] }
-  ];
-  var DUR = 6000, NS = "http://www.w3.org/2000/svg", ALTO = 380, PISO = 592, CENTRO = 1060;
-  function el(tag, attrs){ var e = document.createElementNS(NS, tag); for (var k in attrs) e.setAttribute(k, attrs[k]); return e; }
-  function vitrina(){
-    var slot = document.getElementById("slot"), box = document.getElementById("onStage"), ctrl = document.getElementById("osCtrl");
-    var sweep = document.getElementById("sweep"), actual = -1, timer = null, pausa = false;
-    var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    box.style.setProperty("--dur", DUR + "ms");
-    // Cada modelo: sombra de contacto bajo el chasís y bajo cada llanta, el camión con el tono de la luz
-    // del escenario y una oclusión suave en la parte baja, para que quede asentado sobre la tarima.
-    var unidades = VITRINA.map(function(m, n){
-      var g = el("g", { "class": "unit" });
-      slot.appendChild(g);
-      var pic = new Image();
-      pic.onload = function(){
-        var ar = pic.naturalWidth / pic.naturalHeight, h = ALTO, w = h * ar;
-        if (w > 620) { w = 620; h = w / ar; }
-        var r = m.ruedas, cx = 0;
-        r.forEach(function(p){ cx += p[0]; }); cx /= r.length;
-        var x = CENTRO - w * cx, y = PISO - h * r[1][1];
-        var pts = r.map(function(p){ return [x + p[0] * w, y + p[1] * h]; });
-        // luz ambiental bloqueada alrededor del vehículo
-        var my = 0; pts.forEach(function(p){ my += p[1]; }); my /= pts.length;
-        g.appendChild(el("ellipse", { cx: CENTRO, cy: my + 14, rx: w * .62, ry: 46, fill: "#000", opacity: ".38", filter: "url(#ground)" }));
-        // sombra bajo el chasís (huella entre las cuatro llantas)
-        var d = "M" + pts.map(function(p, i){ return p[0] + " " + (p[1] + (i < 2 ? 8 : 3)); }).join(" L") + " Z";
-        g.appendChild(el("path", { d: d, fill: "#000", opacity: ".85", filter: "url(#ground)", stroke: "#000", "stroke-width": 30, "stroke-linejoin": "round" }));
-        // contacto de cada llanta
-        r.forEach(function(p, i){
-          g.appendChild(el("ellipse", { cx: x + p[0] * w, cy: y + p[1] * h - 1, rx: p[2] * w * .62, ry: i === 1 ? 8 : 6, fill: "#000", opacity: i === 1 ? ".9" : ".8", filter: "url(#tight)" }));
-        });
-        var attrs = { x: x, y: y, width: w, height: h, href: m.src, preserveAspectRatio: "none" };
-        g.appendChild(el("image", Object.assign({ filter: "url(#tono)" }, attrs)));
-        g.appendChild(el("image", Object.assign({ filter: "url(#silueta)", mask: "url(#mAO)" }, attrs)));
-      };
-      pic.src = m.src;
-      var b = document.createElement("button"); b.type = "button"; b.setAttribute("aria-label", "Ver " + m.nombre); b.innerHTML = "<i></i>";
-      b.addEventListener("click", function(){ mostrar(n, true); });
-      ctrl.appendChild(b);
-      return g;
-    });
-    function mostrar(n, manual){
-      if (n === actual) return;
-      var prev = actual; actual = n;
-      unidades.forEach(function(u, k){
-        u.classList.remove("on", "off");
-        if (k === n) u.classList.add("on"); else if (k === prev) u.classList.add("off");
-      });
-      // la siguiente unidad espera a la derecha para entrar
-      setTimeout(function(){ if (prev > -1 && prev !== actual) unidades[prev].classList.remove("off"); }, 1600);
-      if (!reduce) { sweep.classList.remove("go"); void sweep.getBBox(); sweep.classList.add("go"); }
-      var m = VITRINA[n];
-      document.getElementById("osName").textContent = m.nombre;
-      document.getElementById("osSub").textContent = m.sub;
-      var vf = document.getElementById("osVer"); vf.hidden = !m.url; if (m.url) vf.href = m.url;
-      document.getElementById("osCount").textContent = ("0" + (n + 1)).slice(-2) + " / " + ("0" + VITRINA.length).slice(-2);
-      document.getElementById("osGo").href = waLink("Hola, me interesa el " + m.nombre + " que vi en la vitrina de FAW Centro Camionero.");
-      [].forEach.call(ctrl.children, function(b, k){
-        b.className = k === n ? "" : k < n ? "done" : "";
-        if (k === n) { void b.offsetWidth; b.className = "on"; }
-      });
-      programar();
-    }
-    function programar(){
-      clearTimeout(timer);
-      if (reduce || pausa) return;
-      timer = setTimeout(function(){ mostrar((actual + 1) % VITRINA.length); }, DUR);
-    }
-    var scene = document.getElementById("scene");
-    [scene, box].forEach(function(el){
-      el.addEventListener("mouseenter", function(){ pausa = true; box.classList.add("paused"); clearTimeout(timer); });
-      el.addEventListener("mouseleave", function(){ pausa = false; box.classList.remove("paused"); var b = ctrl.children[actual]; if (b) { b.className = ""; void b.offsetWidth; b.className = "on"; } programar(); });
-    });
-    mostrar(0);
-  }
-  vitrina();
 
   // Línea de modelos FAW (datos en /faw/modelos.json, tomados de las fichas técnicas FAW Trucks)
   fetch("/faw/modelos.json").then(function(r){ if (!r.ok) throw 0; return r.json(); }).then(function(d){
