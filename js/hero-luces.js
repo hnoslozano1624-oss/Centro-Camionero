@@ -2,8 +2,9 @@
    Posiciones medidas sobre la imagen original (1916 x 821 px): h = luces delanteras, f = exploradoras,
    a = estacionarias (intermitentes). Solo el Hino (tercer camión) enciende las estacionarias. */
 (function () {
-  var link = document.querySelector(".hero-banner-link");
-  if (!link || link.querySelector(".hl")) return;
+  // El banner de computador/tableta (.hero-banner-link) y el recorte para celular (.hm-foto) llevan las mismas luces.
+  var destinos = [].slice.call(document.querySelectorAll(".hero-banner-link, .hm-foto"));
+  if (!destinos.length || destinos[0].querySelector(".hl")) return;
   var W = 1916, H = 821;
 
   var CAMIONES = [
@@ -26,12 +27,15 @@
     html += luz("hl-s hl-h" + c.n, [(c.h[0][0] + c.h[1][0]) / 2, 638]);
   });
 
-  var capa = document.createElement("span");
-  capa.className = "hl"; capa.setAttribute("aria-hidden", "true"); capa.innerHTML = html;
+  function capa() {
+    var c = document.createElement("span");
+    c.className = "hl"; c.setAttribute("aria-hidden", "true"); c.innerHTML = html;
+    return c;
+  }
 
   var css = document.createElement("link");
   css.rel = "stylesheet"; css.href = "/css/hero-luces.css";
-  css.onload = function () { link.appendChild(capa); };
+  css.onload = function () { destinos.forEach(function (d) { d.appendChild(capa()); }); };
   css.onerror = function () { /* sin estilos no se muestra nada */ };
   document.head.appendChild(css);
 })();
