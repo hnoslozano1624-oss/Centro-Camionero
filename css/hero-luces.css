@@ -3,6 +3,8 @@
    luces delanteras, luces exploradoras y, en el Hino, las luces estacionarias (intermitentes). */
 .hero-banner-link{position:relative}
 .hl{position:absolute;inset:0;overflow:hidden;pointer-events:none}
+/* celular: la capa de luces ocupa exactamente el mismo recorte ampliado que la foto (ver .hm-foto en site.css) */
+.hm-foto>.hl{inset:auto;right:auto;bottom:auto;display:block;height:auto;width:177.24%;left:-77.24%;top:-2.941%;aspect-ratio:1916/821}
 .hl i{position:absolute;display:block;aspect-ratio:1;border-radius:50%;transform:translate(-50%,-50%);opacity:0;mix-blend-mode:screen;will-change:opacity;animation-timing-function:linear;animation-iteration-count:infinite}
 /* luz delantera: núcleo blanco cálido con resplandor */
 .hl .hl-h{width:3.5%;background:radial-gradient(circle,rgba(255,255,248,.98) 0,rgba(255,247,214,.75) 16%,rgba(255,238,185,.32) 40%,rgba(255,230,170,0) 70%)}
