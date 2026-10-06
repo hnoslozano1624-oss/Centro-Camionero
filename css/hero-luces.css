@@ -1,0 +1,40 @@
+/* Luces de los camiones del banner principal (las crea /js/hero-luces.js).
+   Cada camión enciende y apaga sus luces por su cuenta, con ritmos distintos (a propósito, de forma dispareja):
+   luces delanteras, luces exploradoras y, en el Hino, las luces estacionarias (intermitentes). */
+.hero-banner-link{position:relative}
+.hl{position:absolute;inset:0;overflow:hidden;pointer-events:none}
+.hl i{position:absolute;display:block;aspect-ratio:1;border-radius:50%;transform:translate(-50%,-50%);opacity:0;mix-blend-mode:screen;will-change:opacity;animation-timing-function:linear;animation-iteration-count:infinite}
+/* luz delantera: núcleo blanco cálido con resplandor */
+.hl .hl-h{width:3.5%;background:radial-gradient(circle,rgba(255,255,248,.98) 0,rgba(255,247,214,.75) 16%,rgba(255,238,185,.32) 40%,rgba(255,230,170,0) 70%)}
+/* exploradora: más pequeña y de tono un poco más amarillo */
+.hl .hl-f{width:2.5%;background:radial-gradient(circle,rgba(255,252,230,.98) 0,rgba(255,240,175,.7) 18%,rgba(255,226,140,.3) 42%,rgba(255,214,120,0) 70%)}
+/* luz estacionaria (intermitente): ámbar */
+.hl .hl-a{width:3.1%;background:radial-gradient(circle,rgba(255,226,150,.95) 0,rgba(255,170,40,.8) 20%,rgba(255,130,10,.38) 46%,rgba(255,110,0,0) 72%);animation:hl-parqueo 1.1s steps(1,end) infinite}
+/* reflejo suave sobre el piso, frente a cada camión */
+.hl .hl-s{width:15%;aspect-ratio:5/1;border-radius:50%;background:radial-gradient(ellipse,rgba(255,244,205,.5) 0,rgba(255,238,190,.18) 45%,rgba(255,232,180,0) 72%)}
+
+/* un ritmo distinto por camión */
+.hl .hl-h1,.hl .hl-s.hl-h1{animation-name:hl-a;animation-duration:7.3s;animation-delay:-1.2s}
+.hl .hl-h2,.hl .hl-s.hl-h2{animation-name:hl-b;animation-duration:9.1s;animation-delay:-4.6s}
+.hl .hl-h3,.hl .hl-s.hl-h3{animation-name:hl-c;animation-duration:8.2s;animation-delay:-6.1s}
+.hl .hl-h4,.hl .hl-s.hl-h4{animation-name:hl-d;animation-duration:6.4s;animation-delay:-2.4s}
+.hl .hl-f1{animation-name:hl-e;animation-duration:5.7s;animation-delay:-3.3s}
+.hl .hl-f2{animation-name:hl-f;animation-duration:10.3s;animation-delay:-0.8s}
+.hl .hl-f3{animation-name:hl-g;animation-duration:6.9s;animation-delay:-5.2s}
+.hl .hl-f4{animation-name:hl-e;animation-duration:8.7s;animation-delay:-7.4s}
+.hl .hl-s{opacity:0}
+
+@keyframes hl-a{0%,10%{opacity:0}11%,34%{opacity:1}35%,41%{opacity:0}42%,46%{opacity:1}47%,64%{opacity:0}65%,90%{opacity:1}91%,100%{opacity:0}}
+@keyframes hl-b{0%,22%{opacity:1}23%,30%{opacity:0}31%,52%{opacity:1}53%,59%{opacity:0}60%,64%{opacity:1}65%,80%{opacity:0}81%,100%{opacity:1}}
+@keyframes hl-c{0%,18%{opacity:0}19%,47%{opacity:1}48%,55%{opacity:0}56%,83%{opacity:1}84%,100%{opacity:0}}
+@keyframes hl-d{0%,14%{opacity:1}15%,36%{opacity:0}37%,41%{opacity:1}42%,47%{opacity:0}48%,78%{opacity:1}79%,100%{opacity:0}}
+@keyframes hl-e{0%,25%{opacity:0}26%,48%{opacity:1}49%,58%{opacity:0}59%,70%{opacity:1}71%,76%{opacity:0}77%,92%{opacity:1}93%,100%{opacity:0}}
+@keyframes hl-f{0%,30%{opacity:1}31%,45%{opacity:0}46%,50%{opacity:1}51%,57%{opacity:0}58%,88%{opacity:1}89%,100%{opacity:0}}
+@keyframes hl-g{0%,8%{opacity:0}9%,28%{opacity:1}29%,62%{opacity:0}63%,85%{opacity:1}86%,100%{opacity:0}}
+@keyframes hl-parqueo{0%{opacity:1}50%{opacity:0}}
+
+/* el reflejo en el piso es más tenue que las luces */
+.hl .hl-s{filter:opacity(.55)}
+
+/* Sin movimiento: el banner se queda como la fotografía original */
+@media (prefers-reduced-motion:reduce){.hl{display:none}}

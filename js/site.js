@@ -55,6 +55,13 @@
   d.src = "/js/dylia.js"; d.defer = true;
   document.head.appendChild(d);
 
+  // Luces de los camiones del banner principal (solo en la página de inicio)
+  if (page === "inicio" && document.querySelector(".hero-banner-link")) {
+    var hl = document.createElement("script");
+    hl.src = "/js/hero-luces.js"; hl.defer = true;
+    document.head.appendChild(hl);
+  }
+
   // Comportamiento: sombra al desplazar, menú móvil y aparición suave de bloques
   try {
     var onScroll = function () { if (header) header.classList.toggle("scrolled", window.scrollY > 10); };
