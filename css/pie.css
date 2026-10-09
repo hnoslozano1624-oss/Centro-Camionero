@@ -1,0 +1,25 @@
+/* Pie de página compartido (lo arma /js/site.js): franja del formulario de crédito y columnas de enlaces bien visibles. */
+footer#siteFooter{padding:0;border-top:0;background:#FFFFFF}
+.pie-credito{background:linear-gradient(135deg,#010B3D 0%,#012792 100%);color:#fff;position:relative;overflow:hidden}
+.pie-credito::before{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.08) 1px,transparent 1.6px);background-size:22px 22px;pointer-events:none}
+.pie-credito-in{position:relative;display:flex;align-items:center;justify-content:space-between;gap:18px 28px;flex-wrap:wrap;padding-block:28px}
+.pie-credito b{display:block;font-family:'IBM Plex Sans',sans-serif;font-weight:800;font-size:clamp(21px,2.4vw,28px);letter-spacing:-.01em;line-height:1.15}
+.pie-credito span{display:block;margin-top:6px;color:#C7D1F2;font-size:15px;max-width:58ch}
+.pie-acc{display:flex;gap:10px;flex-wrap:wrap}
+.pie-btn{display:inline-flex;align-items:center;gap:8px;font-family:'IBM Plex Sans',sans-serif;font-weight:600;font-size:15px;padding:13px 20px;border-radius:2px;text-decoration:none;border:1px solid transparent;transition:background .2s ease,transform .2s ease}
+.pie-btn:hover{transform:translateY(-1px)}
+.pie-btn.rojo{background:#FA010D;color:#fff}.pie-btn.rojo:hover{background:#C8000A}
+.pie-btn.borde{border-color:rgba(255,255,255,.6);color:#fff}.pie-btn.borde:hover{background:rgba(255,255,255,.1)}
+.pie-grid{display:grid;grid-template-columns:1.3fr 1fr 1.1fr;gap:clamp(24px,4vw,56px);padding-block:40px 26px}
+.pie-marca{display:flex;flex-direction:column;gap:14px}
+.pie-marca .brand-logo-img{height:34px}
+.pie-dir{margin:0;display:flex;flex-direction:column;gap:4px;font-family:'IBM Plex Sans',sans-serif;font-size:16px;color:#04102B}
+.pie-dir a{color:#012792;font-weight:600;text-decoration:none}.pie-dir a:hover{color:#FA010D}
+.pie-horario{margin:0;display:flex;flex-direction:column;gap:2px;font-family:'IBM Plex Sans',sans-serif;font-size:15px;color:#4A5578}
+.pie-col h4{margin:0 0 12px;font-family:'IBM Plex Mono',monospace;font-weight:500;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#FA010D}
+.pie-col a{display:block;padding:6px 0;font-family:'IBM Plex Sans',sans-serif;font-weight:600;font-size:16px;line-height:1.35;color:#04102B;text-decoration:none;transition:color .2s ease,transform .2s ease}
+.pie-col a:hover{color:#FA010D;transform:translateX(3px)}
+.pie-col a[aria-current="page"]{color:#012792}
+.pie-copy{border-top:1px solid rgba(1,39,146,.16);padding-block:16px 24px}
+@media (max-width:820px){.pie-grid{grid-template-columns:1fr 1fr}.pie-marca{grid-column:1/-1}}
+@media (max-width:480px){.pie-grid{grid-template-columns:1fr}.pie-btn{flex:1 1 100%;justify-content:center}}
