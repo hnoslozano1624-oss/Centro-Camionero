@@ -44,3 +44,11 @@
 .res-ini{font-size:14px;letter-spacing:.02em}
 .res-grid{scrollbar-width:thin}
 @media (max-width:560px){.res-glogo.grande{width:40px;height:40px}.res-grid{grid-auto-columns:minmax(260px,86%)}}
+/* carrusel de reseñas en rotación continua */
+.res-carrusel{margin-top:26px;overflow:hidden;padding:6px 0 16px;-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 48px,#000 calc(100% - 48px),transparent 100%);mask-image:linear-gradient(90deg,transparent 0,#000 48px,#000 calc(100% - 48px),transparent 100%)}
+.res-pista{display:flex;width:max-content;animation:resGirar var(--res-dur,56s) linear infinite}
+.res-carrusel:hover .res-pista,.res-carrusel:focus-within .res-pista,.res-carrusel:active .res-pista{animation-play-state:paused}
+.res-set{display:flex;gap:16px;padding-right:16px}
+.res-set .res-card{width:clamp(270px,26vw,330px);flex:none}
+@keyframes resGirar{to{transform:translateX(-50%)}}
+@media (prefers-reduced-motion:reduce){.res-pista{animation:none}.res-carrusel{overflow-x:auto}.res-set[aria-hidden="true"]{display:none}}

@@ -40,26 +40,17 @@
       '<a class="res-g" href="' + esc(x.enlace || MAPS) + '" target="_blank" rel="noopener">Ver en Google →</a></article>';
   }
 
+  // Carrusel en rotación continua: las fichas pasan de derecha a izquierda sin parar
+  // (se detiene al pasar el mouse o al tocar, para poder leer). La lista va duplicada para que el giro no tenga cortes.
   function pintar(lista, resumen, ver, calificar) {
+    var fichas = lista.map(tarjeta).join("");
     caja.innerHTML = (resumen || "") +
-      '<div class="res-grid" tabindex="0" aria-label="Reseñas de clientes en Google">' + lista.map(tarjeta).join("") + "</div>" +
+      '<div class="res-carrusel" aria-label="Reseñas de clientes en Google"><div class="res-pista" style="--res-dur:' + Math.max(30, lista.length * 8) + 's">' +
+      '<div class="res-set">' + fichas + '</div><div class="res-set" aria-hidden="true">' + fichas + "</div></div></div>" +
       '<div class="res-acciones"><a class="btn-sitio azul" href="' + esc(ver) + '" target="_blank" rel="noopener">Ver todas las opiniones en Google →</a>' +
       '<a class="btn-sitio borde" href="' + esc(calificar) + '" target="_blank" rel="noopener">Califícanos en Google</a></div>';
-    mover(caja.querySelector(".res-grid"));
-  }
-
-  // Desplazamiento automático suave de las fichas; se detiene al pasar el mouse o tocar
-  function mover(grid) {
-    if (!grid || (window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches)) return;
-    var quieto = false;
-    ["mouseenter", "touchstart", "focusin"].forEach(function (ev) { grid.addEventListener(ev, function () { quieto = true; }, { passive: true }); });
-    grid.addEventListener("mouseleave", function () { quieto = false; });
-    setInterval(function () {
-      if (quieto || grid.scrollWidth <= grid.clientWidth) return;
-      var card = grid.querySelector(".res-card"), paso = card ? card.offsetWidth + 16 : 300;
-      if (grid.scrollLeft + grid.clientWidth >= grid.scrollWidth - 8) grid.scrollTo({ left: 0, behavior: "smooth" });
-      else grid.scrollBy({ left: paso, behavior: "smooth" });
-    }, 4500);
+    var copia = caja.querySelector('.res-set[aria-hidden="true"]');
+    if (copia) copia.querySelectorAll("a").forEach(function (a) { a.setAttribute("tabindex", "-1"); });
   }
 
   var resumenFijo = '<div class="res-resumen">' + G.replace('class="res-glogo"', 'class="res-glogo grande"') +
