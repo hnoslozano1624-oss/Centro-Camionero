@@ -20,6 +20,11 @@
   fr.src = "/js/aliados.js"; fr.defer = true;
   document.head.appendChild(fr);
 
+  // Franja "Compramos tu camión" (prioridad comercial): también se enciende aquí para que salga en todas las páginas
+  var ct = document.createElement("script");
+  ct.src = "/js/compramos.js"; ct.defer = true;
+  document.head.appendChild(ct);
+
   // También aquí se enciende el ícono de la pestaña (la llanta de Centro Camionero): así lo tienen
   // todas las páginas, incluidas las del showroom FAW, que no usan site.js.
   var fv = document.createElement("script");

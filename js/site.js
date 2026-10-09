@@ -8,6 +8,7 @@
     menu: [
       { k: "inicio", t: "Camiones usados", h: "/#camiones", btn: "rojo" },
       { k: "faw", t: "Camiones nuevos", h: "/faw/", btn: "azul" },
+      { k: "compramos", t: "Compramos tu camión", h: "/compramos-tu-camion/", destacado: true },
       { k: "financiacion", t: "Financiación", h: "/financiacion/" },
       { k: "retomas", t: "Retomas", h: "/retomas/" },
       { k: "nosotros", t: "Nosotros", h: "/nosotros/" },
@@ -21,7 +22,7 @@
   // botones=true: en el menú principal, "Camiones usados" (rojo) y "Camiones nuevos" (azul) van como botones
   function links(cls, botones) {
     return CFG.menu.map(function (m) {
-      var c = cls || (botones && m.btn ? "menu-btn menu-btn-" + m.btn : "");
+      var c = cls || (botones && m.btn ? "menu-btn menu-btn-" + m.btn : (botones && m.destacado ? "menu-destacado" : ""));
       return '<a href="' + m.h + '"' + (m.k === page ? ' aria-current="page"' : "") + (c ? ' class="' + c + '"' : "") + ">" + esc(m.t) + "</a>";
     }).join("");
   }
