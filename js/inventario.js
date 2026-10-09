@@ -11,6 +11,7 @@
   var css = document.createElement("style");
   css.textContent =
     ".card-camion[data-id]{cursor:pointer}" +
+    ".stat-img.mosaico{display:grid;grid-auto-flow:column;grid-auto-columns:1fr;gap:3px;background:#0B2B70}.stat-img.mosaico img{width:100%;height:100%;object-fit:cover;display:block}" +
     ".sin-camiones{text-align:center;color:var(--fg-muted);font-size:16px;padding:28px 16px;border:1px dashed var(--border);border-radius:16px;background:var(--bg-elevated)}" +
     ".card-camion .estado-pill{position:absolute;top:10px;right:10px;background:var(--red);color:#fff;font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;padding:4px 8px;border-radius:99px}" +
     ".card-camion .nfotos{position:absolute;bottom:10px;right:10px;background:rgba(4,16,43,.65);color:#fff;font-family:'IBM Plex Mono',monospace;font-size:10px;padding:3px 7px;border-radius:99px}" +
@@ -105,6 +106,10 @@
     var grid = document.querySelector("#camiones .grid-camiones");
     if (grid && usados.length) { grid.innerHTML = usados.map(tarjeta).join(""); grid.classList.add("in"); activar(grid); }
     else sinCamiones();
+    // Tarjeta "+500 camiones comercializados": mosaico con fotos reales del inventario (si hay al menos 2)
+    var mos = document.querySelector(".stat-img-camiones");
+    var fotos = usados.map(function (v) { return v.fotos[0]; }).filter(Boolean).slice(0, 3);
+    if (mos && fotos.length >= 2) { mos.classList.add("mosaico"); mos.innerHTML = fotos.map(function (f) { return '<img src="' + esc(f) + '" alt="" loading="lazy">'; }).join(""); }
   }).catch(sinCamiones);
 
   function sinCamiones() { var p = document.getElementById("sinCamiones"); if (p) p.hidden = false; }

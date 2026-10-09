@@ -6,10 +6,10 @@
     mapa: "https://maps.app.goo.gl/kEuP6FUTMVdnTjbs6",
     horario: ["Lunes a viernes: 8:00 a. m. a 5:00 p. m.", "Sábados: 8:00 a. m. a 2:00 p. m."],
     menu: [
-      { k: "inicio", t: "Camiones disponibles", h: "/#camiones" },
+      { k: "inicio", t: "Camiones usados", h: "/#camiones", btn: "rojo" },
+      { k: "faw", t: "Camiones nuevos", h: "/faw/", btn: "azul" },
       { k: "financiacion", t: "Financiación", h: "/financiacion/" },
       { k: "retomas", t: "Retomas", h: "/retomas/" },
-      { k: "faw", t: "Camiones nuevos", h: "/faw/" },
       { k: "nosotros", t: "Nosotros", h: "/nosotros/" },
       { k: "contacto", t: "Contacto", h: "/contacto/" }
     ]
@@ -18,9 +18,11 @@
   var page = body.getAttribute("data-page") || "";
 
   function esc(s) { return String(s).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); }
-  function links(cls) {
+  // botones=true: en el menú principal, "Camiones usados" (rojo) y "Camiones nuevos" (azul) van como botones
+  function links(cls, botones) {
     return CFG.menu.map(function (m) {
-      return '<a href="' + m.h + '"' + (m.k === page ? ' aria-current="page"' : "") + (cls ? ' class="' + cls + '"' : "") + ">" + esc(m.t) + "</a>";
+      var c = cls || (botones && m.btn ? "menu-btn menu-btn-" + m.btn : "");
+      return '<a href="' + m.h + '"' + (m.k === page ? ' aria-current="page"' : "") + (c ? ' class="' + c + '"' : "") + ">" + esc(m.t) + "</a>";
     }).join("");
   }
 
@@ -29,8 +31,8 @@
     header.innerHTML =
       '<div class="container bar">' +
       '<a class="brand" href="/"><img class="brand-logo-img" src="/assets/logo.svg" alt="Centro Camionero"></a>' +
-      '<nav class="menu" id="siteMenu" aria-label="Principal">' + links() + "</nav>" +
-      '<div class="bar-right"><a class="nav-cta" href="/financiacion/">Financia tu camión</a>' +
+      '<nav class="menu" id="siteMenu" aria-label="Principal">' + links("", true) + "</nav>" +
+      '<div class="bar-right">' +
       '<button class="nav-toggle" id="navToggle" aria-label="Abrir menú" aria-expanded="false">' +
       '<svg width="18" height="14" viewBox="0 0 18 14" fill="none"><path d="M0 1H18M0 7H18M0 13H18" stroke="currentColor" stroke-width="2"/></svg></button></div></div>';
   }
