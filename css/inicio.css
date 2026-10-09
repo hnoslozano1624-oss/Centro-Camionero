@@ -1,0 +1,39 @@
+/* Inicio: calificaciones de Google y ubicación con mapa. */
+.btn-sitio{display:inline-flex;align-items:center;gap:8px;font-family:'IBM Plex Sans',sans-serif;font-weight:600;font-size:15px;padding:13px 20px;border-radius:2px;text-decoration:none;border:1px solid transparent;transition:background .2s ease,transform .2s ease}
+.btn-sitio:hover{transform:translateY(-1px)}
+.btn-sitio.azul{background:#012792;color:#fff}.btn-sitio.azul:hover{background:#010B3D}
+.btn-sitio.rojo{background:#FA010D;color:#fff}.btn-sitio.rojo:hover{background:#C8000A}
+.btn-sitio.borde{border-color:#012792;color:#012792;background:#fff}.btn-sitio.borde:hover{background:#E4E7EF}
+
+/* calificaciones de Google */
+.resenas{background:#FFFFFF;padding-block:clamp(44px,6vw,80px)}
+.resenas .section-head h2{color:var(--ink)}
+.res-resumen{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+.res-num{font-family:'Big Shoulders Display',sans-serif;font-weight:800;font-size:clamp(56px,7vw,80px);color:#012792;line-height:1}
+.res-total{margin-top:4px;font-size:15px;color:var(--fg-muted)}
+.estrellas{color:#F5B301;letter-spacing:2px;font-size:22px;line-height:1}
+.res-grid{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(280px,1fr);gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;padding:4px 2px 12px;margin-top:26px}
+.res-card{scroll-snap-align:start;background:var(--bg);border:1px solid var(--border);border-radius:16px;padding:20px;display:flex;flex-direction:column;gap:10px}
+.res-card .estrellas{font-size:17px}
+.res-autor{display:flex;align-items:center;gap:10px}
+.res-autor img,.res-ini{width:38px;height:38px;border-radius:50%;flex:none;object-fit:cover}
+.res-ini{display:grid;place-items:center;background:#012792;color:#fff;font-weight:700}
+.res-autor b{display:block;font-size:15px}.res-autor small{color:var(--fg-muted);font-size:12.5px}
+.res-texto{color:var(--fg-muted);font-size:14.5px;line-height:1.5;display:-webkit-box;-webkit-line-clamp:6;-webkit-box-orient:vertical;overflow:hidden}
+.res-g{margin-top:auto;font-size:13px;font-weight:600;color:#012792;text-decoration:none}
+.res-acciones{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
+.res-vacio{display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap;background:var(--bg);border:1px solid var(--border);border-radius:16px;padding:clamp(20px,3vw,30px)}
+.res-vacio p{font-size:16px;color:var(--fg-muted);max-width:56ch}
+.res-g-logo{font-family:'IBM Plex Sans',sans-serif;font-weight:700;font-size:20px;color:var(--ink);display:flex;align-items:center;gap:10px}
+
+/* ubicación */
+.ubicacion{background:var(--bg);padding-block:clamp(44px,6vw,80px)}
+.ubi-grid{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:clamp(20px,3vw,40px);align-items:stretch}
+.mapa{border-radius:16px;overflow:hidden;border:1px solid var(--border);min-height:360px;background:#E4E7EF;box-shadow:var(--shadow)}
+.mapa iframe{display:block;width:100%;height:100%;min-height:360px;border:0}
+.ubi-info{background:#fff;border:1px solid var(--border);border-radius:16px;padding:clamp(22px,3vw,32px);display:flex;flex-direction:column;gap:14px}
+.ubi-info h3{font-family:'IBM Plex Sans',sans-serif;text-transform:none;font-size:22px;font-weight:700;letter-spacing:-.01em}
+.ubi-info p{font-size:16px;color:var(--fg-muted)}
+.ubi-info b{color:var(--ink)}
+.ubi-info .btn-sitio{justify-content:center}
+@media (max-width:860px){.ubi-grid{grid-template-columns:1fr}.mapa,.mapa iframe{min-height:300px}}

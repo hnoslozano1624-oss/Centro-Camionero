@@ -15,6 +15,11 @@
       { k: "contacto", t: "Contacto", h: "/contacto/" }
     ]
   };
+  // Estilos del pie de página (franja del formulario de crédito y columnas de enlaces)
+  var pc = document.createElement("link");
+  pc.rel = "stylesheet"; pc.href = "/css/pie.css";
+  document.head.appendChild(pc);
+
   var body = document.body;
   var page = body.getAttribute("data-page") || "";
 
@@ -41,16 +46,30 @@
   var footer = document.getElementById("siteFooter");
   if (footer) {
     footer.innerHTML =
-      '<div class="container foot-inner">' +
-      '<a class="brand" href="/"><img class="brand-logo-img footer-logo-img" src="/assets/logo.svg" alt="Centro Camionero"></a>' +
-      '<div class="foot-links">' + links() + "</div>" +
-      '<div class="foot-info"><b>' + esc(CFG.dir) + '</b><a href="' + CFG.mapa + '" target="_blank" rel="noopener">Ver en el mapa</a>' +
-      CFG.horario.map(function (h) { return "<span>" + esc(h) + "</span>"; }).join("") + "</div>" +
+      // Franja: formulario de crédito
+      '<div class="pie-credito"><div class="container pie-credito-in">' +
+      '<div><b>Encuentra aquí tu formulario de crédito</b><span>Mira los documentos que necesitas según tu perfil y pide tu formulario para financiar tu camión.</span></div>' +
+      '<div class="pie-acc"><a class="pie-btn rojo" href="/financiacion/#documentos">Formulario de crédito →</a>' +
+      '<a class="pie-btn borde" href="#dylia" data-dylia="Hola, quiero el formulario de solicitud de crédito para financiar un camión.">Pedirlo por chat</a></div>' +
+      "</div></div>" +
+      // Columnas
+      '<div class="container pie-grid">' +
+      '<div class="pie-marca"><a class="brand" href="/"><img class="brand-logo-img footer-logo-img" src="/assets/logo.svg" alt="Centro Camionero"></a>' +
+      '<p class="pie-dir"><b>' + esc(CFG.dir) + '</b><a href="' + CFG.mapa + '" target="_blank" rel="noopener">Ver en el mapa →</a></p>' +
+      '<p class="pie-horario">' + CFG.horario.map(function (h) { return "<span>" + esc(h) + "</span>"; }).join("") + "</p>" +
       '<div class="foot-social">' +
       '<a class="social-ico" href="#" id="igLink" aria-label="Instagram" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.3" cy="6.7" r="1"/></svg></a>' +
       '<a class="social-ico" href="#" id="fbLink" aria-label="Facebook" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 21v-7.6h2.7l.4-3.2H14V8.1c0-.9.3-1.6 1.7-1.6h1.6V3.6C17 3.5 15.9 3.4 14.7 3.4c-2.6 0-4.3 1.6-4.3 4.4v2.4H7.8v3.2h2.6V21"/></svg></a>' +
-      "</div>" +
-      '<span class="copy">© 2026 Centro Camionero · Bogotá, Colombia</span></div>';
+      "</div></div>" +
+      '<nav class="pie-col" aria-label="Secciones"><h4>Secciones</h4>' + links() + "</nav>" +
+      '<div class="pie-col"><h4>Atajos</h4>' +
+      '<a href="/compramos-tu-camion/">Vende tu camión de contado</a>' +
+      '<a href="/retomas/">Retoma tu usado como parte de pago</a>' +
+      '<a href="/financiacion/#simulador">Simulador de cuotas</a>' +
+      '<a href="/financiacion/#documentos">Formulario de crédito</a>' +
+      '<a href="#dylia" data-dylia="Hola, quiero hablar con un asesor de Centro Camionero.">Habla con DYLIA</a>' +
+      "</div></div>" +
+      '<div class="container pie-copy"><span class="copy">© 2026 Centro Camionero · Bogotá, Colombia</span></div>';
   }
 
   // Asistente virtual DYLIA: todos los llamados a la acción del sitio la abren (ver /js/dylia.js)

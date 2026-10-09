@@ -1,5 +1,6 @@
 /* Franja en movimiento "Compramos tu camión" (prioridad comercial de Centro Camionero).
-   Se enciende desde /js/dylia.js, así que aparece en todas las páginas públicas (también en el showroom FAW).
+   Se enciende desde /js/dylia.js, así que aparece en todas las páginas públicas.
+   En el showroom FAW cambia a "Retomamos tu camión usado como parte de pago" y lleva a /retomas/.
    - Inicio, computador: va sobre el piso del banner principal.
    - Inicio, celular, y demás páginas: va justo debajo del encabezado.
    Para cambiar los mensajes, edite solo la lista FRASES. */
@@ -44,13 +45,23 @@
       FRASES.map(function (f) { return "<li>" + CAMION + "<span>" + f + "</span></li>"; }).join("") + "</ul>";
   }
 
+  // En el showroom FAW (camiones nuevos) el mensaje es otro: retomamos tu usado como parte de pago de un FAW 0 km
+  var esFaw = /^\/faw(\/|$)/.test(location.pathname);
+  if (esFaw) FRASES = [
+    "Retomamos tu camión usado como parte de pago",
+    "Entrega tu usado y estrena un FAW 0 km",
+    "Financia la diferencia con nuestros aliados",
+    "Un asesor evalúa tu camión y te confirma el valor"
+  ];
+
   var enPagina = location.pathname.indexOf(PAGINA) === 0;
   var a = document.createElement("a");
   a.className = "ct-franja";
-  a.href = enPagina ? "#formulario" : PAGINA;
-  a.setAttribute("aria-label", "Compramos tu camión de contado, en cualquier parte del país. " + (enPagina ? "Ir al formulario" : "Ver cómo vender tu camión"));
+  a.href = esFaw ? "/retomas/" : (enPagina ? "#formulario" : PAGINA);
+  a.setAttribute("aria-label", esFaw ? "Retomamos tu camión usado como parte de pago de un FAW nuevo. Ver cómo funciona la retoma" :
+    "Compramos tu camión de contado, en cualquier parte del país. " + (enPagina ? "Ir al formulario" : "Ver cómo vender tu camión"));
   a.innerHTML = '<div class="ct-mask"><div class="ct-track">' + set(false) + set(true) + "</div></div>" +
-    '<span class="ct-cta"><span>' + (enPagina ? "Envía los datos" : "Vende tu camión") + "</span><b>→</b></span>";
+    '<span class="ct-cta"><span>' + (esFaw ? "Retoma tu usado" : (enPagina ? "Envía los datos" : "Vende tu camión")) + "</span><b>→</b></span>";
 
   function poner() {
     var hero = document.querySelector("body[data-page='inicio'] .hero");
