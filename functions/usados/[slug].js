@@ -10,6 +10,7 @@ const ESTILO = `
 .fc{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:clamp(20px,3.4vw,48px);align-items:start}
 .fc .gal{background:#000;border-radius:16px;overflow:hidden;min-width:0}
 .fc .big{aspect-ratio:4/3;display:grid;place-items:center;background:linear-gradient(155deg,var(--navy),var(--navy-deep))}
+.fc .big:has(img){background:#fff}
 .fc .big img{width:100%;height:100%;object-fit:contain}.fc .big svg{width:55%}
 .fc .mins{display:flex;gap:6px;padding:8px;overflow-x:auto;background:#050B1F}
 .fc .mins button{flex:none;width:76px;aspect-ratio:4/3;padding:0;border:2px solid transparent;background:none;cursor:pointer;opacity:.7;border-radius:4px;overflow:hidden}

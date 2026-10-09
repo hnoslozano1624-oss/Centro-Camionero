@@ -11,6 +11,8 @@
   var css = document.createElement("style");
   css.textContent =
     ".card-camion[data-id]{cursor:pointer}" +
+    // Con foto, el fondo del recuadro es blanco: si la foto (casi siempre de fondo blanco) es más baja que el recuadro, no quedan franjas azules
+    ".card-camion .thumb.con-foto{background:#fff;box-shadow:none}.cc-det .big.con-foto{background:#fff}" +
     ".sin-camiones{text-align:center;color:#fff;font-size:16px;padding:28px 16px;border:1px dashed rgba(255,255,255,.35);border-radius:16px;background:rgba(255,255,255,.06)}" +
     ".card-camion .estado-pill{position:absolute;top:10px;right:10px;background:var(--red);color:#fff;font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;padding:4px 8px;border-radius:99px}" +
     ".card-camion .nfotos{position:absolute;bottom:10px;right:10px;background:rgba(4,16,43,.65);color:#fff;font-family:'IBM Plex Mono',monospace;font-size:10px;padding:3px 7px;border-radius:99px}" +
@@ -53,7 +55,7 @@
     var nombre = v.marca + " " + v.linea;
     var sp = specs(v).slice(0, 5).map(function (s) { return "<span>" + esc(s[0]) + " <b>" + esc(s[1]) + "</b></span>"; }).join("");
     return '<article class="card-camion" data-id="' + v.id + '" tabindex="0" role="button" aria-label="Ver detalle de ' + esc(nombre) + '">' +
-      '<div class="thumb">' + (v.fotos[0] ? '<img src="' + esc(v.fotos[0]) + '" alt="' + esc(nombre + (v.modelo_anio ? " " + v.modelo_anio : "")) + '" loading="lazy">' : SVG) +
+      '<div class="thumb' + (v.fotos[0] ? " con-foto" : "") + '">' + (v.fotos[0] ? '<img src="' + esc(v.fotos[0]) + '" alt="' + esc(nombre + (v.modelo_anio ? " " + v.modelo_anio : "")) + '" loading="lazy">' : SVG) +
       (v.estado === "reservado" ? '<span class="estado-pill">Reservado</span>' : "") +
       (v.fotos.length > 1 ? '<span class="nfotos">' + v.fotos.length + " fotos</span>" : "") + "</div>" +
       '<div class="body"><div class="name-row"><h3>' + esc(nombre) + '</h3><span class="price' + (v.precio ? "" : " muted") + '">' + precio(v) + "</span></div>" +
@@ -68,7 +70,7 @@
       dlg.addEventListener("click", function (e) { if (e.target === dlg || e.target.closest(".cerrar")) dlg.close(); });
     }
     var fotos = v.fotos;
-    dlg.innerHTML = '<button class="cerrar" aria-label="Cerrar">×</button><div class="wrap"><div class="gal"><div class="big">' +
+    dlg.innerHTML = '<button class="cerrar" aria-label="Cerrar">×</button><div class="wrap"><div class="gal"><div class="big' + (fotos[0] ? " con-foto" : "") + '">' +
       (fotos[0] ? '<img src="' + esc(fotos[0]) + '" alt="">' : SVG) + "</div>" +
       (fotos.length > 1 ? '<div class="mins">' + fotos.map(function (f, i) { return '<button data-i="' + i + '" aria-current="' + (i === 0) + '"><img src="' + esc(f) + '" alt="Foto ' + (i + 1) + '" loading="lazy"></button>'; }).join("") + "</div>" : "") +
       '</div><div class="txt"><p class="eyebrow">' + (v.tipo === "nuevo" ? "Camión nuevo" : "Camión usado") + (v.estado === "reservado" ? " · Reservado" : "") + "</p>" +

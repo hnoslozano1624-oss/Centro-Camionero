@@ -33,8 +33,8 @@
     "@keyframes ctMover{to{transform:translateX(-50%)}}" +
     "@keyframes ctRodar{from{transform:translateX(-2px)}to{transform:translateX(2px)}}" +
     "@keyframes ctFlecha{from{transform:translateX(0)}to{transform:translateX(4px)}}" +
-    /* inicio en computador: sobre el piso libre del banner (parte inferior de la foto) */
-    ".hero>.ct-franja{position:absolute;left:0;right:0;bottom:6%}" +
+    /* inicio en computador: pegada al borde inferior de la foto del banner (la sección deja 6px de margen abajo) */
+    ".hero>.ct-franja{position:absolute;left:0;right:0;bottom:6px}" +
     "@media (max-width:700px){.hero>.ct-franja{position:relative;bottom:auto}.ct-cta span{display:none}}" +
     "@media (prefers-reduced-motion:reduce){.ct-track,.ct-set li svg,.ct-cta b{animation:none}.ct-mask{overflow-x:auto}}";
   document.head.appendChild(css);
