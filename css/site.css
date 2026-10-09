@@ -379,25 +379,33 @@ nav.menu a.menu-btn-azul{background:#012792}
 nav.menu a.menu-btn-azul:hover{background:#010B3D}
 @media (max-width:1240px){nav.menu a.menu-btn{font-size:16px;padding:12px 20px}}
 
-/* ---------- cifras de inicio: dos tarjetas grandes con foto ---------- */
-.stats-grid.stats-2{grid-template-columns:repeat(2,minmax(0,1fr));max-width:980px}
-.stat-card.stat-foto{padding:0;overflow:hidden;gap:0}
-.stat-img{width:100%;aspect-ratio:16/7;background:#0B2B70 url("/assets/hero-banner.jpg") no-repeat;background-size:184%;transition:transform 6s ease}
-.stat-img-camiones{background-position:96% 77%}
-.stat-img-anios{background-position:96.5% 0%}
-.stat-foto:hover .stat-img{transform:scale(1.06)}
-.stat-body{position:relative;display:flex;flex-direction:column;align-items:center;gap:10px;padding:0 20px 26px;margin-top:-30px}
-.stat-foto .stat-icon{background:#fff;box-shadow:0 6px 18px -6px rgba(1,15,61,.35)}
-.stat-foto .stat-num{font-size:clamp(48px,6vw,72px)}
-.stat-foto .stat-label{font-size:12.5px}
-@media (prefers-reduced-motion:reduce){.stat-img{transition:none}.stat-foto:hover .stat-img{transform:none}}
-@media (max-width:560px){
-  .stats-grid.stats-2{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
-  .stat-card.stat-foto{padding:0}
-  .stat-img{aspect-ratio:4/3;background-size:240%}
-  .stat-img-camiones{background-position:96% 95%}
-  .stat-img-anios{background-position:97% 0%}
-  .stat-body{padding:0 8px 14px;gap:6px;margin-top:-20px}
-  .stat-foto .stat-num{font-size:38px}
-  .stat-foto .stat-label{font-size:10.5px}
-}
+/* ---------- cifras de inicio: dos tarjetas (se retiró "Puntos de inspección") ---------- */
+.stats-grid.stats-2{grid-template-columns:repeat(2,minmax(0,1fr));max-width:760px}
+@media (max-width:560px){.stats-grid.stats-2{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}}
+
+/* ---------- menú: "Compramos tu camión" destacado ---------- */
+nav.menu a.menu-destacado{color:#FA010D;font-weight:700;padding-left:16px}
+nav.menu a.menu-destacado::before{content:"";position:absolute;left:0;top:50%;width:8px;height:8px;margin-top:-4px;border-radius:50%;background:#FA010D;animation:pulsoMenu 1.6s ease-out infinite}
+@keyframes pulsoMenu{0%{box-shadow:0 0 0 0 rgba(250,1,13,.55)}80%,100%{box-shadow:0 0 0 9px rgba(250,1,13,0)}}
+
+/* ---------- fondo azul con puntos en movimiento (camiones usados del inicio y simulador) ---------- */
+.fondo-azul{background:linear-gradient(135deg,#010B3D 0%,#012792 100%);color:#fff;position:relative;overflow:hidden}
+.fondo-azul>.container{position:relative;z-index:1}
+#camiones.fondo-azul{padding-block:clamp(40px,5vw,64px)}
+#camiones.fondo-azul .section-head h2{color:#fff}
+#camiones.fondo-azul .section-head .lede{color:#C7D1F2}
+.fondo-azul::before,.contacto::before{inset:-44px;background-image:radial-gradient(rgba(255,255,255,.10) 1px,transparent 1.6px);background-size:22px 22px;animation:puntosDeriva 7s linear infinite}
+.fondo-azul::before{content:"";position:absolute;pointer-events:none;z-index:0}
+.fondo-azul::after,.contacto::after{content:"";position:absolute;inset:-88px;pointer-events:none;z-index:0;background-image:radial-gradient(rgba(255,255,255,.22) 1.4px,transparent 2.4px);background-size:88px 88px;background-position:11px 33px;animation:puntosDeriva2 18s linear infinite,puntosBrillo 3.2s ease-in-out infinite alternate}
+@keyframes puntosDeriva{to{transform:translate(22px,22px)}}
+@keyframes puntosDeriva2{to{transform:translate(-88px,88px)}}
+@keyframes puntosBrillo{from{opacity:.35}to{opacity:1}}
+@media (prefers-reduced-motion:reduce){.fondo-azul::before,.fondo-azul::after,.contacto::before,.contacto::after,nav.menu a.menu-destacado::before{animation:none}}
+
+/* ---------- página "Compramos tu camión" ---------- */
+.form-camion{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px 18px}
+.form-camion .full{grid-column:1/-1}
+.form-camion .btn{justify-content:center}
+@media (max-width:640px){.form-camion{grid-template-columns:1fr}}
+.compra-grid{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(24px,4vw,56px);align-items:start}
+@media (max-width:860px){.compra-grid{grid-template-columns:1fr}}
