@@ -6,6 +6,7 @@
   var caja = document.getElementById("resGoogle");
   if (!caja) return;
   var MAPS = caja.getAttribute("data-maps");
+  var TOTAL = "167"; // total de opiniones en Google (actualizar cuando cambie)
   var RESENAS = [
     { autor: "Eimy Chauta", estrellas: 5, enlace: "https://www.google.com/maps/contrib/105493191292569260380/reviews?hl=es-419",
       texto: "Quiero recomendar ampliamente al centro camionero por la excelente experiencia en la entrega del furgón. Desde el primer momento me brindaron seguridad, confianza y una atención muy profesional. Todo el proceso fue llevado por el señor Yoanni quien fue muy claro, organizado y con un acompañamiento constante, lo que me hizo sentir tranquila y satisfecha con el servicio." },
@@ -54,7 +55,7 @@
   }
 
   var resumenFijo = '<div class="res-resumen">' + G.replace('class="res-glogo"', 'class="res-glogo grande"') +
-    '<div>' + estrellas(5) + '<p class="res-total">Clientes que ya cumplieron su sueño con Centro Camionero</p></div></div>';
+    '<div>' + estrellas(5) + '<p class="res-total"><b>' + TOTAL + ' opiniones en Google</b><br>Clientes que ya cumplieron su sueño con Centro Camionero</p></div></div>';
   pintar(RESENAS, resumenFijo, MAPS, MAPS);
 
   // Datos en vivo de Google (si la llave está configurada)

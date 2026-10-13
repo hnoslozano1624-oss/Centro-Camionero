@@ -52,3 +52,8 @@
 .res-set .res-card{width:clamp(270px,26vw,330px);flex:none}
 @keyframes resGirar{to{transform:translateX(-50%)}}
 @media (prefers-reduced-motion:reduce){.res-pista{animation:none}.res-carrusel{overflow-x:auto}.res-set[aria-hidden="true"]{display:none}}
+/* foto del asesor en el simulador */
+.asesor-avatar.foto{width:118px;height:118px;background:#fff;padding:0;box-shadow:0 10px 26px -10px rgba(0,0,0,.5)}
+.asesor-avatar.foto img{display:block;width:100%;height:100%;border-radius:50%;object-fit:cover}
+.res-total b{color:var(--ink);font-size:17px}
+@media (max-width:560px){.asesor-avatar.foto{width:96px;height:96px}}
