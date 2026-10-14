@@ -4,7 +4,8 @@
    Capas (todas de 1448 × 1156, mismo encuadre, fondo transparente sobre la página): cc5-sombra.webp es la sombra del camión en el piso;
    cc5-<nombre>.webp es solo la carrocería; cc5-camion.webp es el camión recortado, que va encima
    para que la cabina tape el frente de la carrocería, como en la realidad.
-   Lo usa /faw/modelo/ (funciones carrocerias() y activarCarrocerias()).
+   Lo usan /faw/modelo/ (funciones carrocerias() y activarCarrocerias()) y el banner de /faw/.
+   Al hacer clic sobre el camión pasa a la siguiente carrocería.
    Para agregar una carrocería: subir /assets/vitrina/cc5-<nombre>.webp con ese mismo encuadre y agregarla a FOTOS. */
 (function () {
   // id de la carrocería → nombre del archivo cc5-<nombre>.webp
@@ -99,6 +100,19 @@
       st.classList.add("listo");
     }, espera + 750 + 1250);
   }
+
+  // Clic sobre el camión: pasa a la siguiente carrocería (como si se tocara el botón siguiente).
+  // Sirve en el inicio de FAW y en /faw/modelo/: busca los botones de carrocería de la misma sección.
+  document.addEventListener("click", function (e) {
+    var st = e.target.closest && e.target.closest(".c360");
+    if (!st) return;
+    var sec = st.closest("section");
+    var tabs = sec ? [].slice.call(sec.querySelectorAll('[role="tab"]')) : [];
+    if (!tabs.length) return;
+    var i = 0;
+    tabs.forEach(function (t, k) { if (t.getAttribute("aria-selected") === "true") i = k; });
+    tabs[(i + 1) % tabs.length].click();
+  });
 
   window.Carroceria360 = { soporta: soporta, html: html, mostrar: mostrar };
 })();
