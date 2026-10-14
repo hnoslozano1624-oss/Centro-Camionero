@@ -9,6 +9,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <link rel="stylesheet" href="/css/site.css">
 <link rel="stylesheet" href="/css/inicio.css">
+<link rel="stylesheet" href="/css/entregas.css">
 </head>
 <body data-page="inicio" data-wa="573157207016">
 <header id="siteHeader">
@@ -74,6 +75,22 @@
 
       <div class="grid-camiones reveal" aria-live="polite"></div>
       <p class="sin-camiones" id="sinCamiones" hidden>Estamos actualizando el inventario. Escríbenos por WhatsApp y te contamos qué camiones tenemos disponibles hoy.</p>
+    </div>
+  </section>
+
+  <section class="entregas-inicio" id="entregas">
+    <div class="container">
+      <div class="section-head reveal">
+        <div><p class="eyebrow">Entregas reales</p><h2 style="margin-top:12px">Ellos ya cumplieron <span>su sueño.</span></h2></div>
+        <p class="lede">Familias y transportadores que hoy trabajan en su propio camión. Cada foto es una entrega real en Centro Camionero.</p>
+      </div>
+    </div>
+    <div data-entregas data-max="16" data-vacio="ocultar"></div>
+    <div class="container">
+      <div class="ent-acciones">
+        <a class="btn btn-primary" href="/entregas/">Conoce sus historias →</a>
+        <small>La próxima foto puede ser la tuya.</small>
+      </div>
     </div>
   </section>
 
@@ -273,5 +290,6 @@
 
 <script src="/js/inventario.js" defer></script>
 <script src="/js/resenas.js" defer></script>
+<script src="/js/entregas.js" defer></script>
 </body>
 </html>
