@@ -3,17 +3,17 @@
    y la nueva se construye por bloques de abajo hacia arriba. Luego un reflejo de luz recorre el camión.
    El camión no se gira ni se deforma: con una sola foto, cualquier giro estira el frente.
    Lo usa /faw/modelo/ (funciones carrocerias() y activarCarrocerias()).
-   Para agregar una carrocería con foto: subir /assets/vitrina/cc2-<id>.webp (solo la carrocería, fondo transparente,
-   misma toma y tamaño que cc2-base.webp) y agregar el id a FOTOS. */
+   Para agregar una carrocería con foto: subir /assets/vitrina/cc3-<id>.webp (solo la carrocería, fondo transparente,
+   misma toma y tamaño que cc3-base.webp) y agregar el id a FOTOS. */
 (function () {
   var FOTOS = { furgon: 1, refrigerado: 1, estacas: 1 };
-  var RUTA = "/assets/vitrina/cc2-";
+  var RUTA = "/assets/vitrina/cc3-";
   var W = 982, H = 846;
   var REDUCIDO = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   // Geometría sobre la imagen (en píxeles del lienzo 982 × 846)
-  var LADO = [[606, 57], [922.5, 107.7], [922.5, 512.8], [606, 538.5]];
-  var FRENTE_SUP = [[298.5, 91.2], [606, 57]];
+  var LADO = [[615, 57], [912, 147.1], [912, 521.5], [615, 538.5]];
+  var FRENTE_SUP = [[304.5, 109.4], [615, 57]];
   var TECHO_CABINA = 222;
   // Puntos donde el camión toca el piso: esquina del bómper, llantas delanteras, llanta trasera y fin del chasís
   var BOMPER = [78, 690], LLANTA_DEL = [543, 801], LLANTA_LEJOS = [240, 750], LLANTA_TRAS = [844.5, 679.5], COLA = [910.5, 645];

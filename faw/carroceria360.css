@@ -27,9 +27,9 @@
 .c360.trazando .c360-plano path{animation:c360Traza .8s ease-out forwards}
 @keyframes c360Traza{to{stroke-dashoffset:0}}
 /* línea láser que acompaña la construcción */
-.c360-laser{position:absolute;left:29%;right:5%;top:64%;height:3px;border-radius:3px;background:linear-gradient(90deg,transparent,#FFD27A 15%,#fff 50%,#FFD27A 85%,transparent);box-shadow:0 0 14px 3px rgba(255,178,30,.75);opacity:0;pointer-events:none}
+.c360-laser{position:absolute;left:31%;right:7%;top:64%;height:3px;border-radius:3px;background:linear-gradient(90deg,transparent,#FFD27A 15%,#fff 50%,#FFD27A 85%,transparent);box-shadow:0 0 14px 3px rgba(255,178,30,.75);opacity:0;pointer-events:none}
 .c360.armando .c360-laser{animation:c360Laser 1.2s linear forwards}
-@keyframes c360Laser{0%{top:64%;opacity:1}92%{opacity:1}100%{top:5%;opacity:0}}
+@keyframes c360Laser{0%{top:64%;opacity:1}92%{opacity:1}100%{top:7%;opacity:0}}
 /* reflejo de luz que recorre el camión ya armado (recortado a su silueta desde el JS) */
 .c360-brillo{position:absolute;inset:0;pointer-events:none;opacity:0;background:linear-gradient(105deg,transparent 38%,rgba(255,255,255,.55) 48%,rgba(255,255,255,.15) 54%,transparent 62%) no-repeat;background-size:250% 100%;background-position:120% 0;mix-blend-mode:soft-light;-webkit-mask-size:100% 100%;mask-size:100% 100%;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat}
 .c360.listo .c360-brillo{opacity:1;animation:c360Brillo 4.5s ease-in-out .3s infinite}
