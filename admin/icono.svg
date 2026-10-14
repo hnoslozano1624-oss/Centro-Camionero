@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+  <!-- Ícono del panel de Centro Camionero: la C del logo (azul) con su arco rojo -->
+  <rect width="512" height="512" rx="112" fill="#FFFFFF"/>
+  <path d="M190.5 433.4A182 182 0 1 1 439.5 225.9A166 166 0 1 0 190.5 433.4Z" fill="#FA010D" stroke="#FA010D" stroke-width="2" stroke-linejoin="round"/>
+  <path d="M378.0 391.0A148 148 0 1 1 378.0 193.0L372.8 239.1A90 90 0 1 0 372.8 344.9Z" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="30" stroke-linejoin="round"/>
+  <path d="M378.0 391.0A148 148 0 1 1 378.0 193.0L372.8 239.1A90 90 0 1 0 372.8 344.9Z" fill="#012792" stroke="#012792" stroke-width="10" stroke-linejoin="round"/>
+</svg>

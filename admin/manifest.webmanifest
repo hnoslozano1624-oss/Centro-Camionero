@@ -1,0 +1,16 @@
+{
+  "id": "/admin/",
+  "name": "Panel Centro Camionero",
+  "short_name": "Panel CC",
+  "description": "Panel de inventario de Centro Camionero: subir y editar los camiones de la página web.",
+  "lang": "es-CO",
+  "start_url": "/admin/",
+  "scope": "/admin/",
+  "display": "standalone",
+  "background_color": "#010B3D",
+  "theme_color": "#012792",
+  "icons": [
+    { "src": "/admin/icono.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" },
+    { "src": "/admin/icono.svg", "sizes": "512x512", "type": "image/svg+xml", "purpose": "any" }
+  ]
+}
