@@ -110,7 +110,7 @@ p{margin:0}
 @media (max-width:1179px){
   .scene{aspect-ratio:auto;height:auto;max-height:none;min-height:0;overflow:visible;container-type:normal}
   .fw-visual{position:relative;inset:auto;height:clamp(300px,72vw,560px)}
-  .fw-canvas{--ax:.66}
+  .fw-canvas{--ax:.61}
   .fw-visual::after{content:"";position:absolute;left:0;right:0;bottom:0;height:34%;background:linear-gradient(180deg,rgba(3,10,38,0),#030A26);z-index:3;pointer-events:none}
   .fw-cielo .fw-scrim{display:none}
   .fw-logo{right:5cqw;top:5cqw;width:min(36cqw,230px)}
@@ -127,10 +127,31 @@ p{margin:0}
   .on-stage .vf,.on-stage .go{font-size:15px}.on-stage .go{padding:11px 22px}
   .v-copy .more{margin-top:20px;font-size:15px}
 }
-/* sin movimiento: se muestra la foto tal como fue diseñada */
+/* sin movimiento: las nubes quedan quietas */
 @media (prefers-reduced-motion:reduce){
-  .fw-canvas{background:url("/assets/faw-hero/fw-base.jpg") center/100% 100% no-repeat}
-  .fw-cielo,.fw-fg{display:none}
+  .fw-nube{animation:none;transform:translate3d(-5%,0,0)}
+  .fw-nube-b{display:none}
+}
+/* camión FAW con carrocería intercambiable sobre el paisaje (mismo componente de /faw/modelo/, ver /faw/carroceria360.js).
+   Va dentro de .fw-canvas, en la posición del camión de la foto, para que escale junto con el paisaje. */
+.fw-canvas .h-c360{position:absolute;left:38.5625%;top:20.4638%;width:45.25%;z-index:1;filter:saturate(1.04) sepia(.07) brightness(.98)}
+.vitrina .c360-escena{background:none}
+.vitrina .c360-tag{display:none}
+/* botones para cambiar la carrocería (en el lugar de la tarjeta del modelo) */
+.h-bopts{pointer-events:auto;display:flex;flex-wrap:wrap;gap:clamp(8px,.6cqw,12px);margin-top:clamp(16px,1.6cqw,30px);text-shadow:none}
+.h-bopts button{position:relative;display:inline-flex;align-items:center;gap:clamp(8px,.6cqw,12px);border:1px solid rgba(255,255,255,.32);background:rgba(5,18,66,.55);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);color:#fff;font:inherit;font-weight:700;font-size:clamp(13.5px,.95cqw,17px);padding:clamp(9px,.7cqw,13px) clamp(14px,1.1cqw,20px) clamp(9px,.7cqw,13px) clamp(10px,.8cqw,14px);border-radius:999px;cursor:pointer;overflow:hidden;white-space:nowrap;transition:background .25s ease,border-color .25s ease,transform .2s ease,color .25s ease}
+.h-bopts button:hover{transform:translateY(-2px);border-color:#fff}
+.h-bopts button svg{width:clamp(26px,1.9cqw,34px);height:auto;flex:none}
+.h-bopts button[aria-selected="true"]{background:#fff;color:#1238B8;border-color:#fff}
+.h-bopts button i{position:absolute;left:0;bottom:0;height:3px;width:0;background:#FFB21E}
+.h-bopts button.run i{animation:hfill var(--hdur,9s) linear forwards}
+.vitrina.pausa .h-bopts button.run i{animation-play-state:paused}
+@keyframes hfill{to{width:100%}}
+@media (max-width:1179px){
+  .h-bopts{margin-top:22px;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;margin-inline:calc(-1 * clamp(16px,4vw,40px));padding:0 clamp(16px,4vw,40px) 6px}
+  .h-bopts::-webkit-scrollbar{display:none}
+  .h-bopts button{flex:none;font-size:15px;padding:10px 18px 10px 12px}
+  .h-bopts button svg{width:30px}
 }
 
 
@@ -281,6 +302,7 @@ dialog::backdrop{background:rgba(8,18,65,.75)}
   .lockup .div{height:24px}
 }
 </style>
+<link rel="stylesheet" href="/faw/carroceria360.css">
 </head>
 <body>
 
@@ -312,14 +334,15 @@ dialog::backdrop{background:rgba(8,18,65,.75)}
   <section class="vitrina" aria-labelledby="t-hero">
     <div class="scene" id="scene">
       <div class="fw-visual">
-      <div class="fw-canvas" aria-hidden="true">
+      <div class="fw-canvas">
         <div class="fw-cielo">
           <img class="fw-nube" src="/assets/faw-hero/fw-cielo.jpg" alt="" width="2040" height="500" fetchpriority="high" decoding="async">
           <img class="fw-nube fw-nube-b" src="/assets/faw-hero/fw-cielo.jpg" alt="" width="2040" height="500" decoding="async">
           <i class="fw-scrim"></i>
           <i class="fw-sol"><i class="fw-sol-i"><i class="s-brillo"></i><i class="s-rayos"></i><i class="s-rayos s-rayos2"></i><i class="s-calida"></i><i class="s-blanca"></i></i></i>
         </div>
-        <img class="fw-fg" src="/assets/faw-hero/fw-primer-plano.webp" alt="" width="1600" height="733" fetchpriority="high" decoding="async">
+        <img class="fw-fg" src="/assets/faw-hero/fw-primer-plano-v2.webp" alt="" width="1600" height="733" fetchpriority="high" decoding="async">
+        <div class="h-c360" id="hC360"></div>
       </div>
       <img class="fw-logo" src="/assets/faw-logo-h-blanco.svg" alt="FAW Trucks" width="2000" height="422">
       </div>
@@ -329,10 +352,10 @@ dialog::backdrop{background:rgba(8,18,65,.75)}
             <p class="kicker">Showroom de camiones nuevos · Bogotá</p>
             <h1 id="t-hero">FAW <span>Centro Camionero</span></h1>
             <p class="tag">Fuerza de trabajo #1 en China, <b>ahora en Colombia.</b> Camiones FAW 0 km con la asesoría y el respaldo de Centro Camionero.</p>
-            <div class="on-stage">
-              <div class="nm">Camión FAW WRR 7.1 LION</div>
-              <div class="sb">Carga mediana</div>
-              <div class="row2"><a class="vf" href="/faw/modelos/wrr-lion-7-1">Ver ficha técnica <span aria-hidden="true">→</span></a><a class="go" data-wa="Hola, me interesa el camión FAW WRR 7.1 LION que vi en la página de FAW Centro Camionero." href="#asesoria">Cotizar</a></div>
+            <div class="h-bopts" id="hBopts" role="tablist" aria-label="Carrocerías del camión FAW">
+              <button type="button" role="tab" id="hb-furgon" data-b="furgon" aria-selected="true" tabindex="0"><svg viewBox="0 0 30 20" fill="currentColor" aria-hidden="true"><rect x="1" y="2" width="18" height="12" rx="1"/><path d="M20 6h5l4 5v3h-9z"/><circle cx="7" cy="16.5" r="2.5"/><circle cx="24" cy="16.5" r="2.5"/></svg>Camión furgón<i></i></button>
+              <button type="button" role="tab" id="hb-refrigerado" data-b="refrigerado" aria-selected="false" tabindex="-1"><svg viewBox="0 0 30 20" fill="currentColor" aria-hidden="true"><rect x="1" y="3" width="18" height="11" rx="1"/><rect x="15" y="0" width="4" height="3"/><path d="M20 6h5l4 5v3h-9z"/><circle cx="7" cy="16.5" r="2.5"/><circle cx="24" cy="16.5" r="2.5"/></svg>Furgón refrigerado<i></i></button>
+              <button type="button" role="tab" id="hb-estacas" data-b="estacas" aria-selected="false" tabindex="-1"><svg viewBox="0 0 30 20" fill="currentColor" aria-hidden="true"><rect x="1" y="11" width="18" height="3"/><rect x="1" y="4" width="2" height="7"/><rect x="7" y="4" width="2" height="7"/><rect x="12" y="4" width="2" height="7"/><rect x="17" y="4" width="2" height="7"/><rect x="1" y="5" width="18" height="1.6"/><path d="M20 6h5l4 5v3h-9z"/><circle cx="7" cy="16.5" r="2.5"/><circle cx="24" cy="16.5" r="2.5"/></svg>Camión estacas<i></i></button>
             </div>
             <a class="more" href="#modelos">Ver los modelos FAW <span aria-hidden="true">→</span></a>
           </div>
@@ -453,6 +476,7 @@ dialog::backdrop{background:rgba(8,18,65,.75)}
 
 <dialog id="dlg" aria-label="Detalle del camión"></dialog>
 
+<script src="/faw/carroceria360.js"></script>
 <script>
 (function(){
   var WA = "573245792435";
@@ -465,6 +489,44 @@ dialog::backdrop{background:rgba(8,18,65,.75)}
   document.querySelectorAll("[data-wa]").forEach(function(a){
     a.href = waLink(a.getAttribute("data-wa")); a.target = "_blank"; a.rel = "noopener";
   });
+
+  // Camión del inicio con carrocería intercambiable (mismo efecto de /faw/modelo/): rota solo cada 9 s
+  // hasta que el visitante elige una carrocería.
+  (function(){
+    var hero = document.querySelector(".vitrina"), cont = document.getElementById("hC360"), zona = document.getElementById("hBopts");
+    if (!hero || !cont || !zona || !window.Carroceria360) return;
+    var lista = [{id:"furgon"},{id:"refrigerado"},{id:"estacas"}];
+    if (!Carroceria360.soporta(lista)) return;
+    cont.innerHTML = Carroceria360.html(lista);
+    var btns = [].slice.call(zona.querySelectorAll("button")), actual = -1, timer = null, manual = false, visible = true, DUR = 9000;
+    var REDUCIDO = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    hero.style.setProperty("--hdur", DUR + "ms");
+    function mostrar(i, foco){
+      if (i === actual) return;
+      actual = i;
+      Carroceria360.mostrar(hero, lista[i].id);
+      btns.forEach(function(b, k){ b.setAttribute("aria-selected", k === i); b.tabIndex = k === i ? 0 : -1; b.classList.remove("run"); });
+      var b = btns[i]; if (foco) b.focus();
+      if (!manual && !REDUCIDO) { void b.offsetWidth; b.classList.add("run"); }
+      programar();
+    }
+    function programar(){
+      clearTimeout(timer);
+      if (manual || REDUCIDO || !visible || hero.classList.contains("pausa")) return;
+      timer = setTimeout(function(){ mostrar((actual + 1) % lista.length); }, DUR);
+    }
+    btns.forEach(function(b, k){ b.addEventListener("click", function(){ manual = true; clearTimeout(timer); btns.forEach(function(x){ x.classList.remove("run"); }); mostrar(k); }); });
+    zona.addEventListener("keydown", function(e){
+      var d = e.key === "ArrowRight" ? 1 : e.key === "ArrowLeft" ? -1 : 0; if (!d) return;
+      e.preventDefault(); manual = true; mostrar((actual + d + lista.length) % lista.length, true);
+    });
+    cont.addEventListener("mouseenter", function(){ hero.classList.add("pausa"); clearTimeout(timer); });
+    cont.addEventListener("mouseleave", function(){ hero.classList.remove("pausa"); var b = btns[actual]; if (b && !manual) { b.classList.remove("run"); void b.offsetWidth; b.classList.add("run"); } programar(); });
+    if ("IntersectionObserver" in window) {
+      new IntersectionObserver(function(es){ visible = es[0].isIntersecting; programar(); }, {threshold:.35}).observe(hero);
+    }
+    mostrar(0);
+  })();
 
   // Menú móvil
   var btn = document.getElementById("menuBtn"), nav = document.getElementById("nav");
