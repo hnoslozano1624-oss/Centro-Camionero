@@ -1,13 +1,14 @@
 /* Carrocerías FAW: el mismo FAW sobre chasís y tres carrocerías (furgón, refrigerado y estacas).
    Al cambiar de carrocería, la actual se desarma de arriba hacia abajo, se dibuja el plano de la nueva
    y la nueva se construye por bloques de abajo hacia arriba. Luego un reflejo de luz recorre el camión.
-   Capas (todas de 1448 × 1156, mismo encuadre): cc5-base.webp es el fondo con la sombra del camión en el piso;
-   cc5-<id>.webp es solo la carrocería (fondo transparente); cc5-camion.webp es el camión recortado, que va encima
+   Capas (todas de 1448 × 1156, mismo encuadre, fondo transparente sobre la página): cc5-sombra.webp es la sombra del camión en el piso;
+   cc5-<nombre>.webp es solo la carrocería; cc5-camion.webp es el camión recortado, que va encima
    para que la cabina tape el frente de la carrocería, como en la realidad.
    Lo usa /faw/modelo/ (funciones carrocerias() y activarCarrocerias()).
-   Para agregar una carrocería: subir /assets/vitrina/cc5-<id>.webp con ese mismo encuadre y agregar el id a FOTOS. */
+   Para agregar una carrocería: subir /assets/vitrina/cc5-<nombre>.webp con ese mismo encuadre y agregarla a FOTOS. */
 (function () {
-  var FOTOS = { furgon: 1, refrigerado: 1, estacas: 1 };
+  // id de la carrocería → nombre del archivo cc5-<nombre>.webp
+  var FOTOS = { furgon: "furgon", refrigerado: "refrigerado", estacas: "estacas_1" };
   var RUTA = "/assets/vitrina/cc5-";
   var W = 1448, H = 1156;
   var REDUCIDO = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -41,9 +42,9 @@
   function html(lista) {
     return '<div class="c360" data-actual="">' +
       '<div class="c360-escena">' +
-        '<img class="c360-base" src="' + RUTA + 'base.webp" alt="" width="' + W + '" height="' + H + '" decoding="async">' +
+        '<img class="c360-sombra" src="' + RUTA + 'sombra.webp" alt="" width="' + W + '" height="' + H + '" decoding="async">' +
         lista.map(function (c) {
-          return '<img class="c360-cuerpo" data-b="' + c.id + '" src="' + RUTA + c.id + '.webp" alt="" width="' + W + '" height="' + H + '" decoding="async">';
+          return '<img class="c360-cuerpo" data-b="' + c.id + '" src="' + RUTA + FOTOS[c.id] + '.webp" alt="" width="' + W + '" height="' + H + '" decoding="async">';
         }).join("") +
         '<img class="c360-camion" src="' + RUTA + 'camion.webp" alt="Camión FAW WHR Lion" width="' + W + '" height="' + H + '" decoding="async">' +
         '<span class="c360-brillo" aria-hidden="true"></span>' +
@@ -57,7 +58,7 @@
   function brillo(st, id) {
     var b = st.querySelector(".c360-brillo");
     if (!b) return;
-    var m = "url(" + RUTA + id + ".webp)";
+    var m = "url(" + RUTA + FOTOS[id] + ".webp)";
     b.style.webkitMaskImage = m;
     b.style.maskImage = m;
   }

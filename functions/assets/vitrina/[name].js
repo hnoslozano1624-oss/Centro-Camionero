@@ -3,8 +3,8 @@
 // Si no, se arma a partir de su copia en texto base64, partida en trozos
 // (<modelo>.1.b64, <modelo>.2.b64, ...): el conector de GitHub no permite subir binarios.
 export async function onRequestGet({ request, params, env }) {
-  const m = String(params.name || "").match(/^([a-z0-9-]+)\.webp$/);
-  if (!m) return new Response("No encontrado", { status: 404 });
+  const m = String(params.name || "").match(/^([a-z0-9_-]+)\.webp$/);
+  if (!m) return env.ASSETS.fetch(request);
 
   const real = await env.ASSETS.fetch(request);
   // 304: el navegador ya tiene la imagen estática en caché.
