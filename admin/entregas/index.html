@@ -145,15 +145,18 @@ async function init(){
   catch(e){showLogin();}
 }
 async function cargar(){
-  try{DATA=(await api("/api/admin/entregas")).entregas;render();}
+  try{DATA=(await api("/api/admin/entregas")).entregas;render();miniaturas();}
   catch(e){$("#grid").innerHTML=`<div class="empty">${esc(e.message)}</div>`;}
 }
-function render(){
+function pintarConteo(){
   const pub=DATA.filter(x=>x.publicado).length;
-  $("#counts").innerHTML=`<b>${pub}</b> publicadas · <b>${DATA.length-pub}</b> ocultas`;
+  $("#counts").innerHTML=`<b>${pub}</b> publicadas · <b>${DATA.length-pub}</b> ocultas${$("#counts").dataset.extra||""}`;
+}
+function render(){
+  pintarConteo();
   if(!DATA.length){$("#grid").innerHTML='<div class="empty">Aún no hay entregas. Suba las primeras fotos con el botón de arriba.</div>';return;}
   $("#grid").innerHTML=DATA.map((x,i)=>`<article class="card${x.publicado?"":" off"}" data-id="${x.id}">
-    <div class="ph"><img src="${esc(x.url)}" alt="" loading="lazy"><span class="n">#${i+1}</span></div>
+    <div class="ph"><img src="${esc(x.mini||x.url)}" alt="" loading="lazy"><span class="n">#${i+1}</span></div>
     <div class="body">
       <textarea maxlength="140" placeholder="Texto opcional: nombre de pila y camión" aria-label="Texto de la foto">${esc(x.texto)}</textarea>
       <div class="row">
@@ -181,14 +184,27 @@ $("#grid").addEventListener("click",async e=>{
   }catch(err){toast(err.message,true);}
 });
 
-// Reduce la foto a máx. 1400 px y la convierte a JPEG antes de subirla
-async function optimizar(file){
-  const MAX=1400;
+// Reduce la foto (máx. 1400 px para verla en grande; 640 px para la miniatura del carrusel) y la convierte a JPEG
+async function optimizar(file,MAX=1400,Q=0.82){
   const bmp=await createImageBitmap(file,{imageOrientation:"from-image"}).catch(()=>createImageBitmap(file));
   const s=Math.min(1,MAX/Math.max(bmp.width,bmp.height));
   const c=document.createElement("canvas");c.width=Math.round(bmp.width*s);c.height=Math.round(bmp.height*s);
   c.getContext("2d").drawImage(bmp,0,0,c.width,c.height); bmp.close&&bmp.close();
-  return new Promise((res,rej)=>c.toBlob(b=>b?res(b):rej(new Error("conversión")),"image/jpeg",0.82));
+  return new Promise((res,rej)=>c.toBlob(b=>b?res(b):rej(new Error("conversión")),"image/jpeg",Q));
+}
+// Crea las miniaturas que falten (fotos subidas antes de existir esta función). Corre sola al abrir el panel.
+let MINIS=false;
+async function miniaturas(){
+  if(MINIS)return; const faltan=DATA.filter(x=>!x.mini); if(!faltan.length)return;
+  MINIS=true; let ok=0;
+  for(const x of faltan){
+    $("#counts").dataset.extra=` · optimizando fotos para la web ${ok+1} de ${faltan.length}…`;pintarConteo();
+    try{const b=await (await fetch(x.url)).blob();const fd=new FormData();fd.append("mini",await optimizar(b,640,0.74),"mini.jpg");
+      const r=await api(`/api/admin/entregas/${x.id}`,{method:"PUT",body:fd});x.mini=r.mini;ok++;}
+    catch(e){if(/sesión/i.test(e.message))break;}
+  }
+  $("#counts").dataset.extra="";pintarConteo();MINIS=false;
+  if(ok)toast(`${ok} fotos optimizadas para cargar más rápido`);
 }
 let ocupado=false;
 async function subir(files){
@@ -199,7 +215,7 @@ async function subir(files){
   const lista=files.slice().reverse();
   for(let i=0;i<lista.length;i++){
     $("#progTxt").textContent=`Subiendo ${i+1} de ${lista.length}…`;$("#progBar").style.width=(i/lista.length*100)+"%";
-    try{const fd=new FormData();fd.append("foto",await optimizar(lista[i]),"entrega.jpg");await api("/api/admin/entregas",{method:"POST",body:fd});ok++;}
+    try{const fd=new FormData();const grande=await optimizar(lista[i]);fd.append("foto",grande,"entrega.jpg");fd.append("mini",await optimizar(grande,640,0.74),"mini.jpg");await api("/api/admin/entregas",{method:"POST",body:fd});ok++;}
     catch(err){fallas++;if(/sesión/i.test(err.message))break;}
   }
   $("#progBar").style.width="100%";

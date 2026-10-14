@@ -50,9 +50,11 @@
     if (visor.showModal) visor.showModal(); else visor.setAttribute("open", "");
   }
 
+  // La tarjeta usa la miniatura liviana (si existe); el visor en grande usa la foto completa.
+  // Las primeras fotos cargan de inmediato; las demás, a medida que se acercan. Aparecen con un fundido suave.
   function tarjeta(x, i) {
     return '<button type="button" class="ent-card" data-i="' + i + '" aria-label="Ver en grande: ' + esc(titulo(x, i)) + '">' +
-      '<img src="' + esc(x.url) + '" alt="Cliente de Centro Camionero recibiendo su camión" loading="lazy" decoding="async">' +
+      '<img src="' + esc(x.mini || x.url) + '" alt="Cliente de Centro Camionero recibiendo su camión" loading="' + (i < 8 ? "eager" : "lazy") + '" decoding="async" onload="this.classList.add(\'ok\')">' +
       '<span class="ent-pie"><b>' + esc(titulo(x, i)) + "</b><small>Entregado en Centro Camionero</small></span></button>";
   }
 
