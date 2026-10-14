@@ -3,6 +3,7 @@
    En el showroom FAW cambia a "Retomamos tu camión usado como parte de pago" y lleva a /retomas/.
    - Inicio, computador: va sobre el piso del banner principal.
    - Inicio, celular, y demás páginas: va justo debajo del encabezado.
+   - Showroom FAW (/faw/...): va pegada al borde superior de la página, encima del encabezado.
    Para cambiar los mensajes, edite solo la lista FRASES. */
 (function () {
   if (window.__ctFranja) return;
@@ -64,6 +65,8 @@
     '<span class="ct-cta"><span>' + (esFaw ? "Retoma tu usado" : (enPagina ? "Envía los datos" : "Vende tu camión")) + "</span><b>→</b></span>";
 
   function poner() {
+    // Showroom FAW: la franja va pegada al borde superior de la página, encima del encabezado
+    if (esFaw) { document.body.insertBefore(a, document.body.firstChild); return; }
     var hero = document.querySelector("body[data-page='inicio'] .hero");
     if (hero) { hero.appendChild(a); return; }
     var header = document.querySelector("body > header, header#siteHeader, header");
