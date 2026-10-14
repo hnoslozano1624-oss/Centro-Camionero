@@ -1,20 +1,21 @@
 /* Carrocerías FAW: el mismo FAW sobre chasís y tres carrocerías (furgón, refrigerado y estacas).
    Al cambiar de carrocería, la actual se desarma de arriba hacia abajo, se dibuja el plano de la nueva
    y la nueva se construye por bloques de abajo hacia arriba. Luego un reflejo de luz recorre el camión.
-   Las imágenes salen de tres tomas idénticas del camión (una por carrocería): cc4-base.webp es el camión con su fondo
-   y sin carrocería; cc4-<id>.webp es solo la carrocería (fondo transparente, mismo encuadre de 1448 × 1086).
+   Capas (todas de 1448 × 1156, mismo encuadre): cc5-base.webp es el fondo con la sombra del camión en el piso;
+   cc5-<id>.webp es solo la carrocería (fondo transparente); cc5-camion.webp es el camión recortado, que va encima
+   para que la cabina tape el frente de la carrocería, como en la realidad.
    Lo usa /faw/modelo/ (funciones carrocerias() y activarCarrocerias()).
-   Para agregar una carrocería: subir /assets/vitrina/cc4-<id>.webp con ese mismo encuadre y agregar el id a FOTOS. */
+   Para agregar una carrocería: subir /assets/vitrina/cc5-<id>.webp con ese mismo encuadre y agregar el id a FOTOS. */
 (function () {
   var FOTOS = { furgon: 1, refrigerado: 1, estacas: 1 };
-  var RUTA = "/assets/vitrina/cc4-";
-  var W = 1448, H = 1086;
+  var RUTA = "/assets/vitrina/cc5-";
+  var W = 1448, H = 1156;
   var REDUCIDO = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  // Geometría de la caja sobre la imagen (en píxeles de la imagen de 1448 × 1086)
-  var LADO = [[880, 22], [1410, 240], [1410, 668], [880, 706]];
-  var FRENTE_SUP = [[405, 120], [880, 22]];
-  var TECHO_CABINA = 250;
+  // Geometría de la caja sobre la imagen (en píxeles de la imagen de 1448 × 1156)
+  var LADO = [[893.2, 20.3], [1415, 217.6], [1415, 682.3], [906.6, 718]];
+  var FRENTE_SUP = [[411, 124.8], [893.2, 20.3]];
+  var TECHO_CABINA = 235;
 
   function mezcla(a, b, t) { return [a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t]; }
   function p(pt) { return pt[0].toFixed(1) + " " + pt[1].toFixed(1); }
@@ -40,10 +41,11 @@
   function html(lista) {
     return '<div class="c360" data-actual="">' +
       '<div class="c360-escena">' +
-        '<img class="c360-base" src="' + RUTA + 'base.webp" alt="Camión FAW WHR Lion" width="' + W + '" height="' + H + '" decoding="async">' +
+        '<img class="c360-base" src="' + RUTA + 'base.webp" alt="" width="' + W + '" height="' + H + '" decoding="async">' +
         lista.map(function (c) {
           return '<img class="c360-cuerpo" data-b="' + c.id + '" src="' + RUTA + c.id + '.webp" alt="" width="' + W + '" height="' + H + '" decoding="async">';
         }).join("") +
+        '<img class="c360-camion" src="' + RUTA + 'camion.webp" alt="Camión FAW WHR Lion" width="' + W + '" height="' + H + '" decoding="async">' +
         '<span class="c360-brillo" aria-hidden="true"></span>' +
         plano() + '<span class="c360-laser" aria-hidden="true"></span>' +
       "</div>" +
