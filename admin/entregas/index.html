@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Entregas · Panel Centro Camionero</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@800&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+:root{
+  --bg:#F3F4F7; --surface:#FFFFFF; --fg:#04102B; --muted:#4A5578; --line:#DDE1EC; --soft:#ECEFF6;
+  --navy:#012792; --navy-deep:#010B3D; --red:#FA010D; --red-deep:#C8000A; --ok:#137A4B; --ok-bg:#E3F4EB;
+  --f-display:'Big Shoulders Display',Impact,sans-serif; --f-body:'IBM Plex Sans',-apple-system,Segoe UI,sans-serif; --f-mono:'IBM Plex Mono',ui-monospace,monospace;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:15px;line-height:1.45;-webkit-font-smoothing:antialiased}
+button,input,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:2px solid var(--red);outline-offset:2px}
+[hidden]{display:none!important}
+h1{font-family:var(--f-display);text-transform:uppercase;letter-spacing:.01em;margin:0;line-height:1}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:1px solid transparent;border-radius:4px;padding:10px 16px;font-weight:600;font-size:14px;text-decoration:none;white-space:nowrap}
+.btn-primary{background:var(--red);color:#fff}.btn-primary:hover{background:var(--red-deep)}
+.btn-ghost{background:var(--surface);border-color:var(--line);color:var(--fg)}
+.btn-sm{padding:6px 10px;font-size:13px}
+.btn:disabled{opacity:.55;cursor:wait}
+
+.login{min-height:100vh;display:grid;place-items:center;padding:24px 16px;background:linear-gradient(160deg,var(--navy) 0%,var(--navy-deep) 100%)}
+.login form{background:var(--surface);border-radius:8px;padding:28px 24px;width:min(400px,100%);display:grid;gap:16px;box-shadow:0 30px 60px -20px rgba(0,0,0,.5)}
+.login img{width:100%;max-width:300px;height:auto}
+.login h1{font-size:30px;color:var(--navy)}
+.login p{margin:0;color:var(--muted);font-size:14px}
+.f{display:grid;gap:5px}
+.f label{font-size:12.5px;font-weight:600;color:var(--muted)}
+.f input{border:1px solid var(--line);border-radius:5px;padding:10px 12px;background:#fff;width:100%}
+.err{color:var(--red-deep);font-size:14px;margin:0}
+
+.top{background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:20;padding-top:env(safe-area-inset-top,0px)}
+.top-in{max-width:1100px;margin:0 auto;padding:10px 16px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.top img{height:30px;width:auto}
+.tabs{display:flex;gap:4px;margin-left:8px}
+.tabs a{padding:7px 12px;border-radius:4px;font-size:14px;font-weight:600;color:var(--muted);text-decoration:none}
+.tabs a[aria-current="page"]{background:var(--navy);color:#fff}
+.sp{flex:1}
+main{max-width:1100px;margin:0 auto;padding:20px 16px 80px;display:grid;gap:16px}
+.head{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;flex-wrap:wrap}
+.head h1{font-size:clamp(30px,5vw,40px);color:var(--navy)}
+.head p{margin:6px 0 0;color:var(--muted);font-size:14px;max-width:62ch}
+.drop{border:2px dashed #B9C2DA;border-radius:10px;background:var(--surface);padding:26px 18px;text-align:center;display:grid;gap:8px;justify-items:center;color:var(--muted);cursor:pointer;transition:border-color .2s,background .2s}
+.drop b{color:var(--navy);font-size:17px}
+.drop.on,.drop:hover{border-color:var(--navy);background:#F7F8FC}
+.progreso{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:12px 14px;display:grid;gap:8px}
+.barra{height:8px;border-radius:99px;background:var(--soft);overflow:hidden}
+.barra i{display:block;height:100%;width:0;background:var(--ok);transition:width .3s}
+.aviso{background:#FDF0D9;color:#7A4A00;border-radius:6px;padding:10px 14px;font-size:13.5px}
+.counts{font-size:13px;color:var(--muted)}
+.counts b{color:var(--fg);font-family:var(--f-mono)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:10px;overflow:hidden;display:grid;grid-template-rows:auto 1fr}
+.card.off{opacity:.55}
+.card .ph{position:relative;aspect-ratio:3/4;background:var(--soft)}
+.card .ph img{width:100%;height:100%;object-fit:cover;display:block}
+.card .ph .n{position:absolute;top:8px;left:8px;background:rgba(4,16,43,.75);color:#fff;font-family:var(--f-mono);font-size:11px;padding:2px 7px;border-radius:3px}
+.card .body{padding:10px;display:grid;gap:8px;align-content:start}
+.card textarea{border:1px solid var(--line);border-radius:5px;padding:8px 10px;resize:vertical;min-height:54px;font-size:13.5px;width:100%}
+.card .row{display:flex;gap:6px;flex-wrap:wrap;align-items:center;justify-content:space-between}
+.sw{display:inline-flex;gap:6px;align-items:center;font-size:13px;color:var(--muted);cursor:pointer}
+.sw input{width:18px;height:18px;accent-color:var(--ok)}
+.del{background:none;border:0;color:var(--red-deep);font-size:13px;font-weight:600;padding:6px 4px}
+.empty{background:var(--surface);border:1px dashed var(--line);border-radius:8px;padding:36px 20px;text-align:center;color:var(--muted)}
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--navy-deep);color:#fff;padding:10px 18px;border-radius:6px;font-size:14px;z-index:100;box-shadow:0 10px 30px rgba(0,0,0,.3);max-width:calc(100% - 32px)}
+.toast.bad{background:var(--red-deep)}
+@media (max-width:640px){.tabs{order:3;width:100%;margin:0}.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}}
+</style>
+</head>
+<body>
+
+<section class="login" id="vLogin" hidden>
+  <form id="fLogin">
+    <img src="/assets/logo.png" alt="Centro Camionero">
+    <h1>Entregas</h1>
+    <p>Ingrese la contraseña del panel para administrar las fotos de entregas.</p>
+    <div class="f"><label for="pw">Contraseña</label><input id="pw" type="password" autocomplete="current-password" required></div>
+    <p class="err" id="loginErr" role="alert"></p>
+    <button class="btn btn-primary" type="submit" id="bLogin">Ingresar</button>
+  </form>
+</section>
+
+<div id="vApp" hidden>
+  <header class="top"><div class="top-in">
+    <img src="/assets/logo.png" alt="Centro Camionero">
+    <nav class="tabs" aria-label="Secciones del panel"><a href="/admin/">Camiones</a><a href="/admin/entregas/" aria-current="page">Entregas</a></nav>
+    <span class="sp"></span>
+    <a class="btn btn-ghost btn-sm" href="/entregas/" target="_blank" rel="noopener">Ver página de entregas</a>
+    <button class="btn btn-ghost btn-sm" id="bLogout">Salir</button>
+  </div></header>
+
+  <main>
+    <div class="head">
+      <div>
+        <h1>Entregas</h1>
+        <p>Fotos reales de clientes recibiendo su camión. Aparecen en el inicio y en la página “Entregas”, de la más reciente a la más antigua.</p>
+        <div class="counts" id="counts"></div>
+      </div>
+    </div>
+    <p class="aviso"><b>Antes de publicar:</b> use solo fotos de clientes que autorizaron su publicación. En el texto escriba, si quiere, el nombre de pila y el camión (por ejemplo: “Familia Rodríguez · JMC Carrying Plus”); nunca cédulas, teléfonos ni placas completas.</p>
+    <label class="drop" id="drop" for="files">
+      <b>+ Subir fotos de entregas</b>
+      <span>Toque aquí o arrastre las fotos. Puede elegir varias a la vez; se optimizan solas antes de subir.</span>
+      <input id="files" type="file" accept="image/jpeg,image/png,image/webp" multiple hidden>
+    </label>
+    <div class="progreso" id="prog" hidden><span id="progTxt">Subiendo…</span><div class="barra"><i id="progBar"></i></div></div>
+    <div class="grid" id="grid"></div>
+  </main>
+</div>
+<div class="toast" id="toast" role="status" hidden></div>
+
+<script>
+(function(){
+const $=s=>document.querySelector(s);
+const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+let DATA=[];
+function toast(m,bad){const t=$("#toast");t.textContent=m;t.classList.toggle("bad",!!bad);t.hidden=false;clearTimeout(t._t);t._t=setTimeout(()=>t.hidden=true,3200);}
+async function api(url,opt={}){
+  const r=await fetch(url,{credentials:"same-origin",...opt,headers:{...(opt.body&&!(opt.body instanceof FormData)?{"Content-Type":"application/json"}:{}),...(opt.headers||{})}});
+  const d=await r.json().catch(()=>({}));
+  if(r.status===401&&!url.endsWith("/login")){showLogin();throw new Error(d.error||"Sesión expirada");}
+  if(!r.ok) throw new Error(d.error||"Ocurrió un error. Intente de nuevo.");
+  return d;
+}
+function showLogin(){$("#vApp").hidden=true;$("#vLogin").hidden=false;setTimeout(()=>$("#pw").focus(),50);}
+$("#fLogin").addEventListener("submit",async e=>{
+  e.preventDefault();$("#loginErr").textContent="";$("#bLogin").disabled=true;
+  try{await api("/api/login",{method:"POST",body:JSON.stringify({password:$("#pw").value})});$("#pw").value="";await init();}
+  catch(err){$("#loginErr").textContent=err.message;}
+  finally{$("#bLogin").disabled=false;}
+});
+$("#bLogout").addEventListener("click",async()=>{await fetch("/api/logout",{method:"POST"});showLogin();});
+
+async function init(){
+  try{await api("/api/admin/session");$("#vLogin").hidden=true;$("#vApp").hidden=false;await cargar();}
+  catch(e){showLogin();}
+}
+async function cargar(){
+  try{DATA=(await api("/api/admin/entregas")).entregas;render();}
+  catch(e){$("#grid").innerHTML=`<div class="empty">${esc(e.message)}</div>`;}
+}
+function render(){
+  const pub=DATA.filter(x=>x.publicado).length;
+  $("#counts").innerHTML=`<b>${pub}</b> publicadas · <b>${DATA.length-pub}</b> ocultas`;
+  if(!DATA.length){$("#grid").innerHTML='<div class="empty">Aún no hay entregas. Suba las primeras fotos con el botón de arriba.</div>';return;}
+  $("#grid").innerHTML=DATA.map((x,i)=>`<article class="card${x.publicado?"":" off"}" data-id="${x.id}">
+    <div class="ph"><img src="${esc(x.url)}" alt="" loading="lazy"><span class="n">#${i+1}</span></div>
+    <div class="body">
+      <textarea maxlength="140" placeholder="Texto opcional: nombre de pila y camión" aria-label="Texto de la foto">${esc(x.texto)}</textarea>
+      <div class="row">
+        <label class="sw"><input type="checkbox" class="pub" ${x.publicado?"checked":""}> En la web</label>
+        <button class="btn btn-ghost btn-sm top1" type="button" ${i===0?"disabled":""}>Poner de primera</button>
+      </div>
+      <div class="row"><button class="del" type="button">Eliminar</button></div>
+    </div></article>`).join("");
+}
+$("#grid").addEventListener("change",async e=>{
+  const card=e.target.closest(".card");if(!card)return;const id=card.dataset.id;
+  try{
+    if(e.target.matches(".pub")){await api(`/api/admin/entregas/${id}`,{method:"PATCH",body:JSON.stringify({publicado:e.target.checked})});card.classList.toggle("off",!e.target.checked);DATA.find(x=>x.id==id).publicado=e.target.checked?1:0;render();toast(e.target.checked?"Visible en la web":"Oculta de la web");}
+    if(e.target.matches("textarea")){await api(`/api/admin/entregas/${id}`,{method:"PATCH",body:JSON.stringify({texto:e.target.value})});DATA.find(x=>x.id==id).texto=e.target.value.trim();toast("Texto guardado");}
+  }catch(err){toast(err.message,true);}
+});
+$("#grid").addEventListener("click",async e=>{
+  const card=e.target.closest(".card");if(!card)return;const id=card.dataset.id;
+  try{
+    if(e.target.matches(".top1")){e.target.disabled=true;await api(`/api/admin/entregas/${id}`,{method:"PATCH",body:JSON.stringify({destacar:true})});await cargar();toast("Ahora es la primera");}
+    if(e.target.matches(".del")){
+      if(e.target.dataset.ok!=="1"){e.target.dataset.ok="1";e.target.textContent="¿Seguro? Toque de nuevo para eliminar";setTimeout(()=>{e.target.dataset.ok="";e.target.textContent="Eliminar";},4000);return;}
+      await api(`/api/admin/entregas/${id}`,{method:"DELETE"});DATA=DATA.filter(x=>x.id!=id);render();toast("Foto eliminada");
+    }
+  }catch(err){toast(err.message,true);}
+});
+
+// Reduce la foto a máx. 1400 px y la convierte a JPEG antes de subirla
+async function optimizar(file){
+  const MAX=1400;
+  const bmp=await createImageBitmap(file,{imageOrientation:"from-image"}).catch(()=>createImageBitmap(file));
+  const s=Math.min(1,MAX/Math.max(bmp.width,bmp.height));
+  const c=document.createElement("canvas");c.width=Math.round(bmp.width*s);c.height=Math.round(bmp.height*s);
+  c.getContext("2d").drawImage(bmp,0,0,c.width,c.height); bmp.close&&bmp.close();
+  return new Promise((res,rej)=>c.toBlob(b=>b?res(b):rej(new Error("conversión")),"image/jpeg",0.82));
+}
+let ocupado=false;
+async function subir(files){
+  files=[...files].filter(f=>/^image\//.test(f.type));
+  if(!files.length||ocupado)return;
+  ocupado=true;$("#prog").hidden=false;let ok=0,fallas=0;
+  // Se suben de la última a la primera elegida, para que la primera quede de primera en la web
+  const lista=files.slice().reverse();
+  for(let i=0;i<lista.length;i++){
+    $("#progTxt").textContent=`Subiendo ${i+1} de ${lista.length}…`;$("#progBar").style.width=(i/lista.length*100)+"%";
+    try{const fd=new FormData();fd.append("foto",await optimizar(lista[i]),"entrega.jpg");await api("/api/admin/entregas",{method:"POST",body:fd});ok++;}
+    catch(err){fallas++;if(/sesión/i.test(err.message))break;}
+  }
+  $("#progBar").style.width="100%";
+  toast(fallas?`${ok} fotos subidas, ${fallas} con error`:`${ok} fotos subidas`,!!fallas);
+  setTimeout(()=>{$("#prog").hidden=true;$("#progBar").style.width="0";},1200);
+  ocupado=false;$("#files").value="";await cargar();
+}
+$("#files").addEventListener("change",e=>subir(e.target.files));
+const drop=$("#drop");
+["dragenter","dragover"].forEach(t=>drop.addEventListener(t,e=>{e.preventDefault();drop.classList.add("on");}));
+["dragleave","drop"].forEach(t=>drop.addEventListener(t,e=>{e.preventDefault();drop.classList.remove("on");}));
+drop.addEventListener("drop",e=>subir(e.dataTransfer.files));
+init();
+})();
+</script>
+</body>
+</html>
