@@ -3,20 +3,20 @@
    y la nueva se construye por bloques de abajo hacia arriba. Luego un reflejo de luz recorre el camión.
    El camión no se gira ni se deforma: con una sola foto, cualquier giro estira el frente.
    Lo usa /faw/modelo/ (funciones carrocerias() y activarCarrocerias()).
-   Para agregar una carrocería con foto: subir /assets/vitrina/cc-<id>.webp (solo la carrocería, fondo transparente,
-   misma toma y tamaño que cc-base.webp) y agregar el id a FOTOS. */
+   Para agregar una carrocería con foto: subir /assets/vitrina/cc2-<id>.webp (solo la carrocería, fondo transparente,
+   misma toma y tamaño que cc2-base.webp) y agregar el id a FOTOS. */
 (function () {
   var FOTOS = { furgon: 1, refrigerado: 1, estacas: 1 };
-  var RUTA = "/assets/vitrina/cc-";
-  var W = 720, H = 661;
+  var RUTA = "/assets/vitrina/cc2-";
+  var W = 982, H = 846;
   var REDUCIDO = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  // Geometría sobre la foto (en píxeles de la imagen 720 × 661)
-  var LADO = [[437.8, 4.4], [717.1, 140.3], [711.2, 373.5], [456.9, 465.6]];
-  var FRENTE_SUP = [[135.2, 29.2], [437.8, 4.4]];
-  var TECHO_CABINA = 188;
-  // Puntos donde el camión toca el piso: esquina del bómper, llanta delantera, llanta trasera y fin del chasís
-  var BOMPER = [18, 588], LLANTA_DEL = [394, 661], LLANTA_TRAS = [606, 528], COLA = [712, 452];
+  // Geometría sobre la imagen (en píxeles del lienzo 982 × 846)
+  var LADO = [[606, 57], [922.5, 107.7], [922.5, 512.8], [606, 538.5]];
+  var FRENTE_SUP = [[298.5, 91.2], [606, 57]];
+  var TECHO_CABINA = 222;
+  // Puntos donde el camión toca el piso: esquina del bómper, llantas delanteras, llanta trasera y fin del chasís
+  var BOMPER = [78, 690], LLANTA_DEL = [543, 801], LLANTA_LEJOS = [240, 750], LLANTA_TRAS = [844.5, 679.5], COLA = [910.5, 645];
 
   function mezcla(a, b, t) { return [a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t]; }
   function p(pt) { return pt[0].toFixed(1) + " " + pt[1].toFixed(1); }
@@ -35,22 +35,23 @@
     return '<svg class="c360-plano" viewBox="0 0 ' + W + " " + H + '" aria-hidden="true"><path d="' + d + '"/></svg>';
   }
 
-  // Piso y sombras de contacto, en las mismas coordenadas de la foto, para que el camión quede apoyado
+  // Piso y sombras de contacto, en las mismas coordenadas de la imagen, para que el camión quede apoyado
   function piso() {
-    // huella del camión sobre el piso (el lado lejano queda tapado por el propio camión)
+    // huella del camión sobre el piso (el lado lejano queda tapado por el propio camión);
     // incluye el piso bajo el bómper, que está más abajo que el bómper porque este va elevado
-    var huella = "M" + p(BOMPER) + "L330 706L" + p(LLANTA_DEL) + "L" + p(LLANTA_TRAS) + "L" + p(COLA) + "L640 360L130 480Z";
+    var huella = "M" + p(BOMPER) + "L390 843L" + p(LLANTA_DEL) + "L" + p(LLANTA_TRAS) + "L" + p(COLA) + "L900 560L200 640Z";
     return '<svg class="c360-sombra" viewBox="0 0 ' + W + " " + H + '" aria-hidden="true">' +
       '<defs>' +
         '<radialGradient id="c360Luz" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#8FB0FF" stop-opacity=".34"/><stop offset=".6" stop-color="#5B7CFF" stop-opacity=".12"/><stop offset="1" stop-color="#5B7CFF" stop-opacity="0"/></radialGradient>' +
-        '<filter id="c360Difusa" x="-20%" y="-30%" width="140%" height="160%"><feGaussianBlur stdDeviation="14"/></filter>' +
-        '<filter id="c360Nitida" x="-50%" y="-200%" width="200%" height="500%"><feGaussianBlur stdDeviation="3.5"/></filter>' +
+        '<filter id="c360Difusa" x="-20%" y="-30%" width="140%" height="160%"><feGaussianBlur stdDeviation="18"/></filter>' +
+        '<filter id="c360Nitida" x="-50%" y="-200%" width="200%" height="500%"><feGaussianBlur stdDeviation="4.5"/></filter>' +
       '</defs>' +
-      '<ellipse cx="380" cy="612" rx="420" ry="96" fill="url(#c360Luz)"/>' +
+      '<ellipse cx="500" cy="760" rx="560" ry="120" fill="url(#c360Luz)"/>' +
       '<path d="' + huella + '" fill="#000510" opacity=".72" filter="url(#c360Difusa)"/>' +
-      '<path d="M' + p([BOMPER[0] + 6, BOMPER[1] + 14]) + 'L318 690" fill="none" stroke="#000510" stroke-width="22" stroke-linecap="round" opacity=".55" filter="url(#c360Difusa)"/>' +
-      '<ellipse cx="' + LLANTA_DEL[0] + '" cy="' + (LLANTA_DEL[1] - 1) + '" rx="50" ry="9" fill="#000510" opacity=".9" filter="url(#c360Nitida)"/>' +
-      '<ellipse cx="' + LLANTA_TRAS[0] + '" cy="' + LLANTA_TRAS[1] + '" rx="30" ry="6" fill="#000510" opacity=".85" filter="url(#c360Nitida)"/>' +
+      '<path d="M' + p([BOMPER[0] + 8, BOMPER[1] + 18]) + 'L372 828" fill="none" stroke="#000510" stroke-width="30" stroke-linecap="round" opacity=".5" filter="url(#c360Difusa)"/>' +
+      '<ellipse cx="' + LLANTA_DEL[0] + '" cy="' + (LLANTA_DEL[1] - 2) + '" rx="68" ry="12" fill="#000510" opacity=".9" filter="url(#c360Nitida)"/>' +
+      '<ellipse cx="' + LLANTA_LEJOS[0] + '" cy="' + LLANTA_LEJOS[1] + '" rx="50" ry="9" fill="#000510" opacity=".7" filter="url(#c360Nitida)"/>' +
+      '<ellipse cx="' + LLANTA_TRAS[0] + '" cy="' + LLANTA_TRAS[1] + '" rx="40" ry="8" fill="#000510" opacity=".85" filter="url(#c360Nitida)"/>' +
     "</svg>";
   }
 
@@ -62,10 +63,11 @@
     return '<div class="c360" data-actual="">' +
       '<div class="c360-escena">' +
         piso() +
-        '<img class="c360-base" src="' + RUTA + 'base.webp" alt="Camión FAW sobre chasís" width="' + W + '" height="' + H + '" decoding="async">' +
+        // la carrocería va detrás del camión: la cabina la tapa, como en la realidad
         lista.map(function (c) {
           return '<img class="c360-cuerpo" data-b="' + c.id + '" src="' + RUTA + c.id + '.webp" alt="" width="' + W + '" height="' + H + '" decoding="async">';
         }).join("") +
+        '<img class="c360-base" src="' + RUTA + 'base.webp" alt="Camión FAW WHR Lion" width="' + W + '" height="' + H + '" decoding="async">' +
         '<span class="c360-brillo" aria-hidden="true"></span>' +
         plano() + '<span class="c360-laser" aria-hidden="true"></span>' +
       "</div>" +
