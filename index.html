@@ -98,7 +98,7 @@
         <h2>Simulador de financiación</h2>
         <p class="intro-phrase">Proyecta tu cuota mensual.</p>
         <p class="lede" style="margin-top:16px">Calcula un estimado de tu cuota para financiar tu próximo camión. Es una simulación de referencia — la tasa y condiciones finales las confirma la entidad financiera aliada.</p>
-        <span class="badge" style="margin-top:18px;display:inline-block">Tasa de ejemplo: 1,8% mensual — sujeta a aprobación</span>
+        <span class="badge" style="margin-top:18px;display:inline-block">Tasa de referencia: 2,1% mensual (28,3% E.A.) — sujeta a aprobación</span>
         <a class="btn btn-ghost on-dark" href="/financiacion/" style="margin-top:14px;align-self:flex-start">Ver requisitos y aliados financieros →</a>
 
         <div class="asesor-card reveal">
@@ -189,7 +189,7 @@
       var monto=parseFloat(document.getElementById('sim-monto').value)||0;
       var inicialPct=parseFloat(document.getElementById('sim-inicial').value)||0;
       var meses=parseInt(document.getElementById('sim-plazo').value,10)||36;
-      var tasaMensual=0.018; // tasa de ejemplo — pendiente confirmar con entidad financiera aliada
+      var tasaMensual=0.021; // 2,1% mensual ≈ 28,3% E.A., por debajo de la tasa de usura (revisar cada mes con la Superfinanciera)
       var principal=monto*(1-Math.min(Math.max(inicialPct,0),90)/100);
       var factor=Math.pow(1+tasaMensual, meses);
       var cuota=principal*tasaMensual*factor/(factor-1);
