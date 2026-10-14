@@ -20,6 +20,10 @@
   var pc = document.createElement("link");
   pc.rel = "stylesheet"; pc.href = "/css/pie.css";
   document.head.appendChild(pc);
+  // Ajustes del menú de cabecera en computador (botones juntos a la izquierda, enlaces compactos)
+  var mc = document.createElement("link");
+  mc.rel = "stylesheet"; mc.href = "/css/menu.css";
+  document.head.appendChild(mc);
 
   var body = document.body;
   var page = body.getAttribute("data-page") || "";
