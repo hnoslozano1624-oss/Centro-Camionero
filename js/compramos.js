@@ -1,9 +1,8 @@
 /* Franja en movimiento "Compramos tu camión" (prioridad comercial de Centro Camionero).
    Se enciende desde /js/dylia.js, así que aparece en todas las páginas públicas.
    En el showroom FAW cambia a "Retomamos tu camión usado como parte de pago" y lleva a /retomas/.
-   - Inicio, computador: va sobre el piso del banner principal.
-   - Inicio, celular, y demás páginas: va justo debajo del encabezado.
-   - Showroom FAW (/faw/...): va pegada al borde superior de la página, encima del encabezado.
+   - Inicio y showroom FAW (/faw/...): va pegada al borde superior de la página, encima del encabezado.
+   - Demás páginas: va justo debajo del encabezado.
    Para cambiar los mensajes, edite solo la lista FRASES. */
 (function () {
   if (window.__ctFranja) return;
@@ -35,9 +34,7 @@
     "@keyframes ctMover{to{transform:translateX(-50%)}}" +
     "@keyframes ctRodar{from{transform:translateX(-2px)}to{transform:translateX(2px)}}" +
     "@keyframes ctFlecha{from{transform:translateX(0)}to{transform:translateX(4px)}}" +
-    /* inicio en computador: pegada al borde inferior de la foto del banner (la sección deja 6px de margen abajo) */
-    ".hero>.ct-franja{position:absolute;left:0;right:0;bottom:6px}" +
-    "@media (max-width:700px){.hero>.ct-franja{position:relative;bottom:auto}.ct-cta span{display:none}}" +
+    "@media (max-width:700px){.ct-cta span{display:none}}" +
     "@media (prefers-reduced-motion:reduce){.ct-track,.ct-set li svg,.ct-cta b{animation:none}.ct-mask{overflow-x:auto}}";
   document.head.appendChild(css);
 
@@ -65,10 +62,8 @@
     '<span class="ct-cta"><span>' + (esFaw ? "Retoma tu usado" : (enPagina ? "Envía los datos" : "Vende tu camión")) + "</span><b>→</b></span>";
 
   function poner() {
-    // Showroom FAW: la franja va pegada al borde superior de la página, encima del encabezado
-    if (esFaw) { document.body.insertBefore(a, document.body.firstChild); return; }
-    var hero = document.querySelector("body[data-page='inicio'] .hero");
-    if (hero) { hero.appendChild(a); return; }
+    // Showroom FAW e inicio: la franja va pegada al borde superior de la página, encima del encabezado
+    if (esFaw || document.body.getAttribute("data-page") === "inicio") { document.body.insertBefore(a, document.body.firstChild); return; }
     var header = document.querySelector("body > header, header#siteHeader, header");
     if (header && header.parentNode) { header.parentNode.insertBefore(a, header.nextSibling); return; }
     var main = document.querySelector("main");
