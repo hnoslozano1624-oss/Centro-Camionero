@@ -31,6 +31,19 @@
   fv.src = "/js/favicon.js"; fv.defer = true;
   document.head.appendChild(fv);
 
+  // App instalable (escritorio y celular): manifiesto con nombre e ícono, color de la barra y service worker mínimo
+  if (!document.querySelector('link[rel="manifest"]')) {
+    var mf = document.createElement("link"); mf.rel = "manifest"; mf.href = "/manifest.webmanifest";
+    document.head.appendChild(mf);
+  }
+  if (!document.querySelector('meta[name="theme-color"]')) {
+    var tc = document.createElement("meta"); tc.name = "theme-color"; tc.content = "#012792";
+    document.head.appendChild(tc);
+  }
+  if ("serviceWorker" in navigator) {
+    window.addEventListener("load", function () { navigator.serviceWorker.register("/sw.js").catch(function () {}); });
+  }
+
   if (!document.getElementById("ia-sdk-root")) {
     var root = document.createElement("div");
     root.id = "ia-sdk-root";
