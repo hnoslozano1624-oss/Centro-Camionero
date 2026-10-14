@@ -6,7 +6,7 @@ export async function onRequestGet({ env }) {
   try {
     if (env.DB) {
       const { results } = await env.DB.prepare(
-        "SELECT id, url, texto FROM entregas WHERE publicado=1 ORDER BY orden DESC, id DESC LIMIT 300"
+        "SELECT id, url, mini, texto FROM entregas WHERE publicado=1 ORDER BY orden DESC, id DESC LIMIT 300"
       ).all();
       entregas = results;
     }
