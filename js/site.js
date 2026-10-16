@@ -76,7 +76,7 @@
       '<a href="/financiacion/#documentos">Formulario de crédito</a>' +
       '<a href="#dylia" data-dylia="Hola, quiero hablar con un asesor de Centro Camionero.">Habla con DYLIA</a>' +
       "</div></div>" +
-      '<div class="container pie-copy"><span class="copy">© 2026 Centro Camionero · Bogotá, Colombia</span></div>';
+      '<div class="container pie-copy"><span class="copy">© 2026 Centro Camionero · Bogotá, Colombia · <a href="/aviso-de-privacidad/" style="color:inherit;text-decoration:underline">Aviso de privacidad</a></span></div>';
   }
 
   // Asistente virtual DYLIA: todos los llamados a la acción del sitio la abren (ver /js/dylia.js)

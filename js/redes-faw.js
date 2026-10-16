@@ -22,6 +22,8 @@
     }).join("");
     var cp = wrap.querySelector(".cp");
     wrap.insertBefore(box, cp || null);
+    // Enlace al aviso de privacidad (es la misma empresa responsable de los datos)
+    if (cp && !cp.querySelector(".fw-priv")) cp.insertAdjacentHTML("beforeend", ' · <a class="fw-priv" href="/aviso-de-privacidad/" style="color:inherit;text-decoration:underline">Aviso de privacidad</a>');
   }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", poner); else poner();
 })();
