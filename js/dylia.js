@@ -25,6 +25,13 @@
   ct.src = "/js/compramos.js"; ct.defer = true;
   document.head.appendChild(ct);
 
+  // Redes sociales de FAW Centro Camionero en el pie del showroom (sus páginas no usan site.js)
+  if (/^\/faw(\/|$)/.test(location.pathname)) {
+    var rf = document.createElement("script");
+    rf.src = "/js/redes-faw.js"; rf.defer = true;
+    document.head.appendChild(rf);
+  }
+
   // También aquí se enciende el ícono de la pestaña (la llanta de Centro Camionero): así lo tienen
   // todas las páginas, incluidas las del showroom FAW, que no usan site.js.
   var fv = document.createElement("script");
