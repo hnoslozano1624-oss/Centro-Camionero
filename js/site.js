@@ -63,8 +63,9 @@
       '<p class="pie-dir"><b>' + esc(CFG.dir) + '</b><a href="' + CFG.mapa + '" target="_blank" rel="noopener">Ver en el mapa →</a></p>' +
       '<p class="pie-horario">' + CFG.horario.map(function (h) { return "<span>" + esc(h) + "</span>"; }).join("") + "</p>" +
       '<div class="foot-social">' +
-      '<a class="social-ico" href="#" id="igLink" aria-label="Instagram" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.3" cy="6.7" r="1"/></svg></a>' +
-      '<a class="social-ico" href="#" id="fbLink" aria-label="Facebook" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 21v-7.6h2.7l.4-3.2H14V8.1c0-.9.3-1.6 1.7-1.6h1.6V3.6C17 3.5 15.9 3.4 14.7 3.4c-2.6 0-4.3 1.6-4.3 4.4v2.4H7.8v3.2h2.6V21"/></svg></a>' +
+      '<a class="social-ico" href="https://www.instagram.com/centrocamionero_bogota/" id="igLink" aria-label="Instagram de Centro Camionero" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.3" cy="6.7" r="1"/></svg></a>' +
+      '<a class="social-ico" href="https://www.facebook.com/centrocamioneroA" id="fbLink" aria-label="Facebook de Centro Camionero" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 21v-7.6h2.7l.4-3.2H14V8.1c0-.9.3-1.6 1.7-1.6h1.6V3.6C17 3.5 15.9 3.4 14.7 3.4c-2.6 0-4.3 1.6-4.3 4.4v2.4H7.8v3.2h2.6V21"/></svg></a>' +
+      '<a class="social-ico" href="https://www.tiktok.com/@centrocamionero" id="ttLink" aria-label="TikTok de Centro Camionero" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M14 3v11.6a3.4 3.4 0 1 1-3.4-3.4"/><path d="M14 3c.4 2.6 2.2 4.3 5 4.6"/></svg></a>' +
       "</div></div>" +
       '<nav class="pie-col" aria-label="Secciones"><h4>Secciones</h4>' + links() + "</nav>" +
       '<div class="pie-col"><h4>Atajos</h4>' +
