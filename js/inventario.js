@@ -13,6 +13,7 @@
     ".card-camion[data-id]{cursor:pointer}" +
     // Con foto, el fondo del recuadro es blanco: si la foto (casi siempre de fondo blanco) es más baja que el recuadro, no quedan franjas azules
     ".card-camion .thumb.con-foto{background:#fff;box-shadow:none}.cc-det .big.con-foto{background:#fff}" +
+    ".ver-mas-camiones{display:flex;justify-content:center;margin-top:32px}.ver-mas-camiones[hidden]{display:none}" +
     ".sin-camiones{text-align:center;color:#fff;font-size:16px;padding:28px 16px;border:1px dashed rgba(255,255,255,.35);border-radius:16px;background:rgba(255,255,255,.06)}" +
     ".card-camion .estado-pill{position:absolute;top:10px;right:10px;background:var(--red);color:#fff;font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;padding:4px 8px;border-radius:99px}" +
     ".card-camion .nfotos{position:absolute;bottom:10px;right:10px;background:rgba(4,16,43,.65);color:#fff;font-family:'IBM Plex Mono',monospace;font-size:10px;padding:3px 7px;border-radius:99px}" +
@@ -105,7 +106,16 @@
     lista.forEach(function (v) { CACHE[v.id] = v; });
     var usados = lista.filter(function (v) { return v.tipo === "usado"; });
     var grid = document.querySelector("#camiones .grid-camiones");
-    if (grid && usados.length) { grid.innerHTML = usados.map(tarjeta).join(""); grid.classList.add("in"); activar(grid); }
+    if (grid && usados.length) {
+      // En el inicio la cuadrícula trae data-max="8": se muestran solo esos y el botón lleva a /camiones/ con todos
+      var max = parseInt(grid.getAttribute("data-max"), 10) || 0;
+      var visibles = max ? usados.slice(0, max) : usados;
+      grid.innerHTML = visibles.map(tarjeta).join(""); grid.classList.add("in"); activar(grid);
+      var vm = document.getElementById("verMasCamiones");
+      if (vm) { vm.hidden = false; var a = vm.querySelector("a"); if (a) a.textContent = "Ver todos los camiones (" + usados.length + ") →"; }
+      var tot = document.getElementById("totalCamiones");
+      if (tot) tot.textContent = usados.length === 1 ? "Hoy tenemos 1 camión disponible." : "Hoy tenemos " + usados.length + " camiones disponibles.";
+    }
     else sinCamiones();
   }).catch(sinCamiones);
 
