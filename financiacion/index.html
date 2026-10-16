@@ -206,8 +206,8 @@
       <div class="reveal">
         <p class="eyebrow">Simulador</p>
         <h2 style="margin-top:12px">Proyecta tu cuota mensual.</h2>
-        <p class="lede">Calcula un estimado para financiar tu próximo camión. Es una simulación de referencia con una tasa de 2,1 % mensual: la tasa, el plazo y la cuota reales los define la entidad financiera.</p>
-        <span class="badge">Tasa de referencia: 2,1 % mensual (28,3 % E.A.) · sujeta a aprobación</span>
+        <p class="lede">Calcula un estimado para financiar tu próximo camión. Es una simulación de referencia con una tasa de 1,7 % mensual: la tasa, el plazo y la cuota reales los define la entidad financiera.</p>
+        <span class="badge">Tasa de referencia: 1,7 % mensual (22,4 % E.A.) · sujeta a aprobación</span>
       </div>
       <form class="contact-form reveal" id="simForm">
         <div class="field"><label for="sim-monto">Valor del camión (COP)</label><input id="sim-monto" name="monto" type="number" min="0" step="1000000" placeholder="180000000" required></div>
@@ -223,7 +223,7 @@
         </div>
         <button class="btn btn-primary" type="submit" style="justify-content:center">Calcular cuota</button>
         <div class="sim-result"><span class="k">Cuota mensual estimada</span><span class="amount mono" id="simResultAmount">—</span></div>
-        <p class="form-note" role="status" aria-live="polite">*Simulación de referencia, no constituye una oferta de crédito.</p>
+        <p class="form-note" role="status" aria-live="polite" style="display:block;line-height:1.5">*Este es solo un simulador: una herramienta de apoyo para que tengas una idea aproximada de tu cuota. No es el valor real del préstamo ni constituye una oferta de crédito. La tasa varía según el perfil de cada cliente y la aprobación de la entidad financiera, y el valor calculado no incluye seguros.</p>
       </form>
     </div>
   </section>
@@ -295,7 +295,7 @@
       var monto=parseFloat(document.getElementById('sim-monto').value)||0;
       var inicialPct=parseFloat(document.getElementById('sim-inicial').value)||0;
       var meses=parseInt(document.getElementById('sim-plazo').value,10)||36;
-      var tasaMensual=0.021; // 2,1% mensual ≈ 28,3% E.A., por debajo de la tasa de usura (revisar cada mes)
+      var tasaMensual=0.017; // 1,7% mensual ≈ 22,4% E.A. (tasa de referencia; la real depende del perfil del cliente)
       var principal=monto*(1-Math.min(Math.max(inicialPct,0),90)/100);
       var factor=Math.pow(1+tasaMensual, meses);
       var cuota=principal*tasaMensual*factor/(factor-1);
