@@ -1,0 +1,38 @@
+/* Carrocerías FAW: construcción animada y reflejo de luz sobre la imagen del camión (ver /faw/carroceria360.js). */
+.bart:has(.c360){background:none;padding:0}
+.c360{position:relative;padding:0;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.c360-escena{position:relative;aspect-ratio:1448/1156;background:radial-gradient(54% 17% at 50% 83%,rgba(91,124,255,.42),rgba(91,124,255,.12) 60%,transparent 100%)}
+.c360-escena img{position:absolute;inset:0;width:100%;height:100%;display:block;user-select:none;-webkit-user-drag:none}
+.c360-cuerpo{opacity:0}
+.c360-cuerpo.on{opacity:1}
+/* la carrocería actual se desarma de arriba hacia abajo, con un destello azul */
+.c360-cuerpo.sale{opacity:1;animation:c360Sale .65s cubic-bezier(.55,0,.8,.4) forwards}
+@keyframes c360Sale{
+  0%{clip-path:inset(0 0 0 0);filter:none}
+  35%{filter:brightness(1.35) saturate(.4)}
+  100%{clip-path:inset(62% 0 0 0);filter:sepia(1) hue-rotate(185deg) saturate(4) brightness(1.1);opacity:.2}
+}
+/* la nueva se construye por bloques, de abajo hacia arriba */
+.c360-cuerpo.arma{opacity:1;animation:c360Arma 1.2s steps(9,end) forwards}
+@keyframes c360Arma{
+  0%{clip-path:inset(62% 0 0 0);filter:sepia(1) hue-rotate(185deg) saturate(3) brightness(1.15)}
+  85%{filter:sepia(.3) hue-rotate(185deg) saturate(1.4) brightness(1.05)}
+  100%{clip-path:inset(0 0 0 0);filter:none}
+}
+/* plano de construcción */
+.c360-plano{position:absolute;inset:0;width:100%;height:100%;overflow:visible;opacity:0;transition:opacity .5s ease;pointer-events:none}
+.c360-plano path{fill:none;stroke:#FFB21E;stroke-width:1.6;stroke-linecap:round;stroke-dasharray:2600;stroke-dashoffset:2600;filter:drop-shadow(0 0 4px rgba(255,178,30,.8))}
+.c360.trazando .c360-plano{opacity:1}
+.c360.trazando .c360-plano path{animation:c360Traza .8s ease-out forwards}
+@keyframes c360Traza{to{stroke-dashoffset:0}}
+/* línea láser que acompaña la construcción */
+.c360-laser{position:absolute;left:28%;right:2%;top:62%;height:3px;border-radius:3px;background:linear-gradient(90deg,transparent,#FFD27A 15%,#fff 50%,#FFD27A 85%,transparent);box-shadow:0 0 14px 3px rgba(255,178,30,.75);opacity:0;pointer-events:none}
+.c360.armando .c360-laser{animation:c360Laser 1.2s linear forwards}
+@keyframes c360Laser{0%{top:62%;opacity:1}92%{opacity:1}100%{top:2%;opacity:0}}
+/* reflejo de luz que recorre el camión ya armado (recortado a su silueta desde el JS) */
+.c360-brillo{position:absolute;inset:0;pointer-events:none;opacity:0;background:linear-gradient(105deg,transparent 38%,rgba(255,255,255,.55) 48%,rgba(255,255,255,.15) 54%,transparent 62%) no-repeat;background-size:250% 100%;background-position:120% 0;mix-blend-mode:soft-light;-webkit-mask-size:100% 100%;mask-size:100% 100%;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat}
+.c360.listo .c360-brillo{opacity:1;animation:c360Brillo 4.5s ease-in-out .3s infinite}
+@keyframes c360Brillo{0%{background-position:120% 0}55%,100%{background-position:-20% 0}}
+.c360-tag{position:absolute;top:12px;left:14px;display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#FFD27A;background:rgba(1,11,61,.55);border:1px solid rgba(255,178,30,.45);padding:5px 10px;border-radius:999px}
+.c360-tag svg{width:16px;height:16px}
+@media (prefers-reduced-motion:reduce){.c360-brillo{display:none}}

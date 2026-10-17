@@ -1,0 +1,411 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Panel de inventario · Centro Camionero</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@800&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+:root{
+  --bg:#F3F4F7; --surface:#FFFFFF; --fg:#04102B; --muted:#4A5578; --line:#DDE1EC; --soft:#ECEFF6;
+  --navy:#012792; --navy-deep:#010B3D; --red:#FA010D; --red-deep:#C8000A;
+  --ok:#137A4B; --ok-bg:#E3F4EB; --warn:#9A5B00; --warn-bg:#FDF0D9; --mute-bg:#E7E9F0;
+  --f-display:'Big Shoulders Display',Impact,sans-serif; --f-body:'IBM Plex Sans',-apple-system,Segoe UI,sans-serif; --f-mono:'IBM Plex Mono',ui-monospace,monospace;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:15px;line-height:1.45;-webkit-font-smoothing:antialiased}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:2px solid var(--red);outline-offset:2px}
+[hidden]{display:none!important}
+h1,h2{font-family:var(--f-display);text-transform:uppercase;letter-spacing:.01em;margin:0;line-height:1}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:1px solid transparent;border-radius:4px;padding:10px 16px;font-weight:600;font-size:14px;text-decoration:none;white-space:nowrap}
+.btn-primary{background:var(--red);color:#fff}.btn-primary:hover{background:var(--red-deep)}
+.btn-navy{background:var(--navy);color:#fff}
+.btn-ghost{background:var(--surface);border-color:var(--line);color:var(--fg)}
+.btn-danger{background:transparent;color:var(--red-deep);border-color:#F5B5B8}
+.btn-sm{padding:6px 10px;font-size:13px}
+.btn:disabled{opacity:.55;cursor:wait}
+
+/* login */
+.login{min-height:100vh;display:grid;place-items:center;padding:24px 16px;background:linear-gradient(160deg,var(--navy) 0%,var(--navy-deep) 100%)}
+.login form{background:var(--surface);border-radius:8px;padding:28px 24px;width:min(400px,100%);display:grid;grid-template-columns:minmax(0,1fr);gap:16px;box-shadow:0 30px 60px -20px rgba(0,0,0,.5)}
+.login img{width:100%;max-width:300px;height:auto;justify-self:start}
+.login h1{font-size:30px;color:var(--navy)}
+.login p{margin:0;color:var(--muted);font-size:14px}
+
+/* app */
+.top{background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:20;padding-top:env(safe-area-inset-top,0px)}
+.top-in{max-width:1100px;margin:0 auto;padding:10px 16px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.top img{height:30px;width:auto;max-width:60vw;object-fit:contain;object-position:left}
+.top .tag{font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);border-left:1px solid var(--line);padding-left:12px}
+.top .sp{flex:1}
+main{max-width:1100px;margin:0 auto;padding:20px 16px 80px;display:grid;gap:16px}
+.head{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;flex-wrap:wrap}
+.head h1{font-size:clamp(30px,5vw,40px);color:var(--navy)}
+.counts{display:flex;gap:16px;flex-wrap:wrap;font-size:13px;color:var(--muted);margin-top:6px}
+.counts b{color:var(--fg);font-family:var(--f-mono)}
+.tools{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.seg{display:inline-flex;background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:3px}
+.seg button{border:0;background:none;padding:6px 12px;border-radius:4px;font-size:13px;color:var(--muted)}
+.seg button[aria-pressed="true"]{background:var(--navy);color:#fff;font-weight:600}
+.search{flex:1 1 200px;min-width:0;border:1px solid var(--line);background:var(--surface);border-radius:6px;padding:9px 12px}
+.alert{background:var(--warn-bg);color:var(--warn);border-radius:6px;padding:10px 14px;font-size:14px}
+
+.list{display:grid;gap:10px}
+.item{background:var(--surface);border:1px solid var(--line);border-radius:8px;display:grid;grid-template-columns:120px minmax(0,1fr) auto;gap:14px;padding:10px;align-items:center}
+.item.off{opacity:.62}
+.thumb{width:120px;aspect-ratio:4/3;border-radius:5px;background:var(--soft);overflow:hidden;display:grid;place-items:center;color:var(--muted);font-size:11px;text-align:center}
+.thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.info{min-width:0;display:grid;gap:4px}
+.info .t{font-weight:700;font-size:16px}
+.info .m{font-size:13px;color:var(--muted);font-family:var(--f-mono)}
+.info .p{font-family:var(--f-display);font-size:22px;color:var(--navy)}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{font-size:11.5px;font-weight:600;padding:2px 8px;border-radius:999px;background:var(--mute-bg);color:var(--muted)}
+.chip.usado{background:#E4E9FA;color:var(--navy)} .chip.nuevo{background:#FDE4E5;color:var(--red-deep)}
+.chip.web{background:var(--ok-bg);color:var(--ok)}
+.acts{display:grid;gap:8px;justify-items:end}
+.acts .row{display:flex;gap:6px;align-items:center;flex-wrap:wrap;justify-content:flex-end}
+.acts select{border:1px solid var(--line);border-radius:4px;padding:6px 8px;background:var(--surface);font-size:13px}
+.switch{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--muted);cursor:pointer}
+.switch input{width:18px;height:18px;accent-color:var(--ok)}
+.empty{background:var(--surface);border:1px dashed var(--line);border-radius:8px;padding:36px 20px;text-align:center;color:var(--muted);display:grid;gap:12px;justify-items:center}
+
+/* editor */
+dialog{border:0;padding:0;border-radius:10px;width:min(760px,calc(100% - 24px));max-height:calc(100% - 24px);box-shadow:0 30px 80px -20px rgba(0,0,0,.45);background:var(--surface);color:var(--fg)}
+dialog::backdrop{background:rgba(1,11,61,.55)}
+.ed{display:grid;grid-template-rows:auto 1fr auto;max-height:calc(100vh - 24px)}
+.ed header{display:flex;justify-content:space-between;align-items:center;padding:16px 20px;border-bottom:1px solid var(--line)}
+.ed header h2{font-size:26px;color:var(--navy)}
+.x{border:0;background:none;font-size:26px;line-height:1;color:var(--muted);padding:4px 8px}
+.ed .body{overflow:auto;padding:18px 20px;display:grid;gap:18px}
+.ed footer{display:flex;justify-content:space-between;gap:10px;padding:14px 20px;border-top:1px solid var(--line);flex-wrap:wrap;align-items:center}
+fieldset{border:0;margin:0;padding:0;display:grid;gap:12px}
+legend{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--red);margin-bottom:8px;padding:0}
+.g2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.g3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.f{display:grid;gap:5px;min-width:0}
+.f label{font-size:12.5px;font-weight:600;color:var(--muted)}
+.f input,.f select,.f textarea{border:1px solid var(--line);border-radius:5px;padding:10px 12px;background:#fff;width:100%;min-width:0}
+.f textarea{min-height:90px;resize:vertical}
+.f small{font-size:12px;color:var(--muted)}
+.req::after{content:" *";color:var(--red)}
+.photos{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:10px}
+.ph{position:relative;border-radius:6px;overflow:hidden;background:var(--soft);aspect-ratio:4/3}
+.ph img{width:100%;height:100%;object-fit:cover;display:block}
+.ph .bar{position:absolute;inset:auto 0 0 0;display:flex;justify-content:space-between;gap:4px;padding:5px;background:linear-gradient(transparent,rgba(0,0,0,.65))}
+.ph .bar button{border:0;border-radius:3px;font-size:11.5px;padding:3px 7px;background:rgba(255,255,255,.92);color:var(--fg)}
+.ph .main{position:absolute;top:6px;left:6px;background:var(--red);color:#fff;font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:2px 7px;border-radius:3px}
+.ph.pend::after{content:"Pendiente de subir";position:absolute;top:6px;right:6px;background:rgba(4,16,43,.75);color:#fff;font-size:10px;padding:2px 6px;border-radius:3px}
+.addph{border:2px dashed var(--line);border-radius:6px;aspect-ratio:4/3;display:grid;place-items:center;text-align:center;color:var(--muted);font-size:13px;cursor:pointer;padding:8px}
+.addph:hover{border-color:var(--navy);color:var(--navy)}
+.err{color:var(--red-deep);font-size:14px;margin:0}
+
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--navy-deep);color:#fff;padding:10px 18px;border-radius:6px;font-size:14px;z-index:100;box-shadow:0 10px 30px rgba(0,0,0,.3);max-width:calc(100% - 32px)}
+.toast.bad{background:var(--red-deep)}
+
+@media (max-width:640px){
+  .item{grid-template-columns:96px minmax(0,1fr)}
+  .thumb{width:96px}
+  .acts{grid-column:1/-1;justify-items:stretch}
+  .acts .row{justify-content:space-between}
+  .g2,.g3{grid-template-columns:minmax(0,1fr)}
+  dialog{width:100%;max-width:100%;max-height:100%;height:100%;border-radius:0;margin:0}
+  .ed{max-height:100vh;height:100%}
+  .top .tag{display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- ============ LOGIN ============ -->
+<section class="login" id="vLogin" hidden>
+  <form id="fLogin">
+    <img src="/assets/logo.png" alt="Centro Camionero">
+    <h1>Panel de inventario</h1>
+    <p>Ingrese la contraseña para administrar los camiones que aparecen en la página web.</p>
+    <div class="f"><label for="pw">Contraseña</label><input id="pw" type="password" autocomplete="current-password" required></div>
+    <p class="err" id="loginErr" role="alert"></p>
+    <button class="btn btn-primary" type="submit" id="bLogin">Ingresar</button>
+  </form>
+</section>
+
+<!-- ============ APP ============ -->
+<div id="vApp" hidden>
+  <header class="top"><div class="top-in">
+    <img src="/assets/logo.png" alt="Centro Camionero">
+    <span class="tag">Panel de inventario</span>
+    <span class="sp"></span>
+    <a class="btn btn-ghost btn-sm" href="/#camiones" target="_blank" rel="noopener">Ver sitio web</a>
+    <button class="btn btn-ghost btn-sm" id="bLogout">Salir</button>
+  </div></header>
+
+  <main>
+    <div class="head">
+      <div>
+        <h1>Camiones</h1>
+        <div class="counts" id="counts"></div>
+      </div>
+      <button class="btn btn-primary" id="bNew">+ Agregar camión</button>
+    </div>
+    <div class="alert" id="noFotos" hidden>La subida de fotos aún no está activa: falta enlazar el almacenamiento de fotos (FOTOS) en Cloudflare. Puede registrar camiones y agregar las fotos después.</div>
+    <div class="tools">
+      <div class="seg" role="group" aria-label="Filtrar por tipo">
+        <button data-f="all" aria-pressed="true">Todos</button>
+        <button data-f="usado" aria-pressed="false">Usados</button>
+        <button data-f="nuevo" aria-pressed="false">Nuevos</button>
+        <button data-f="vendido" aria-pressed="false">Vendidos</button>
+      </div>
+      <input class="search" id="q" type="search" placeholder="Buscar por marca, línea o placa" aria-label="Buscar">
+    </div>
+    <div class="list" id="list"></div>
+  </main>
+</div>
+
+<!-- ============ EDITOR ============ -->
+<dialog id="dlg" aria-labelledby="edTitle">
+  <form class="ed" id="fEd" novalidate>
+    <header><h2 id="edTitle">Nuevo camión</h2><button type="button" class="x" id="bClose" aria-label="Cerrar">×</button></header>
+    <div class="body">
+      <fieldset>
+        <legend>Datos principales</legend>
+        <div class="g2">
+          <div class="f"><label class="req" for="e-tipo">Tipo</label>
+            <select id="e-tipo" name="tipo"><option value="usado">Usado</option><option value="nuevo">Nuevo (0 km)</option></select></div>
+          <div class="f"><label for="e-estado">Estado</label>
+            <select id="e-estado" name="estado"><option value="disponible">Disponible</option><option value="reservado">Reservado</option><option value="vendido">Vendido (se oculta de la web)</option></select></div>
+          <div class="f"><label class="req" for="e-marca">Marca</label><input id="e-marca" name="marca" list="marcas" placeholder="Ej. Chevrolet" required></div>
+          <div class="f"><label class="req" for="e-linea">Línea / referencia</label><input id="e-linea" name="linea" placeholder="Ej. NPR Reward" required></div>
+        </div>
+        <div class="g3">
+          <div class="f"><label for="e-anio">Modelo (año)</label><input id="e-anio" name="modelo_anio" type="number" inputmode="numeric" min="1970" placeholder="2019"></div>
+          <div class="f"><label for="e-km">Kilometraje</label><input id="e-km" name="kilometraje" inputmode="numeric" placeholder="120.000"></div>
+          <div class="f"><label for="e-precio">Precio (COP)</label><input id="e-precio" name="precio" inputmode="numeric" placeholder="185.000.000"><small>Vacío = “Precio a consultar”.</small></div>
+        </div>
+        <div class="g2">
+          <div class="f"><label for="e-placa">Placa</label><input id="e-placa" name="placa" maxlength="10" placeholder="ABC123" style="text-transform:uppercase"><small>Uso interno. No se muestra en la web.</small></div>
+          <div class="f"><label for="e-origen">Origen</label>
+            <select id="e-origen" name="origen"><option value="compra_directa">Compra directa</option><option value="permuta">Recibido en permuta</option></select></div>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Ficha técnica</legend>
+        <div class="g3">
+          <div class="f"><label for="e-motor">Motor</label><input id="e-motor" data-ficha="motor" placeholder="Isuzu 4HK1"></div>
+          <div class="f"><label for="e-carroceria">Carrocería</label><input id="e-carroceria" data-ficha="carroceria" list="carrocerias" placeholder="Furgón"></div>
+          <div class="f"><label for="e-capacidad">Capacidad</label><input id="e-capacidad" data-ficha="capacidad" placeholder="5 toneladas"></div>
+          <div class="f"><label for="e-transmision">Transmisión</label><input id="e-transmision" data-ficha="transmision" placeholder="Manual 6 vel."></div>
+          <div class="f"><label for="e-combustible">Combustible</label><input id="e-combustible" data-ficha="combustible" list="combustibles" placeholder="Diésel"></div>
+          <div class="f"><label for="e-config">Configuración</label><input id="e-config" data-ficha="configuracion" placeholder="4x2 · 2 ejes"></div>
+        </div>
+        <div class="f"><label for="e-desc">Descripción para la web</label><textarea id="e-desc" name="descripcion" maxlength="1500" placeholder="Estado general, mantenimientos, papeles al día, llantas, etc."></textarea></div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Fotos</legend>
+        <p class="f" style="margin:0"><small>La primera foto es la que se ve en la tarjeta de la web. Las fotos se optimizan automáticamente antes de subirlas.</small></p>
+        <div class="photos" id="photos"></div>
+        <input type="file" id="fileIn" accept="image/*" multiple hidden>
+      </fieldset>
+
+      <label class="switch"><input type="checkbox" id="e-pub" checked> Publicar en la página web</label>
+      <p class="err" id="edErr" role="alert"></p>
+    </div>
+    <footer>
+      <button type="button" class="btn btn-danger btn-sm" id="bDel" hidden>Eliminar camión</button>
+      <span style="flex:1"></span>
+      <button type="button" class="btn btn-ghost" id="bCancel">Cancelar</button>
+      <button type="submit" class="btn btn-primary" id="bSave">Guardar</button>
+    </footer>
+  </form>
+</dialog>
+
+<datalist id="marcas"><option>Chevrolet</option><option>FAW</option><option>Foton</option><option>Freightliner</option><option>Fuso</option><option>Hino</option><option>International</option><option>Isuzu</option><option>JAC</option><option>JMC</option><option>Kenworth</option><option>Mercedes-Benz</option><option>Volvo</option></datalist>
+<datalist id="carrocerias"><option>Furgón</option><option>Estacas</option><option>Volqueta</option><option>Tractocamión</option><option>Planchón</option><option>Chasís</option><option>Refrigerado</option><option>Grúa</option><option>Tanque</option></datalist>
+<datalist id="combustibles"><option>Diésel</option><option>Gasolina</option><option>Gas natural</option><option>Eléctrico</option></datalist>
+
+<div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+
+<script>
+(function(){
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+let DATA=[], FILTRO="all", EDIT=null, PEND=[], FOTOS_OK=true, confirmDel=false;
+const fmt=n=>n==null?"":Number(n).toLocaleString("es-CO");
+const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+
+function toast(msg,bad){const t=$("#toast");t.textContent=msg;t.classList.toggle("bad",!!bad);t.hidden=false;clearTimeout(t._t);t._t=setTimeout(()=>t.hidden=true,3200);}
+async function api(url,opt={}){
+  const r=await fetch(url,{credentials:"same-origin",...opt,headers:{...(opt.body&&!(opt.body instanceof FormData)?{"Content-Type":"application/json"}:{}),...(opt.headers||{})}});
+  const d=await r.json().catch(()=>({}));
+  if(r.status===401&&!url.endsWith("/login")){showLogin();throw new Error(d.error||"Sesión expirada");}
+  if(!r.ok) throw new Error(d.error||"Ocurrió un error. Intente de nuevo.");
+  return d;
+}
+
+/* ---------- sesión ---------- */
+function showLogin(){$("#vApp").hidden=true;$("#vLogin").hidden=false;setTimeout(()=>$("#pw").focus(),50);}
+async function showApp(){$("#vLogin").hidden=true;$("#vApp").hidden=false;await cargar();}
+$("#fLogin").addEventListener("submit",async e=>{
+  e.preventDefault();$("#loginErr").textContent="";$("#bLogin").disabled=true;
+  try{await api("/api/login",{method:"POST",body:JSON.stringify({password:$("#pw").value})});$("#pw").value="";await init();}
+  catch(err){$("#loginErr").textContent=err.message;}
+  finally{$("#bLogin").disabled=false;}
+});
+$("#bLogout").addEventListener("click",async()=>{await fetch("/api/logout",{method:"POST"});showLogin();});
+async function init(){
+  try{const s=await api("/api/admin/session");FOTOS_OK=s.fotos;$("#noFotos").hidden=FOTOS_OK;await showApp();}
+  catch(e){showLogin();}
+}
+
+/* ---------- lista ---------- */
+async function cargar(){
+  try{DATA=(await api("/api/admin/vehiculos")).vehiculos;render();}
+  catch(e){$("#list").innerHTML=`<div class="empty">${esc(e.message)}</div>`;}
+}
+function render(){
+  const enWeb=DATA.filter(v=>v.publicado&&v.estado!=="vendido").length;
+  $("#counts").innerHTML=`<span><b>${enWeb}</b> visibles en la web</span><span><b>${DATA.filter(v=>v.estado==="reservado").length}</b> reservados</span><span><b>${DATA.filter(v=>v.estado==="vendido").length}</b> vendidos</span><span><b>${DATA.length}</b> en total</span>`;
+  const q=$("#q").value.trim().toLowerCase();
+  let rows=DATA.filter(v=>FILTRO==="vendido"?v.estado==="vendido":FILTRO==="all"?v.estado!=="vendido":(v.tipo===FILTRO&&v.estado!=="vendido"));
+  if(q) rows=rows.filter(v=>[v.marca,v.linea,v.placa,v.modelo_anio].join(" ").toLowerCase().includes(q));
+  if(!DATA.length){$("#list").innerHTML=`<div class="empty"><b>Aún no hay camiones registrados.</b><span>Agregue el primero y aparecerá de inmediato en la sección de camiones de la página web.</span><button class="btn btn-primary" onclick="document.getElementById('bNew').click()">+ Agregar camión</button></div>`;return;}
+  if(!rows.length){$("#list").innerHTML=`<div class="empty">No hay camiones que coincidan con este filtro.</div>`;return;}
+  $("#list").innerHTML=rows.map(v=>{
+    const visible=v.publicado&&v.estado!=="vendido";
+    return `<article class="item ${visible?"":"off"}" data-id="${v.id}">
+      <div class="thumb">${v.fotos[0]?`<img src="${esc(v.fotos[0].url)}" alt="" loading="lazy">`:"Sin foto"}</div>
+      <div class="info">
+        <div class="chips"><span class="chip ${v.tipo}">${v.tipo==="nuevo"?"Nuevo":"Usado"}</span>${visible?`<span class="chip web">En la web</span>`:`<span class="chip">Oculto</span>`}${v.origen==="permuta"?`<span class="chip">Permuta</span>`:""}</div>
+        <span class="t">${esc(v.marca)} ${esc(v.linea)}</span>
+        <span class="m">${[v.modelo_anio,v.kilometraje!=null?fmt(v.kilometraje)+" km":null,v.placa,v.fotos.length+" fotos"].filter(Boolean).map(esc).join(" · ")}</span>
+        <span class="p">${v.precio?"$ "+fmt(v.precio):"Precio a consultar"}</span>
+      </div>
+      <div class="acts">
+        <div class="row">
+          <select data-act="estado" aria-label="Estado">${["disponible","reservado","vendido"].map(s=>`<option value="${s}" ${v.estado===s?"selected":""}>${s[0].toUpperCase()+s.slice(1)}</option>`).join("")}</select>
+          <label class="switch"><input type="checkbox" data-act="pub" ${v.publicado?"checked":""}> En la web</label>
+        </div>
+        <div class="row"><button class="btn btn-navy btn-sm" data-act="edit">Editar</button></div>
+      </div>
+    </article>`;}).join("");
+}
+$$("[data-f]").forEach(b=>b.addEventListener("click",()=>{FILTRO=b.dataset.f;$$("[data-f]").forEach(x=>x.setAttribute("aria-pressed",x===b));render();}));
+$("#q").addEventListener("input",render);
+$("#list").addEventListener("change",async e=>{
+  const it=e.target.closest(".item"); if(!it) return; const id=+it.dataset.id, v=DATA.find(x=>x.id===id);
+  const body=e.target.dataset.act==="estado"?{estado:e.target.value}:e.target.dataset.act==="pub"?{publicado:e.target.checked}:null;
+  if(!body) return;
+  try{await api(`/api/admin/vehiculos/${id}`,{method:"PATCH",body:JSON.stringify(body)});Object.assign(v,body.publicado!==undefined?{publicado:body.publicado?1:0}:body);render();toast("Cambios guardados. La web se actualiza en un minuto.");}
+  catch(err){toast(err.message,true);render();}
+});
+$("#list").addEventListener("click",e=>{const b=e.target.closest("[data-act=edit]");if(b) abrir(DATA.find(x=>x.id===+b.closest(".item").dataset.id));});
+
+/* ---------- editor ---------- */
+const dlg=$("#dlg");
+$("#bNew").addEventListener("click",()=>abrir(null));
+$("#bClose").addEventListener("click",cerrar);$("#bCancel").addEventListener("click",cerrar);
+dlg.addEventListener("cancel",e=>{e.preventDefault();cerrar();});
+function cerrar(){PEND.forEach(p=>URL.revokeObjectURL(p.url));PEND=[];dlg.close();}
+const miles=el=>el.addEventListener("input",()=>{const d=el.value.replace(/\D/g,"");el.value=d?Number(d).toLocaleString("es-CO"):"";});
+miles($("#e-km"));miles($("#e-precio"));
+
+function abrir(v){
+  EDIT=v?JSON.parse(JSON.stringify(v)):null; PEND=[]; confirmDel=false;
+  $("#edTitle").textContent=v?`${v.marca} ${v.linea}`:"Nuevo camión";
+  $("#fEd").reset(); $("#edErr").textContent="";
+  $("#e-tipo").value=v?.tipo||"usado"; $("#e-estado").value=v?.estado||"disponible"; $("#e-origen").value=v?.origen||"compra_directa";
+  $("#e-marca").value=v?.marca||""; $("#e-linea").value=v?.linea||""; $("#e-anio").value=v?.modelo_anio||"";
+  $("#e-km").value=v?.kilometraje!=null?fmt(v.kilometraje):""; $("#e-precio").value=v?.precio?fmt(v.precio):"";
+  $("#e-placa").value=v?.placa||""; $("#e-desc").value=v?.descripcion||""; $("#e-pub").checked=v?!!v.publicado:true;
+  $$("[data-ficha]").forEach(i=>i.value=v?.ficha?.[i.dataset.ficha]||"");
+  $("#bDel").hidden=!v; $("#bDel").textContent="Eliminar camión";
+  pintarFotos(); dlg.showModal(); setTimeout(()=>$("#e-marca").focus(),50);
+}
+function pintarFotos(){
+  const sub=EDIT?.fotos||[];
+  let h=sub.map((f,i)=>`<div class="ph">${i===0?'<span class="main">Principal</span>':""}<img src="${esc(f.url)}" alt=""><div class="bar">${i?`<button type="button" data-ph="main" data-id="${f.id}">Hacer principal</button>`:"<span></span>"}<button type="button" data-ph="del" data-id="${f.id}">Quitar</button></div></div>`).join("");
+  h+=PEND.map((p,i)=>`<div class="ph pend">${!sub.length&&i===0?'<span class="main">Principal</span>':""}<img src="${p.url}" alt=""><div class="bar"><span></span><button type="button" data-ph="unq" data-i="${i}">Quitar</button></div></div>`).join("");
+  h+=FOTOS_OK?`<label class="addph" for="fileIn">+ Agregar fotos<br><small>JPG, PNG o desde la cámara</small></label>`:`<div class="addph" style="cursor:default">Subida de fotos no disponible todavía</div>`;
+  $("#photos").innerHTML=h;
+}
+$("#fileIn").addEventListener("change",async e=>{
+  const files=[...e.target.files]; e.target.value="";
+  for(const f of files){
+    try{const blob=await optimizar(f);PEND.push({blob,url:URL.createObjectURL(blob)});}
+    catch(err){toast(`No se pudo leer ${f.name}. Intente con una foto JPG.`,true);}
+  }
+  pintarFotos();
+  if(EDIT) subirPendientes(EDIT.id); // si el camión ya existe, sube de una vez
+});
+$("#photos").addEventListener("click",async e=>{
+  const b=e.target.closest("[data-ph]"); if(!b) return;
+  if(b.dataset.ph==="unq"){URL.revokeObjectURL(PEND[b.dataset.i].url);PEND.splice(+b.dataset.i,1);pintarFotos();return;}
+  const id=+b.dataset.id;
+  try{
+    if(b.dataset.ph==="del"){await api(`/api/admin/fotos/${id}`,{method:"DELETE"});EDIT.fotos=EDIT.fotos.filter(f=>f.id!==id);}
+    else{await api(`/api/admin/fotos/${id}`,{method:"PATCH"});const f=EDIT.fotos.find(x=>x.id===id);EDIT.fotos=[f,...EDIT.fotos.filter(x=>x.id!==id)];}
+    pintarFotos(); sync();
+  }catch(err){toast(err.message,true);}
+});
+function sync(){const i=DATA.findIndex(x=>x.id===EDIT?.id);if(i>-1){DATA[i].fotos=EDIT.fotos;render();}}
+
+// Reduce la foto a máx. 1600 px y la convierte a JPEG (~200-400 KB) antes de subirla
+async function optimizar(file){
+  const MAX=1600;
+  const bmp=await createImageBitmap(file,{imageOrientation:"from-image"}).catch(()=>createImageBitmap(file));
+  const s=Math.min(1,MAX/Math.max(bmp.width,bmp.height));
+  const c=document.createElement("canvas");c.width=Math.round(bmp.width*s);c.height=Math.round(bmp.height*s);
+  c.getContext("2d").drawImage(bmp,0,0,c.width,c.height); bmp.close&&bmp.close();
+  return new Promise((res,rej)=>c.toBlob(b=>b?res(b):rej(new Error("conversión")),"image/jpeg",0.82));
+}
+let SUBIENDO=null;
+async function subirPendientes(id){
+  if(SUBIENDO) return SUBIENDO; // evita subir la misma foto dos veces
+  SUBIENDO=(async()=>{let ok=0;
+  while(PEND.length){
+    const p=PEND[0]; const fd=new FormData(); fd.append("foto",p.blob,"foto.jpg");
+    try{const r=await api(`/api/admin/vehiculos/${id}/fotos`,{method:"POST",body:fd});URL.revokeObjectURL(p.url);PEND.shift();ok++;
+      if(EDIT){EDIT.fotos.push(r.foto);pintarFotos();sync();}}
+    catch(err){toast(err.message,true);break;}
+  }
+  return ok;})();
+  try{return await SUBIENDO;}finally{SUBIENDO=null;}
+}
+
+$("#fEd").addEventListener("submit",async e=>{
+  e.preventDefault(); $("#edErr").textContent="";
+  const ficha={}; $$("[data-ficha]").forEach(i=>ficha[i.dataset.ficha]=i.value);
+  const body={tipo:$("#e-tipo").value,estado:$("#e-estado").value,origen:$("#e-origen").value,marca:$("#e-marca").value,linea:$("#e-linea").value,
+    modelo_anio:$("#e-anio").value,kilometraje:$("#e-km").value.replace(/\D/g,""),precio:$("#e-precio").value.replace(/\D/g,""),
+    placa:$("#e-placa").value,descripcion:$("#e-desc").value,publicado:$("#e-pub").checked,ficha};
+  if(!body.marca.trim()||!body.linea.trim()){$("#edErr").textContent="Escriba la marca y la línea del camión.";return;}
+  $("#bSave").disabled=true; $("#bSave").textContent="Guardando…";
+  try{
+    let id=EDIT?.id;
+    if(id) await api(`/api/admin/vehiculos/${id}`,{method:"PUT",body:JSON.stringify(body)});
+    else { id=(await api("/api/admin/vehiculos",{method:"POST",body:JSON.stringify(body)})).id; }
+    if(SUBIENDO) await SUBIENDO;
+    if(PEND.length){$("#bSave").textContent="Subiendo fotos…";EDIT=EDIT||{id,fotos:[]};await subirPendientes(id);}
+    if(PEND.length){$("#edErr").textContent="El camión se guardó, pero algunas fotos no se subieron. Intente de nuevo.";await cargar();return;}
+    cerrar(); await cargar(); toast(body.publicado&&body.estado!=="vendido"?"Camión guardado y publicado en la web.":"Camión guardado (no visible en la web).");
+  }catch(err){$("#edErr").textContent=err.message;}
+  finally{$("#bSave").disabled=false;$("#bSave").textContent="Guardar";}
+});
+$("#bDel").addEventListener("click",async()=>{
+  if(!confirmDel){confirmDel=true;$("#bDel").textContent="¿Seguro? Toque de nuevo para eliminar";setTimeout(()=>{confirmDel=false;$("#bDel").textContent="Eliminar camión";},4000);return;}
+  try{await api(`/api/admin/vehiculos/${EDIT.id}`,{method:"DELETE"});cerrar();await cargar();toast("Camión eliminado.");}
+  catch(err){$("#edErr").textContent=err.message;}
+});
+
+init();
+})();
+</script>
+</body>
+</html>

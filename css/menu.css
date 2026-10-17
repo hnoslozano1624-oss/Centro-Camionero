@@ -1,0 +1,10 @@
+/* Menú de cabecera en computador: los botones "Camiones usados" y "Camiones nuevos" van juntos,
+   pegados al logo, y el resto de enlaces se alinea a la derecha con espacios más compactos para que todo quepa. */
+@media (min-width:1241px){
+  header .brand{margin-right:clamp(14px,1.6vw,26px)}
+  header #siteMenu{flex:1;margin-left:0;gap:clamp(14px,1.45vw,26px)}
+  nav.menu a{font-size:14px}
+  nav.menu a.menu-btn{padding:9px 14px}
+  nav.menu a.menu-btn-rojo + a.menu-btn-azul{margin-left:calc(6px - clamp(14px,1.45vw,26px))}
+  nav.menu a.menu-btn-azul{margin-right:auto}
+}

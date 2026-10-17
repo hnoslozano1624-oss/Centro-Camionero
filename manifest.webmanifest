@@ -1,0 +1,15 @@
+{
+  "name": "Centro Camionero",
+  "short_name": "Centro Camionero",
+  "description": "Camiones usados y camiones nuevos FAW de Centro Camionero, Bogotá.",
+  "lang": "es-CO",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#010B3D",
+  "theme_color": "#012792",
+  "icons": [
+    { "src": "/assets/app/icono.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" },
+    { "src": "/assets/app/icono.svg", "sizes": "512x512", "type": "image/svg+xml", "purpose": "any" }
+  ]
+}
