@@ -12,10 +12,10 @@
   var PAGINA = "/compramos-tu-camion/";
   var FRASES = [
     "Compramos tu camión de contado",
-    "Pago en 24 horas",
+    "Pago en menos de 24 horas",
+    "No importa si tiene prenda bancaria",
     "En cualquier parte del país",
-    "Cuéntanos qué camión tienes y te hacemos una oferta",
-    "Sin publicar ni atender curiosos"
+    "Envíanos fotos, marca, modelo y kilometraje"
   ];
   var CAMION = '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 30V16h20v14H4Z"/><path d="M24 22h9l7 7v5h-3"/><circle cx="14" cy="32" r="4"/><circle cx="34" cy="32" r="4"/></svg>';
 
@@ -57,7 +57,7 @@
   a.className = "ct-franja";
   a.href = esFaw ? "/retomas/" : (enPagina ? "#formulario" : PAGINA);
   a.setAttribute("aria-label", esFaw ? "Retomamos tu camión usado como parte de pago de un FAW nuevo. Ver cómo funciona la retoma" :
-    "Compramos tu camión de contado, en cualquier parte del país, con pago en 24 horas. " + (enPagina ? "Ir al formulario" : "Ver cómo vender tu camión"));
+    "Compramos tu camión de contado, en cualquier parte del país, con pago en menos de 24 horas, aunque tenga prenda bancaria. " + (enPagina ? "Ir al formulario" : "Ver cómo vender tu camión"));
   a.innerHTML = '<div class="ct-mask"><div class="ct-track">' + set(false) + set(true) + "</div></div>" +
     '<span class="ct-cta"><span>' + (esFaw ? "Retoma tu usado" : (enPagina ? "Envía los datos" : "Vende tu camión")) + "</span><b>→</b></span>";
 
