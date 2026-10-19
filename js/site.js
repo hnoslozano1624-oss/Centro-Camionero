@@ -70,7 +70,7 @@
       '<nav class="pie-col" aria-label="Secciones"><h4>Secciones</h4>' + links() + "</nav>" +
       '<div class="pie-col"><h4>Atajos</h4>' +
       '<a href="/entregas/">Clientes que ya recibieron su camión</a>' +
-      '<a href="/compramos-tu-camion/">Vende tu camión de contado</a>' +
+      '<a href="/compramos-tu-camion/">Vende tu camión: pago en 24 horas</a>' +
       '<a href="/retomas/">Retoma tu usado como parte de pago</a>' +
       '<a href="/financiacion/#simulador">Simulador de cuotas</a>' +
       '<a href="/financiacion/#documentos">Formulario de crédito</a>' +
