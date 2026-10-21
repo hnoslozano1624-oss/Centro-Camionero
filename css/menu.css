@@ -23,3 +23,9 @@ nav.menu a.menu-btn-azul::before{animation-delay:-1.3s}
 @keyframes ccGiro{to{--cc-ang:360deg}}
 @keyframes ccLatido{0%,100%{box-shadow:0 0 0 0 rgba(250,1,13,0),0 0 6px rgba(250,1,13,.25)}50%{box-shadow:0 0 0 4px rgba(250,1,13,.16),0 0 20px 3px rgba(250,1,13,.55)}}
 @media (prefers-reduced-motion:reduce){nav.menu a.menu-btn,.cc-luz,nav.menu a.menu-btn::before,.cc-luz::before{animation:none}}
+
+/* Simulador (inicio y /financiacion/): la "Tasa de referencia" va como nota informativa con una línea roja a la izquierda,
+   sin fondo ni bordes redondeados, para que no parezca un botón. */
+.contacto-info>.badge,#simulador .badge{display:block;width:fit-content;max-width:100%;background:none;border:0;border-left:3px solid #FA010D;border-radius:0;padding:3px 0 3px 12px;font-family:'IBM Plex Sans',sans-serif;font-size:14px;font-weight:600;letter-spacing:0;text-transform:none;line-height:1.45}
+.contacto-info>.badge{color:#fff}
+#simulador .badge{color:var(--navy-deep);margin-top:20px}
