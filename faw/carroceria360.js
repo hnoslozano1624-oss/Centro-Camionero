@@ -8,6 +8,14 @@
    Al hacer clic sobre el camión pasa a la siguiente carrocería.
    Para agregar una carrocería: subir /assets/vitrina/cc5-<nombre>.webp con ese mismo encuadre y agregarla a FOTOS. */
 (function () {
+  // Encabezado FAW (/faw/ y /faw/modelo/): el enlace de regreso se convierte en el botón "Volver a Centro Camionero"
+  // con la luz roja de marca. Estilos en /css/volver-cc.css (importado desde /faw/carroceria360.css).
+  var volver = document.querySelector(".sign nav a.back");
+  if (volver && !volver.classList.contains("cc-volver")) {
+    volver.classList.add("cc-volver");
+    volver.textContent = "← Volver a Centro Camionero";
+  }
+
   // id de la carrocería → nombre del archivo cc5-<nombre>.webp
   var FOTOS = { furgon: "furgon-logo", refrigerado: "refrigerado-logo", estacas: "estacas_1" };
   var RUTA = "/assets/vitrina/cc5-";

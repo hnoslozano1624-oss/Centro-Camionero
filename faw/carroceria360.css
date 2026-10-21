@@ -1,3 +1,4 @@
+@import url("/css/volver-cc.css"); /* botón "Volver a Centro Camionero" del encabezado FAW */
 /* Carrocerías FAW: construcción animada y reflejo de luz sobre la imagen del camión (ver /faw/carroceria360.js). */
 .bart:has(.c360){background:none;padding:0}
 .c360{position:relative;padding:0;cursor:pointer;-webkit-tap-highlight-color:transparent}
