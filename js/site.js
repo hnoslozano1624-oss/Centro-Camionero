@@ -4,7 +4,7 @@
   var CFG = {
     dir: "Calle 13 #62-34, Bogotá",
     mapa: "https://maps.app.goo.gl/kEuP6FUTMVdnTjbs6",
-    horario: ["Lunes a viernes: 8:00 a. m. a 5:00 p. m.", "Sábados: 8:00 a. m. a 2:00 p. m."],
+    horario: ["Lunes a viernes: 8:00 a. m. a 5:00 p. m.", "Sábados: 8:00 a. m. a 1:00 p. m."],
     menu: [
       { k: "inicio", t: "Camiones usados", h: "/#camiones", btn: "rojo" },
       { k: "faw", t: "Camiones nuevos", h: "/faw/", btn: "azul" },
