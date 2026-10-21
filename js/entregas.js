@@ -42,7 +42,7 @@
     var img = visor.querySelector("img");
     img.src = x.url;
     img.alt = "Cliente de Centro Camionero recibiendo su camión. " + titulo(x, pos);
-    visor.querySelector("figcaption").innerHTML = "<b>" + esc(titulo(x, pos)) + "</b><span>Entrega " + (pos + 1) + " de " + lista.length + " · Centro Camionero</span>";
+    visor.querySelector("figcaption").innerHTML = "<b>" + esc(titulo(x, pos)) + "</b><span>Entregado en Centro Camionero</span>";
   }
   function abrir(i) {
     if (!visor) armarVisor();
