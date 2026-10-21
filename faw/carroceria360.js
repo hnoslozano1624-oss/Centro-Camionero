@@ -47,7 +47,7 @@
         lista.map(function (c) {
           return '<img class="c360-cuerpo" data-b="' + c.id + '" src="' + RUTA + FOTOS[c.id] + '.webp" alt="" width="' + W + '" height="' + H + '" decoding="async">';
         }).join("") +
-        '<img class="c360-camion" src="' + RUTA + 'camion.webp" alt="Camión FAW WHR Lion" width="' + W + '" height="' + H + '" decoding="async">' +
+        '<img class="c360-camion" src="' + RUTA + 'camion-placa.webp" alt="Camión FAW WHR Lion" width="' + W + '" height="' + H + '" decoding="async">' +
         '<span class="c360-brillo" aria-hidden="true"></span>' +
         plano() + '<span class="c360-laser" aria-hidden="true"></span>' +
       "</div>" +
