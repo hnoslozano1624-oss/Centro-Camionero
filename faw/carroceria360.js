@@ -9,7 +9,7 @@
    Para agregar una carrocería: subir /assets/vitrina/cc5-<nombre>.webp con ese mismo encuadre y agregarla a FOTOS. */
 (function () {
   // id de la carrocería → nombre del archivo cc5-<nombre>.webp
-  var FOTOS = { furgon: "furgon", refrigerado: "refrigerado", estacas: "estacas_1" };
+  var FOTOS = { furgon: "furgon-logo", refrigerado: "refrigerado-logo", estacas: "estacas_1" };
   var RUTA = "/assets/vitrina/cc5-";
   var W = 1448, H = 1156;
   var REDUCIDO = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
