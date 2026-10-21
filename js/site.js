@@ -51,11 +51,11 @@
   var footer = document.getElementById("siteFooter");
   if (footer) {
     footer.innerHTML =
-      // Franja: formulario de crédito
+      // Franja: formulario de crédito (el PDF se descarga directo; para cambiarlo, suba el nuevo PDF a /assets/ con el nombre "SOLICITUD CREDITO 2026.pdf")
       '<div class="pie-credito"><div class="container pie-credito-in">' +
-      '<div><b>Encuentra aquí tu formulario de crédito</b><span>Mira los documentos que necesitas según tu perfil y pide tu formulario para financiar tu camión.</span></div>' +
-      '<div class="pie-acc"><a class="pie-btn rojo" href="/financiacion/#documentos">Formulario de crédito →</a>' +
-      '<a class="pie-btn borde" href="#dylia" data-dylia="Hola, quiero el formulario de solicitud de crédito para financiar un camión.">Pedirlo por chat</a></div>' +
+      '<div><b>Encuentra aquí tu formulario de crédito</b><span>Descárgalo, diligéncialo y fírmalo. Revisa también los documentos que necesitas según tu perfil para financiar tu camión.</span></div>' +
+      '<div class="pie-acc"><a class="pie-btn rojo" href="/assets/SOLICITUD%20CREDITO%202026.pdf" download="Solicitud-de-credito-Centro-Camionero-2026.pdf">Descargar formulario de crédito ↓</a>' +
+      '<a class="pie-btn borde" href="/financiacion/#documentos">Ver documentos requeridos</a></div>' +
       "</div></div>" +
       // Columnas
       '<div class="container pie-grid">' +
@@ -73,7 +73,7 @@
       '<a href="/compramos-tu-camion/">Vende tu camión: pago en menos de 24 horas</a>' +
       '<a href="/retomas/">Retoma tu usado como parte de pago</a>' +
       '<a href="/financiacion/#simulador">Simulador de cuotas</a>' +
-      '<a href="/financiacion/#documentos">Formulario de crédito</a>' +
+      '<a href="/assets/SOLICITUD%20CREDITO%202026.pdf" download="Solicitud-de-credito-Centro-Camionero-2026.pdf">Formulario de crédito (PDF)</a>' +
       '<a href="#dylia" data-dylia="Hola, quiero hablar con un asesor de Centro Camionero.">Habla con DYLIA</a>' +
       "</div></div>" +
       '<div class="container pie-copy"><span class="copy">© 2026 Centro Camionero · Bogotá, Colombia · <a href="/aviso-de-privacidad/" style="color:inherit;text-decoration:underline">Aviso de privacidad</a></span></div>';
