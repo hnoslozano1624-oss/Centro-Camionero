@@ -389,28 +389,6 @@ dialog::backdrop{background:rgba(8,18,65,.75)}
     </div>
   </section>
 
-  <!-- Exhibición -->
-
-  <section class="sec hex" id="exhibicion" aria-labelledby="t-exh">
-    <div class="wrap">
-      <div class="sec-head">
-        <h2 id="t-exh">Camiones en exhibición</h2>
-        <p>Unidades nuevas disponibles en FAW Centro Camionero. Toca cada camión para ver fotos y ficha técnica.</p>
-        <span class="rule" aria-hidden="true"></span>
-      </div>
-      <div id="exh">
-        <div class="empty" id="exhEmpty">
-          <img src="/assets/faw-logo-v-blanco.svg" alt="" aria-hidden="true" style="background:var(--faw);border-radius:12px;padding:14px">
-          <div>
-            <h3>Estamos preparando la exhibición</h3>
-            <p>Muy pronto verás aquí las unidades FAW disponibles. Mientras tanto, nuestros asesores te cuentan qué modelos tenemos, precios y tiempos de entrega.</p>
-            <a class="btn btn-wa" data-wa="Hola, quiero conocer los modelos FAW disponibles en FAW Centro Camionero." href="#asesoria">Consultar modelos disponibles</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- Muro de historia -->
   <section class="sec history" id="historia" aria-labelledby="t-his">
     <div class="wrap">
@@ -448,7 +426,7 @@ dialog::backdrop{background:rgba(8,18,65,.75)}
         <small>¿Quieres saber cuánto pagarías al mes? Usa el <a href="/#financiamiento">simulador de cuotas de Centro Camionero</a>.</small>
       </div>
       <div class="steps">
-        <div class="step"><span class="n">1</span><div><h3>Elige tu camión</h3><p>Revisa las unidades en exhibición o cuéntanos qué necesitas transportar.</p></div></div>
+        <div class="step"><span class="n">1</span><div><h3>Elige tu camión</h3><p>Revisa la línea de modelos FAW o cuéntanos qué necesitas transportar.</p></div></div>
         <div class="step"><span class="n">2</span><div><h3>Recibe tu cotización</h3><p>Con tu autorización, un asesor FAW te contacta con precio, ficha técnica y opciones de pago.</p></div></div>
         <div class="step"><span class="n">3</span><div><h3>Visítanos en Bogotá</h3><p>Conoce el camión en el showroom de Centro Camionero antes de decidir.</p></div></div>
       </div>
@@ -462,7 +440,6 @@ dialog::backdrop{background:rgba(8,18,65,.75)}
     <a class="lockup" href="#top" style="gap:12px"><img src="/assets/faw-logo-h-blanco.svg" alt="FAW Trucks"><span class="dist" style="color:#fff;font-size:16px">Centro Camionero</span></a>
     <div class="lk">
       <a href="#modelos">Modelos FAW</a>
-      <a href="#exhibicion">Exhibición</a>
       <a href="#historia">Historia FAW</a>
       <a href="/faw/por-que-faw/">Por qué FAW</a>
       <a href="/faw/respaldo/">Respaldo y servicio</a>
@@ -578,15 +555,6 @@ dialog::backdrop{background:rgba(8,18,65,.75)}
     dlg.showModal();
   }
 
-  var exh = document.getElementById("exh");
-  exh.addEventListener("click", function(e){
-    if (e.target.closest("[data-cot]")) return;
-    var c = e.target.closest(".card"); if (c) detalle(CACHE[c.dataset.id]);
-  });
-  exh.addEventListener("keydown", function(e){
-    var c = e.target.closest(".card");
-    if (c && (e.key === "Enter" || e.key === " ")) { e.preventDefault(); detalle(CACHE[c.dataset.id]); }
-  });
 
 
   // Línea de modelos FAW (datos en /faw/modelos.json, tomados de las fichas técnicas FAW Trucks)
@@ -620,13 +588,6 @@ dialog::backdrop{background:rgba(8,18,65,.75)}
       }, 260);
     });
   }).catch(function(){ document.getElementById("modelos").hidden = true; });
-
-  fetch("/api/vehiculos?tipo=nuevo").then(function(r){ if (!r.ok) throw 0; return r.json(); }).then(function(d){
-    var l = d.vehiculos || [];
-    if (!l.length) return;
-    l.forEach(function(v){ CACHE[v.id] = v; });
-    exh.innerHTML = '<div class="grid">' + l.map(card).join("") + "</div>";
-  }).catch(function(){ /* sin API: se mantiene el mensaje de exhibición en preparación */ });
 })();
 </script>
 <script src="/js/dylia.js" defer></script>
