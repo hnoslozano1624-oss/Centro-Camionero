@@ -20,6 +20,11 @@
   fr.src = "/js/aliados.js"; fr.defer = true;
   document.head.appendChild(fr);
 
+  // Aviso de cookies: la persona aprueba el uso de cookies la primera vez que entra (ver /js/cookies.js)
+  var ck = document.createElement("script");
+  ck.src = "/js/cookies.js"; ck.defer = true;
+  document.head.appendChild(ck);
+
   // Franja "Compramos tu camión" (prioridad comercial): también se enciende aquí para que salga en todas las páginas
   var ct = document.createElement("script");
   ct.src = "/js/compramos.js"; ct.defer = true;
