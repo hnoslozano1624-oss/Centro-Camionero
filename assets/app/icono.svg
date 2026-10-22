@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+  <!-- Ícono de la app de Centro Camionero: la llanta del logo, dibujada en vector para que se vea nítida en cualquier tamaño -->
+  <defs>
+    <radialGradient id="caucho" cx="50%" cy="45%" r="55%"><stop offset=".72" stop-color="#26282C"/><stop offset="1" stop-color="#0B0C0E"/></radialGradient>
+    <linearGradient id="rin" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F4F5F7"/><stop offset=".5" stop-color="#B9BEC6"/><stop offset="1" stop-color="#E6E8EC"/></linearGradient>
+    <radialGradient id="centro" cx="45%" cy="40%" r="60%"><stop offset="0" stop-color="#E9EBEF"/><stop offset="1" stop-color="#8E949C"/></radialGradient>
+  </defs>
+  <rect width="512" height="512" rx="112" fill="#FFFFFF"/>
+  <circle cx="256" cy="256" r="236" fill="url(#caucho)"/>
+  <circle cx="256" cy="256" r="221" fill="none" stroke="#2A2C30" stroke-width="22" stroke-dasharray="12 26.57"/>
+  <circle cx="256" cy="256" r="206" fill="none" stroke="#3A3D42" stroke-width="3"/>
+  <circle cx="256" cy="256" r="160" fill="url(#rin)"/>
+  <circle cx="256" cy="256" r="150" fill="none" stroke="#7D838C" stroke-width="3"/>
+  <g fill="#15161A"><path d="M266.2 194.9L271.6 118.9A138 138 0 0 1 324.0 135.9L283.7 200.5A62 62 0 0 0 266.2 194.9Z"/><path d="M300.2 212.5L349.2 154.3A138 138 0 0 1 381.6 198.8L311.0 227.4A62 62 0 0 0 300.2 212.5Z"/><path d="M317.3 246.8L391.2 228.5A138 138 0 0 1 391.2 283.5L317.3 265.2A62 62 0 0 0 317.3 246.8Z"/><path d="M311.0 284.6L381.6 313.2A138 138 0 0 1 349.2 357.7L300.2 299.5A62 62 0 0 0 311.0 284.6Z"/><path d="M283.7 311.5L324.0 376.1A138 138 0 0 1 271.6 393.1L266.2 317.1A62 62 0 0 0 283.7 311.5Z"/><path d="M245.8 317.1L240.4 393.1A138 138 0 0 1 188.0 376.1L228.3 311.5A62 62 0 0 0 245.8 317.1Z"/><path d="M211.8 299.5L162.8 357.7A138 138 0 0 1 130.4 313.2L201.0 284.6A62 62 0 0 0 211.8 299.5Z"/><path d="M194.7 265.2L120.8 283.5A138 138 0 0 1 120.8 228.5L194.7 246.8A62 62 0 0 0 194.7 265.2Z"/><path d="M201.0 227.4L130.4 198.8A138 138 0 0 1 162.8 154.3L211.8 212.5A62 62 0 0 0 201.0 227.4Z"/><path d="M228.3 200.5L188.0 135.9A138 138 0 0 1 240.4 118.9L245.8 194.9A62 62 0 0 0 228.3 200.5Z"/></g>
+  <circle cx="256" cy="256" r="52" fill="url(#centro)" stroke="#7D838C" stroke-width="3"/>
+  <circle cx="256.0" cy="226.0" r="7" fill="#5E636B"/><circle cx="284.5" cy="246.7" r="7" fill="#5E636B"/><circle cx="273.6" cy="280.3" r="7" fill="#5E636B"/><circle cx="238.4" cy="280.3" r="7" fill="#5E636B"/><circle cx="227.5" cy="246.7" r="7" fill="#5E636B"/>
+  <circle cx="256" cy="256" r="14" fill="#3B3F46"/>
+</svg>
