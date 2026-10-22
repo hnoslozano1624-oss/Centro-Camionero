@@ -25,6 +25,11 @@
   ck.src = "/js/cookies.js"; ck.defer = true;
   document.head.appendChild(ck);
 
+  // Menú en celular y tableta: botón "×", tocar fuera y tecla Escape para cerrarlo (ver /js/menu-cerrar.js)
+  var mn = document.createElement("script");
+  mn.src = "/js/menu-cerrar.js"; mn.defer = true;
+  document.head.appendChild(mn);
+
   // Franja "Compramos tu camión" (prioridad comercial): también se enciende aquí para que salga en todas las páginas
   var ct = document.createElement("script");
   ct.src = "/js/compramos.js"; ct.defer = true;
