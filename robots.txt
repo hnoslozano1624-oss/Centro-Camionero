@@ -1,0 +1,7 @@
+# Centro Camionero · www.centrocamionero.com.co
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+
+Sitemap: https://www.centrocamionero.com.co/sitemap.xml
