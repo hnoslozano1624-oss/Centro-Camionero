@@ -100,8 +100,11 @@ export async function onRequestGet({ params, env, request }) {
   const jsonld = JSON.stringify({
     "@context": "https://schema.org", "@type": "Product", name: `${nombre}${v.modelo_anio ? " " + v.modelo_anio : ""} (usado)`,
     brand: { "@type": "Brand", name: v.marca }, itemCondition: "https://schema.org/UsedCondition", url,
+    description: String(v.descripcion || "").trim().slice(0, 500) || descripcion,
     ...(foto0 ? { image: v.fotos.map((f) => new URL(f, base + "/").href) } : {}),
-    ...(precio && v.estado === "disponible" ? { offers: { "@type": "Offer", price: Math.round(Number(v.precio)), priceCurrency: "COP", availability: "https://schema.org/InStock", url } } : {}),
+    // El camión se entrega en la sede (no se envía): así lo pide Google en las fichas de comerciantes.
+    ...(precio && v.estado === "disponible" ? { offers: { "@type": "Offer", price: Math.round(Number(v.precio)), priceCurrency: "COP", availability: "https://schema.org/InStock", url,
+      shippingDetails: { "@type": "OfferShippingDetails", doesNotShip: true, shippingDestination: { "@type": "DefinedRegion", addressCountry: "CO" } } } } : {}),
     seller: { "@type": "AutoDealer", name: "Centro Camionero", address: { "@type": "PostalAddress", streetAddress: "Calle 13 #62-34", addressLocality: "Bogotá", addressCountry: "CO" } },
   });
 
