@@ -10,7 +10,11 @@
 //    <link rel="canonical" href="https://www.centrocamionero.com.co/ruta/"> (https, www, sin parámetros,
 //    con la misma barra final que usa /sitemap.xml).
 //
-// 3. Vista previa al compartir un enlace (WhatsApp, Facebook, LinkedIn, X, etc.): etiquetas Open Graph.
+// 3. Ícono del sitio (el que Google muestra junto al resultado de búsqueda): toda página que no traiga su propio
+//    ícono recibe /favicon.ico, /icono-192.png y /apple-touch-icon.png (la llanta de Centro Camionero, archivos en la raíz del sitio).
+//    Las páginas FAW conservan su emblema.
+//
+// 4. Vista previa al compartir un enlace (WhatsApp, Facebook, LinkedIn, X, etc.): etiquetas Open Graph.
 //    - Centro Camionero: foto de los camiones frente a la sede (/assets/og-centro-camionero.jpg, 1200 × 630).
 //    - Showroom FAW (/faw/...): banner FAW con la placa de Centro Camionero (/assets/faw-banner-placa.jpg).
 //    Si una página ya trae su propia etiqueta (por ejemplo, la foto de cada camión usado en /usados/...), se respeta.
@@ -102,11 +106,13 @@ export async function onRequest(context) {
       element(e) { const k = e.getAttribute("property") || e.getAttribute("name"); if (k) tiene[k] = true; },
     })
     .on('link[rel="canonical"]', { element() { tiene.canonical = true; } })
+    .on('link[rel~="icon"]', { element() { tiene.icono = true; } })
     .on("head", {
       element(e) {
         e.onEndTag((fin) => {
           const t = titulo.trim(), m = [];
           if (!tiene.canonical) m.push(`<link rel="canonical" href="${esc(canonica)}">`);
+          if (!tiene.icono) m.push('<link rel="icon" href="/favicon.ico" sizes="48x48"><link rel="icon" type="image/png" sizes="192x192" href="/icono-192.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png">');
           const add = (k, v, attr) => { if (v && !tiene[k]) m.push(`<meta ${attr || "property"}="${k}" content="${esc(v)}">`); };
           add("og:type", "website");
           add("og:locale", "es_CO");
