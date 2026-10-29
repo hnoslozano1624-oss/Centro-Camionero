@@ -11,13 +11,19 @@
 //    con la misma barra final que usa /sitemap.xml).
 //
 // 3. Ícono del sitio (el que Google muestra junto al resultado de búsqueda): toda página que no traiga su propio
-//    ícono recibe /favicon.ico, /icono-192.png y /apple-touch-icon.png (la llanta de Centro Camionero, archivos en la raíz del sitio).
+//    ícono recibe /favicon.ico, /icono-192.png y /apple-touch-icon.png (la "C" de Centro Camionero; el de iPhone es la llanta). Son archivos en la raíz del sitio.
 //    Las páginas FAW conservan su emblema.
 //
 // 4. Vista previa al compartir un enlace (WhatsApp, Facebook, LinkedIn, X, etc.): etiquetas Open Graph.
 //    - Centro Camionero: foto de los camiones frente a la sede (/assets/og-centro-camionero.jpg, 1200 × 630).
 //    - Showroom FAW (/faw/...): banner FAW con la placa de Centro Camionero (/assets/faw-banner-placa.jpg).
 //    Si una página ya trae su propia etiqueta (por ejemplo, la foto de cada camión usado en /usados/...), se respeta.
+//
+// 5. SEO: título y descripción de cada página según /lib/seo.js (también para cada modelo FAW), datos de la empresa
+//    para Google en el inicio (negocio local), preguntas frecuentes de cada página en formato FAQPage y noindex
+//    para la plantilla vacía /faw/modelo/.
+import { SEO, seoModeloFaw, NEGOCIO } from "../lib/seo.js";
+
 const BASE = "https://www.centrocamionero.com.co";
 const IMG_CC = { url: BASE + "/assets/og-centro-camionero.jpg", w: "1200", h: "630", alt: "Camiones frente a la sede de Centro Camionero en Bogotá" };
 const IMG_FAW = { url: BASE + "/assets/faw-banner-placa.jpg", w: "1600", h: "400", alt: "Camión FAW con la placa de Centro Camionero" };
@@ -68,13 +74,16 @@ function esLegado(url) {
 }
 
 // Los modelos FAW se sirven con una sola plantilla (/faw/modelos/* en _redirects): un modelo que no existe es 404.
-async function modeloFawExiste(context, slug) {
+// Devuelve el modelo, false si no existe, o null si no se pudo leer el catálogo (en ese caso no se bloquea la página).
+async function modeloFaw(context, slug) {
   try {
     const r = await context.env.ASSETS.fetch(new URL("/faw/modelos.json", context.request.url));
-    if (!r.ok) return true;
-    return ((await r.json()).modelos || []).some((m) => m.slug === slug);
-  } catch (e) { return true; }
+    if (!r.ok) return null;
+    return ((await r.json()).modelos || []).find((m) => m.slug === slug) || false;
+  } catch (e) { return null; }
 }
+const jsonLd = (obj) => '<script type="application/ld+json">' + JSON.stringify(obj).replace(/</g, "\\u003c") + "</script>";
+const textoPlano = (s) => String(s).replace(/<[^>]+>/g, "").replace(/&nbsp;/g, " ").replace(/&amp;/g, "&").replace(/&quot;/g, '"').replace(/&#39;/g, "'").replace(/\s+/g, " ").trim();
 
 export async function onRequest(context) {
   const url = new URL(context.request.url);
@@ -86,7 +95,10 @@ export async function onRequest(context) {
     if (REDIRECCIONES[clave]) return Response.redirect(new URL(REDIRECCIONES[clave], url.origin).href, 301);
     if (esLegado(url)) return error(context, 410);
     const fm = url.pathname.match(/^\/faw\/modelos\/([^/]+)\/?$/);
-    if (fm && !(await modeloFawExiste(context, decodeURIComponent(fm[1])))) return error(context, 404);
+    if (fm) {
+      context.data.modeloFaw = await modeloFaw(context, decodeURIComponent(fm[1]));
+      if (context.data.modeloFaw === false) return error(context, 404);
+    }
   }
 
   const res = await context.next();
@@ -96,14 +108,42 @@ export async function onRequest(context) {
   const faw = /^\/faw(\/|$)/.test(url.pathname);
   const img = faw ? IMG_FAW : IMG_CC;
   const canonica = BASE + url.pathname;
+  const seo = context.data.modeloFaw ? seoModeloFaw(context.data.modeloFaw) : SEO[url.pathname];
+  const plantillaVacia = url.pathname === "/faw/modelo/";
   const tiene = {};
+  const faqs = [];
   let titulo = "", descripcion = "";
 
   return new HTMLRewriter()
-    .on("title", { text(t) { titulo += t.text; } })
-    .on('meta[name="description"]', { element(e) { descripcion = e.getAttribute("content") || ""; } })
+    .on("title", {
+      element(e) { if (seo) { e.setInnerContent(seo.t); titulo = seo.t; } },
+      text(t) { if (!seo) titulo += t.text; },
+    })
+    .on('meta[name="description"]', {
+      element(e) { if (seo) e.setAttribute("content", seo.d); descripcion = seo ? seo.d : e.getAttribute("content") || ""; },
+    })
+    .on('meta[property="og:title"]', { element(e) { if (seo) e.setAttribute("content", seo.t); } })
+    .on('meta[property="og:description"]', { element(e) { if (seo) e.setAttribute("content", seo.d); } })
     .on("meta[property], meta[name]", {
       element(e) { const k = e.getAttribute("property") || e.getAttribute("name"); if (k) tiene[k] = true; },
+    })
+    .on('script[type="application/ld+json"]', { text(t) { if (/FAQPage/.test(t.text)) tiene.faq = true; } })
+    // Preguntas frecuentes visibles (<details><summary>pregunta</summary><p>respuesta</p></details>) → FAQPage para Google
+    .on(".faq details", { element() { faqs.push({ q: "", a: "" }); } })
+    .on(".faq details summary", { text(t) { if (faqs.length) faqs[faqs.length - 1].q += t.text; } })
+    .on(".faq details > p", { text(t) { if (faqs.length) faqs[faqs.length - 1].a += t.text; } })
+    .on("body", {
+      element(e) {
+        e.onEndTag((fin) => {
+          const lista = faqs.map((f) => ({ q: textoPlano(f.q), a: textoPlano(f.a) })).filter((f) => f.q && f.a);
+          if (lista.length && !tiene.faq) {
+            fin.before(jsonLd({
+              "@context": "https://schema.org", "@type": "FAQPage",
+              mainEntity: lista.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })),
+            }), { html: true });
+          }
+        });
+      },
     })
     .on('link[rel="canonical"]', { element() { tiene.canonical = true; } })
     .on('link[rel~="icon"]', { element() { tiene.icono = true; } })
@@ -112,6 +152,8 @@ export async function onRequest(context) {
         e.onEndTag((fin) => {
           const t = titulo.trim(), m = [];
           if (!tiene.canonical) m.push(`<link rel="canonical" href="${esc(canonica)}">`);
+          if (plantillaVacia) m.push('<meta name="robots" content="noindex">');
+          if (url.pathname === "/") m.push(jsonLd(NEGOCIO));
           if (!tiene.icono) m.push('<link rel="icon" href="/favicon.ico" sizes="48x48"><link rel="icon" type="image/png" sizes="192x192" href="/icono-192.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png">');
           const add = (k, v, attr) => { if (v && !tiene[k]) m.push(`<meta ${attr || "property"}="${k}" content="${esc(v)}">`); };
           add("og:type", "website");

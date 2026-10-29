@@ -52,6 +52,10 @@
     return "https://wa.me/" + WHATSAPP + "?text=" + encodeURIComponent(msg);
   }
 
+  // Dirección de la ficha de cada usado: /usados/<marca-linea-año-id> (igual que /lib/inventario.js)
+  function slug(t) { return String(t || "").normalize("NFD").replace(/\p{M}/gu, "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, ""); }
+  function urlFicha(v) { return "/usados/" + slug([v.marca, v.linea, v.modelo_anio].filter(Boolean).join(" ")) + "-" + v.id; }
+
   function tarjeta(v) {
     var nombre = v.marca + " " + v.linea;
     var sp = specs(v).slice(0, 5).map(function (s) { return "<span>" + esc(s[0]) + " <b>" + esc(s[1]) + "</b></span>"; }).join("");
@@ -59,7 +63,7 @@
       '<div class="thumb' + (v.fotos[0] ? " con-foto" : "") + '">' + (v.fotos[0] ? '<img src="' + esc(v.fotos[0]) + '" alt="' + esc(nombre + (v.modelo_anio ? " " + v.modelo_anio : "")) + '" loading="lazy">' : SVG) +
       (v.estado === "reservado" ? '<span class="estado-pill">Reservado</span>' : "") +
       (v.fotos.length > 1 ? '<span class="nfotos">' + v.fotos.length + " fotos</span>" : "") + "</div>" +
-      '<div class="body"><div class="name-row"><h3>' + esc(nombre) + '</h3><span class="price' + (v.precio ? "" : " muted") + '">' + precio(v) + "</span></div>" +
+      '<div class="body"><div class="name-row"><h3>' + (v.tipo === "usado" ? '<a class="ficha-link" href="' + urlFicha(v) + '">' + esc(nombre + (v.modelo_anio ? " " + v.modelo_anio : "")) + "</a>" : esc(nombre)) + '</h3><span class="price' + (v.precio ? "" : " muted") + '">' + precio(v) + "</span></div>" +
       (sp ? '<div class="specs">' + sp + "</div>" : "") +
       '<a class="btn btn-primary" href="' + linkCotizar(v) + '"' + (WHATSAPP ? ' target="_blank" rel="noopener"' : "") + ' data-cotizar>Habla con un asesor →</a></div></article>';
   }
@@ -79,7 +83,7 @@
       '<div class="specs">' + specs(v).map(function (s) { return "<span>" + esc(s[0]) + " <b>" + esc(s[1]) + "</b></span>"; }).join("") + "</div>" +
       (v.descripcion ? '<p class="desc">' + esc(v.descripcion) + "</p>" : "") +
       '<a class="btn btn-primary" href="' + linkCotizar(v) + '" style="margin-top:auto;justify-content:center"' + (WHATSAPP ? ' target="_blank" rel="noopener"' : "") + ">Habla con un asesor →</a>" +
-      (v.tipo === "usado" ? '<a class="btn btn-ghost on-light" href="/usados/' + v.id + '" style="justify-content:center">Ver ficha completa</a>' : "") + "</div></div>";
+      (v.tipo === "usado" ? '<a class="btn btn-ghost on-light" href="' + urlFicha(v) + '" style="justify-content:center">Ver ficha completa</a>' : "") + "</div></div>";
     dlg.querySelectorAll(".mins button").forEach(function (b) {
       b.addEventListener("click", function () {
         dlg.querySelector(".big img").src = fotos[+b.dataset.i];
@@ -92,7 +96,7 @@
 
   function activar(grid) {
     grid.addEventListener("click", function (e) {
-      if (e.target.closest("[data-cotizar]")) return;
+      if (e.target.closest("[data-cotizar], .ficha-link")) return;
       var c = e.target.closest(".card-camion[data-id]"); if (c) detalle(CACHE[c.dataset.id]);
     });
     grid.addEventListener("keydown", function (e) {
