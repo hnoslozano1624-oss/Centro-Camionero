@@ -29,3 +29,15 @@ nav.menu a.menu-btn-azul::before{animation-delay:-1.3s}
 .contacto-info>.badge,#simulador .badge{display:block;width:fit-content;max-width:100%;background:none;border:0;border-left:3px solid #FA010D;border-radius:0;padding:3px 0 3px 12px;font-family:'IBM Plex Sans',sans-serif;font-size:14px;font-weight:600;letter-spacing:0;text-transform:none;line-height:1.45}
 .contacto-info>.badge{color:#fff}
 #simulador .badge{color:var(--navy-deep);margin-top:20px}
+
+/* Bloques de texto para buscadores (inicio y /camiones/): títulos, párrafos y enlaces a cada sección. */
+.seo-texto h2{font-size:clamp(26px,3.4vw,40px)}
+.seo-texto>.container>p{max-width:78ch;margin-top:16px;color:var(--fg-muted);font-size:16px;line-height:1.7}
+.seo-texto a{color:#012792;font-weight:600}
+.seo-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-top:26px}
+.seo-grid article{background:var(--bg-elevated);border:1px solid var(--border);border-radius:14px;padding:20px 22px}
+.seo-grid h3{font-family:'IBM Plex Sans',sans-serif;text-transform:none;letter-spacing:0;font-size:18px;font-weight:700;color:var(--navy-deep);margin:0 0 8px}
+.seo-grid p{margin:0;color:var(--fg-muted);font-size:15px;line-height:1.6}
+.seo-grid a{display:inline-block;margin-top:8px}
+.card-camion h3 .ficha-link{color:inherit;text-decoration:none}
+.card-camion h3 .ficha-link:hover{text-decoration:underline}
