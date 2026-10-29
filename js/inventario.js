@@ -53,7 +53,7 @@
   }
 
   // Dirección de la ficha de cada usado: /usados/<marca-linea-año-id> (igual que /lib/inventario.js)
-  function slug(t) { return String(t || "").normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, ""); }
+  function slug(t) { return String(t || "").normalize("NFD").replace(/\p{M}/gu, "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, ""); }
   function urlFicha(v) { return "/usados/" + slug([v.marca, v.linea, v.modelo_anio].filter(Boolean).join(" ")) + "-" + v.id; }
 
   function tarjeta(v) {
