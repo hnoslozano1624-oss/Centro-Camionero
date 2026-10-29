@@ -10,3 +10,4 @@ En desarrollo. Ver el documento de alcance del proyecto para el detalle de modul
 
 - Hosting: Cloudflare Pages (proyecto centro-camionero), desplegado automaticamente en cada push a main.
 - Dominio: https://www.centrocamionero.com.co
+
